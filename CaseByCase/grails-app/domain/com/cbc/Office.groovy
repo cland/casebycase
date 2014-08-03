@@ -11,7 +11,7 @@ class Office {
 	//MunicipalAreaDefinition municipalAreaDefinition
 	//static mappedBy = [staffList:'staff',clientList:'clients']
 	static belongsTo = []
-	static hasMany = [cases: Case, staff:Person,  affiliates:Organization]
+	static hasMany = [cases: Case, staff:Person, affiliates:Organization]
 	
     static constraints = {
 		name unique:true, blank:false

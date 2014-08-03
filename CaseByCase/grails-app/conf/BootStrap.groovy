@@ -60,6 +60,12 @@ SpringSecurityUtils.doWithAuth('default') {
 				//* Admin user
 					def adminUser = null
 					Office.withTransaction{
+						Citizenship rsa = new Citizenship(name:"RSA").save();
+						new Citizenship(name:"Permanent Residennce").save();
+						new Citizenship(name:"Temporary Residence").save();
+						new Citizenship(name:"Refugee").save();
+						new Citizenship(name:"Other").save();
+						
 						def office = new Office(name:"Main Office",code:"MO",status:"Active")
 						office.save()
 						if(office.hasErrors()){
@@ -71,7 +77,8 @@ SpringSecurityUtils.doWithAuth('default') {
 							idNumber :"3456753463453",
 							contactNumber : "021334232",
 							dateOfBirth:(new Date() - 365*30),
-							gender:"Male"
+							gender:"Male",
+							citizenship:rsa
 							)
 						office.addToStaff(person)
 						office.save(flush:true)
@@ -134,7 +141,7 @@ SpringSecurityUtils.doWithAuth('default') {
 						if(keyword.hasErrors()){
 							println keyword.errors
 						}
-						new Organization(name:"Casual Workers",code:"CWAO",status:"Active",isMember:true,isHost:true,phoneNo:"021 333 4444,021 222 4565,021 333 4444,023 344 3344",email:"mail@mymail.com")
+						new Organization(name:"Casual Workers",status:"Active",isMember:true,isHost:true,phoneNo:"021 333 4444,021 222 4565,021 333 4444,023 344 3344",email:"mail@mymail.com")
 						new Document(name:'\$home',content:"<h2>Welcome</h2>").save()
 						new Document(name:"\$aboutus",content:"<h2>About us</h2>").save()
 						new Document(name:"\$news",content:"<h2>Some news maybe</h2>").save()

@@ -82,6 +82,6 @@ class cbcApiService {
 		} 
 
 		//else we return the user back to home page.
-		return "sidenav-admin"
+		return "sidenav-public"
 	}
 }//end class

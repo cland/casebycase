@@ -10,7 +10,7 @@ class Region {
 	Date dateCreated
 	Date lastUpdated
 	static belongsTo = [country:Country]
-	static hasMany = [citites:City]
+	static hasMany = [cities:City]
 	static constraints = {
 		name(blank:false)
 		lastUpdatedBy nullable:true

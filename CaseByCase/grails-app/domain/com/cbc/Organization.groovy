@@ -3,7 +3,6 @@ package com.cbc
 class Organization {
 
 	String name
-	String code
 	String status
 	String phoneNo
 	String email
@@ -13,7 +12,6 @@ class Organization {
 	
     static constraints = {
 		name unique:true, blank:false
-		code unique:true, blank:false
 		status blank:false, inList:["Active", "Inactive"]
 		phoneNo nullable:true
 		email nullable:true

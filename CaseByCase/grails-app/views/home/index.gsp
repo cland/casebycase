@@ -91,6 +91,7 @@
 			legend {font-weight:bold;color:#FFAE2F;font-size:1.2em;}
 			h1 {font-weight:bold;font-size:1.3em;}
 		</style>
+		<g:render template="head"></g:render>
 	</head>
 	<body>
 		
@@ -107,6 +108,28 @@
 			</div>
 			
 		</div>
-	
+<script>
+$(document).ready(function() {		
+	$("#accordion" ).accordion({ active: cbc_params.active_sidebar() });
+
+	$("#tabs").tabs(
+					{
+					active:cbc_params.active_tab(),
+					create: function (event,ui){	
+						//executed after is created								
+						$('#tabs').show()
+					},
+					show: function(event,ui){
+						//on every tabs clicked
+					},
+					beforeLoad : function(event, ui) {
+							ui.jqXHR.error(function() {
+								ui.panel
+								.html("Couldn't load this tab. We'll try to fix this as soon as possible. ");
+							});
+						}
+			});		                
+});  //end method ready(...)
+</script>	
 	</body>
 </html>

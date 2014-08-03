@@ -9,8 +9,9 @@ class UrlMappings {
 
        //"/"(view:"/index")
 		"/"(controller:"home",action:"index")
+		"/admin/technical" (view:"/admin/technical")
 		"/admin/"(view:"/admin/index")
-		"/admin/technical" (view:"/admin/technical")				
+						
 		"500"(view:'/error')
 		"404"(view:'/error')
 	}

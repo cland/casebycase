@@ -54,21 +54,9 @@
 		
 		<sec:ifLoggedIn>		
 			<li class="float-right">
-				<g:link controller="home" action="index" class="logout">
-						<sec:ifLoggedIn><sec:loggedInUserInfo field="fullName" /></sec:ifLoggedIn>
-				</g:link>				
-				<ul>
-					<li>
-						<g:link controller="logout" action="index" class="logout">
-							<g:message code="default.logout.label" default="Logout"/>
-						</g:link>
-					</li>
-					<li>
-						<g:link controller="home" action="index" class="settings">
-							<g:message code="default.logout.label" default="My Preferences"/>
-						</g:link>
-					</li>
-				</ul>
+				<g:link controller="logout" action="index" class="logout">
+					<g:message code="default.logout.label" default="Logout"/>
+				</g:link>
 			</li>
 		</sec:ifLoggedIn>
 
