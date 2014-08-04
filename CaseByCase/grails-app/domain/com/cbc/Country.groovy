@@ -4,6 +4,7 @@ import java.util.Date;
 
 class Country {
 	transient cbcApiService
+	static attachmentable = true
 	String name
 	long createdBy
 	long lastUpdatedBy
@@ -12,8 +13,8 @@ class Country {
 	static hasMany = [regions:Region]
 	static constraints = {
 		name(blank:false)
-		lastUpdatedBy nullable:true
-		createdBy nullable:true
+		lastUpdatedBy nullable:true, editable:false
+		createdBy nullable:true, editable:false
 	}
 	
 	def beforeInsert = {
@@ -22,9 +23,14 @@ class Country {
 	def beforeUpdate = {
 		lastUpdatedBy = cbcApiService.getCurrentUserId()
 	}
-	def beforeDelete = {
-		// your code goes here
-	}
+	/**
+	 * To ensure that all attachments are removed when the "owner" domain is deleted.
+	 */
+	transient def beforeDelete = {
+		withNewSession{
+		  removeAttachments()
+		}
+	 }
 	def onLoad = {
 		// your code goes here
 	}

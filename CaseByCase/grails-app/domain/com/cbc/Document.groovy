@@ -15,8 +15,8 @@ class Document {
 	static constraints = {
 		name(blank:false,unique:true)
 		content(nullable:true)
-		lastUpdatedBy nullable:true
-		createdBy nullable:true
+		lastUpdatedBy nullable:true, editable:false
+		createdBy nullable:true, editable:false
 		docType(nullable:true)
 	}
 	static mapping = {

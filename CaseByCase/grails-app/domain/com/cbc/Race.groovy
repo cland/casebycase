@@ -11,8 +11,8 @@ class Race {
 	Date lastUpdated
     static constraints = {
 		name()
-		lastUpdatedBy nullable:true
-		createdBy nullable:true
+		lastUpdatedBy nullable:true, editable:false
+		createdBy nullable:true, editable:false
     }
 	def beforeInsert = {
 	createdBy = cbcApiService.getCurrentUserId()

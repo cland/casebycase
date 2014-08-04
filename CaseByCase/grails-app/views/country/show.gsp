@@ -49,7 +49,7 @@
 					</div>
 				</div>
 				
-				<div id="tab-attachments">
+				<div id="tab-2">
 					
 				</div>
 			</div>

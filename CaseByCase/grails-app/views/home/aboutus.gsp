@@ -1,6 +1,6 @@
 <%@ page import="com.cbc.SystemRoles" %>
 <%@ page import="com.cbc.User" %>
-<g:set var="hostOrg" value="${ com.cbc.Organization.find{isHost==true}}"/>
+<g:set var="hostOrg" value="${ com.cbc.Organisation.find{isHost==true}}"/>
 <!DOCTYPE html>
 <html>
 	<head>

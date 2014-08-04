@@ -13,8 +13,8 @@ class Region {
 	static hasMany = [cities:City]
 	static constraints = {
 		name(blank:false)
-		lastUpdatedBy nullable:true
-		createdBy nullable:true
+		lastUpdatedBy nullable:true, editable:false
+		createdBy nullable:true, editable:false
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()

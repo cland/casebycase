@@ -141,7 +141,7 @@ SpringSecurityUtils.doWithAuth('default') {
 						if(keyword.hasErrors()){
 							println keyword.errors
 						}
-						new Organization(name:"Casual Workers",status:"Active",isMember:true,isHost:true,phoneNo:"021 333 4444,021 222 4565,021 333 4444,023 344 3344",email:"mail@mymail.com")
+						new Organisation(name:"Casual Workers",status:"Active",isMember:true,isHost:true,phoneNo:"021 333 4444,021 222 4565,021 333 4444,023 344 3344",email:"mail@mymail.com")
 						new Document(name:'\$home',content:"<h2>Welcome</h2>").save()
 						new Document(name:"\$aboutus",content:"<h2>About us</h2>").save()
 						new Document(name:"\$news",content:"<h2>Some news maybe</h2>").save()

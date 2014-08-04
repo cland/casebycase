@@ -5,7 +5,7 @@ import org.codehaus.groovy.grails.plugins.springsecurity.*
 import org.grails.datastore.gorm.finders.MethodExpression.IsEmpty;
 
 import com.sun.org.apache.xalan.internal.xsltc.compiler.ForEach;
-
+import org.apache.commons.lang.RandomStringUtils
 class cbcApiService {
 	static transactional = false
 	def springSecurityService
@@ -83,5 +83,12 @@ class cbcApiService {
 
 		//else we return the user back to home page.
 		return "sidenav-public"
+	}
+	String generateIdNumber(Date birthday){
+		String charset = (('A'..'Z') + ('0'..'9')).join()
+		Integer length = 7
+		String randomString = RandomStringUtils.random(length, charset.toCharArray())
+		if(birthday == null) birthday = new Date();
+		return birthday?.format("yymmdd") + randomString
 	}
 }//end class

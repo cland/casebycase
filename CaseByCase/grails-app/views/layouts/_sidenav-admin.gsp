@@ -1,12 +1,23 @@
 	
 	<div id="accordion" style="font-size: 14px;">
-			<h3><g:message code="default.main.menu" default="Main 1" /></h3>
+			<h3><g:message code="default.offices.menu" default="Offices & Users" /></h3>
 			<div>
 				<ul>
-					<li><g:link class="create" controller="person" action="create">
-							<g:message code="default.new.label" args="['Person']" /></g:link></li>
-					<li><g:link class="list" controller="person" action="list">
-							<g:message code="default.list.label" args="['People']" /></g:link></li>							
+					<li>
+						<g:link class="create" controller="office" action="create">
+							<g:message code="default.new.label" args="['Office']" params="[sidebar:0]"/>
+						</g:link>
+					</li>
+					<li>
+						<g:link class="index" controller="office" action="index">
+							<g:message code="default.list.label" args="['Offices']" params="[sidebar:0]" />
+						</g:link>
+					</li>
+					<li>
+						<g:link class="index" controller="user" action="index" params="[sidebar:0]">
+							<g:message code="default.user.label" default="User Profiles" />
+						</g:link>
+					</li>							
 				</ul>
 			</div>
 

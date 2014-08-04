@@ -18,8 +18,8 @@ class Keywords {
 		name(unique:true)
 		category(nullable:true)
 		description(nullable:true) 
-		lastUpdatedBy nullable:true
-		createdBy nullable:true
+		lastUpdatedBy nullable:true, editable:false
+		createdBy nullable:true, editable:false
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
