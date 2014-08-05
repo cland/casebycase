@@ -8,6 +8,7 @@ import java.util.Date;
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
+	static transients = ["createdByName","lastUpdatedByName"]
     static constraints = {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
@@ -23,6 +24,14 @@ import java.util.Date;
 	}
 	def beforeDelete = {
 		// your code goes here
+	}
+	String getCreatedByName(){
+		User user = User.get(createdBy)
+		return (user==null?"unknown":user?.person.toString())
+	}
+	String getLastUpdatedByName(){
+		User user = User.get(lastUpdatedBy)
+		return (user==null?"unknown":user?.person.toString())
 	}
 	def onLoad = {
 		// your code goes here

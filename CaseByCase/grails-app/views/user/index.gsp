@@ -32,16 +32,14 @@
 					
 						<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
 					
-						<g:sortableColumn property="password" title="${message(code: 'user.password.label', default: 'Password')}" />
-					
+						
 						<g:sortableColumn property="email" title="${message(code: 'user.email.label', default: 'Email')}" />
 					
-						<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'user.lastUpdatedBy.label', default: 'Last Updated By')}" />
+						<g:sortableColumn property="lastUpdatedByName" title="${message(code: 'user.lastUpdatedBy.label', default: 'Last Updated By')}" />
 					
-						<g:sortableColumn property="createdBy" title="${message(code: 'user.createdBy.label', default: 'Created By')}" />
+						<g:sortableColumn property="createdByName" title="${message(code: 'user.createdBy.label', default: 'Created By')}" />
 					
-						<g:sortableColumn property="history" title="${message(code: 'user.history.label', default: 'History')}" />
-					
+						
 					</tr>
 				</thead>
 				<tbody>
@@ -50,15 +48,12 @@
 					
 						<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
 					
-						<td>${fieldValue(bean: userInstance, field: "password")}</td>
 					
 						<td>${fieldValue(bean: userInstance, field: "email")}</td>
 					
-						<td>${fieldValue(bean: userInstance, field: "lastUpdatedBy")}</td>
+						<td>${fieldValue(bean: userInstance, field: "lastUpdatedByName")}</td>
 					
-						<td>${fieldValue(bean: userInstance, field: "createdBy")}</td>
-					
-						<td>${fieldValue(bean: userInstance, field: "history")}</td>
+						<td>${fieldValue(bean: userInstance, field: "createdByName")}</td>				
 					
 					</tr>
 				</g:each>

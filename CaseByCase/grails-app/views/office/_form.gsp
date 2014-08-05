@@ -55,7 +55,7 @@
 		<g:message code="office.affiliates.label" default="Affiliates" />
 		
 	</label>
-	<g:select name="affiliates" from="${com.cbc.Organization.list()}" multiple="multiple" optionKey="id" size="5" value="${officeInstance?.affiliates*.id}" class="many-to-many"/>
+	<g:select name="affiliates" from="${com.cbc.Organisation.list()}" multiple="multiple" optionKey="id" size="5" value="${officeInstance?.affiliates*.id}" class="many-to-many"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: officeInstance, field: 'cases', 'error')} ">

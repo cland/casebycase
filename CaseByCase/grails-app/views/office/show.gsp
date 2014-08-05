@@ -94,7 +94,7 @@
 								<span id="affiliates-label" class="property-label"><g:message code="office.affiliates.label" default="Affiliates" /></span>
 								
 									<g:each in="${officeInstance.affiliates}" var="a">
-									<span class="property-value" aria-labelledby="affiliates-label"><g:link controller="organization" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
+									<span class="property-value" aria-labelledby="affiliates-label"><g:link controller="organisation" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
 									</g:each>
 								
 							</li>

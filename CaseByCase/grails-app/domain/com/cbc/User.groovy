@@ -29,13 +29,21 @@ class User {
 	
 	/** 	*END FIELDS* 		**/
 	
+	static transients = ["createdByName","lastUpdatedByName"]
 	static belongsTo = []
 	static hasMany = []	
 	
 	String toString(){
 		return username
 	}
-	
+	String getCreatedByName(){
+		User user = User.get(createdBy)
+		return (user==null?"unknown":user?.person.toString())
+	}
+	String getLastUpdatedByName(){
+		User user = User.get(lastUpdatedBy)
+		return (user==null?"unknown":user?.person.toString())
+	}
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false, password:true
@@ -68,5 +76,6 @@ class User {
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password)
 	}
-		
+	
+	
 }

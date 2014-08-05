@@ -31,28 +31,16 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<!-- *** START TABS *** -->
-			<div id="tabs" style="display: none;">
-				<ul>
-					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Other</a></li>		
-				</ul>
-				<div id="tab-1">
-					<g:form url="[resource:userInstance, action:'save']" >
-						<fieldset class="form">
-							<g:render template="form"/>
-						</fieldset>
-						<fieldset class="buttons">
-							<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-						</fieldset>
-					</g:form>
-				</div>
+
+			<g:form url="[resource:userInstance, action:'save']" >
 				
-				<div id="tab-2">
-					
-				</div>
-			</div>
-			<!--  *** END TABS *** -->			
+				<g:render template="form"/>
+				
+				<fieldset class="buttons">
+					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+				</fieldset>
+			</g:form>
+			
 			
 		</div>
 		<script>

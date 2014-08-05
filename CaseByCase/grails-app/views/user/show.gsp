@@ -29,8 +29,8 @@
 			<!-- *** START TABS *** -->
 			<div id="tabs" style="display: none;">
 				<ul>
-					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Other</a></li>		
+					<li><a href="#tab-1">Login Details</a></li>
+					<li><a href="#tab-2">Personal Details</a></li>		
 				</ul>
 				<div id="tab-1">
 					<ol class="property-list user">
@@ -44,15 +44,7 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${userInstance?.password}">
-							<li class="fieldcontain">
-								<span id="password-label" class="property-label"><g:message code="user.password.label" default="Password" /></span>
-								
-									<span class="property-value" aria-labelledby="password-label"><g:fieldValue bean="${userInstance}" field="password"/></span>
-								
-							</li>
-							</g:if>
-						
+													
 							<g:if test="${userInstance?.email}">
 							<li class="fieldcontain">
 								<span id="email-label" class="property-label"><g:message code="user.email.label" default="Email" /></span>
@@ -143,7 +135,14 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${userInstance?.person}">
+							
+						
+						</ol>
+				</div>
+				
+				<div id="tab-2">
+					<ol class="property-list user">
+						<g:if test="${userInstance?.person}">
 							<li class="fieldcontain">
 								<span id="person-label" class="property-label"><g:message code="user.person.label" default="Person" /></span>
 								
@@ -151,12 +150,7 @@
 								
 							</li>
 							</g:if>
-						
-						</ol>
-				</div>
-				
-				<div id="tab-2">
-					
+					</ol>
 				</div>
 			</div>
 			<!--  *** END TABS *** -->
