@@ -5,21 +5,30 @@ import java.util.Date;
 class Action {
 	transient cbcApiService
 	static attachmentable = true
+	/** Tab1: Action Details **/
 	Date date
+	ActionType actionType
 	String actionToFrom
 	String description
 	String subject
+	User actionOwner		//person responsible for the case
 	String followUpStatus
 	Date followUpDate
 	double disbursementAmount
 	boolean isPrivate
-	String actionType
+	
+	/** Tab2: Supporting Documents **/
+	
+	/** Tab3: Admin Tracking Information **/
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
-	static belongsTo = [thiscase:Case]
 	
+	/** 	*END FIELDS* 		**/
+	
+	static belongsTo = [thiscase:Case]
+	static hasMany = [followers:User]
     static constraints = {
 		date blank:false
 		actionToFrom nullable:true

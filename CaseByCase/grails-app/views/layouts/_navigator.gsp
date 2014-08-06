@@ -13,23 +13,23 @@
 			<li>				
 				<a class="mywork-link" href="${createLink(uri: '/')}"><g:message code="default.mywork.label" default="My Work"/></a>
 				<ul>
-				<li><a class="newcase-link" href="${createLink(uri: '/home/')}"><g:message code="default.aboutus.label" default="New Case" /></a></li>	
-		        <li><a class="cases-link" href="${createLink(uri: '/home/')}"><g:message code="default.aboutus.label" default="Cases" /></a></li>		        
-				<li><a class="actions-link" href="${createLink(uri: '/home/')}"><g:message code="default.newsevents.label" default="Actions"/></a></li>
+				<li><a class="newcase-link" href="${createLink(uri: '/case/create')}"><g:message code="default.newcase.label" default="New Case" /></a></li>	
+		        <li><a class="cases-link" href="${createLink(uri: '/case/index')}"><g:message code="default.cases.label" default="Cases" /></a></li>		        
+				<li><a class="actions-link" href="${createLink(uri: '/action/index')}"><g:message code="default.actions.label" default="Actions"/></a></li>
 				</ul>
 			</li>
 			<li><a class="clients-link" href="${createLink(uri: '/')}"><g:message code="default.clients.label" default="Clients"/></a>
 				<ul>
-					<li><a class="newperson-link" href="${createLink(uri: '/home/')}"><g:message code="default.aboutus.label" default="New Person" /></a></li>	
-					<li><a class="neworg-link" href="${createLink(uri: '/home/')}"><g:message code="default.aboutus.label" default="New Organisation" /></a></li>	
-					<li><a class="persons-link" href="${createLink(uri: '/')}"><g:message code="default.persons.label" default="Persons"/></a></li>					
-					<li><a class="orglist-link" href="${createLink(uri: '/')}"><g:message code="default.organisations.label" default="Organisations"/></a></li>				
+					<li><a class="newperson-link" href="${createLink(uri: '/person/create')}"><g:message code="default.aboutus.label" default="New Person" /></a></li>	
+					<li><a class="neworg-link" href="${createLink(uri: '/organisation/create')}"><g:message code="default.aboutus.label" default="New Organisation" /></a></li>	
+					<li><a class="persons-link" href="${createLink(uri: '/person/index')}"><g:message code="default.persons.label" default="Persons"/></a></li>					
+					<li><a class="orglist-link" href="${createLink(uri: '/person/index')}"><g:message code="default.organisations.label" default="Organisations"/></a></li>				
             	</ul>
             </li>	
-            <li><a class="events-link" href="${createLink(uri: '/')}"><g:message code="default.events.label" default="Events"/></a>
+            <li><a class="events-link" href="${createLink(uri: '/event/index')}"><g:message code="default.events.label" default="Events"/></a>
             	<ul>
-			        <li><a class="newevent-link" href="${createLink(uri: '/home/')}"><g:message code="default.newevent.label" default="New Event" /></a></li>		        
-					<li><a class="listevent-link" href="${createLink(uri: '/home/')}"><g:message code="default.eventlist.label" default="Events List"/></a></li>								
+			        <li><a class="newevent-link" href="${createLink(uri: '/event/create')}"><g:message code="default.newevent.label" default="New Event" /></a></li>		        
+					<li><a class="listevent-link" href="${createLink(uri: '/event/create')}"><g:message code="default.eventlist.label" default="Events List"/></a></li>								
             	</ul>
             </li>
             	
@@ -44,7 +44,7 @@
 			        <li><a class="stdreports-link" href="${createLink(uri: '/home/')}"><g:message code="default.standard.label" default="Standard" /></a></li>		        
 					<li><a class="custreports-link" href="${createLink(uri: '/home/')}"><g:message code="default.custom.label" default="Custom"/></a></li>
 					<li><a class="eventreports-link" href="${createLink(uri: '/')}"><g:message code="default.events.label" default="Events"/></a></li>				
-					<li><a class="eventreports-link" href="${createLink(uri: '/')}"><g:message code="default.pcm.label" default="PCM"/></a></li>
+					<li><a class="pcmreports-link" href="${createLink(uri: '/')}"><g:message code="default.pcm.label" default="PCM"/></a></li>
             	</ul>
 			</li>				
 			<li>

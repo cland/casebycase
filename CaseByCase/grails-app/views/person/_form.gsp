@@ -82,12 +82,12 @@
 	<g:textField name="empHowJobFound" value="${personInstance?.empHowJobFound}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'emoHowJobFoundDesc', 'error')} ">
-	<label for="emoHowJobFoundDesc">
-		<g:message code="person.emoHowJobFoundDesc.label" default="Emo How Job Found Desc" />
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'empHowJobFoundDesc', 'error')} ">
+	<label for="empHowJobFoundDesc">
+		<g:message code="person.empHowJobFoundDesc.label" default="Emp How Job Found Desc" />
 		
 	</label>
-	<g:textArea name="emoHowJobFoundDesc" cols="40" rows="5" value="${personInstance?.emoHowJobFoundDesc}"/>
+	<g:textArea name="empHowJobFoundDesc" cols="40" rows="5" value="${personInstance?.empHowJobFoundDesc}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'lastUpdatedBy', 'error')} required">

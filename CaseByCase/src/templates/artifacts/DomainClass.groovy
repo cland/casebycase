@@ -1,4 +1,3 @@
-import java.util.Date;
 
 @artifact.package@class @artifact.name@ {
 	transient cbcApiService
@@ -14,7 +13,7 @@ import java.util.Date;
 		createdBy nullable:true
 	}
 	String toString(){
-		${name}
+		"${name}"
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
@@ -22,9 +21,7 @@ import java.util.Date;
 	def beforeUpdate = {
 		lastUpdatedBy = cbcApiService.getCurrentUserId()
 	}
-	def beforeDelete = {
-		// your code goes here
-	}
+
 	String getCreatedByName(){
 		User user = User.get(createdBy)
 		return (user==null?"unknown":user?.person.toString())
@@ -44,4 +41,6 @@ import java.util.Date;
 		  removeAttachments()
 		}
 	 }
+	
 } //end class
+import java.util.Date

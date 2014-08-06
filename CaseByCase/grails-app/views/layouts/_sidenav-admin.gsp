@@ -26,40 +26,88 @@
 				</ul>
 			</div>
 
-			<h3><g:message code="default.users.menu" default="Users" /></h3>
+			<h3><g:message code="default.clients.menu" default="Clients" /></h3>
 			<div>
 				<ul>
-					<li><g:link class="create" controller="user" action="create">
-							<g:message code="default.new.label" args="['User']" /></g:link></li>
-					<li><g:link class="list" controller="user" action="list">
-							<g:message code="default.list.label" args="['User']" />
+					<li><g:link class="create" controller="person" action="create">
+							<g:message code="default.new.label" args="['Person Client']" /></g:link></li>
+					<li><g:link class="list" controller="person" action="index">
+							<g:message code="default.list.label" args="['Person Clients']" />
 						</g:link></li>
 					<li><g:link class="create" controller="organisation" action="create">
 							<g:message code="default.new.label" args="['Organisation']" /></g:link></li>
-					<li><g:link class="list" controller="organisation" action="list">
-							<g:message code="default.list.label" args="['Organisation']" />
+					<li><g:link class="list" controller="organisation" action="index">
+							<g:message code="default.list.label" args="['Organisations']" />
 						</g:link></li>						
 				</ul>
 			</div>
 			
-			<h3><g:message code="default.other.menu" default="Other" /></h3>
+			<h3><g:message code="default.reports.menu" default="Reports" /></h3>
+			<div>
+				<ul>
+					<li><g:link class="create" controller="person" action="create">
+							<g:message code="default.new.label" args="['Standard']" /></g:link></li>
+					<li><g:link class="list" controller="person" action="index">
+							<g:message code="default.list.label" args="['Advanced']" />
+						</g:link></li>
+					<li><g:link class="create" controller="organisation" action="create">
+							<g:message code="default.new.label" args="['Organisation']" /></g:link></li>
+					<li><g:link class="list" controller="organisation" action="index">
+							<g:message code="default.list.label" args="['Organisations']" />
+						</g:link></li>						
+				</ul>
+			</div>
+
+			<h3><g:message code="default.lookup.menu" default="Lookup Types" /></h3>
 			<div>
 			<ul>
-<%--				<li>--%>
-<%--					<g:link class="search" controller="search" action="index">--%>
-<%--						<g:message code="default.search.label" default="Search" />--%>
-<%--					</g:link>--%>
-<%--				</li>--%>
+					<li><g:link class="create" controller="caseStatus" action="create">
+							<g:message code="default.new.label" args="['Case Status']" /></g:link></li>
+					<li><g:link class="list" controller="caseStatus" action="index">
+							<g:message code="default.list.label" args="['Case Statuses']" />
+						</g:link></li>
+					<li>
+						<g:link class="create" controller="caseOutcome" action="create">
+							<g:message code="default.new.label" args="['Case Outcome']" />
+						</g:link>
+					</li>
+					<li>
+						<g:link class="list" controller="caseOutcome" action="index">
+							<g:message code="default.list.label" args="['Case Outcomes']" />
+						</g:link>
+					</li>
+					<li>
+						<g:link class="create" controller="casePriority" action="create">
+							<g:message code="default.new.label" args="['Case Priority']" />
+						</g:link>
+					</li>
+					<li>
+						<g:link class="list" controller="casePriority" action="index">
+							<g:message code="default.list.label" args="['Case Priority']" />
+						</g:link>
+					</li>
+					<li>
+						<g:link class="create" controller="actionType" action="create">
+							<g:message code="default.new.label" args="['Action Type']" />
+						</g:link>
+					</li>
+					<li>
+						<g:link class="list" controller="actionType" action="index">
+							<g:message code="default.list.label" args="['Action Types']" />
+						</g:link>
+					</li>
 					<li><g:link class="create" controller="region" action="create">
 							<g:message code="default.new.label" args="['Region']" /></g:link></li>
-					<li><g:link class="list" controller="region" action="list">
+					<li><g:link class="list" controller="region" action="index">
 							<g:message code="default.list.label" args="['Region']" />
 						</g:link></li>
 					<li><g:link class="create" controller="race" action="create">
 							<g:message code="default.new.label" args="['Race']" /></g:link></li>
-					<li><g:link class="list" controller="race" action="list">
+					<li><g:link class="list" controller="race" action="index">
 							<g:message code="default.list.label" args="['Race']" />
 						</g:link></li>
 			</ul>
-			</div>			
+			</div>				
+			
+						
 		</div>

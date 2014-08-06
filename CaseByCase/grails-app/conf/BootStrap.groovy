@@ -147,6 +147,47 @@ SpringSecurityUtils.doWithAuth('default') {
 						new Document(name:"\$news",content:"<h2>Some news maybe</h2>").save()
 						new Document(name:"\$contactus",content:"<h2>About us</h2>").save()
 						new Document(name:"\$side-noticeboard",content:"<h2>Some notice</h2>").save()
+						
+						//Case status
+						new CaseStatus(name:"Closed").save()
+						new CaseStatus(name:"Open").save()
+						new CaseStatus(name:"Referred - Still Open").save()
+						new CaseStatus(name:"Case Closed - Intimidation").save()
+						//Case Priority
+						new CasePriority(name:"Critical").save()
+						new CasePriority(name:"Extremely Urgent").save()
+						new CasePriority(name:"Urgent").save()
+						new CasePriority(name:"Standard").save()
+						//Case Outcome
+						new CaseOutcome(name:"Case Resolved").save()
+						new CaseOutcome(name:"CCMA/BC Ruling").save()
+						new CaseOutcome(name:"Client requests closure").save()
+						new CaseOutcome(name:"Compliance Order").save()
+						new CaseOutcome(name:"Court Ruling").save()
+						new CaseOutcome(name:"Deceased").save()
+						new CaseOutcome(name:"Educated beneficiary").save()
+						new CaseOutcome(name:"Grant Rejected").save()
+						new CaseOutcome(name:"No more client contact").save()
+						new CaseOutcome(name:"Referred and Closed").save()
+						new CaseOutcome(name:"Abandoned - Lack Of Client Resources").save()
+						new CaseOutcome(name:"Other").save()
+						//Action type
+						new ActionType(name:"Case Report").save()
+						new ActionType(name:"CCMA").save()
+						new ActionType(name:"Consultation").save()
+						new ActionType(name:"Correspondence").save()
+						new ActionType(name:"Court").save()
+						new ActionType(name:"Documentation").save()
+						new ActionType(name:"Home Visit").save()
+						new ActionType(name:"Followup").save()
+						new ActionType(name:"Letter of Demand").save()
+						new ActionType(name:"Medical Consultation").save()
+						new ActionType(name:"Meeting").save()
+						new ActionType(name:"Phone").save()
+						new ActionType(name:"Refer").save()
+						new ActionType(name:"Status Update").save()
+						new ActionType(name:"Took Instruction").save()
+						new ActionType(name:"Other").save()
 				 }
 					
 				} //end if doBootStrap

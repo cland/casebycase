@@ -5,6 +5,7 @@ import java.util.Date;
 class Case {
 	transient cbcApiService
 	static attachmentable = true
+	/** Tab1: Quick Details **/
 	int totalMale
 	int totalFemale
 	int totalUnknown
@@ -13,11 +14,34 @@ class Case {
 	Date problemStart
 	String description
 	String subject
-	Event thisevent
+	
+	CasePriority priority
+	/** Tab2: Categorisation **/
+	
+	//String category   	
+	boolean childHeadedHouse
+	boolean specialCase
+	CaseStatus status
+	Event thisevent		//if this case was created as a result of an event
+	
+	/** Tab4: Outcome **/
+	Date dateClosed
+	CaseOutcome outcome		//** Why closed
+	Double amtRecovered
+	boolean bestPractice
+	
+	/** Tab5: Case Metrics **/
+	
+	/** Tab6: Supporting Documents **/
+	
+	/** Tab7: Admin Tracking Information **/
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
+	
+	/** 	*END FIELDS* 		**/
+	
 	static belongsTo = [office:Office]
 	static hasMany = [clients: Person,orgclients:Organisation,actions:Action]
     static constraints = {
