@@ -10,28 +10,21 @@
 	<g:textField name="name" required="" value="${regionInstance?.name}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: regionInstance, field: 'lastUpdatedBy', 'error')} required">
-	<label for="lastUpdatedBy">
-		<g:message code="region.lastUpdatedBy.label" default="Last Updated By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="lastUpdatedBy" type="number" value="${regionInstance.lastUpdatedBy}" required=""/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: regionInstance, field: 'createdBy', 'error')} required">
-	<label for="createdBy">
-		<g:message code="region.createdBy.label" default="Created By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="createdBy" type="number" value="${regionInstance.createdBy}" required=""/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: regionInstance, field: 'cities', 'error')} ">
 	<label for="cities">
 		<g:message code="region.cities.label" default="Cities" />
 		
 	</label>
-	<g:select name="cities" from="${com.cbc.City.list()}" multiple="multiple" optionKey="id" size="5" value="${regionInstance?.cities*.id}" class="many-to-many"/>
+	
+<ul class="one-to-many">
+<g:each in="${regionInstance?.cities?}" var="c">
+    <li><g:link controller="city" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="city" action="create" params="['region.id': regionInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'city.label', default: 'City')])}</g:link>
+</li>
+</ul>
+
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: regionInstance, field: 'country', 'error')} required">

@@ -29,7 +29,7 @@
             <li><a class="events-link" href="${createLink(uri: '/event/index')}"><g:message code="default.events.label" default="Events"/></a>
             	<ul>
 			        <li><a class="newevent-link" href="${createLink(uri: '/event/create')}"><g:message code="default.newevent.label" default="New Event" /></a></li>		        
-					<li><a class="listevent-link" href="${createLink(uri: '/event/create')}"><g:message code="default.eventlist.label" default="Events List"/></a></li>								
+					<li><a class="listevent-link" href="${createLink(uri: '/event/index')}"><g:message code="default.eventlist.label" default="Events List"/></a></li>								
             	</ul>
             </li>
             	
@@ -53,8 +53,8 @@
 					<li><a class="offices-link" href="${createLink(uri: '/office/index?sidebar=0')}"><g:message code="default.offices.label" default="Advice Offices" /></a></li>
 					<li><a class="profiles-link" href="${createLink(uri: '/user/index?sidebar=0')}"><g:message code="default.userprofiles.label" default="User Profiles" /></a></li>
 					<li><a class="location-link" href="${createLink(uri: '/home/')}"><g:message code="default.location.label" default="Municipalities" /></a></li>
-					<li><a class="orgs-link" href="${createLink(uri: '/home/')}"><g:message code="default.organisations.label" default="Organisations" /></a></li>
-					<li><a class="lookuptypes-link" href="${createLink(uri: '/home/')}"><g:message code="default.lookuptypes.label" default="Lookup Types" /></a></li>
+					<li><a class="orgs-link" href="${createLink(uri: '/organisation/index')}"><g:message code="default.organisations.label" default="Organisations" /></a></li>
+					<li><a class="lookuptypes-link" href="${createLink(uri: '/caseStatus/index')}"><g:message code="default.lookuptypes.label" default="Lookup Types" /></a></li>
 				</ul>
 			</li>
 		</sec:ifLoggedIn>						

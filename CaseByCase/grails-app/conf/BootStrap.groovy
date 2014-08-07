@@ -77,7 +77,7 @@ SpringSecurityUtils.doWithAuth('default') {
 							idNumber :"3456753463453",
 							contactNumber : "021334232",
 							dateOfBirth:(new Date() - 365*30),
-							gender:"Male",
+							gender:Gender.MALE.toString(),
 							citizenship:rsa
 							)
 						office.addToStaff(person)
@@ -188,6 +188,50 @@ SpringSecurityUtils.doWithAuth('default') {
 						new ActionType(name:"Status Update").save()
 						new ActionType(name:"Took Instruction").save()
 						new ActionType(name:"Other").save()
+						
+						//Age groups
+						new AgeGroup(name:"Pensioner Male",gender:Gender.MALE.toString()).save()
+						new AgeGroup(name:"Pensioner",gender:Gender.FEMALE.toString()).save()
+						new AgeGroup(name:"Adult",gender:Gender.MALE.toString()).save()
+						new AgeGroup(name:"Adult",gender:Gender.FEMALE.toString()).save()
+						new AgeGroup(name:"Male Youth",gender:Gender.MALE.toString()).save()
+						new AgeGroup(name:"Female Youth",gender:Gender.FEMALE.toString()).save()
+						new AgeGroup(name:"Male Child",gender:Gender.MALE.toString()).save()
+						new AgeGroup(name:"Female Child",gender:Gender.FEMALE.toString()).save()
+						new AgeGroup(name:"Infant",gender:Gender.UNKNOWN.toString()).save()
+						
+						//Event focus area
+						new EventFocusArea(name:"Admin Justice PAJA").save()
+						new EventFocusArea(name:"Basic Income Grant").save()
+						new EventFocusArea(name:"Capacity Building").save()
+						new EventFocusArea(name:"CCMS").save()
+						new EventFocusArea(name:"Child Support").save()
+						new EventFocusArea(name:"Other").save()
+						
+						//Event type
+						new EventType(name:"Bi-monthly meeting").save()
+						new EventType(name:"Campaign").save()
+						new EventType(name:"Conference").save()
+						new EventType(name:"Cross Sectored").save()
+						new EventType(name:"Other").save()
+						
+						//Event Outcome
+						new EventOutcome(name:"Advocacy & Lobbying").save()
+						new EventOutcome(name:"Community Education").save()
+						new EventOutcome(name:"Community Mobilisation").save()
+						new EventOutcome(name:"Worker Forum").save()
+						new EventOutcome(name:"Networking").save()
+						new EventOutcome(name:"Staff Development").save()
+						new EventOutcome(name:"Other").save()
+						
+						//Event participants
+						new EventParticipant(name:"Civil Society").save()
+						new EventParticipant(name:"Claiments").save()
+						new EventParticipant(name:"Commercial Farmers").save()
+						new EventParticipant(name:"Farmworkers").save()
+						new EventParticipant(name:"Local Community").save()
+						new EventParticipant(name:"Other").save()
+						
 				 }
 					
 				} //end if doBootStrap

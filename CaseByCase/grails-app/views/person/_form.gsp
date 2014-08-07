@@ -90,30 +90,6 @@
 	<g:textArea name="empHowJobFoundDesc" cols="40" rows="5" value="${personInstance?.empHowJobFoundDesc}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'lastUpdatedBy', 'error')} required">
-	<label for="lastUpdatedBy">
-		<g:message code="person.lastUpdatedBy.label" default="Last Updated By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="lastUpdatedBy" type="number" value="${personInstance.lastUpdatedBy}" required=""/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'createdBy', 'error')} required">
-	<label for="createdBy">
-		<g:message code="person.createdBy.label" default="Created By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="createdBy" type="number" value="${personInstance.createdBy}" required=""/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'history', 'error')} ">
-	<label for="history">
-		<g:message code="person.history.label" default="History" />
-		
-	</label>
-	<g:textField name="history" readonly="readonly" value="${personInstance?.history}"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'citizenship', 'error')} required">
 	<label for="citizenship">
 		<g:message code="person.citizenship.label" default="Citizenship" />

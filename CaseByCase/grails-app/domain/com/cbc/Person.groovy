@@ -52,7 +52,7 @@ class Person {
 		knownAs nullable:true
 		dateOfBirth blank:true, nullable:true
 		contactNumber matches: "[0-9]*"
-		gender inList: ["Male", "Female", "Unknown"]
+		gender inList: Gender.list()
 		idNumber  blank:true, unique:true	
 		race blank:true, nullable:true	
 		empHowJobFound nullable:true

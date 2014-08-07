@@ -26,22 +26,6 @@
 	<g:textField name="description" value="${imageInstance?.description}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: imageInstance, field: 'lastUpdatedBy', 'error')} required">
-	<label for="lastUpdatedBy">
-		<g:message code="image.lastUpdatedBy.label" default="Last Updated By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="lastUpdatedBy" type="number" value="${imageInstance.lastUpdatedBy}" required=""/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: imageInstance, field: 'createdBy', 'error')} required">
-	<label for="createdBy">
-		<g:message code="image.createdBy.label" default="Created By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="createdBy" type="number" value="${imageInstance.createdBy}" required=""/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: imageInstance, field: 'locations', 'error')} ">
 	<label for="locations">
 		<g:message code="image.locations.label" default="Locations" />

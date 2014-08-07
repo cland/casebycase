@@ -5,27 +5,37 @@ import java.util.Date;
 class Event {
 	transient cbcApiService
 	static attachmentable = true
+	/** Tab1: Quick Details **/
 	String topic
-	String number
+	User user		//case worker involved as the primary person. Any other will be registered as followers
+	String refno	//reference number. Still needed???
 	Date date
 	String venue
+	EventType eventType
 	String description
 	String objective
+	EventOutcome outcome
+	
+	/** Tab2: Event Analysis **/
 	int totalMale = 0
 	int totalFemale = 0
-	String outcome
-	String eventType
-	String focusArea
-	Office office
-	User user
+	int femaleYouth = 0
+	int maleYouth = 0
+	EventParticipant eventParticipants
+	/** Tab3: Supporting documents **/
+	
+	/** Tab4: Admin Tracking Information **/
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
-	static hasMany = [funders:Funder]
+	/** 	*END FIELDS* 		**/
+	
+	static belongsTo=[office:Office]
+	static hasMany = [funders:Funder,followers:User, focusAreas:EventFocusArea]
     static constraints = {
 		topic blank:false
-		number blank:false, unique:true
+		refno blank:false, unique:true
 		date blank:false
 		venue nullable:true
 		description blank:false
@@ -53,6 +63,6 @@ class Event {
 		// your code goes here
 	}
 	String toString(){
-		return topic + "(" + number + ")"
+		return topic + "(" + refno + ")"
 	}
 }

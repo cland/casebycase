@@ -10,12 +10,12 @@
 	<g:textField name="topic" required="" value="${eventInstance?.topic}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'number', 'error')} required">
-	<label for="number">
-		<g:message code="event.number.label" default="Number" />
+<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'refno', 'error')} required">
+	<label for="refno">
+		<g:message code="event.refno.label" default="Refno" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="number" required="" value="${eventInstance?.number}"/>
+	<g:textField name="refno" required="" value="${eventInstance?.refno}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'date', 'error')} required">
@@ -66,20 +66,44 @@
 	<g:field name="totalFemale" type="number" value="${eventInstance.totalFemale}" required=""/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'eventType', 'error')} ">
-	<label for="eventType">
-		<g:message code="event.eventType.label" default="Event Type" />
-		
+<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'eventParticipants', 'error')} required">
+	<label for="eventParticipants">
+		<g:message code="event.eventParticipants.label" default="Event Participants" />
+		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="eventType" value="${eventInstance?.eventType}"/>
+	<g:select id="eventParticipants" name="eventParticipants.id" from="${com.cbc.EventParticipant.list()}" optionKey="id" required="" value="${eventInstance?.eventParticipants?.id}" class="many-to-one"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'focusArea', 'error')} ">
-	<label for="focusArea">
-		<g:message code="event.focusArea.label" default="Focus Area" />
+<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'eventType', 'error')} required">
+	<label for="eventType">
+		<g:message code="event.eventType.label" default="Event Type" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="eventType" name="eventType.id" from="${com.cbc.EventType.list()}" optionKey="id" required="" value="${eventInstance?.eventType?.id}" class="many-to-one"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'femaleYouth', 'error')} required">
+	<label for="femaleYouth">
+		<g:message code="event.femaleYouth.label" default="Female Youth" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="femaleYouth" type="number" value="${eventInstance.femaleYouth}" required=""/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'focusAreas', 'error')} ">
+	<label for="focusAreas">
+		<g:message code="event.focusAreas.label" default="Focus Areas" />
 		
 	</label>
-	<g:textField name="focusArea" value="${eventInstance?.focusArea}"/>
+	<g:select name="focusAreas" from="${com.cbc.EventFocusArea.list()}" multiple="multiple" optionKey="id" size="5" value="${eventInstance?.focusAreas*.id}" class="many-to-many"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'followers', 'error')} ">
+	<label for="followers">
+		<g:message code="event.followers.label" default="Followers" />
+		
+	</label>
+	<g:select name="followers" from="${com.cbc.User.list()}" multiple="multiple" optionKey="id" size="5" value="${eventInstance?.followers*.id}" class="many-to-many"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'funders', 'error')} ">
@@ -99,6 +123,14 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'maleYouth', 'error')} required">
+	<label for="maleYouth">
+		<g:message code="event.maleYouth.label" default="Male Youth" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="maleYouth" type="number" value="${eventInstance.maleYouth}" required=""/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'office', 'error')} required">
 	<label for="office">
 		<g:message code="event.office.label" default="Office" />
@@ -107,12 +139,12 @@
 	<g:select id="office" name="office.id" from="${com.cbc.Office.list()}" optionKey="id" required="" value="${eventInstance?.office?.id}" class="many-to-one"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'outcome', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'outcome', 'error')} required">
 	<label for="outcome">
 		<g:message code="event.outcome.label" default="Outcome" />
-		
+		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="outcome" value="${eventInstance?.outcome}"/>
+	<g:select id="outcome" name="outcome.id" from="${com.cbc.EventOutcome.list()}" optionKey="id" required="" value="${eventInstance?.outcome?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'user', 'error')} required">

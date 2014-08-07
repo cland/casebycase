@@ -32,7 +32,7 @@
 					
 						<g:sortableColumn property="topic" title="${message(code: 'event.topic.label', default: 'Topic')}" />
 					
-						<g:sortableColumn property="number" title="${message(code: 'event.number.label', default: 'Number')}" />
+						<g:sortableColumn property="refno" title="${message(code: 'event.refno.label', default: 'Refno')}" />
 					
 						<g:sortableColumn property="date" title="${message(code: 'event.date.label', default: 'Date')}" />
 					
@@ -50,7 +50,7 @@
 					
 						<td><g:link action="show" id="${eventInstance.id}">${fieldValue(bean: eventInstance, field: "topic")}</g:link></td>
 					
-						<td>${fieldValue(bean: eventInstance, field: "number")}</td>
+						<td>${fieldValue(bean: eventInstance, field: "refno")}</td>
 					
 						<td><g:formatDate date="${eventInstance.date}" /></td>
 					

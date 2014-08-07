@@ -26,74 +26,89 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<ol class="property-list region">
+			<!-- *** START TABS *** -->
+			<div id="tabs" style="display: none;">
+				<ul>
+					<li><a href="#tab-1">Details</a></li>
+					<li><a href="#tab-2">Other</a></li>		
+				</ul>
+				<div id="tab-1">
+					<ol class="property-list region">
+						
+							<g:if test="${regionInstance?.name}">
+							<li class="fieldcontain">
+								<span id="name-label" class="property-label"><g:message code="region.name.label" default="Name" /></span>
+								
+									<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${regionInstance}" field="name"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${regionInstance?.lastUpdatedBy}">
+							<li class="fieldcontain">
+								<span id="lastUpdatedBy-label" class="property-label"><g:message code="region.lastUpdatedBy.label" default="Last Updated By" /></span>
+								
+									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${regionInstance}" field="lastUpdatedBy"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${regionInstance?.createdBy}">
+							<li class="fieldcontain">
+								<span id="createdBy-label" class="property-label"><g:message code="region.createdBy.label" default="Created By" /></span>
+								
+									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${regionInstance}" field="createdBy"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${regionInstance?.cities}">
+							<li class="fieldcontain">
+								<span id="cities-label" class="property-label"><g:message code="region.cities.label" default="Cities" /></span>
+								
+									<g:each in="${regionInstance.cities}" var="c">
+									<span class="property-value" aria-labelledby="cities-label"><g:link controller="city" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+									</g:each>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${regionInstance?.country}">
+							<li class="fieldcontain">
+								<span id="country-label" class="property-label"><g:message code="region.country.label" default="Country" /></span>
+								
+									<span class="property-value" aria-labelledby="country-label"><g:link controller="country" action="show" id="${regionInstance?.country?.id}">${regionInstance?.country?.encodeAsHTML()}</g:link></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${regionInstance?.dateCreated}">
+							<li class="fieldcontain">
+								<span id="dateCreated-label" class="property-label"><g:message code="region.dateCreated.label" default="Date Created" /></span>
+								
+									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${regionInstance?.dateCreated}" /></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${regionInstance?.lastUpdated}">
+							<li class="fieldcontain">
+								<span id="lastUpdated-label" class="property-label"><g:message code="region.lastUpdated.label" default="Last Updated" /></span>
+								
+									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${regionInstance?.lastUpdated}" /></span>
+								
+							</li>
+							</g:if>
+						
+						</ol>
+				</div>
+				
+				<div id="tab-2">
+					
+				</div>
+			</div>
+			<!--  *** END TABS *** -->
 			
-				<g:if test="${regionInstance?.name}">
-				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="region.name.label" default="Name" /></span>
-					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${regionInstance}" field="name"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${regionInstance?.lastUpdatedBy}">
-				<li class="fieldcontain">
-					<span id="lastUpdatedBy-label" class="property-label"><g:message code="region.lastUpdatedBy.label" default="Last Updated By" /></span>
-					
-						<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${regionInstance}" field="lastUpdatedBy"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${regionInstance?.createdBy}">
-				<li class="fieldcontain">
-					<span id="createdBy-label" class="property-label"><g:message code="region.createdBy.label" default="Created By" /></span>
-					
-						<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${regionInstance}" field="createdBy"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${regionInstance?.cities}">
-				<li class="fieldcontain">
-					<span id="cities-label" class="property-label"><g:message code="region.cities.label" default="Cities" /></span>
-					
-						<g:each in="${regionInstance.cities}" var="c">
-						<span class="property-value" aria-labelledby="cities-label"><g:link controller="city" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${regionInstance?.country}">
-				<li class="fieldcontain">
-					<span id="country-label" class="property-label"><g:message code="region.country.label" default="Country" /></span>
-					
-						<span class="property-value" aria-labelledby="country-label"><g:link controller="country" action="show" id="${regionInstance?.country?.id}">${regionInstance?.country?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${regionInstance?.dateCreated}">
-				<li class="fieldcontain">
-					<span id="dateCreated-label" class="property-label"><g:message code="region.dateCreated.label" default="Date Created" /></span>
-					
-						<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${regionInstance?.dateCreated}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${regionInstance?.lastUpdated}">
-				<li class="fieldcontain">
-					<span id="lastUpdated-label" class="property-label"><g:message code="region.lastUpdated.label" default="Last Updated" /></span>
-					
-						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${regionInstance?.lastUpdated}" /></span>
-					
-				</li>
-				</g:if>
-			
-			</ol>
 			<g:form url="[resource:regionInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${regionInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

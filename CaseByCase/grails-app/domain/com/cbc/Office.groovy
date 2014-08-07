@@ -26,7 +26,7 @@ class Office {
 	/** 	*END FIELDS* 		**/
 	
 	static belongsTo = []
-	static hasMany = [cases: Case, staff:Person, affiliates:Organisation]
+	static hasMany = [cases: Case, staff:Person, affiliates:Organisation,events:Event]
 	
     static constraints = {
 		name unique:true, blank:false

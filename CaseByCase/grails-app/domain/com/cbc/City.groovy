@@ -9,6 +9,8 @@ class City {
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
+	
+	static belongsTo=[region:Region]
 	static constraints = {
 		name(blank:false)
 		lastUpdatedBy nullable:true, editable:false
