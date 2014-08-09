@@ -25,6 +25,7 @@ class CategoryController {
 
 	@Transactional
 	def save(Category categoryInstance) {
+		print params
 		if (categoryInstance == null) {
 			notFound()
 			return
