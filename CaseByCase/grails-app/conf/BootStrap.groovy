@@ -171,6 +171,8 @@ SpringSecurityUtils.doWithAuth('default') {
 						new CaseOutcome(name:"Referred and Closed").save()
 						new CaseOutcome(name:"Abandoned - Lack Of Client Resources").save()
 						new CaseOutcome(name:"Other").save()
+						//Category
+						new Category(name:"Root").save()
 						//Action type
 						new ActionType(name:"Case Report").save()
 						new ActionType(name:"CCMA").save()

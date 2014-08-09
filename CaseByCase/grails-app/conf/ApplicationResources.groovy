@@ -17,4 +17,11 @@ modules = {
 	jquerygridlocale{
 		resource url: 'js/i18n/grid.locale-en.js', disposition: 'head'
 	}
+	
+	categoryHierarchyStructure{
+		dependsOn 'application'
+		resource url: 'js/renderHierarchyStructureToHTML.js'
+		resource url: 'css/hierarchy.css'
+		
+	}
 }
