@@ -75,15 +75,16 @@ class cbcApiService {
 		//else we return the user back to home page.
 		return "/?" + status
 	}
-	String getSideMenuName(){
+	String getSideMenuName(def d = "sidenav-public"){
 		if(springSecurityService.isLoggedIn()){
 			long userId = getCurrentUserId() //springSecurityService.currentUser?.id //?.principal?.id
-			if(isAdmin()) return "sidenav-admin"
+			if(!isAdmin() & d.equals("sidenav-admin")) return "sidenav-public"
+			//return the requested menu.
+			return d
 		} 
-
-		//else we return the user back to home page.
-		return "sidenav-public"
+		return "sidenav-public"		
 	}
+	
 	String generateIdNumber(Date birthday){
 		String charset = (('A'..'Z') + ('0'..'9')).join()
 		Integer length = 7
