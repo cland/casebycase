@@ -1,15 +1,19 @@
 package com.cbc
 
 import java.util.Date;
-
+//comment
 class Category {
-
+	def cbcApiService
+	/** Tab 1 **/
     String name
 	Category category
+	
+	/** Tab 2**/
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
+	
 	static hasMany = [categories:Category]
 	static belongsTo = [Category]
     static constraints = {
@@ -20,20 +24,21 @@ class Category {
     }
 	
 	String toString(){
-		boolean checkCategory = false
+		/*boolean checkCategory = false
 		Category current = this
 		String itemString = ""
 		while(!checkCategory){
 			Category parent = current.category
 			if(parent !=null){
 				itemString = parent.name + "-" + itemString
-			}else{
+			}else{ 
 				checkCategory = true
 			}
 			current = parent
 		}
 		itemString += this.name
-		return itemString
+		return itemString*/
+		return name
 	}
 	
 	def beforeInsert = {
