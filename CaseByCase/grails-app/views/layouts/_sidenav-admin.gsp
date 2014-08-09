@@ -87,6 +87,16 @@
 						</g:link>
 					</li>
 					<li>
+						<g:link class="create" controller="category" action="create">
+							<g:message code="default.new.label" args="['Category']" params="[sidebar:0]"/>
+						</g:link>
+					</li>
+					<li>
+						<g:link class="list" controller="category" action="index">
+							<g:message code="default.list.label" args="['Category']" />
+						</g:link>
+					</li>
+					<li>
 						<g:link class="create" controller="actionType" action="create">
 							<g:message code="default.new.label" args="['Action Type']" />
 						</g:link>
