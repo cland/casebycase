@@ -6,7 +6,8 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'person.label', default: 'Person')}" />
 		<title><g:appTitle title=""><g:message code="default.show.label" args="[entityName]" /></g:appTitle></title>
-		<g:render template="head"></g:render>
+		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
+		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
 	</head>
 	<body>
 		<a href="#show-person" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -19,7 +20,7 @@
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
-			<g:sideMenu default=""></g:sideMenu> 
+			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="show-person" class="content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
@@ -125,11 +126,11 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${personInstance?.emoHowJobFoundDesc}">
+							<g:if test="${personInstance?.empHowJobFoundDesc}">
 							<li class="fieldcontain">
-								<span id="emoHowJobFoundDesc-label" class="property-label"><g:message code="person.emoHowJobFoundDesc.label" default="Emo How Job Found Desc" /></span>
+								<span id="empHowJobFoundDesc-label" class="property-label"><g:message code="person.empHowJobFoundDesc.label" default="Emo How Job Found Desc" /></span>
 								
-									<span class="property-value" aria-labelledby="emoHowJobFoundDesc-label"><g:fieldValue bean="${personInstance}" field="emoHowJobFoundDesc"/></span>
+									<span class="property-value" aria-labelledby="empHowJobFoundDesc-label"><g:fieldValue bean="${personInstance}" field="empHowJobFoundDesc"/></span>
 								
 							</li>
 							</g:if>

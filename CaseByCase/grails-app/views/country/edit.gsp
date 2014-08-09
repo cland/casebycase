@@ -4,12 +4,12 @@
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'country.label', default: 'Country')}" />
-		<title><g:message code="default.edit.label" args="[entityName]" /></title>
-		<g:render template="head"></g:render>
+		<title><g:appTitle title=""><g:message code="default.edit.label" args="[entityName]" /></g:appTitle></title>
+		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_ADMIN}" />
+		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
 	</head>
 	<body>
 		<a href="#edit-country" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-				<a href="#show-country" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="bread-crump">
 				<span class="r-arrow"></span>
 				<g:link controller="home" action="cbc">Home</g:link>
@@ -19,10 +19,8 @@
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
-			<g:sideMenu default=""></g:sideMenu> 
+			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
-		
-		
 		<div id="edit-country" class="content scaffold-edit" role="main">
 			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
@@ -35,15 +33,30 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form url="[resource:countryInstance, action:'update']" method="PUT" >
-				<g:hiddenField name="version" value="${countryInstance?.version}" />
-				<fieldset class="form">
-					<g:render template="form"/>
-				</fieldset>
-				<fieldset class="buttons">
-					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-				</fieldset>
-			</g:form>
+			<!-- *** START TABS *** -->
+			<div id="tabs" style="display: none;">
+				<ul>
+					<li><a href="#tab-1">Details</a></li>
+					<li><a href="#tab-2">Other</a></li>		
+				</ul>
+				<div id="tab-1">
+					<g:form url="[resource:countryInstance, action:'update']" method="PUT" >
+						<g:hiddenField name="version" value="${countryInstance?.version}" />
+						<fieldset class="form">
+							<g:render template="form"/>
+						</fieldset>
+						<fieldset class="buttons">
+							<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+						</fieldset>
+					</g:form>
+				</div>
+				
+				<div id="tab-2">
+					
+				</div>
+			</div>
+			<!--  *** END TABS *** -->
+			
 		</div>
 		<script>
 			$(document).ready(function() {		
@@ -66,7 +79,7 @@
 										});
 									}
 						});		                
-			});  //end method ready(...)
-		</script>		
+			});  
+		</script>			
 	</body>
 </html>

@@ -6,7 +6,8 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'organisation.label', default: 'Organisation')}" />
 		<title><g:appTitle title=""><g:message code="default.list.label" args="[entityName]" /></g:appTitle></title>
-		<g:render template="head"></g:render>
+		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
+		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
 	</head>
 	<body>
 		<a href="#list-organisation" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -19,7 +20,7 @@
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
-			<g:sideMenu default=""></g:sideMenu> 
+			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="list-organisation" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
@@ -38,9 +39,9 @@
 					
 						<g:sortableColumn property="email" title="${message(code: 'organisation.email.label', default: 'Email')}" />
 					
-						<g:sortableColumn property="isHost" title="${message(code: 'organisation.isHost.label', default: 'Is Host')}" />
+						<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'organisation.lastUpdatedBy.label', default: 'Last Updated By')}" />
 					
-						<g:sortableColumn property="isMember" title="${message(code: 'organisation.isMember.label', default: 'Is Member')}" />
+						<g:sortableColumn property="createdBy" title="${message(code: 'organisation.createdBy.label', default: 'Created By')}" />
 					
 					</tr>
 				</thead>
@@ -56,9 +57,9 @@
 					
 						<td>${fieldValue(bean: organisationInstance, field: "email")}</td>
 					
-						<td><g:formatBoolean boolean="${organisationInstance.isHost}" /></td>
+						<td>${fieldValue(bean: organisationInstance, field: "lastUpdatedBy")}</td>
 					
-						<td><g:formatBoolean boolean="${organisationInstance.isMember}" /></td>
+						<td>${fieldValue(bean: organisationInstance, field: "createdBy")}</td>
 					
 					</tr>
 				</g:each>

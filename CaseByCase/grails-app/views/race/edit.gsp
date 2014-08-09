@@ -5,7 +5,8 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'race.label', default: 'Race')}" />
 		<title><g:appTitle title=""><g:message code="default.edit.label" args="[entityName]" /></g:appTitle></title>
-		<g:render template="head"></g:render>
+		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
+		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
 	</head>
 	<body>
 		<a href="#edit-race" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -18,7 +19,7 @@
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
-			<g:sideMenu default=""></g:sideMenu> 
+			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="edit-race" class="content scaffold-edit" role="main">
 			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
@@ -32,15 +33,30 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form url="[resource:raceInstance, action:'update']" method="PUT" >
-				<g:hiddenField name="version" value="${raceInstance?.version}" />
-				<fieldset class="form">
-					<g:render template="form"/>
-				</fieldset>
-				<fieldset class="buttons">
-					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-				</fieldset>
-			</g:form>
+			<!-- *** START TABS *** -->
+			<div id="tabs" style="display: none;">
+				<ul>
+					<li><a href="#tab-1">Details</a></li>
+					<li><a href="#tab-2">Other</a></li>		
+				</ul>
+				<div id="tab-1">
+					<g:form url="[resource:raceInstance, action:'update']" method="PUT" >
+						<g:hiddenField name="version" value="${raceInstance?.version}" />
+						<fieldset class="form">
+							<g:render template="form"/>
+						</fieldset>
+						<fieldset class="buttons">
+							<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+						</fieldset>
+					</g:form>
+				</div>
+				
+				<div id="tab-2">
+					
+				</div>
+			</div>
+			<!--  *** END TABS *** -->
+			
 		</div>
 		<script>
 			$(document).ready(function() {		

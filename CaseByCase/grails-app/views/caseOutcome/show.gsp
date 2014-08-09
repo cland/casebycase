@@ -6,6 +6,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'caseOutcome.label', default: 'CaseOutcome')}" />
 		<title><g:appTitle title=""><g:message code="default.show.label" args="[entityName]" /></g:appTitle></title>
+		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
 		<g:render template="head"></g:render>
 	</head>
 	<body>
@@ -19,7 +20,7 @@
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
-			<g:sideMenu default=""></g:sideMenu> 
+			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="show-caseOutcome" class="content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>

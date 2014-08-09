@@ -11,14 +11,14 @@
 		</li>
 		<sec:ifLoggedIn>
 			<li>				
-				<a class="mywork-link" href="${createLink(uri: '/')}"><g:message code="default.mywork.label" default="My Work"/></a>
+				<a class="mywork-link" href="${createLink(uri: '/case/index')}"><g:message code="default.mywork.label" default="My Work"/></a>
 				<ul>
 				<li><a class="newcase-link" href="${createLink(uri: '/case/create')}"><g:message code="default.newcase.label" default="New Case" /></a></li>	
 		        <li><a class="cases-link" href="${createLink(uri: '/case/index')}"><g:message code="default.cases.label" default="Cases" /></a></li>		        
 				<li><a class="actions-link" href="${createLink(uri: '/action/index')}"><g:message code="default.actions.label" default="Actions"/></a></li>
 				</ul>
 			</li>
-			<li><a class="clients-link" href="${createLink(uri: '/')}"><g:message code="default.clients.label" default="Clients"/></a>
+			<li><a class="clients-link" href="${createLink(uri: '/person/index')}"><g:message code="default.clients.label" default="Clients"/></a>
 				<ul>
 					<li><a class="newperson-link" href="${createLink(uri: '/person/create')}"><g:message code="default.aboutus.label" default="New Person" /></a></li>	
 					<li><a class="neworg-link" href="${createLink(uri: '/organisation/create')}"><g:message code="default.aboutus.label" default="New Organisation" /></a></li>	
@@ -33,10 +33,10 @@
             	</ul>
             </li>
             	
-            <li><a class="pcm-link" href="${createLink(uri: '/')}"><g:message code="default.pcm.label" default="Please Call Me"/></a>
+            <li><a class="pcm-link" href="${createLink(uri: '/pcm/index')}"><g:message code="default.pcm.label" default="Please Call Me"/></a>
             	<ul>
-			        <li><a class="newpcm-link" href="${createLink(uri: '/home/')}"><g:message code="default.newpcm.label" default="New PCM" /></a></li>		        
-					<li><a class="listpcm-link" href="${createLink(uri: '/home/')}"><g:message code="default.pcmlist.label" default="PCM List"/></a></li>								
+			        <li><a class="newpcm-link" href="${createLink(uri: '/pcm/create')}"><g:message code="default.newpcm.label" default="New PCM" /></a></li>		        
+					<li><a class="listpcm-link" href="${createLink(uri: '/pcm/index')}"><g:message code="default.pcmlist.label" default="PCM List"/></a></li>								
             	</ul>
             <li>				
 				<a class="reports-link" href="${createLink(uri: '/')}"><g:message code="default.reports.label" default="Reports"/></a>
@@ -50,8 +50,8 @@
 			<li>
 				<g:link controller="admin" action="cbc" class="admin-link"> <g:message code="default.admin.label" default="Admin" /></g:link>
 				<ul>
-					<li><a class="offices-link" href="${createLink(uri: '/office/index?sidebar=0')}"><g:message code="default.offices.label" default="Advice Offices" /></a></li>
-					<li><a class="profiles-link" href="${createLink(uri: '/user/index?sidebar=0')}"><g:message code="default.userprofiles.label" default="User Profiles" /></a></li>
+					<li><a class="offices-link" href="${createLink(uri: '/office/index')}"><g:message code="default.offices.label" default="Advice Offices" /></a></li>
+					<li><a class="profiles-link" href="${createLink(uri: '/user/index')}"><g:message code="default.userprofiles.label" default="User Profiles" /></a></li>
 					<li><a class="location-link" href="${createLink(uri: '/home/')}"><g:message code="default.location.label" default="Municipalities" /></a></li>
 					<li><a class="orgs-link" href="${createLink(uri: '/organisation/index')}"><g:message code="default.organisations.label" default="Organisations" /></a></li>
 					<li><a class="lookuptypes-link" href="${createLink(uri: '/caseStatus/index')}"><g:message code="default.lookuptypes.label" default="Lookup Types" /></a></li>

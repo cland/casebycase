@@ -6,6 +6,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'pcm.label', default: 'Pcm')}" />
 		<title><g:appTitle title=""><g:message code="default.show.label" args="[entityName]" /></g:appTitle></title>
+		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
 		<g:render template="head"></g:render>
 	</head>
 	<body>
@@ -19,7 +20,7 @@
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
-			<g:sideMenu default=""></g:sideMenu> 
+			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="show-pcm" class="content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
@@ -89,15 +90,6 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${pcmInstance?.from}">
-							<li class="fieldcontain">
-								<span id="from-label" class="property-label"><g:message code="pcm.from.label" default="From" /></span>
-								
-									<span class="property-value" aria-labelledby="from-label"><g:fieldValue bean="${pcmInstance}" field="from"/></span>
-								
-							</li>
-							</g:if>
-						
 							<g:if test="${pcmInstance?.lastUpdated}">
 							<li class="fieldcontain">
 								<span id="lastUpdated-label" class="property-label"><g:message code="pcm.lastUpdated.label" default="Last Updated" /></span>
@@ -157,6 +149,15 @@
 								<span id="region-label" class="property-label"><g:message code="pcm.region.label" default="Region" /></span>
 								
 									<span class="property-value" aria-labelledby="region-label"><g:link controller="region" action="show" id="${pcmInstance?.region?.id}">${pcmInstance?.region?.encodeAsHTML()}</g:link></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${pcmInstance?.sender}">
+							<li class="fieldcontain">
+								<span id="sender-label" class="property-label"><g:message code="pcm.sender.label" default="Sender" /></span>
+								
+									<span class="property-value" aria-labelledby="sender-label"><g:fieldValue bean="${pcmInstance}" field="sender"/></span>
 								
 							</li>
 							</g:if>

@@ -26,6 +26,22 @@
 	<g:textField name="description" value="${keywordsInstance?.description}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: keywordsInstance, field: 'lastUpdatedBy', 'error')} required">
+	<label for="lastUpdatedBy">
+		<g:message code="keywords.lastUpdatedBy.label" default="Last Updated By" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="lastUpdatedBy" type="number" value="${keywordsInstance.lastUpdatedBy}" required=""/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: keywordsInstance, field: 'createdBy', 'error')} required">
+	<label for="createdBy">
+		<g:message code="keywords.createdBy.label" default="Created By" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="createdBy" type="number" value="${keywordsInstance.createdBy}" required=""/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: keywordsInstance, field: 'values', 'error')} ">
 	<label for="values">
 		<g:message code="keywords.values.label" default="Values" />

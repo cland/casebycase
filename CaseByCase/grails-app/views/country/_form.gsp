@@ -10,6 +10,22 @@
 	<g:textField name="name" required="" value="${countryInstance?.name}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: countryInstance, field: 'lastUpdatedBy', 'error')} required">
+	<label for="lastUpdatedBy">
+		<g:message code="country.lastUpdatedBy.label" default="Last Updated By" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="lastUpdatedBy" type="number" value="${countryInstance.lastUpdatedBy}" required=""/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: countryInstance, field: 'createdBy', 'error')} required">
+	<label for="createdBy">
+		<g:message code="country.createdBy.label" default="Created By" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="createdBy" type="number" value="${countryInstance.createdBy}" required=""/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: countryInstance, field: 'regions', 'error')} ">
 	<label for="regions">
 		<g:message code="country.regions.label" default="Regions" />

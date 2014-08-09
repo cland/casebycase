@@ -75,14 +75,14 @@ class cbcApiService {
 		//else we return the user back to home page.
 		return "/?" + status
 	}
-	String getSideMenuName(def d = "sidenav-public"){
-		if(springSecurityService.isLoggedIn()){
+	String getSideMenuName(def d = SideNav.MENU_STANDARD.toString()){
+		if(springSecurityService.isLoggedIn()){		
 			long userId = getCurrentUserId() //springSecurityService.currentUser?.id //?.principal?.id
-			if(!isAdmin() & d.equals("sidenav-admin")) return "sidenav-public"
+			if(!isAdmin() & d.equals(SideNav.MENU_ADMIN.toString())) return SideNav.MENU_STANDARD.String()
 			//return the requested menu.
 			return d
 		} 
-		return "sidenav-public"		
+		return SideNav.MENU_STANDARD.toString()		
 	}
 	
 	String generateIdNumber(Date birthday){
@@ -92,4 +92,11 @@ class cbcApiService {
 		if(birthday == null) birthday = new Date();
 		return birthday?.format("yymmdd") + randomString
 	}
+	private static int findUpperIndex(int offset, int max, int total) {
+		max = offset + max - 1
+		if (max >= total) {
+			max -= max - total + 1
+		}
+		return max
+	} //end helper method findUpperIndex
 }//end class

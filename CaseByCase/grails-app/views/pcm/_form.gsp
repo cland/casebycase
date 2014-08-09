@@ -1,5 +1,23 @@
 <%@ page import="com.cbc.Pcm" %>
 
+
+
+<div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'lastUpdatedBy', 'error')} required">
+	<label for="lastUpdatedBy">
+		<g:message code="pcm.lastUpdatedBy.label" default="Last Updated By" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="lastUpdatedBy" type="number" value="${pcmInstance.lastUpdatedBy}" required=""/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'createdBy', 'error')} required">
+	<label for="createdBy">
+		<g:message code="pcm.createdBy.label" default="Created By" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="createdBy" type="number" value="${pcmInstance.createdBy}" required=""/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'agegroup', 'error')} required">
 	<label for="agegroup">
 		<g:message code="pcm.agegroup.label" default="Agegroup" />
@@ -22,14 +40,6 @@
 		
 	</label>
 	<g:textField name="description" value="${pcmInstance?.description}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'from', 'error')} ">
-	<label for="from">
-		<g:message code="pcm.from.label" default="From" />
-		
-	</label>
-	<g:textField name="from" value="${pcmInstance?.from}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'name', 'error')} ">
@@ -78,5 +88,13 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="region" name="region.id" from="${com.cbc.Region.list()}" optionKey="id" required="" value="${pcmInstance?.region?.id}" class="many-to-one"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'sender', 'error')} ">
+	<label for="sender">
+		<g:message code="pcm.sender.label" default="Sender" />
+		
+	</label>
+	<g:textField name="sender" value="${pcmInstance?.sender}"/>
 </div>
 

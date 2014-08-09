@@ -6,6 +6,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'race.label', default: 'Race')}" />
 		<title><g:appTitle title=""><g:message code="default.show.label" args="[entityName]" /></g:appTitle></title>
+		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
 		<g:render template="head"></g:render>
 	</head>
 	<body>
@@ -19,61 +20,76 @@
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
-			<g:sideMenu default=""></g:sideMenu> 
+			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="show-race" class="content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<ol class="property-list race">
+			<!-- *** START TABS *** -->
+			<div id="tabs" style="display: none;">
+				<ul>
+					<li><a href="#tab-1">Details</a></li>
+					<li><a href="#tab-2">Other</a></li>		
+				</ul>
+				<div id="tab-1">
+					<ol class="property-list race">
+						
+							<g:if test="${raceInstance?.name}">
+							<li class="fieldcontain">
+								<span id="name-label" class="property-label"><g:message code="race.name.label" default="Name" /></span>
+								
+									<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${raceInstance}" field="name"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${raceInstance?.lastUpdatedBy}">
+							<li class="fieldcontain">
+								<span id="lastUpdatedBy-label" class="property-label"><g:message code="race.lastUpdatedBy.label" default="Last Updated By" /></span>
+								
+									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${raceInstance}" field="lastUpdatedBy"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${raceInstance?.createdBy}">
+							<li class="fieldcontain">
+								<span id="createdBy-label" class="property-label"><g:message code="race.createdBy.label" default="Created By" /></span>
+								
+									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${raceInstance}" field="createdBy"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${raceInstance?.dateCreated}">
+							<li class="fieldcontain">
+								<span id="dateCreated-label" class="property-label"><g:message code="race.dateCreated.label" default="Date Created" /></span>
+								
+									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${raceInstance?.dateCreated}" /></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${raceInstance?.lastUpdated}">
+							<li class="fieldcontain">
+								<span id="lastUpdated-label" class="property-label"><g:message code="race.lastUpdated.label" default="Last Updated" /></span>
+								
+									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${raceInstance?.lastUpdated}" /></span>
+								
+							</li>
+							</g:if>
+						
+						</ol>
+				</div>
+				
+				<div id="tab-2">
+					
+				</div>
+			</div>
+			<!--  *** END TABS *** -->
 			
-				<g:if test="${raceInstance?.name}">
-				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="race.name.label" default="Name" /></span>
-					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${raceInstance}" field="name"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${raceInstance?.lastUpdatedBy}">
-				<li class="fieldcontain">
-					<span id="lastUpdatedBy-label" class="property-label"><g:message code="race.lastUpdatedBy.label" default="Last Updated By" /></span>
-					
-						<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${raceInstance}" field="lastUpdatedBy"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${raceInstance?.createdBy}">
-				<li class="fieldcontain">
-					<span id="createdBy-label" class="property-label"><g:message code="race.createdBy.label" default="Created By" /></span>
-					
-						<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${raceInstance}" field="createdBy"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${raceInstance?.dateCreated}">
-				<li class="fieldcontain">
-					<span id="dateCreated-label" class="property-label"><g:message code="race.dateCreated.label" default="Date Created" /></span>
-					
-						<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${raceInstance?.dateCreated}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${raceInstance?.lastUpdated}">
-				<li class="fieldcontain">
-					<span id="lastUpdated-label" class="property-label"><g:message code="race.lastUpdated.label" default="Last Updated" /></span>
-					
-						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${raceInstance?.lastUpdated}" /></span>
-					
-				</li>
-				</g:if>
-			
-			</ol>
 			<g:form url="[resource:raceInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${raceInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

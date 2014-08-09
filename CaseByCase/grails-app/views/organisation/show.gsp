@@ -6,6 +6,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'organisation.label', default: 'Organisation')}" />
 		<title><g:appTitle title=""><g:message code="default.show.label" args="[entityName]" /></g:appTitle></title>
+		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
 		<g:render template="head"></g:render>
 	</head>
 	<body>
@@ -19,7 +20,7 @@
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
-			<g:sideMenu default=""></g:sideMenu> 
+			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="show-organisation" class="content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
@@ -71,6 +72,33 @@
 							</li>
 							</g:if>
 						
+							<g:if test="${organisationInstance?.lastUpdatedBy}">
+							<li class="fieldcontain">
+								<span id="lastUpdatedBy-label" class="property-label"><g:message code="organisation.lastUpdatedBy.label" default="Last Updated By" /></span>
+								
+									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${organisationInstance}" field="lastUpdatedBy"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${organisationInstance?.createdBy}">
+							<li class="fieldcontain">
+								<span id="createdBy-label" class="property-label"><g:message code="organisation.createdBy.label" default="Created By" /></span>
+								
+									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${organisationInstance}" field="createdBy"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${organisationInstance?.dateCreated}">
+							<li class="fieldcontain">
+								<span id="dateCreated-label" class="property-label"><g:message code="organisation.dateCreated.label" default="Date Created" /></span>
+								
+									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${organisationInstance?.dateCreated}" /></span>
+								
+							</li>
+							</g:if>
+						
 							<g:if test="${organisationInstance?.isHost}">
 							<li class="fieldcontain">
 								<span id="isHost-label" class="property-label"><g:message code="organisation.isHost.label" default="Is Host" /></span>
@@ -85,6 +113,15 @@
 								<span id="isMember-label" class="property-label"><g:message code="organisation.isMember.label" default="Is Member" /></span>
 								
 									<span class="property-value" aria-labelledby="isMember-label"><g:formatBoolean boolean="${organisationInstance?.isMember}" /></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${organisationInstance?.lastUpdated}">
+							<li class="fieldcontain">
+								<span id="lastUpdated-label" class="property-label"><g:message code="organisation.lastUpdated.label" default="Last Updated" /></span>
+								
+									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${organisationInstance?.lastUpdated}" /></span>
 								
 							</li>
 							</g:if>

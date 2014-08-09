@@ -4,10 +4,10 @@ package com.cbc
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
-
+import grails.converters.JSON
 @Transactional(readOnly = true)
 class OfficeController {
-
+	def cbcApiService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -100,5 +100,49 @@ class OfficeController {
             }
             '*'{ render status: NOT_FOUND }
         }
-    }
-}
+    } //end notFound()
+	
+	/**
+	 * jqGrid support functions
+	 */
+	/** Custom jquery function
+	 * Lists all the courses that the person.id is registered for.
+	 *
+	 ***/
+	def jq_list_staff = {
+		//println("jq_list_staff: ${params}")
+		def officeInstance = Office.get(params.officeid)
+		if (!officeInstance) {
+			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'office.label', default: 'Office'), params.id])}"
+			redirect(action: "show",params:params)
+		}
+		
+		def all_staff = officeInstance.staff.sort(false){[it.firstLastName]}
+		int total = all_staff?.size()
+		if(total < 1){
+			def t =[records:0,page:0]
+			render  t as JSON
+			return
+		}
+		int max = (params?.rows ? params.int('rows') : 30)
+		int page = (params?.page ? params.int('page') : 1)
+		int total_pages = (total > 0 ? Math.ceil(total/max) : 0)
+		if(page > total_pages)	page = total_pages
+		int offset = max*page-max
+		
+		int upperLimit = cbcApiService.findUpperIndex(offset, max, total)
+
+		List resultList = all_staff.getAt(offset..upperLimit)
+		def jsonCells =	resultList.collect {
+			[cell: [it.firstLastName,
+					it.gender,
+					it.dateOfBirth,
+				], id: it.id] 
+		}
+		
+		def jsonData= [rows: jsonCells,page:page,records:total,total:total_pages]
+
+		render jsonData as JSON
+		
+	} //end jq_list_staff
+} //end class
