@@ -9,6 +9,7 @@
 		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_ADMIN}" />
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
 		<g:javascript library="jquerygrid" />
+		<link rel="stylesheet" href="/cbc/css/ui.jqgrid.css" type="text/css">
 	</head>
 	<body>
 		<a href="#show-office" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -124,7 +125,8 @@
 							</li>
 							</g:if>
 						
-						</ol>
+						</ol>			
+					
 				</div>
 				
 				<div id="tab-2">
@@ -132,8 +134,7 @@
 					<div id="staff_grid" style="padding: 5px;">
 						<table id="staff_list" class="scroll jqTable"></table>
 						<!-- pager will hold our paginator -->
-						<div id="staff_list_pager" class="scroll"
-							style="text-align: center;"></div>
+						<div id="staff_list_pager" class="scroll" style="text-align: center;"></div>
 					</div>
 				</div>
 			</div>
@@ -171,11 +172,11 @@
 				});		    
 
 				/** GRID **/
-				centerForm = function ($form) {
-		                    $form.closest('div.ui-jqdialog').position({
-		                        my: "center"
-		                    });
-		                };		             
+<%--				centerForm = function ($form) {--%>
+<%--		                    $form.closest('div.ui-jqdialog').position({--%>
+<%--		                        my: "center"--%>
+<%--		                    });--%>
+<%--		                };		             --%>
   
                 //initialize the coursegrid 
 			    jQuery("#" + cbc_params.staff_maingrid_id).jqGrid({
@@ -190,7 +191,7 @@
 			        {name:'roles', editable:false},
 			        {name:'username', editable:false},					             
 			        {name:'id',hidden:true},
-			        {name:'act',index:'act', width:162,sortable:false,search:false}
+			        {name:'act',index:'act', width:100,sortable:false,search:false}
 			       // {name:'modid',index:'modid',editable:true, hidden:true,sortable:false,search:false,editoptions:{defaultValue:cbc_params.thisId}}
 			     ],
 			     rowNum:20,
@@ -211,7 +212,7 @@
 			            { 
 			            	var cl = ids[i]; 
 				          
-				            rs = "<input class='view' style='height:22px;width:80px;' type='button' value='Detao;s' onclick=\"viewResults('"+cl+"','"+cbc_params.staff_maingrid_id+"');\" />";
+				            rs = "<input class='view' style='height:22px;width:80px;' type='button' value='Details' onclick=\"viewResults('"+cl+"','"+cbc_params.staff_maingrid_id+"');\" />";
 				            rm = "<input class='edit' style='height:22px;width:80px;' type='button' value='Remove' onclick=\"removeGridRow('"+cl+"','"+cbc_params.staff_maingrid_id+"');\" />";
 				            jQuery("#" + cbc_params.staff_maingrid_id).jqGrid('setRowData',ids[i],{act:rs+rm}); //be+se+ce+de forall actions 
 			            }
@@ -225,7 +226,6 @@
 			        );
 			  //  $("#" + cbc_params.staff_maingrid_id).jqGrid('filterToolbar',{autosearch:true});            
 			});  
-
 			/** helper functions **/
 			 
 			  function afterSubmitEvent(response, postdata) {  
@@ -267,13 +267,13 @@
 					}
 					  
 					  function viewResults(id,grid_id){
-					  	document.location.href= "../../person/show/" + id
+					  	document.location.href= "../../user/show/" + id
 					  	
 					  }
-					  function addStaffRow(parent_id, grid_id){
+					  function addStaffRow(person_id, grid_id){
 					  	 var $dialog = $('<div></div>')
 			           
-			                        .load('../../user/create?person.id=' + parent_id)
+			                        .load('../user/create?person.id=' + person_id)
 			                        .dialog({
 			                            autoOpen: false,
 			                            width:350,
@@ -289,7 +289,8 @@
 			                        $dialog.dialog('open');
 					  }
 					  function clearSelection(grid_id){jQuery('#' + grid_id).jqGrid('resetSelection'); }
+			
 		</script>	
-</script>		
+		
 	</body>
 </html>
