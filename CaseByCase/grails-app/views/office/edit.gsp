@@ -37,7 +37,7 @@
 			<div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Other</a></li>		
+					<li><a href="#tab-2">Staff Members</a></li>		
 				</ul>
 				<div id="tab-1">
 					<g:form url="[resource:officeInstance, action:'update']" method="PUT" >

@@ -841,7 +841,7 @@ p {
 
 .ui-tabs .ui-tabs-panel {padding:0.5em !important;}
 .production fieldset {padding:1em;}
-.data-table,.cast-details-data-table, cast-actions-data-table,cast-mugshot-data-table,production-data-table{display:table;width:100%;}
+.data-table{display:table;width:100%;}
 .row{display:table-row;}
 .row:hover, .row:hover label{background:#8C8C8C;color:#fff !important;}
 .cell{display:table-cell; padding:4px;}

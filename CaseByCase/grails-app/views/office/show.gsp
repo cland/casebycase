@@ -33,100 +33,134 @@
 			<div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Other</a></li>		
+					<li><a href="#tab-2">Staff Members</a></li>		
+					<li><a href="#tab-3">Cases</a></li>
+					<li><a href="#tab-4">Admin</a></li>
 				</ul>
 				<div id="tab-1">
-					<ol class="property-list office">
-						
-							<g:if test="${officeInstance?.name}">
-							<li class="fieldcontain">
-								<span id="name-label" class="property-label"><g:message code="office.name.label" default="Name" /></span>
-								
-									<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${officeInstance}" field="name"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${officeInstance?.code}">
-							<li class="fieldcontain">
-								<span id="code-label" class="property-label"><g:message code="office.code.label" default="Code" /></span>
-								
-									<span class="property-value" aria-labelledby="code-label"><g:fieldValue bean="${officeInstance}" field="code"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${officeInstance?.status}">
-							<li class="fieldcontain">
-								<span id="status-label" class="property-label"><g:message code="office.status.label" default="Status" /></span>
-								
-									<span class="property-value" aria-labelledby="status-label"><g:fieldValue bean="${officeInstance}" field="status"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${officeInstance?.contactNumber}">
-							<li class="fieldcontain">
-								<span id="contactNumber-label" class="property-label"><g:message code="office.contactNumber.label" default="Contact Number" /></span>
-								
-									<span class="property-value" aria-labelledby="contactNumber-label"><g:fieldValue bean="${officeInstance}" field="contactNumber"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${officeInstance?.cellphoneNumber}">
-							<li class="fieldcontain">
-								<span id="cellphoneNumber-label" class="property-label"><g:message code="office.cellphoneNumber.label" default="Cellphone Number" /></span>
-								
-									<span class="property-value" aria-labelledby="cellphoneNumber-label"><g:fieldValue bean="${officeInstance}" field="cellphoneNumber"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${officeInstance?.faxNumber}">
-							<li class="fieldcontain">
-								<span id="faxNumber-label" class="property-label"><g:message code="office.faxNumber.label" default="Fax Number" /></span>
-								
-									<span class="property-value" aria-labelledby="faxNumber-label"><g:fieldValue bean="${officeInstance}" field="faxNumber"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${officeInstance?.affiliates}">
-							<li class="fieldcontain">
-								<span id="affiliates-label" class="property-label"><g:message code="office.affiliates.label" default="Affiliates" /></span>
-								
-									<g:each in="${officeInstance.affiliates}" var="a">
+					<fieldset><legend>OFFICE SETUP</legend>
+					<div class="table">
+							<div class="row">
+								<div class="cell"><label><g:message code="office.name.label" default="Name" /></label></div>
+								<div class="cell"><span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${officeInstance}" field="name"/></span></div>
+							</div>
+							<div class="row">
+								<div class="cell"><label id="code-label"><g:message code="office.code.label" default="Code" /></label></div>
+								<div class="cell"><span class="property-value" aria-labelledby="code-label"><g:fieldValue bean="${officeInstance}" field="code"/></span></div>
+							</div>
+							<div class="row">
+								<div class="cell"><label id="status-label"><g:message code="office.status.label" default="Status" /></label></div>
+								<div class="cell"><span class="property-value" aria-labelledby="status-label"><g:fieldValue bean="${officeInstance}" field="status"/></span></div>
+							</div>
+							<div class="row">
+								<div class="cell"><label id="contactNumber-label" ><g:message code="office.contactNumber.label" default="Contact Number" /></label></div>
+								<div class="cell"><span class="property-value" aria-labelledby="contactNumber-label"><g:fieldValue bean="${officeInstance}" field="contactNumber"/></span></div>
+							</div>
+							<div class="row">
+								<div class="cell"><label id="cellphoneNumber-label"><g:message code="office.cellphoneNumber.label" default="Cellphone Number" /></label></div>
+								<div class="cell"><span class="property-value" aria-labelledby="cellphoneNumber-label"><g:fieldValue bean="${officeInstance}" field="cellphoneNumber"/></span></div>
+							</div>
+							<div class="row">
+								<div class="cell"><label id="faxNumber-label"><g:message code="office.faxNumber.label" default="Fax Number" /></label></div>
+								<div class="cell"><span class="property-value" aria-labelledby="faxNumber-label"><g:fieldValue bean="${officeInstance}" field="faxNumber"/></span></div>
+							</div>
+							<div class="row">
+								<div class="cell"><label id="affiliates-label"><g:message code="office.affiliates.label" default="Affiliates" /></label></div>
+								<div class="cell"><g:each in="${officeInstance.affiliates}" var="a">
 									<span class="property-value" aria-labelledby="affiliates-label"><g:link controller="organisation" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
 									</g:each>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${officeInstance?.cases}">
-							<li class="fieldcontain">
-								<span id="cases-label" class="property-label"><g:message code="office.cases.label" default="Cases" /></span>
-								
-									<g:each in="${officeInstance.cases}" var="c">
+								</div>
+							</div>
+							<div class="row">
+								<div class="cell"><label id="cases-label"><g:message code="office.cases.label" default="Cases" /></label></div>
+								<div class="cell"><g:each in="${officeInstance.cases}" var="c">
 									<span class="property-value" aria-labelledby="cases-label"><g:link controller="case" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
 									</g:each>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${officeInstance?.staff}">
-							<li class="fieldcontain">
-								<span id="staff-label" class="property-label"><g:message code="office.staff.label" default="Staff" /></span>
-								
-									<g:each in="${officeInstance.staff}" var="s">
-									<span class="property-value" aria-labelledby="staff-label"><g:link controller="person" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></span>
-									</g:each>
-								
-							</li>
-							</g:if>
-						
-						</ol>			
-					
+								</div>
+							</div>
+							<div class="row">
+								<div class="cell"><label id="faxNumber-label"><g:message code="office.faxNumber.label" default="Fax Number" /></label></div>
+								<div class="cell"><span class="property-value" aria-labelledby="faxNumber-label"><g:fieldValue bean="${officeInstance}" field="faxNumber"/></span></div>
+							</div>
+					</div>
+					</fieldset>
+					<br/>
+					<fieldset><legend>CONTACT NUMBERS</legend></fieldset>
+					<br/>
+					<fieldset><legend>PHYSICAL ADDRESS</legend>
+						<div class="table">
+							<div class="row">
+								<div class="cell"><label>Line 1:</label></div>
+								<div class="cell"><span class="property-value">-- line 1 field --</span></div>
+							</div>
+							<div class="row">
+								<div class="cell"><label>Line 2:</label></div>
+								<div class="cell">-- line 2 field --</div>
+							</div>
+							<div class="row">
+								<div class="cell"><label>Town/City:</label></div>
+								<div class="cell">-- town/city field --</div>
+							</div>
+							<div class="row">
+								<div class="cell"><label>Postal Code:</label></div>
+								<div class="cell">-- line 1 field --</div>
+							</div>
+						</div>
+					</fieldset>
+					<br/>
+					<fieldset><legend>POSTAL ADDRESS</legend>
+						<div class="table">
+								<div class="row">
+									<div class="cell"><label>Line 1:</label></div>
+									<div class="cell">-- line 1 field --</div>
+								</div>
+								<div class="row">
+									<div class="cell"><label>Line 2:</label></div>
+									<div class="cell">-- line 2 field --</div>
+								</div>
+								<div class="row">
+									<div class="cell"><label>Town/City:</label></div>
+									<div class="cell">-- town/city field --</div>
+								</div>
+								<div class="row">
+									<div class="cell"><label>Postal Code:</label></div>
+									<div class="cell">-- line 1 field --</div>
+								</div>
+						</div>
+					</fieldset>
+					<br/>
+					<fieldset><legend>GEOGRAPHICAL DETAILS</legend>
+						<div class="table">
+							<div class="row">
+								<div class="cell"><label>Province:</label></div>
+								<div class="cell">-- field --</div>
+							</div>
+							<div class="row">
+								<div class="cell"><label>District:</label></div>
+								<div class="cell">-- line 2 field --</div>
+							</div>
+							<div class="row">
+								<div class="cell"><label>Municipality:</label></div>
+								<div class="cell">-- town/city field --</div>
+							</div>
+							<div class="row">
+								<div class="cell"><label>Main Place:</label></div>
+								<div class="cell">-- line 1 field --</div>
+							</div>
+							<div class="row">
+								<div class="cell"><label>Suburb/Village:</label></div>
+								<div class="cell">-- field --</div>
+							</div>
+							<div class="row">
+								<div class="cell"><label>Township:</label></div>
+								<div class="cell">-- field --</div>
+							</div>
+							<div class="row">
+								<div class="cell"><label>Description of where office is located:</label></div>
+								<div class="cell">-- field --</div>
+							</div>
+						</div>					
+					</fieldset>
 				</div>
 				
 				<div id="tab-2">
@@ -137,6 +171,12 @@
 						<div id="staff_list_pager" class="scroll" style="text-align: center;"></div>
 					</div>
 				</div>
+				<div id="tab-3">
+<%-- Cases --%>
+				</div>
+				<div id="tab-4">
+					<%--Admin Tracking Info--%>
+				</div>
 			</div>
 			<!--  *** END TABS *** -->
 			
@@ -144,6 +184,7 @@
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${officeInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					<g:link class="add" controller="case" action="create" params="['office.id': officeInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'case.label', default: 'Case')])}</g:link>
 				</fieldset>
 			</g:form>
 		</div>
@@ -217,6 +258,7 @@
 				            jQuery("#" + cbc_params.staff_maingrid_id).jqGrid('setRowData',ids[i],{act:rs+rm}); //be+se+ce+de forall actions 
 			            }
 			        if(cbc_params.canEdit) $(".edit").show(); else  $(".edit").hide();
+			        if(cbc_params.canEdit) $(".delete").show(); else  $(".delete").hide();
 			    } 
 			    }).navGrid('#' + cbc_params.staff_maingrid_id_pager,
 			            {add:false,edit:false,del:false,search:false,refresh:true}, // which buttons to show?

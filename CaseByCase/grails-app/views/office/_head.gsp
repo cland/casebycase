@@ -8,7 +8,8 @@ var cbc_params = {
 		staff_maingrid_id		: "staff_list",
 		staff_maingrid_id_pager : "staff_list_pager",
 		thisId : '${params?.id}',
-		staff_list_url : "../jq_list_staff?officeid=${params?.id}"
+		staff_list_url : "../jq_list_staff?officeid=${params?.id}",
+		canEdit :${org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils.ifAnyGranted("ROLE_ADMIN")}
 	}
 //]]>
 </script>
