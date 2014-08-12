@@ -88,7 +88,7 @@
 		<g:message code="case.description.label" default="Description" />
 		
 	</label>
-	<g:textField name="description" value="${caseInstance?.description}"/>
+	<g:textArea name="description" value="${caseInstance?.description}" rows="5" cols="40"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: caseInstance, field: 'office', 'error')} required">
@@ -96,7 +96,7 @@
 		<g:message code="case.office.label" default="Office" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="office" name="office.id" from="${com.cbc.Office.list()}" optionKey="id" required="" value="${caseInstance?.office?.id}" class="many-to-one"/>
+	<g:select id="office" name="office.id" from="${com.cbc.Office.list()}" optionKey="id" required="" value="${caseInstance?.office?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: caseInstance, field: 'orgclients', 'error')} ">
@@ -112,7 +112,7 @@
 		<g:message code="case.outcome.label" default="Outcome" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="outcome" name="outcome.id" from="${com.cbc.CaseOutcome.list()}" optionKey="id" required="" value="${caseInstance?.outcome?.id}" class="many-to-one"/>
+	<g:select id="outcome" name="outcome.id" from="${com.cbc.CaseOutcome.list()}" optionKey="id" required="" value="${caseInstance?.outcome?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: caseInstance, field: 'priority', 'error')} required">
@@ -120,7 +120,7 @@
 		<g:message code="case.priority.label" default="Priority" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="priority" name="priority.id" from="${com.cbc.CasePriority.list()}" optionKey="id" required="" value="${caseInstance?.priority?.id}" class="many-to-one"/>
+	<g:select id="priority" name="priority.id" from="${com.cbc.CasePriority.list()}" optionKey="id" required="" value="${caseInstance?.priority?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: caseInstance, field: 'problemStart', 'error')} required">
@@ -144,7 +144,7 @@
 		<g:message code="case.status.label" default="Status" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="status" name="status.id" from="${com.cbc.CaseStatus.list()}" optionKey="id" required="" value="${caseInstance?.status?.id}" class="many-to-one"/>
+	<g:select id="status" name="status.id" from="${com.cbc.CaseStatus.list()}" optionKey="id" required="" value="${caseInstance?.status?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: caseInstance, field: 'subject', 'error')} ">

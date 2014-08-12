@@ -45,12 +45,22 @@ class Case {
 	static belongsTo = [office:Office]
 	static hasMany = [clients: Person,orgclients:Organisation,actions:Action]
     static constraints = {
+		
+		priority nullable:true
+		status nullable:true
+		specialCase nullable:true
+		childHeadedHouse nullable:true		
 		thisevent nullable:true
 		lastUpdatedBy nullable:true, editable:false
 		createdBy nullable:true, editable:false
+		outcome nullable:true
+		dateClosed nullable:true
+		amtRecovered  nullable:true
+		bestPractice nullable:true
     }
 	static mapping = {
 		table 'issue'  //def tableName = GrailsDomainBinder.getMapping(Case).table.name 
+		amtRecovered defaultValue : new Double(0.0)
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()

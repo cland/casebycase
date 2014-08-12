@@ -35,7 +35,7 @@
 					<li><a href="#tab-1">Details</a></li>
 					<li><a href="#tab-2">Staff Members</a></li>		
 					<li><a href="#tab-3">Cases</a></li>
-					<li><a href="#tab-4">Admin</a></li>
+					<li><a href="#tab-admin">Admin</a></li>
 				</ul>
 				<div id="tab-1">
 					<fieldset><legend>OFFICE SETUP</legend>
@@ -174,7 +174,7 @@
 				<div id="tab-3">
 <%-- Cases --%>
 				</div>
-				<div id="tab-4">
+				<div id="tab-admin">
 					<%--Admin Tracking Info--%>
 				</div>
 			</div>
