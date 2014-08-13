@@ -39,6 +39,9 @@ class cbcApiService {
 		boolean isAdmin(){
 		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_ADMIN.value + "," + SystemRoles.ROLE_DEVELOPER.value))
 	}
+		
+
+	
 	boolean isDeveloper(){
 		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_DEVELOPER.value))
 	}

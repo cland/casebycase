@@ -9,7 +9,7 @@ class Office {
 	String name
 	String code
 	String status
-	
+	String email
 	/** Tab2: Contact Details **/
 	String contactNumber
 	String faxNumber
@@ -32,6 +32,7 @@ class Office {
 		name unique:true, blank:false
 		code unique:true, blank:false
 		status blank:false, inList: ["Active", "Inactive"]
+		email nullable:true,email:true
 		contactNumber nullable:true,blank:false, matches: "[0-9 ]*"
 		cellphoneNumber nullable:true, matches: "[0-9 ]*"
 		faxNumber nullable: true, blank:true, matches: "[0-9 ]*"	
@@ -60,4 +61,13 @@ class Office {
 	String toString(){
 		return name + " (" + code + ")"
 	}
-}
+	def toAutoCompleteMap(){
+		return [id:id,
+		label:name + " (" + Status + ") | " + contactNumber + " | " + email,
+		value:id,
+		phoneno:contactNumber,
+		email:email,
+		status:status]
+	}
+	
+} //end class

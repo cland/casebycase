@@ -1,6 +1,7 @@
 package com.cbc
 
 import java.util.Date;
+import java.util.List;
 
 class Organisation {
 	transient cbcApiService
@@ -15,6 +16,7 @@ class Organisation {
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
+	static transients = ['adviceOfficeList','caseList']
 	static hasMany = [staff:Person]
 	
     static constraints = {
@@ -24,6 +26,7 @@ class Organisation {
 		email nullable:true, email:true
 		lastUpdatedBy nullable:true, editable:false
 		createdBy nullable:true, editable:false
+		email nullable:true,email:true
     }
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
@@ -45,4 +48,29 @@ class Organisation {
 	String toString(){
 		return name 
 	}
-}
+	def toAutoCompleteMap(){
+		return [id:id,
+		label:name + " (" + Status + ") | " + phoneNo + " | " + email,
+		value:id,
+		phoneno:phoneNo,
+		email:email,
+		status:status]
+	}
+	List getAdviceOfficeList(){
+		//The office that this person belongs to
+		def list = Office.createCriteria().list(){
+			createAlias('affiliates',"a")
+			eq('a.id',id)
+		}
+		
+		return list
+	}
+	List getCaseList(){
+		//The office that this person belongs to
+		def list = Case.createCriteria().list(){
+			createAlias('orgclients',"c")
+			eq('c.id',id)
+		}
+		return list
+	}
+} //end class

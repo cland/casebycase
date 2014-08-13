@@ -1,6 +1,7 @@
 package com.cbc
 
 import java.util.Date;
+import java.util.List;
 
 class Person {
 	transient cbcApiService
@@ -15,6 +16,7 @@ class Person {
 	String lastName
 	String knownAs
 	String title
+	String email
 	//**Fieldset 2: Identity
 	Citizenship citizenship
 	Date dateOfBirth
@@ -43,7 +45,15 @@ class Person {
 	/** 	*END FIELDS* 		**/
 	
 	static belongsTo = [office:Office]
-	static transients = [ 'mediumDetails','shortDetails','firstLastName','lastFirstName','age' ]
+	static transients = [ 'mediumDetails',
+		'shortDetails',
+		'firstLastName',
+		'lastFirstName',
+		'age',
+		'hasLoginDetails',
+		'primaryOffice',
+		'loginDetails',
+		'caseList' ]
 
     static constraints = {
 		firstName blank:false
@@ -60,6 +70,7 @@ class Person {
 		lastUpdatedBy nullable:true, editable:false
 		createdBy nullable:true, editable:false
 		history nullable:true,editable:false
+		email nullable:true,email:true
     }
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
@@ -112,5 +123,38 @@ class Person {
 				birthMonth-1,
 				birthDate)
 		return (yearNow - birthYear - (offset > now ? 1 : 0))
+	}
+	boolean hasLoginDetails(){
+		//work out if this person has a user account
+		return (getLoginDetails() != null?true:false)
+	}
+	User getLoginDetails(){
+		return User.findByPerson(this)
+	}
+	Office getPrimaryOffice(){
+		//The office that this person belongs to
+		def list = Office.createCriteria().list(){
+			createAlias('staff',"s")
+			eq('s.id',id)
+		}
+		Office o = null
+		if(list.size() > 0) office = list.get(0) 
+		return o
+	}
+
+	List getCaseList(){
+		//The office that this person belongs to
+		def list = Case.createCriteria().list(){
+			createAlias('clients',"c")
+			eq('c.id',id)
+		}	
+		return list
+	}
+	def toAutoCompleteMap(){
+		return [id:id,
+		label:firstName + " " + lastName + " | " + gender + " | " + dateOfBirth?.format("dd MMM yyyy"),
+		value:id,
+		gender:gender,
+		email:email]
 	}
 } //end class

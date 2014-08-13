@@ -30,106 +30,120 @@
 			<!-- *** START TABS *** -->
 			<div id="tabs" style="display: none;">
 				<ul>
-					<li><a href="#tab-1">Quick Details</a></li>
-					<li><a href="#tab-2">Categorisation</a></li>
-					<li><a href="#tab-evictions">Evictions</a></li>
+					<li><a href="#tab-1">Details</a></li>
 					<li><a href="#tab-labour">Labour</a></li>
-					<li><a href="#tab-3">Outcome</a></li>
-					<li><a href="#tab-4">Case Metrics</a></li>
-					<li><a href="#tab-5">Supporting Documents</a></li>
-					<li><a href="#tab-6">Actions</a></li>
+					<li><a href="#tab-evictions">Evictions</a></li>
+					<li><a href="#tab-2">Outcome & Metrics</a></li>	
+					<li><a href="#tab-3">Attachments</a></li>
+					<li><a href="#tab-4">Actions</a></li>
 					<li><a href="#tab-admin">Admin</a></li>
 				</ul>
-				<div id="tab-1">
-				<div class="table">
-					<div class="row">
-						<div class="cell"><label id="office-label"><g:message code="case.office.label" default="Office" /></label></div>
-						<div class="cell">
-							<span class="property-value" aria-labelledby="office-label">
-								<g:link controller="office" action="show" id="${caseInstance?.office?.id}">${caseInstance?.office?.encodeAsHTML()}</g:link>
-							</span>
-						</div>
-					</div>
-					<div class="row">
-						<div class="cell"><label id="caseNumber-label"><g:message code="case.caseNumber.label" default="Case Number" /></label></div>
-						<div class="cell">
-							<span class="property-value" aria-labelledby="caseNumber-label"><g:fieldValue bean="${caseInstance}" field="caseNumber"/></span>
-						</div>
-					</div>
-					<div class="row">
-						<div class="cell"><label id="dateOpen-label"><g:message code="case.dateOpen.label" default="Date Opened" /></label></div>
-						<div class="cell"><span class="property-value" aria-labelledby="dateOpen-label"><g:formatDate date="${caseInstance?.dateOpen}" /></span></div>
-					</div>
-					<div class="row">
-						<div class="cell"><label id="problemStart-label"><g:message code="case.problemStart.label" default="Problem Start" /></label></div>
-						<div class="cell"><span class="property-value" aria-labelledby="problemStart-label"><g:formatDate date="${caseInstance?.problemStart}" /></span></span></div>
-					</div>
-					
-					<div class="row">
-						<div class="cell"><label id="description-label"><g:message code="case.description.label" default="Description" /></label></div>
-						<div class="cell">
-							<span class="property-value" aria-labelledby="description-label">
-								<g:fieldValue bean="${caseInstance }" field="description"/>								
-							</span>
-						</div>
-					</div>
-					<div class="row">
-						<div class="cell"><label id="subject-label"><g:message code="case.subject.label" default="Subject" /></label></div>
-						<div class="cell">
-							<span class="property-value" aria-labelledby="subject-label"><g:fieldValue bean="${caseInstance}" field="subject"/></span>
-						</div>
-					</div>
-				</div> <!-- End Div-Table -->
+				<div id="tab-1"> 
 				
-				
-					<ol class="property-list case">
-					<g:if test="${caseInstance?.totalFemale}">
-							<li class="fieldcontain">
-								<span id="totalFemale-label" class="property-label"><g:message code="case.totalFemale.label" default="Total Female" /></span>
-								
-									<span class="property-value" aria-labelledby="totalFemale-label"><g:fieldValue bean="${caseInstance}" field="totalFemale"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${caseInstance?.totalMale}">
-							<li class="fieldcontain">
-								<span id="totalMale-label" class="property-label"><g:message code="case.totalMale.label" default="Total Male" /></span>
-								
-									<span class="property-value" aria-labelledby="totalMale-label"><g:fieldValue bean="${caseInstance}" field="totalMale"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${caseInstance?.totalUnknown}">
-							<li class="fieldcontain">
-								<span id="totalUnknown-label" class="property-label"><g:message code="case.totalUnknown.label" default="Total Unknown" /></span>
-								
+				<fieldset><legend>CLIENTS</legend>
+					<div class="table">
+						<div class="row">
+							<div class="cell"><label id="totalFemale-label"><g:message code="case.totalFemale.label" default="Total Female" /> </label></div>
+							<div class="cell">
+								<span class="property-value" aria-labelledby="totalFemale-label"><g:fieldValue bean="${caseInstance}" field="totalFemale"/></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="cell">
+								<label id="totalMale-label">
+									<g:message code="case.totalMale.label" default="Total Male" />							
+								</label>	
+							</div>
+							<div class="cell">
+								<span class="property-value" aria-labelledby="totalMale-label"><g:fieldValue bean="${caseInstance}" field="totalMale"/></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="cell">
+								<label id="totalUnknown-label">
+									<g:message code="case.totalUnknown.label" default="Total Unknown" />
+								</label>	
+							</div>
+							<div class="cell">
+								<span class="property-value" aria-labelledby="office-label">
 									<span class="property-value" aria-labelledby="totalUnknown-label"><g:fieldValue bean="${caseInstance}" field="totalUnknown"/></span>
-								
-							</li>
-							</g:if>
-						<g:if test="${caseInstance?.clients}">
-							<li class="fieldcontain">
-								<span id="clients-label" class="property-label"><g:message code="case.clients.label" default="Clients" /></span>
-								
-									<g:each in="${caseInstance.clients}" var="c">
+								</span>
+							</div>
+						</div>		
+						<div class="row">
+							<div class="cell">
+								<label id="clients-label">
+									<g:message code="case.clients.label" default="Clients" />								
+								</label>
+							</div>
+							<div class="cell">
+								<g:each in="${caseInstance.clients}" var="c">
 									<span class="property-value" aria-labelledby="clients-label"><g:link controller="person" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
-									</g:each>
-								
-							</li>
-							</g:if>
-							
-							<g:if test="${caseInstance?.orgclients}">
-							<li class="fieldcontain">
-								<span id="orgclients-label" class="property-label"><g:message code="case.orgclients.label" default="Orgclients" /></span>
-								
-									<g:each in="${caseInstance.orgclients}" var="o">
+								</g:each>
+							</div>
+						</div>
+						<div class="row">
+							<div class="cell"><label id="orgclients-label"><g:message code="case.orgclients.label" default="Orgclients" /> </label></div>
+							<div class="cell">
+								<g:each in="${caseInstance.orgclients}" var="o">
 									<span class="property-value" aria-labelledby="orgclients-label"><g:link controller="organisation" action="show" id="${o.id}">${o?.encodeAsHTML()}</g:link></span>
-									</g:each>
+								</g:each>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<br/>
+				<fieldset><legend>CASE DETAILS</legend>	
+					<div class="table">
+						<div class="row">
+							<div class="cell"><label id="subject-label"><g:message code="case.subject.label" default="Subject" /></label></div>
+							<div class="cell">
+								<span class="property-value" aria-labelledby="subject-label"><g:fieldValue bean="${caseInstance}" field="subject"/></span>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="cell"><label id="caseNumber-label"><g:message code="case.caseNumber.label" default="Case Number" /></label></div>
+							<div class="cell">
+								<span class="property-value" aria-labelledby="caseNumber-label"><g:fieldValue bean="${caseInstance}" field="caseNumber"/></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="cell"><label id="dateOpen-label"><g:message code="case.dateOpen.label" default="Date Opened" /></label></div>
+							<div class="cell"><span class="property-value" aria-labelledby="dateOpen-label"><g:formatDate date="${caseInstance?.dateOpen}" /></span></div>
+						</div>
+						<div class="row">
+							<div class="cell"><label id="problemStart-label"><g:message code="case.problemStart.label" default="Problem Start" /></label></div>
+							<div class="cell"><span class="property-value" aria-labelledby="problemStart-label"><g:formatDate date="${caseInstance?.problemStart}" /></span></span></div>
+						</div>
+						
+						<div class="row">
+							<div class="cell"><label id="description-label"><g:message code="case.description.label" default="Description" /></label></div>
+							<div class="cell">
+								<span class="property-value" aria-labelledby="description-label">
+									<g:fieldValue bean="${caseInstance }" field="description"/>								
+								</span>
+							</div>
+						</div>
+						
+					</div> <!-- End Div-Table -->
+					<ol class="property-list case">
+					<g:if test="${caseInstance?.priority}">
+							<li class="fieldcontain">
+								<span id="priority-label" class="property-label"><g:message code="case.priority.label" default="Priority" /></span>
+								
+									<span class="property-value" aria-labelledby="priority-label"><g:link controller="casePriority" action="show" id="${caseInstance?.priority?.id}">${caseInstance?.priority?.encodeAsHTML()}</g:link></span>
 								
 							</li>
 							</g:if>
+					</ol>
+					
+				</fieldset>
+				<br/>
+				<fieldset><legend>CATEGORISATION</legend>
+
+					<ol class="property-list case">
+							
 							<g:if test="${caseInstance?.childHeadedHouse}">
 							<li class="fieldcontain">
 								<span id="childHeadedHouse-label" class="property-label"><g:message code="case.childHeadedHouse.label" default="Child Headed House" /></span>
@@ -138,20 +152,6 @@
 								
 							</li>
 							</g:if>
-						
-							
-						
-							
-						
-							<g:if test="${caseInstance?.priority}">
-							<li class="fieldcontain">
-								<span id="priority-label" class="property-label"><g:message code="case.priority.label" default="Priority" /></span>
-								
-									<span class="property-value" aria-labelledby="priority-label"><g:link controller="casePriority" action="show" id="${caseInstance?.priority?.id}">${caseInstance?.priority?.encodeAsHTML()}</g:link></span>
-								
-							</li>
-							</g:if>
-						
 							
 						
 							<g:if test="${caseInstance?.specialCase}">
@@ -172,7 +172,22 @@
 							</li>
 							</g:if>
 
-						<g:if test="${caseInstance?.thisevent}">
+						</ol>
+					</fieldset>
+					
+				<fieldset><legend>OFFICE ADMIN</legend>
+						<div class="table">
+							<div class="row">
+								<div class="cell"><label id="office-label"><g:message code="case.office.label" default="Office" /></label></div>
+								<div class="cell">
+									<span class="property-value" aria-labelledby="office-label">
+										<g:link controller="office" action="show" id="${caseInstance?.office?.id}">${caseInstance?.office?.encodeAsHTML()}</g:link>
+									</span>
+								</div>
+							</div>
+						</div>
+						<ol class="property-list case">
+							<g:if test="${caseInstance?.thisevent}">
 							<li class="fieldcontain">
 								<span id="thisevent-label" class="property-label"><g:message code="case.thisevent.label" default="Thisevent" /></span>
 								
@@ -181,22 +196,16 @@
 							</li>
 							</g:if>
 						</ol>
+					</fieldset>
 				
-				
-				</div>
-				
-				<div id="tab-2">
-					<!-- Categorisation -->
-					<ol class="property-list case">
-					</ol>
-				</div>
-									
+				</div> <!-- END TAB 1 -->
+												
 				
 				<div id="tab-evictions"></div>
 				
 				<div id="tab-labour"></div>
 				
-				<div id="tab-3">
+				<div id="tab-2">
 					<!-- Outcome -->
 					<ol class="property-list case">
 							<g:if test="${caseInstance?.dateClosed}">
@@ -236,15 +245,11 @@
 					
 				</div>
 				
-				<div id="tab-4">
-					<!-- Case Metrics -->
-				</div>
-				
-				<div id="tab-5">
+				<div id="tab-3">
 					<!-- Supporting documents -->
 				</div>
 				
-				<div id="tab-6">
+				<div id="tab-4">
 					<!-- Actions List -->
 					<g:if test="${caseInstance?.actions}">
 					<li class="fieldcontain">
@@ -258,7 +263,9 @@
 					</g:if>
 				</div>
 				
-				<div id="tab-admin"></div>
+				<div id="tab-admin">
+					--history, created,update by etc --
+				</div>
 			</div>
 			<!--  *** END TABS *** -->
 			

@@ -34,27 +34,37 @@
 			</ul>
 			</g:hasErrors>
 			<!-- *** START TABS *** -->
-			<div id="tabs" style="display: none;">
-				<ul>
-					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Other</a></li>		
-				</ul>
-				<div id="tab-1">
-					<g:form url="[resource:caseInstance, action:'update']" method="PUT" >
-						<g:hiddenField name="version" value="${caseInstance?.version}" />
-						<fieldset class="form">
-							<g:render template="form"/>
-						</fieldset>
-						<fieldset class="buttons">
-							<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-						</fieldset>
-					</g:form>
-				</div>
-				
-				<div id="tab-2">
+			<g:form url="[resource:caseInstance, action:'update']" method="PUT" >
+				<g:hiddenField name="version" value="${caseInstance?.version}" />
+				<div id="tabs" style="display: none;">
+					<ul>
+						<li><a href="#tab-1">Details</a></li>
+						<li><a href="#tab-labour">Labour</a></li>
+						<li><a href="#tab-evictions">Evictions</a></li>
+						<li><a href="#tab-2">Outcome & Metrics</a></li>	
+						<li><a href="#tab-3">Attachments</a></li>		
+					</ul>
+					<div id="tab-1">
+						<g:render template="form_tab1"/>
+					</div>
 					
+					<div id="tab-2">
+						<g:render template="form_tab2"/>
+					</div>
+					<div id="tab-labour">
+						<g:render template="form_labour"/>
+					</div>
+					<div id="tab-evictions">
+						<g:render template="form_evictions"/>
+					</div>
+					<div id="tab-3">
+						<g:render template="form_tab3"/>
+					</div>
 				</div>
-			</div>
+				<fieldset class="buttons">
+					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+				</fieldset>
+			</g:form>
 			<!--  *** END TABS *** -->
 			
 		</div>

@@ -3,11 +3,12 @@ package com.cbc
 
 
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class OrganisationController {
-
+	def autoCompleteService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -101,4 +102,8 @@ class OrganisationController {
             '*'{ render status: NOT_FOUND }
         }
     }
-}
+	
+	def orglist = {		
+		render autoCompleteService.searchOrgs(params) as JSON
+	}
+} //end class

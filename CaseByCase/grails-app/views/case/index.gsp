@@ -31,17 +31,17 @@
 			<thead>
 					<tr>
 					
-						<th><g:message code="case.thisevent.label" default="Thisevent" /></th>
-					
-						<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'case.lastUpdatedBy.label', default: 'Last Updated By')}" />
-					
-						<g:sortableColumn property="createdBy" title="${message(code: 'case.createdBy.label', default: 'Created By')}" />
-					
-						<g:sortableColumn property="amtRecovered" title="${message(code: 'case.amtRecovered.label', default: 'Amt Recovered')}" />
-					
-						<g:sortableColumn property="bestPractice" title="${message(code: 'case.bestPractice.label', default: 'Best Practice')}" />
-					
 						<g:sortableColumn property="caseNumber" title="${message(code: 'case.caseNumber.label', default: 'Case Number')}" />
+					
+						<g:sortableColumn property="subject" title="${message(code: 'case.subject.label', default: 'Subject')}" />
+					
+						<g:sortableColumn property="status" title="${message(code: 'case.status.label', default: 'Status')}" />
+					
+						<g:sortableColumn property="priority" title="${message(code: 'case.priority.label', default: 'Priority')}" />
+					
+						
+					
+						
 					
 					</tr>
 				</thead>
@@ -49,17 +49,13 @@
 				<g:each in="${caseInstanceList}" status="i" var="caseInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${caseInstance.id}">${fieldValue(bean: caseInstance, field: "thisevent")}</g:link></td>
+						<td><g:link action="show" id="${caseInstance.id}">${fieldValue(bean: caseInstance, field: "caseNumber")}</g:link></td>
 					
-						<td>${fieldValue(bean: caseInstance, field: "lastUpdatedBy")}</td>
+						<td>${fieldValue(bean: caseInstance, field: "subject")}</td>
 					
-						<td>${fieldValue(bean: caseInstance, field: "createdBy")}</td>
+						<td>${fieldValue(bean: caseInstance, field: "status")}</td>
 					
-						<td>${fieldValue(bean: caseInstance, field: "amtRecovered")}</td>
-					
-						<td><g:formatBoolean boolean="${caseInstance.bestPractice}" /></td>
-					
-						<td>${fieldValue(bean: caseInstance, field: "caseNumber")}</td>
+						<td>${fieldValue(bean: caseInstance, field: "priority")}</td>				
 					
 					</tr>
 				</g:each>

@@ -3,11 +3,12 @@ package com.cbc
 
 
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class PersonController {
-
+	def autoCompleteService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -101,4 +102,8 @@ class PersonController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
+	def personlist = {
+		render autoCompleteService.searchPeople(params) as JSON
+	}
 }
