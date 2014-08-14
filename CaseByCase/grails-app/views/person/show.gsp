@@ -199,6 +199,18 @@
 							</g:if>
 						
 						</ol>
+						<table class="dialog">
+						<tr class="prop">
+							<td valign="top" class="name"><g:message code="person.phones.label" default="Phones" /></td>
+							<td valign="top" style="text-align: left;" class="value">
+							<ul>
+								<g:each in="${personInstance.phones}" var="p">
+									<li><g:link controller="phone" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+								</g:each>
+							</ul>
+							</td>
+						</tr>
+						</table>
 				</div>
 				
 				<div id="tab-2">

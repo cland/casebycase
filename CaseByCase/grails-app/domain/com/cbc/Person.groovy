@@ -1,5 +1,6 @@
 package com.cbc
-
+import org.apache.commons.collections.list.LazyList;
+import org.apache.commons.collections.FactoryUtils;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,7 @@ class Person {
 	Citizenship citizenship
 	Date dateOfBirth
 	String idNumber
-	
+	List phones // = new ArrayList()
 	/** Tab2: Person Profile **/
 	String gender
 	Race race
@@ -45,6 +46,7 @@ class Person {
 	/** 	*END FIELDS* 		**/
 	
 	static belongsTo = [office:Office]
+	static hasMany = [phones:Phone]
 	static transients = [ 'mediumDetails',
 		'shortDetails',
 		'firstLastName',
@@ -55,6 +57,9 @@ class Person {
 		'loginDetails',
 		'caseList' ]
 
+	static mapping = {
+		phones cascade:"all-delete-orphan"
+	}
     static constraints = {
 		firstName blank:false
 		lastName blank:false
@@ -156,5 +161,10 @@ class Person {
 		value:id,
 		gender:gender,
 		email:email]
+	}
+	def getPhonesList() {
+		return LazyList.decorate(
+		phones,
+		FactoryUtils.instantiateFactory(Phone.class))
 	}
 } //end class

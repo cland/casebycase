@@ -71,13 +71,7 @@
 									</g:each>
 								</div>
 							</div>
-							<div class="row">
-								<div class="cell"><label id="cases-label"><g:message code="office.cases.label" default="Cases" /></label></div>
-								<div class="cell"><g:each in="${officeInstance.cases}" var="c">
-									<span class="property-value" aria-labelledby="cases-label"><g:link controller="case" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
-									</g:each>
-								</div>
-							</div>
+							
 							<div class="row">
 								<div class="cell"><label id="faxNumber-label"><g:message code="office.faxNumber.label" default="Fax Number" /></label></div>
 								<div class="cell"><span class="property-value" aria-labelledby="faxNumber-label"><g:fieldValue bean="${officeInstance}" field="faxNumber"/></span></div>
@@ -172,7 +166,13 @@
 					</div>
 				</div>
 				<div id="tab-3">
-<%-- Cases --%>
+					<%-- Cases --%>
+					
+					<div id="case_grid" style="padding: 5px;">
+						<table id="case_list" class="scroll jqTable"></table>
+						<!-- pager will hold our paginator -->
+						<div id="case_list_pager" class="scroll" style="text-align: center;"></div>
+					</div>
 				</div>
 				<div id="tab-admin">
 					<%--Admin Tracking Info--%>
@@ -188,8 +188,10 @@
 				</fieldset>
 			</g:form>
 		</div>
+		
 		<script>
 			$(document).ready(function() {
+				
 				/** ACCORDION MENU **/		
 				$("#accordion" ).accordion({ active: cbc_params.active_sidebar() });
 
@@ -213,14 +215,14 @@
 				});		    
 
 				/** GRID **/
-<%--				centerForm = function ($form) {--%>
-<%--		                    $form.closest('div.ui-jqdialog').position({--%>
-<%--		                        my: "center"--%>
-<%--		                    });--%>
-<%--		                };		             --%>
+				centerForm = function ($form) {
+		                    $form.closest('div.ui-jqdialog').position({
+		                        my: "center"
+		                    });
+		                };		             
   
-                //initialize the coursegrid 
-			    jQuery("#" + cbc_params.staff_maingrid_id).jqGrid({
+              //initialize the staffgrid 
+			  jQuery("#" + cbc_params.staff_maingrid_id).jqGrid({
 			      url:cbc_params.staff_list_url,
 			      editurl:cbc_params.staff_edit_url,
 			      autowidth: true,
@@ -333,6 +335,6 @@
 					  function clearSelection(grid_id){jQuery('#' + grid_id).jqGrid('resetSelection'); }
 			
 		</script>	
-		
+		<g:render template="cases"/>
 	</body>
 </html>

@@ -3,13 +3,14 @@ package com.cbc
 
 
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class CaseController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", jq_list_actions: "GET"]
+	def cbcApiService
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Case.list(params), model:[caseInstanceCount: Case.count()]
@@ -101,4 +102,41 @@ class CaseController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
+	def jq_list_actions = {
+		def caseInstance = Case.get(params.caseid)
+		if (!caseInstance) {
+			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'case.label', default: 'Case'), params.id])}"
+			render [] as JSON
+			return
+		}
+		
+		def all_results = caseInstance.actions.sort(false){[it.actionType]}
+		int total = all_results?.size()
+		if(total < 1){
+			def t =[records:0,page:0]
+			render  t as JSON
+			return
+		}
+		int max = (params?.rows ? params.int('rows') : 30)
+		int page = (params?.page ? params.int('page') : 1)
+		int total_pages = (total > 0 ? Math.ceil(total/max) : 0)
+		if(page > total_pages)	page = total_pages
+		int offset = max*page-max
+		
+		int upperLimit = cbcApiService.findUpperIndex(offset, max, total)
+
+		List resultList = all_results.getAt(offset..upperLimit)
+		def jsonCells =	resultList.collect {
+			[cell: [it.actionType.toString(),
+					it?.actionOwner?.person?.toString(),
+					it.subject,
+				], id: it.id]
+		}
+		
+		
+		def jsonData= [rows: jsonCells,page:page,records:total,total:total_pages]
+		render jsonData as JSON
+		
+	} //end jq_list_actions
 }

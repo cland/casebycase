@@ -1,6 +1,12 @@
 <%@ page import="com.cbc.Action" %>
 
-
+<div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'subject', 'error')} required">
+	<label for="subject">
+		<g:message code="action.subject.label" default="Subject" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="subject" required="" value="${actionInstance?.subject}"/>
+</div>
 
 <div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'date', 'error')} required">
 	<label for="date">
@@ -26,14 +32,6 @@
 	<g:textField name="description" required="" value="${actionInstance?.description}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'subject', 'error')} required">
-	<label for="subject">
-		<g:message code="action.subject.label" default="Subject" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="subject" required="" value="${actionInstance?.subject}"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'followUpStatus', 'error')} required">
 	<label for="followUpStatus">
 		<g:message code="action.followUpStatus.label" default="Follow Up Status" />
@@ -47,7 +45,7 @@
 		<g:message code="action.disbursementAmount.label" default="Disbursement Amount" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="disbursementAmount" value="${fieldValue(bean: actionInstance, field: 'disbursementAmount')}" required=""/>
+	<g:field name="disbursementAmount" type="number" value="${fieldValue(bean: actionInstance, field: 'disbursementAmount')}" required=""/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'isPrivate', 'error')} ">
@@ -56,22 +54,6 @@
 		
 	</label>
 	<g:checkBox name="isPrivate" value="${actionInstance?.isPrivate}" />
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'lastUpdatedBy', 'error')} required">
-	<label for="lastUpdatedBy">
-		<g:message code="action.lastUpdatedBy.label" default="Last Updated By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="lastUpdatedBy" type="number" value="${actionInstance.lastUpdatedBy}" required=""/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'createdBy', 'error')} required">
-	<label for="createdBy">
-		<g:message code="action.createdBy.label" default="Created By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="createdBy" type="number" value="${actionInstance.createdBy}" required=""/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'actionOwner', 'error')} required">
@@ -108,7 +90,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'thiscase', 'error')} required">
 	<label for="thiscase">
-		<g:message code="action.thiscase.label" default="Thiscase" />
+		<g:message code="action.thiscase.label" default="Case" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="thiscase" name="thiscase.id" from="${com.cbc.Case.list()}" optionKey="id" required="" value="${actionInstance?.thiscase?.id}" class="many-to-one"/>

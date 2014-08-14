@@ -80,6 +80,9 @@
 									}
 						});		                
 			});  
-		</script>			
+		</script>
+<!-- Render the phone template (_phone.gsp) hidden so we can clone it -->
+<g:render template='../layouts/phone' model="['phone':null,'i':'_clone','hidden':true]"/>
+<!-- Render the phone template (_phone.gsp) hidden so we can clone it -->			
 	</body>
 </html>

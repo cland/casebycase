@@ -106,11 +106,10 @@ class OfficeController {
 	 * jqGrid support functions
 	 */
 	/** Custom jquery function
-	 * Lists all the courses that the person.id is registered for.
+	 * Lists all the staff that belong to this officeid.
 	 *
 	 ***/
 	def jq_list_staff = {
-		//println("jq_list_staff: ${params}")
 		def officeInstance = Office.get(params.officeid)
 		if (!officeInstance) {
 			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'office.label', default: 'Office'), params.id])}"
@@ -145,4 +144,41 @@ class OfficeController {
 		render jsonData as JSON
 		
 	} //end jq_list_staff
+	
+	
+	def jq_list_cases = {
+		def officeInstance = Office.get(params.officeid)
+		if (!officeInstance) {
+			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'office.label', default: 'Office'), params.id])}"
+			redirect(action: "show",params:params)
+		}
+		
+		def all_results = officeInstance.cases.sort(false){[it.dateOpen]}
+		int total = all_results?.size()
+		if(total < 1){
+			def t =[records:0,page:0]
+			render  t as JSON
+			return
+		}
+		int max = (params?.rows ? params.int('rows') : 30)
+		int page = (params?.page ? params.int('page') : 1)
+		int total_pages = (total > 0 ? Math.ceil(total/max) : 0)
+		if(page > total_pages)	page = total_pages
+		int offset = max*page-max
+		
+		int upperLimit = cbcApiService.findUpperIndex(offset, max, total)
+
+		List resultList = all_results.getAt(offset..upperLimit)
+		def jsonCells =	resultList.collect {
+			[cell: [it.caseNumber,
+					it.dateOpen,
+					it.subject,
+				], id: it.id]
+		}
+		
+		def jsonData= [rows: jsonCells,page:page,records:total,total:total_pages]
+
+		render jsonData as JSON
+		
+	} //end jq_list_cases
 } //end class

@@ -8,6 +8,8 @@
 		<title><g:appTitle title=""><g:message code="default.show.label" args="[entityName]" /></g:appTitle></title>
 		<g:set var="page_sidenav" value="sidenav-public" />
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
+		<g:javascript library="jquerygrid" />
+		<link rel="stylesheet" href="/cbc/css/ui.jqgrid.css" type="text/css">
 	</head>
 	<body>
 		<a href="#show-case" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -141,38 +143,54 @@
 				</fieldset>
 				<br/>
 				<fieldset><legend>CATEGORISATION</legend>
-
-					<ol class="property-list case">
+					<div class="table">
+							<div class="row">
+								<div class="cell"><label id="">Categorise:</label></div>
+								<div class="cell">
+									<span class="property-value" aria-labelledby="office-label">
+										-- category fields here --
+									</span>
+								</div>
+							</div>
 							
-							<g:if test="${caseInstance?.childHeadedHouse}">
-							<li class="fieldcontain">
-								<span id="childHeadedHouse-label" class="property-label"><g:message code="case.childHeadedHouse.label" default="Child Headed House" /></span>
-								
-									<span class="property-value" aria-labelledby="childHeadedHouse-label"><g:formatBoolean boolean="${caseInstance?.childHeadedHouse}" /></span>
-								
-							</li>
-							</g:if>
+							<div class="row">
+								<div class="cell">
+									<label id="childHeadedHouse-label">
+										<g:message code="case.childHeadedHouse.label" default="Child Headed Household?" />		
+									</label>
+								</div>
+								<div class="cell">
+									<span class="property-value" aria-labelledby="childHeadedHouse-label"><g:formatBoolean boolean="${caseInstance?.childHeadedHouse}" true="yes" false="no"/></span>
+								</div>
+							</div>
+					
+							<div class="row">	
+								<div class="cell">
+									<label id="specialCase-label">
+										<g:message code="case.specialCase.label" default="Special Case" />		
+									</label>
+								</div>
+								<div class="cell">
+									<span class="property-value" aria-labelledby="specialCase-label"><g:formatBoolean boolean="${caseInstance?.specialCase}" true="yes" false="no"/></span>
+								</div>
+							</div>
 							
-						
-							<g:if test="${caseInstance?.specialCase}">
-							<li class="fieldcontain">
-								<span id="specialCase-label" class="property-label"><g:message code="case.specialCase.label" default="Special Case" /></span>
-								
-									<span class="property-value" aria-labelledby="specialCase-label"><g:formatBoolean boolean="${caseInstance?.specialCase}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${caseInstance?.status}">
-							<li class="fieldcontain">
-								<span id="status-label" class="property-label"><g:message code="case.status.label" default="Status" /></span>
-								
-									<span class="property-value" aria-labelledby="status-label"><g:link controller="caseStatus" action="show" id="${caseInstance?.status?.id}">${caseInstance?.status?.encodeAsHTML()}</g:link></span>
-								
-							</li>
-							</g:if>
+							<div class="row">	
+								<div class="cell">
+									<label id="status-label">
+										<g:message code="case.status.label" default="Status" />
+										<span class="required-indicator">*</span>
+									</label>
+								</div>
+								<div class="cell">
+									<span class="property-value" aria-labelledby="status-label">
+										<g:fieldValue bean="${caseInstance }" field="status"/>	
+									
+									</span>
+								</div>
+							</div>
+						</div>
 
-						</ol>
 					</fieldset>
 					
 				<fieldset><legend>OFFICE ADMIN</legend>
@@ -250,17 +268,12 @@
 				</div>
 				
 				<div id="tab-4">
-					<!-- Actions List -->
-					<g:if test="${caseInstance?.actions}">
-					<li class="fieldcontain">
-						<span id="actions-label" class="property-label"><g:message code="case.actions.label" default="Actions" /></span>
-						
-							<g:each in="${caseInstance.actions}" var="a">
-							<span class="property-value" aria-labelledby="actions-label"><g:link controller="action" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
-							</g:each>
-						
-					</li>
-					</g:if>
+					<%-- Action jqGrid --%>
+					<div id="action_grid" style="padding: 5px;">
+						<table id="action_list" class="scroll jqTable"></table>
+						<!-- pager will hold our paginator -->
+						<div id="action_list_pager" class="scroll" style="text-align: center;"></div>
+					</div>
 				</div>
 				
 				<div id="tab-admin">
@@ -299,6 +312,8 @@
 						});		                
 			});  
 		</script>	
-</script>		
+		
+		<g:render template="actions"/>
+		
 	</body>
 </html>

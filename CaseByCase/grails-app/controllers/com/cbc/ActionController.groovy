@@ -3,6 +3,7 @@ package com.cbc
 
 
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -49,6 +50,11 @@ class ActionController {
     def edit(Action actionInstance) {
         respond actionInstance
     }
+	
+	def dialogedit(){
+		respond new Action(params)
+		//if(actionInstance == null) respond new Action(params) else respond actionInstance
+	}
 
     @Transactional
     def update(Action actionInstance) {
@@ -101,4 +107,24 @@ class ActionController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
+	@Transactional
+	def dialogupdate(Action actionInstance) {
+		if (actionInstance == null) {
+			def response = [message: "Error: Action not found!", id:id]
+			render response as JSON
+            return ["failed":true] as JSON
+		}
+
+		if (actionInstance.hasErrors()) {
+			def response = [message: "Error: Failed to save!", id:id]
+			render response as JSON
+            return ["failed":true] as JSON
+		}
+
+		actionInstance.save flush:true
+
+		def response = [message: actionInstance.toString() + " updated!", id:actionInstance.id]
+		render response as JSON
+	}
 }
