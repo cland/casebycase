@@ -81,15 +81,7 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${personInstance?.contactNumber}">
-							<li class="fieldcontain">
-								<span id="contactNumber-label" class="property-label"><g:message code="person.contactNumber.label" default="Contact Number" /></span>
-								
-									<span class="property-value" aria-labelledby="contactNumber-label"><g:fieldValue bean="${personInstance}" field="contactNumber"/></span>
-								
-							</li>
-							</g:if>
-						
+													
 							<g:if test="${personInstance?.gender}">
 							<li class="fieldcontain">
 								<span id="gender-label" class="property-label"><g:message code="person.gender.label" default="Gender" /></span>
@@ -205,7 +197,7 @@
 							<td valign="top" style="text-align: left;" class="value">
 							<ul>
 								<g:each in="${personInstance.phones}" var="p">
-									<li><g:link controller="phone" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+									<li>${p?.encodeAsHTML()}</li>
 								</g:each>
 							</ul>
 							</td>
@@ -249,6 +241,6 @@
 						});		                
 			});  
 		</script>	
-</script>		
+		
 	</body>
 </html>

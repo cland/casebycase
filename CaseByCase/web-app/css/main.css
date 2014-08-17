@@ -931,3 +931,7 @@ white-space: nowrap;
 text-align: left;
 width: 85%;
 }
+.ui-autocomplete-loading {
+	background: white url("../images/spinner.gif") right center no-repeat;
+}
+div .screen-dialog .content {width:99%;}

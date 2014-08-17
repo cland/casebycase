@@ -39,9 +39,7 @@
 					
 						<g:sortableColumn property="knownAs" title="${message(code: 'person.knownAs.label', default: 'Known As')}" />
 					
-						<g:sortableColumn property="dateOfBirth" title="${message(code: 'person.dateOfBirth.label', default: 'Date Of Birth')}" />
-					
-						<g:sortableColumn property="contactNumber" title="${message(code: 'person.contactNumber.label', default: 'Contact Number')}" />
+						<g:sortableColumn property="dateOfBirth" title="${message(code: 'person.dateOfBirth.label', default: 'Date Of Birth')}" />										
 					
 					</tr>
 				</thead>
@@ -59,7 +57,6 @@
 					
 						<td><g:formatDate date="${personInstance.dateOfBirth}" /></td>
 					
-						<td>${fieldValue(bean: personInstance, field: "contactNumber")}</td>
 					
 					</tr>
 				</g:each>

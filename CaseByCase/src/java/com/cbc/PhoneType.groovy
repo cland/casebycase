@@ -14,10 +14,13 @@ public enum PhoneType{
 	value;
 	}
 	String getKey(){
-	name()
+		name()
 	}
 	static list() {
-	[H.toString(), M.toString(), W.toString(), F.toString(),O.toString()]
+		[H, M, W, F, O]
+	}
+	static listValues() {
+		[H.toString(), M.toString(), W.toString(), F.toString(),O.toString()]
 	}
 	static stringKeyValuePair(){
 		H.toString() +":" + H.getKey() + ";" +

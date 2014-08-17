@@ -67,6 +67,36 @@
 			
 		</div>
 		<script>
+        function addPersonClient(_id){
+ 		  	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')             
+                         .load('../person/dialogcreate?caseid=' +_id)
+                         
+                         .dialog({
+                             autoOpen: false,
+                             dialogClass: 'no-close',
+                             width:800,
+                             beforeClose: function(event,ui){
+                             	
+                             },
+                             buttons:{
+                                 "DONE":function(){
+                               	  location.reload();
+                                     },
+                                  "CANCEL":function(){
+                               	   $(this).dialog('close')
+                                      }
+                                },
+                             close: function(event,ui){
+                           	  $(this).dialog('destroy').remove()
+                           	  //location.reload();
+                             },
+                             position: {my:"top",at:"top",of:window},
+                             title: 'New Person Client'                         
+                         });
+                             
+                         $dialog.dialog('open');
+                         
+ 		  }
 			$(document).ready(function() {		
 				$("#accordion" ).accordion({ active: cbc_params.active_sidebar() });
 			
@@ -86,7 +116,30 @@
 											.html("Couldn't load this tab. We'll try to fix this as soon as possible. ");
 										});
 									}
-						});		                
+				}); //end tabs
+
+				//person auto-complete
+				$( "#person-clients" ).autocomplete({
+						source: function(request,response) {
+						$.ajax({
+							url : "../person/personlist", // remote datasource
+							dataType: "json",
+							data : request,
+							success : function(data) {
+								response(data); // set the response
+							},
+							error : function() { // handle server errors
+								alert("Unable to retrieve records");
+							}
+						});
+						},
+						minLength : 2, // triggered only after minimum 2 characters have been entered.
+						select : function(event, ui) { // event handler when user selects a company from the list.
+							$("#person_id").val(ui.item.id); // update the hidden field.
+							$("#gender").val(ui.item.gender) // populate the employee field with the nasdaq symbol.
+							//log( ui.item ? "Selected: " + ui.item.label + " aka " + ui.item.id : "Nothing selected, input was " + this.value );
+						}
+					});		                
 			});  
 		</script>		
 	</body>

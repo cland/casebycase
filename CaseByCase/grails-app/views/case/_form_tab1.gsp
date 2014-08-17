@@ -9,6 +9,15 @@
 					<g:field name="totalFemale" type="number" value="${caseInstance.totalFemale}" required=""/>
 				</span>
 			</div>
+			<div class="cell"><label id="" for="clients"><g:message code="case.clients.label" default="Clients" /> </label></div>
+			<div class="cell">
+				<span class="property-value" aria-labelledby="office-label">			
+					<input id="person-clients" name="client_select" value=""/>	
+				</span>
+				<a href="#" onclick="addPersonClient('${caseInstance?.id}');return false">New Client</a>
+				<br/>
+				<div id="current-person-clients">Current: ${caseInstance?.clients*.name}</div>
+			</div>
 		</div>
 		<div class="row">
 			<div class="cell">
@@ -22,6 +31,13 @@
 					<g:field name="totalMale" type="number" value="${caseInstance.totalMale}" required=""/>
 				</span>
 			</div>
+			<div class="cell"><label id="" for="orgclients"><g:message code="case.orgclients.label" default="Org Clients" /> </label></div>
+			<div class="cell">
+				<span class="property-value" aria-labelledby="office-label">
+					<g:select name="orgclients" from="${com.cbc.Organisation.list()}" multiple="multiple" optionKey="id" size="5" value="${caseInstance?.orgclients*.id}" class="many-to-many"/>
+				</span>
+			</div>
+			
 		</div>
 		<div class="row">
 			<div class="cell">
@@ -35,23 +51,9 @@
 					<g:field name="totalUnknown" type="number" value="${caseInstance.totalUnknown}" required=""/>
 				</span>
 			</div>
+			
 		</div>		
-		<div class="row">
-			<div class="cell"><label id="" for="clients"><g:message code="case.clients.label" default="Clients" /> </label></div>
-			<div class="cell">
-				<span class="property-value" aria-labelledby="office-label">
-					<g:select name="clients" from="${com.cbc.Person.list()}" multiple="multiple" optionKey="id" size="5" value="${caseInstance?.clients*.id}" class="many-to-many"/>
-				</span>
-			</div>
-		</div>
-		<div class="row">
-			<div class="cell"><label id="" for="orgclients"><g:message code="case.orgclients.label" default="Orgclients" /> </label></div>
-			<div class="cell">
-				<span class="property-value" aria-labelledby="office-label">
-					<g:select name="orgclients" from="${com.cbc.Organisation.list()}" multiple="multiple" optionKey="id" size="5" value="${caseInstance?.orgclients*.id}" class="many-to-many"/>
-				</span>
-			</div>
-		</div>
+		
 	</div>
 
 </fieldset>

@@ -22,13 +22,13 @@ class Person {
 	Citizenship citizenship
 	Date dateOfBirth
 	String idNumber
-	List phones // = new ArrayList()
+	//Office office
 	/** Tab2: Person Profile **/
 	String gender
 	Race race
 	
 	/** Tab3: Contact Details **/
-	String contactNumber
+	List phones // = new ArrayList()
 	
 	/** Tab4: Employment Profile **/
 	String empHowJobFound
@@ -61,14 +61,13 @@ class Person {
 		phones cascade:"all-delete-orphan"
 	}
     static constraints = {
-		firstName blank:false
-		lastName blank:false
+		firstName blank:false,nullable:true
+		lastName blank:false,nullable:true
 		title nullable:true
 		knownAs nullable:true
 		dateOfBirth blank:true, nullable:true
-		contactNumber matches: "[0-9]*"
-		gender inList: Gender.list()
-		idNumber  blank:true, unique:true	
+		gender inList: Gender.list() ,nullable:true
+		idNumber  blank:true, unique:true ,nullable:true
 		race blank:true, nullable:true	
 		empHowJobFound nullable:true
 		empHowJobFoundDesc nullable:true,widget:'textarea'		
@@ -76,6 +75,7 @@ class Person {
 		createdBy nullable:true, editable:false
 		history nullable:true,editable:false
 		email nullable:true,email:true
+		citizenship nullable:true 
     }
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()

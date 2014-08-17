@@ -42,14 +42,21 @@
 	<g:datePicker name="dateOfBirth" precision="day"  value="${personInstance?.dateOfBirth}" default="none" noSelection="['': '']" />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'contactNumber', 'error')} ">
-	<label for="contactNumber">
-		<g:message code="person.contactNumber.label" default="Contact Number" />
-		
-	</label>
-	<g:textField name="contactNumber" pattern="${personInstance.constraints.contactNumber.matches}" value="${personInstance?.contactNumber}"/>
-</div>
-
+<g:if test="${params.action!='create' }">
+	<table class="dialog">
+	<tr class="prop">
+	<td valign="top" class="name">
+	<label for="phones"><g:message code="person.phones.label" default="Phones List" /></label>
+	</td>
+	<td valign="top" class="value ${hasErrors(bean: personInstance, field: 'phones', 'errors')}">
+	<!-- Render the phones template (_phones.gsp) here -->
+	<g:render template="phones" model="['personInstance':personInstance]" />
+	<!-- Render the phones template (_phones.gsp) here -->
+	</td>
+	</tr>
+	</tbody>
+	</table>
+</g:if>
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'gender', 'error')} ">
 	<label for="gender">
 		<g:message code="person.gender.label" default="Gender" />
@@ -106,16 +113,4 @@
 	<g:select id="office" name="office.id" from="${com.cbc.Office.list()}" optionKey="id" required="" value="${personInstance?.office?.id}" class="many-to-one"/>
 </div>
 
-<table class="dialog">
-<tr class="prop">
-<td valign="top" class="name">
-<label for="phones"><g:message code="person.phones.label" default="Phones List" /></label>
-</td>
-<td valign="top" class="value ${hasErrors(bean: personInstance, field: 'phones', 'errors')}">
-<!-- Render the phones template (_phones.gsp) here -->
-<g:render template="../layouts/phones" model="['personInstance':personInstance]" />
-<!-- Render the phones template (_phones.gsp) here -->
-</td>
-</tr>
-</tbody>
-</table>
+
