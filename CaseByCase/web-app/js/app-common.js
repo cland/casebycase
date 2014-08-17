@@ -36,17 +36,17 @@ function printPage(alltabs){
 	if(alltabs) printableTabs();
 	window.print();
 }
-function onChangeCompany(){
+function onChangeCompany(_tab){
 	var id = $("#company").val()
 	var lnk = document.location.href
 	lnk = lnk.substring(0,lnk.indexOf("?"))
-	document.location.href = lnk + "?company.id=" + id
+	document.location.href = lnk + "?company.id=" + id + "&tab=" + _tab
 }
-function onChangePerson(){
+function onChangePerson(_tab){
 	var id = $("#person").val()
 	var lnk = document.location.href
 	lnk = lnk.substring(0,lnk.indexOf("?"))
-	document.location.href = lnk + "?person.id=" + id
+	document.location.href = lnk + "?person.id=" + id + "&tab=" + _tab
 }
 function getCurrentTabText(){
 	return $("#tabs ul.ui-tabs-nav li.ui-tabs-selected").text()

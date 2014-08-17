@@ -34,22 +34,6 @@
 	<g:field type="email" name="email" value="${organisationInstance?.email}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: organisationInstance, field: 'lastUpdatedBy', 'error')} required">
-	<label for="lastUpdatedBy">
-		<g:message code="organisation.lastUpdatedBy.label" default="Last Updated By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="lastUpdatedBy" type="number" value="${organisationInstance.lastUpdatedBy}" required=""/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: organisationInstance, field: 'createdBy', 'error')} required">
-	<label for="createdBy">
-		<g:message code="organisation.createdBy.label" default="Created By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="createdBy" type="number" value="${organisationInstance.createdBy}" required=""/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: organisationInstance, field: 'isHost', 'error')} ">
 	<label for="isHost">
 		<g:message code="organisation.isHost.label" default="Is Host" />

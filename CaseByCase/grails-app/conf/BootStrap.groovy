@@ -141,7 +141,7 @@ SpringSecurityUtils.doWithAuth('default') {
 						if(keyword.hasErrors()){
 							println keyword.errors
 						}
-						new Organisation(name:"Casual Workers",status:"Active",isMember:true,isHost:true,phoneNo:"021 333 4444,021 222 4565,021 333 4444,023 344 3344",email:"mail@mymail.com")
+						new Organisation(name:"Casual Workers",status:"Active",isMember:true,isHost:true,phoneNo:"021 333 4444,021 222 4565,021 333 4444,023 344 3344",email:"mail@mymail.com").save()
 						new Document(name:'\$home',content:"<h2>Welcome</h2>").save()
 						new Document(name:"\$aboutus",content:"<h2>About us</h2>").save()
 						new Document(name:"\$news",content:"<h2>Some news maybe</h2>").save()
@@ -192,7 +192,7 @@ SpringSecurityUtils.doWithAuth('default') {
 						new ActionType(name:"Other").save()
 						
 						//Age groups
-						new AgeGroup(name:"Pensioner Male",gender:Gender.MALE.toString()).save()
+						
 						new AgeGroup(name:"Pensioner",gender:Gender.FEMALE.toString()).save()
 						new AgeGroup(name:"Adult",gender:Gender.MALE.toString()).save()
 						new AgeGroup(name:"Adult",gender:Gender.FEMALE.toString()).save()
@@ -201,6 +201,7 @@ SpringSecurityUtils.doWithAuth('default') {
 						new AgeGroup(name:"Male Child",gender:Gender.MALE.toString()).save()
 						new AgeGroup(name:"Female Child",gender:Gender.FEMALE.toString()).save()
 						new AgeGroup(name:"Infant",gender:Gender.UNKNOWN.toString()).save()
+						new AgeGroup(name:"Pensioner Male",gender:Gender.MALE.toString()).save()
 						
 						//Event focus area
 						new EventFocusArea(name:"Admin Justice PAJA").save()

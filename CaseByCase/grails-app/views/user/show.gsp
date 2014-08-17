@@ -55,20 +55,20 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${userInstance?.lastUpdatedBy}">
+							<g:if test="${userInstance?.lastUpdatedByName}">
 							<li class="fieldcontain">
 								<span id="lastUpdatedBy-label" class="property-label"><g:message code="user.lastUpdatedBy.label" default="Last Updated By" /></span>
 								
-									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${userInstance}" field="lastUpdatedBy"/></span>
+									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${userInstance}" field="lastUpdatedByName"/></span>
 								
 							</li>
 							</g:if>
 						
-							<g:if test="${userInstance?.createdBy}">
+							<g:if test="${userInstance?.createdByName}">
 							<li class="fieldcontain">
 								<span id="createdBy-label" class="property-label"><g:message code="user.createdBy.label" default="Created By" /></span>
 								
-									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${userInstance}" field="createdBy"/></span>
+									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${userInstance}" field="createdByName"/></span>
 								
 							</li>
 							</g:if>

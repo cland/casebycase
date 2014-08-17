@@ -63,7 +63,9 @@ class User {
 
 	def beforeInsert() {
 		encodePassword()
-		createdBy = cbcApiService.getCurrentUserId()
+		long curId = cbcApiService.getCurrentUserId()
+		createdBy = curId
+		lastUpdatedBy = curId
 	}
 
 	def beforeUpdate() {

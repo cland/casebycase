@@ -66,21 +66,6 @@
 	<g:field name="totalFemale" type="number" value="${eventInstance.totalFemale}" required=""/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'lastUpdatedBy', 'error')} required">
-	<label for="lastUpdatedBy">
-		<g:message code="event.lastUpdatedBy.label" default="Last Updated By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="lastUpdatedBy" type="number" value="${eventInstance.lastUpdatedBy}" required=""/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'createdBy', 'error')} required">
-	<label for="createdBy">
-		<g:message code="event.createdBy.label" default="Created By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="createdBy" type="number" value="${eventInstance.createdBy}" required=""/>
-</div>
 
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'eventParticipants', 'error')} required">
 	<label for="eventParticipants">

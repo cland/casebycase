@@ -15,13 +15,20 @@
 			<g:textField name="username" required="" value="${userInstance?.username}"/>
 		</div>
 
-		<g:if test="${params?.action == 'create'}">
+		<g:if test="${params?.action == 'create'||params?.action == 'save'}">
 			<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
 				<label for="password">
 					<g:message code="user.password.label" default="Password" />
 					<span class="required-indicator">*</span>
 				</label>
 				<g:field type="password" name="password" required="" value="${userInstance?.password}"/>
+			</div>
+			<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
+				<label for="passwordConfirm">
+					<g:message code="user.passwordconfirm.label" default="Confirm Password" />
+					<span class="required-indicator">*</span>
+				</label>
+				<g:field type="password" name="passwordConfirm" required="" value=""/>
 			</div>
 		</g:if>
 				
@@ -75,11 +82,50 @@
 				<g:message code="user.person.label" default="Person" />
 				<span class="required-indicator">*</span>
 			</label>
-			<g:select id="person" name="person.id" from="${com.cbc.Person.list()}" optionKey="id" required="" value="${userInstance?.person?.id}" class="many-to-one"/>
+			<g:select onchange="onChangePerson(1)" id="person" 
+				name="person.id"
+				noSelection="['': '--New Person/Select One--']" 
+				from="${com.cbc.Person.list().sort()}" optionKey="id" 
+				value="${userInstance?.person?.id}" 
+				class="many-to-one"/>
 		</div>
-	</div>
-</div>
-	<!--  *** END TABS *** -->	
+		<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'person.firstName', 'error')} required">
+		<label for="person.firstName">
+			<g:message code="person.firstName.label" default="First Name" />
+			
+		</label>
+		<g:textField name="person.firstName" required="" value="${userInstance?.person?.firstName}"/>
+		</div>
+		<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'person.lastName', 'error')} required">
+			<label for="person.lastName">
+				<g:message code="person.lastName.label" default="Last Name" />
+				
+			</label>
+			<g:textField name="person.lastName" required="" value="${userInstance?.person?.lastName}"/>
+		</div>
+		<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'person.gender', 'error')} required">
+			<label for="person.gender">
+				<g:message code="person.gender.label" default="Gender" />
+				
+			</label>
+			<g:select name="person.gender" required="" from="${com.cbc.Person.constraints.gender.inList}" value="${userInstance?.person?.gender}" valueMessagePrefix="person.gender" noSelection="['': '']"/>
+		</div>
+		<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'person.race', 'error')} required">
+			<label for="person.race">
+				<g:message code="user.race.label" default="Race" />
+				
+			</label>
+			<g:select name="person.race.id" required="" from="${com.cbc.Race.list()}" optionKey="id" value="${userInstance?.person?.race?.id}"  noSelection="['': '']"/>
+		</div>
+		<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'office', 'error')} required">
+			<label for="office">
+				<g:message code="person.office.label" default="Office" />
+				<span class="required-indicator">*</span>
+			</label>
+			<g:select id="office" name="person.office.id" from="${com.cbc.Office.list()}" optionKey="id" required="" value="${userInstance?.person?.office?.id}" class="many-to-one"/>
+		</div>
+	</div> <!-- End tab 2 -->
+</div>	<!--  *** END TABS *** -->	
 
 
 

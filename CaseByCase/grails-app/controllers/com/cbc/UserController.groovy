@@ -33,13 +33,27 @@ class UserController {
             return
         }
 
-        if (userInstance.hasErrors()) {
-            respond userInstance.errors, view:'create'
-            return
-        }
+       
+		if(!params?.person?.id){
+			if(params?.person?.id == ""){
+				def p = new Person(params?.person)
+				if(!p.save(flush:true)){
+					println("Failed to save new person..."  + p?.errors)
+					flash.message = "Error: Failed to save login details due to an error saving person details."
+					
+					render(view: "create", model: [userInstance: userInstance])
+					return
+				}
+				userInstance.person = p
+				userInstance = userInstance.merge()
+			}
+		}
 
-        userInstance.save flush:true
-
+		if (userInstance.hasErrors()) {
+			println(userInstance.errors)
+			respond userInstance.errors, view:'create'
+			return
+		}
         request.withFormat {
             form {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'userInstance.label', default: 'User'), userInstance.toString()])

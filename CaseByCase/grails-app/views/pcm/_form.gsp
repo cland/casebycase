@@ -1,23 +1,5 @@
 <%@ page import="com.cbc.Pcm" %>
 
-
-
-<div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'lastUpdatedBy', 'error')} required">
-	<label for="lastUpdatedBy">
-		<g:message code="pcm.lastUpdatedBy.label" default="Last Updated By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="lastUpdatedBy" type="number" value="${pcmInstance.lastUpdatedBy}" required=""/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'createdBy', 'error')} required">
-	<label for="createdBy">
-		<g:message code="pcm.createdBy.label" default="Created By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="createdBy" type="number" value="${pcmInstance.createdBy}" required=""/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'agegroup', 'error')} required">
 	<label for="agegroup">
 		<g:message code="pcm.agegroup.label" default="Agegroup" />
