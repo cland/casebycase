@@ -50,14 +50,13 @@ class Organisation {
 	}
 	def toAutoCompleteMap(){
 		return [id:id,
-		label:name + " (" + Status + ") | " + phoneNo + " | " + email,
+		label:name + " | " + phoneNo + " | " + email + " | " + status, 
 		value:id,
-		phoneno:phoneNo,
-		email:email,
-		status:status]
+		org:this,
+		category:(isMember?"Member":"Non-Member")]
 	}
 	List getAdviceOfficeList(){
-		//The office that this person belongs to
+		//List of offices affiliated with this organisation
 		def list = Office.createCriteria().list(){
 			createAlias('affiliates',"a")
 			eq('a.id',id)
@@ -66,11 +65,12 @@ class Organisation {
 		return list
 	}
 	List getCaseList(){
-		//The office that this person belongs to
+		//The list of cases that this organisation is a client of
 		def list = Case.createCriteria().list(){
 			createAlias('orgclients',"c")
 			eq('c.id',id)
 		}
 		return list
 	}
+
 } //end class

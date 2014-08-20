@@ -157,10 +157,10 @@ class Person {
 	}
 	def toAutoCompleteMap(){
 		return [id:id,
-		label:firstName + " " + lastName + " | " + gender + " | " + dateOfBirth?.format("dd MMM yyyy"),
+		label:firstName + " " + lastName + " | " + idNumber + " | " + dateOfBirth?.format("dd MMM yyyy"),
 		value:id,
-		gender:gender,
-		email:email]
+		person:this,
+		category:gender]
 	}
 	def getPhonesList() {
 		return LazyList.decorate(

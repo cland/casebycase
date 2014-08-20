@@ -934,4 +934,10 @@ width: 85%;
 .ui-autocomplete-loading {
 	background: white url("../images/spinner.gif") right center no-repeat;
 }
+ .ui-autocomplete-category {
+font-weight: bold;
+padding: .2em .4em;
+margin: .8em 0 .2em;
+line-height: 1.5;
+}
 div .screen-dialog .content {width:99%;}

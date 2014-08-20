@@ -10,7 +10,7 @@ class AutoCompleteService {
 		def query = {
 			or {
 				ilike("firstName", term )
-				ilike("lastName", "%" + term)
+				ilike("lastName", term)
 				ilike("idNumber","%" + term)
 			}
 		}

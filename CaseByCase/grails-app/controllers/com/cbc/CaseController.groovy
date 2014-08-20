@@ -11,6 +11,7 @@ class CaseController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", jq_list_actions: "GET"]
 	def cbcApiService
+	def autoCompleteService
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Case.list(params), model:[caseInstanceCount: Case.count()]
@@ -139,4 +140,9 @@ class CaseController {
 		render jsonData as JSON
 		
 	} //end jq_list_actions
-}
+	def clientlist = {
+		List clients = autoCompleteService.searchPeople(params)
+		clients.addAll(autoCompleteService.searchOrgs(params))
+		render clients as JSON
+	}
+} //end class

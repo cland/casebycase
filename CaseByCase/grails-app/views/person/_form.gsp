@@ -42,7 +42,7 @@
 	<g:datePicker name="dateOfBirth" precision="day"  value="${personInstance?.dateOfBirth}" default="none" noSelection="['': '']" />
 </div>
 
-<g:if test="${params.action!='create' }">
+<g:if test="${params.action!='create' & params.action!='dialogcreate' }">
 	<table class="dialog">
 	<tr class="prop">
 	<td valign="top" class="name">

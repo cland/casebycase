@@ -80,7 +80,7 @@ function stageDisplay(stage){
 	$("#hidden_viewas_" + stage).prop("value",$("#viewas_" + stage).val())
 	$("#hidden_sortby_" + stage).prop("value",$("#sortby_" + stage).val())
 } // end function
-var cland_datepickers = {
+var cbc_datepickers = {
 		reset_picker : function resetPicker(picker_id,altfield_id, type){
 			$("#" + picker_id).multiDatesPicker('resetDates',type);
 			$("#" + altfield_id).prop("value","")
