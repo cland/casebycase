@@ -51,7 +51,7 @@ class OfficeController {
     }
 
     @Transactional
-    def update(Office officeInstance) {
+    def update(Office officeInstance) {		
         if (officeInstance == null) {
             notFound()
             return

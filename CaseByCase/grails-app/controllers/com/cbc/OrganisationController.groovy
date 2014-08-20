@@ -105,5 +105,28 @@ class OrganisationController {
 	
 	def orglist = {		
 		render autoCompleteService.searchOrgs(params) as JSON
+	} //end orglist
+	
+	def dialogcreate() {
+		respond new Organisation(params)
+	}
+	@Transactional
+	def dialogsave(Organisation organisationInstance) {
+		if (organisationInstance == null) {
+			def response = [message: "Error: Organisation not found!", id:id]
+			render response as JSON
+			return ["failed":true] as JSON
+		}
+
+		if (organisationInstance.hasErrors()) {
+			def response = [message: "Error: Failed to save record! " + organisationInstance.errors, id:organisationInstance.id]
+			render response as JSON
+			return
+		}
+		
+		organisationInstance.save flush:true
+
+		def response = [message: organisationInstance.toString() + " created!", id:organisationInstance.id]
+		render response as JSON
 	}
 } //end class

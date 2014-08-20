@@ -159,8 +159,8 @@ class Person {
 		return [id:id,
 		label:firstName + " " + lastName + " | " + idNumber + " | " + dateOfBirth?.format("dd MMM yyyy"),
 		value:id,
-		person:this,
-		category:gender]
+		person:(this==null?Person.get(id):this),
+		category:(gender==null?"Unknown":gender)]
 	}
 	def getPhonesList() {
 		return LazyList.decorate(

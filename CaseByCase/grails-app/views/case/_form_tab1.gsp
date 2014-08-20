@@ -16,8 +16,20 @@
 				</span>
 				<a href="#" onclick="addPersonClient('${caseInstance?.id}');return false">New Client</a>
 				<br/>
-				<div id="current-person-clients">Client List: <br/>
-				${caseInstance?.clients*.name}</div>
+				<div id="current-person-clients"><b>Client List:</b> <br/>
+					<g:each var="c" in="${caseInstance?.clients }" status="i">
+						<div id="person-${c.id }-label" class='person-entry-label'>
+							<img src="${resource(dir: 'images/skin', file: 'icon_delete.png')}" onclick="removeClient('person-${c.id}')" class="entry-rm"/>
+							${ c.firstLastName } | Gender: ${c.gender } 
+						</div>
+					</g:each>
+				</div>
+				<select id="clients" multiple="multiple" name="clients" class="hide">
+				<g:each var="c" in="${caseInstance?.clients }" status="i">
+					<option id="person-${c.id }" selected='selected' value="${c.id }"></option>
+				</g:each>
+				</select>
+				
 			</div>
 		</div>
 		<div class="row">
@@ -39,8 +51,19 @@
 				</span>
 				<a href="#" onclick="addOrgClient('${caseInstance?.id}');return false">New Organisation</a>
 				<br/>
-				<div id="current-org-clients">Organisation List: <br/>
-				${caseInstance?.orgclients*.name}</div>
+				<div id="current-org-clients"><b>Organisation List:</b> <br/>
+					<g:each var="c" in="${caseInstance?.orgclients }" status="i">
+						<div id="org-${c.id }-label" class='org-entry-label'>
+							<img src="${resource(dir: 'images/skin', file: 'icon_delete.png')}" onclick="removeClient('org-${c.id}')" class="entry-rm"/>
+							${ c.name } | Member: ${c.isMember } 
+						</div>
+					</g:each>
+				</div>
+				<select id="orgclients" multiple="multiple" name="orgclients" class="hide">
+					<g:each var="c" in="${caseInstance?.orgclients }" status="i">
+						<option id="org-${c.id }" selected='selected' value="${c.id }"></option>
+					</g:each>
+				</select>
 			</div>
 			
 		</div>
@@ -242,7 +265,7 @@
 <script>
 function addPersonClient(_id){
   	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')             
-                .load('../person/dialogcreate?caseid=' +_id)
+                .load('${g.createLink(controller: 'person', action: 'dialogcreate',params:[caseid:_id])}')
                 
                 .dialog({
                     autoOpen: false,
@@ -253,7 +276,8 @@ function addPersonClient(_id){
                     },
                     buttons:{
                         "DONE":function(){
-                      	  location.reload();
+                      	 // location.reload();
+                         	 $(this).dialog('close')
                             },
                          "CANCEL":function(){
                       	   $(this).dialog('close')
@@ -270,6 +294,37 @@ function addPersonClient(_id){
                 $dialog.dialog('open');
                 
   } //end function addPersonClient()
+  function addOrgClient(_id){
+	  	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')             
+	                .load('${g.createLink(controller: 'organisation', action: 'dialogcreate',params:[caseid:_id])}')
+	                
+	                .dialog({
+	                    autoOpen: false,
+	                    dialogClass: 'no-close',
+	                    width:800,
+	                    beforeClose: function(event,ui){
+	                    	
+	                    },
+	                    buttons:{
+	                        "DONE":function(){
+	                      	  //location.reload();
+		                      	  $(this).dialog('close')
+	                            },
+	                         "CANCEL":function(){
+	                      	   $(this).dialog('close')
+	                             }
+	                       },
+	                    close: function(event,ui){
+	                  	  $(this).dialog('destroy').remove()
+	                  	  //location.reload();
+	                    },
+	                    position: {my:"top",at:"top",of:window},
+	                    title: 'New Organisation Client'                         
+	                });
+	                    
+	                $dialog.dialog('open');
+	                
+	  } //end function addPersonClient()
   $(document).ready(function() {
 	//** PERSON CLIENT Auto Complete Call **//
 		 $.widget( "custom.catcomplete", $.ui.autocomplete, {
@@ -296,30 +351,34 @@ function addPersonClient(_id){
 		$( "#person-clients" ).catcomplete({
 			source: function(request,response) {
 				$.ajax({
-					url : "../person/personlist", // remote datasource
+					url : "${g.createLink(controller: 'person', action: 'personlist')}", 
 					dataType: "json",
 					data : request,
 					success : function(data) {
 						response(data); // set the response
 					},
 					error : function() { // handle server errors
-						alert("Unable to retrieve People");
+						alert("Unable to retrieve records");
 					}
 				});
 			},
 			minLength : 2, // triggered only after minimum 2 characters have been entered.
 			select : function(event, ui) { // event handler when user selects a company from the list.
-				$("#current-person-clients").append("<b>Value: " + ui.item.value + " Gender: " + ui.item.person.gender + "</b><br/>")
+				var _id = ui.item.id;
+				var _img = '${resource(dir: 'images/skin', file: 'icon_delete.png')}';
+				$("#current-person-clients").append("<div id='person-" + _id + "-label' class='person-entry-label'><img src='" + _img + "' onClick='removeClient(\"person-" + _id + "\")' class='entry-rm'/>" + ui.item.person.firstName + " " + ui.item.person.lastName + " Gender: " + ui.item.person.gender + "</div>")
+				$("#clients").append("<option id='person-" + _id + "' selected='selected' value='" + ui.item.value + "'></option>")
 				ui.item.value = ""
 			}
 		});
 
+		
 		//** ORGANISATION CLIENT Auto Complete Call **//
 	
 		$( "#org-clients" ).catcomplete({
 			source: function(request,response) {
 				$.ajax({
-					url : "../organisation/orglist", // remote datasource
+					url : "${g.createLink(controller: 'organisation', action: 'orglist')}", // remote datasource
 					dataType: "json",
 					data : request,
 					success : function(data) {
@@ -332,11 +391,19 @@ function addPersonClient(_id){
 			},
 			minLength : 2, // triggered only after minimum 2 characters have been entered.
 			select : function(event, ui) { // event handler when user selects a company from the list.
-				$("#current-org-clients").append("<b>Value: " + ui.item.value + " Member: " + ui.item.org.isMember + "</b><br/>")
+				var _id = ui.item.id;
+				var _img = '${resource(dir: 'images/skin', file: 'icon_delete.png')}';
+				$("#current-org-clients").append("<div id='org-" + _id + "-label' class='org-entry-label'><img src='" +_img+ "' onClick='removeClient(\"org-" + _id + "\")' class='entry-rm'/>" + ui.item.org.name + " Member: " + ui.item.org.isMember + "</div>")
+				$("#orgclients").append("<option id='org-" + _id + "' selected='selected' value='" + ui.item.value + "'></option>")
 				ui.item.value = ""
 			}
 		});
   });
+
+  function removeClient(id){
+	  $("#" + id).remove();
+	  $("#" + id + "-label").remove();
+	 }
 </script>
 
 

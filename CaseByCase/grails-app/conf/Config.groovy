@@ -231,6 +231,9 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules=[
 	'/user/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	'/user/list/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	'/user/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+	'/person/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+	'/person/list/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+	'/person/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	'/image/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	'/image/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	'/document/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
@@ -245,9 +248,11 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules=[
 	'/country/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],	
 	 '/searchable/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	 '/search/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	 
+	 '/case/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+	 '/office/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+	 '/action/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	//** GENERAL AUTHENTICATED USER
-	//'/home/**': ['IS_AUTHENTICATED_FULLY'],
+	'/home/**': ['IS_AUTHENTICATED_FULLY'],
 	
 	'/user/show/**': ['IS_AUTHENTICATED_FULLY'],
 	'/login/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],

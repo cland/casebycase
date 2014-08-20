@@ -198,8 +198,8 @@ img {
 }
 
 .nav a:focus, .nav a:hover {
-	background-color: #999999;
-	color: #ffffff;
+	background-color: #f2f2f2;
+	color: #444444;
 	outline: none;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
 }
@@ -843,7 +843,7 @@ p {
 .production fieldset {padding:1em;}
 .data-table{display:table;width:100%;}
 .row{display:table-row;}
-.row:hover, .row:hover label{background:#8C8C8C;color:#fff !important;}
+.row:hover, .row:hover label{background:#eee;color:#444 !important;}
 .cell{display:table-cell; padding:4px;}
 .cell .property-value {font-size:0.9em;}
 .float-right{float:right;}
@@ -941,3 +941,9 @@ margin: .8em 0 .2em;
 line-height: 1.5;
 }
 div .screen-dialog .content {width:99%;}
+
+.current-person-clients, .current-org-clients {}
+.person-entry-label, .org-entry-label {padding:2px;}
+.person-entry-label:hover,.org-entry-label:hover {background:#99ccff;Border:solid 1px #000;}
+.entry-rm {float:right;}
+.org-entry-label{}

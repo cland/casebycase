@@ -17,7 +17,7 @@ class AutoCompleteService {
 		def clist = Person.createCriteria().list(query)
 		def selectList = []
 		clist.each {
-		selectList.add(it.toAutoCompleteMap()) 
+			selectList.add(it.toAutoCompleteMap()) 
 		}
 		return selectList
 	} //end searchPeople
