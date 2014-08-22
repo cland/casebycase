@@ -265,6 +265,21 @@
 				
 				<div id="tab-3">
 					<!-- Supporting documents -->
+					<div id="attachments" class="attachments">
+						<attachments:each bean="${caseInstance}" status="i">	
+						<div class="photo-display float-left">
+						<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+							<img src="${resource(dir:'images/icons',file:'attach.png',plugin:'famfamfam')}" />			
+							<attachments:downloadLink attachment="${attachment}" inline="false" withContentType="false" />
+							${attachment.niceLength}
+							<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
+								returnPageURI="${createLink(action:'show', id:caseInstance.id,absolute:true)}" />
+						</div>	
+							<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
+						
+						</attachments:each>
+						<div style="clear:both"></div>
+					</div>
 				</div>
 				
 				<div id="tab-4">
@@ -303,6 +318,7 @@
 								show: function(event,ui){
 									//on every tabs clicked
 								},
+								
 								beforeLoad : function(event, ui) {
 										ui.jqXHR.error(function() {
 											ui.panel

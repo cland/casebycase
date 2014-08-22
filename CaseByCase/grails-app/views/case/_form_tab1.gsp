@@ -295,9 +295,9 @@ function addPersonClient(_id){
                 
   } //end function addPersonClient()
   function addOrgClient(_id){
+	  	var _link = "${g.createLink(controller: 'organisation', action: 'dialogcreate'}";
 	  	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')             
-	                .load('${g.createLink(controller: 'organisation', action: 'dialogcreate',params:[caseid:_id])}')
-	                
+	                .load(_link)     
 	                .dialog({
 	                    autoOpen: false,
 	                    dialogClass: 'no-close',

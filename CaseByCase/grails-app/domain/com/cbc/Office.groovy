@@ -15,6 +15,7 @@ class Office {
 	String faxNumber
 	String cellphoneNumber
 	//MunicipalAreaDefinition location
+	Region region
 	String locationDesc
 	
 	/** Tab3: Admin Tracking Information **/
@@ -40,6 +41,7 @@ class Office {
 		createdBy nullable:true, editable:false
 		history nullable:true,editable:false
 		locationDesc nullable:true,widget:'textarea'
+		region nullable:true
     }
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
@@ -65,9 +67,8 @@ class Office {
 		return [id:id,
 		label:name + " (" + Status + ") | " + contactNumber + " | " + email,
 		value:id,
-		phoneno:contactNumber,
-		email:email,
-		status:status]
+		office:this,
+		category:(region?.name ? region.name : "Unknown")]
 	}
 	
 } //end class

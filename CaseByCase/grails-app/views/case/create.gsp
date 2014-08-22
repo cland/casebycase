@@ -33,7 +33,7 @@
 			</ul>
 			</g:hasErrors>
 			<!-- *** START TABS *** -->
-			<g:form url="[resource:caseInstance, action:'save']" >
+			<g:uploadForm url="[resource:caseInstance, action:'save']" >
 				<div id="tabs" style="display: none;">
 					<ul>
 						<li><a href="#tab-1">Details</a></li>
@@ -62,7 +62,7 @@
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 				</fieldset>
-			</g:form>
+			</g:uploadForm>
 			<!--  *** END TABS *** -->			
 			
 		</div>

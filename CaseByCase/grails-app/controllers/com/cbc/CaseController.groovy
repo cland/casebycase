@@ -5,11 +5,12 @@ package com.cbc
 import static org.springframework.http.HttpStatus.*
 import grails.converters.JSON
 import grails.transaction.Transactional
+import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 
 @Transactional(readOnly = true)
 class CaseController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", jq_list_actions: "GET"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE", jq_list_actions: "GET"]
 	def cbcApiService
 	def autoCompleteService
     def index(Integer max) {
@@ -38,9 +39,10 @@ class CaseController {
         }
 
         caseInstance.save flush:true
-
+		println(">> Uploading files...")
+		attachUploadedFilesTo(caseInstance)
         request.withFormat {
-            form {
+            form multipartForm{				
                 flash.message = message(code: 'default.created.message', args: [message(code: 'caseInstance.label', default: 'Case'), caseInstance.toString()])
                 redirect caseInstance
             }
@@ -65,9 +67,10 @@ class CaseController {
         }
 
         caseInstance.save flush:true
-
+		
+		attachUploadedFilesTo(caseInstance)
         request.withFormat {
-            form {
+            form multipartForm {				
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Case.label', default: 'Case'), caseInstance.toString()])
                 redirect caseInstance
             }
@@ -111,8 +114,9 @@ class CaseController {
 			render [] as JSON
 			return
 		}
-		
+
 		def all_results = caseInstance.actions.sort(false){[it.actionType]}
+	
 		int total = all_results?.size()
 		if(total < 1){
 			def t =[records:0,page:0]

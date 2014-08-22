@@ -57,7 +57,16 @@
 	</label>
 	<g:select name="affiliates" from="${com.cbc.Organisation.list()}" multiple="multiple" optionKey="id" size="5" value="${officeInstance?.affiliates*.id}" class="many-to-many"/>
 </div>
+<div class="fieldcontain ${hasErrors(bean: officeInstance, field: 'regions', 'error')} ">
+	<label for="region">
+		<g:message code="country.region.label" default="Region" />
+		
+	</label>
+	<span class="property-value" aria-labelledby="office-label">
+		<g:select id="region" name="region.id" from="${com.cbc.Region.list()}" optionKey="id" required="" value="${officeInstance?.region?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
+	</span>
 
+</div>
 
 
 

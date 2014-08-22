@@ -83,5 +83,11 @@ class Case {
 		return caseNumber
 	}
 	
-
+	def toAutoCompleteMap(){
+		return [id:id,
+		label:caseNumber + " (" + Status + ")",
+		value:id,
+		thiscase:this,
+		category:office?.name]
+	}
 } //

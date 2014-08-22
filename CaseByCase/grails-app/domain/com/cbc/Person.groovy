@@ -129,14 +129,14 @@ class Person {
 				birthDate)
 		return (yearNow - birthYear - (offset > now ? 1 : 0))
 	}
-	boolean hasLoginDetails(){
+	public boolean hasLoginDetails(){
 		//work out if this person has a user account
 		return (getLoginDetails() != null?true:false)
 	}
-	User getLoginDetails(){
+	public User getLoginDetails(){
 		return User.findByPerson(this)
 	}
-	Office getPrimaryOffice(){
+	public Office getPrimaryOffice(){
 		//The office that this person belongs to
 		def list = Office.createCriteria().list(){
 			createAlias('staff',"s")
@@ -147,7 +147,7 @@ class Person {
 		return o
 	}
 
-	List getCaseList(){
+	public List getCaseList(){
 		//The office that this person belongs to
 		def list = Case.createCriteria().list(){
 			createAlias('clients',"c")

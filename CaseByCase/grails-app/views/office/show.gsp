@@ -91,6 +91,12 @@
 								<div class="cell"><label>Line 2:</label></div>
 								<div class="cell">-- line 2 field --</div>
 							</div>
+							
+							<div class="row">
+								<div class="cell"><label><g:message code="country.region.label" default="Region" /></label></div>
+								<div class="cell">-- region --</div>
+							</div>
+
 							<div class="row">
 								<div class="cell"><label>Town/City:</label></div>
 								<div class="cell">-- town/city field --</div>

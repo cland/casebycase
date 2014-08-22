@@ -34,7 +34,7 @@
 			</ul>
 			</g:hasErrors>
 			<!-- *** START TABS *** -->
-			<g:form url="[resource:caseInstance, action:'update']" method="PUT" >
+			<g:uploadForm url="[resource:caseInstance, action:'update']" method="PUT" >
 				<g:hiddenField name="version" value="${caseInstance?.version}" />
 				<div id="tabs" style="display: none;">
 					<ul>
@@ -64,7 +64,7 @@
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
 				</fieldset>
-			</g:form>
+			</g:uploadForm>
 			<!--  *** END TABS *** -->
 			
 		</div>

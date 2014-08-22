@@ -59,18 +59,28 @@ $(document).ready(function() {
 		  	
 		  }
 		  function addActionRow(_id, grid_id){
-		  	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')
-           
-                        .load('../../action/dialogedit?case.id=' + _id)
+			  var _link = "${g.createLink(controller: 'action', action: 'dialogedit')}";
+			  _link = _link + "?thiscase.id=" + _id;
+		  	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')           
+                        .load(_link)
                         .dialog({
                             autoOpen: false,
                             width:850,
                             beforeClose: function(event,ui){
                             	
                             },
+                            buttons:{
+    	                        "DONE":function(){
+    	                      	  //location.reload();
+    		                      	  $(this).dialog('close')
+    	                            },
+    	                         "CANCEL":function(){
+    	                      	   $(this).dialog('close')
+    	                             }
+    	                       },
                             close: function(event){     
-                            	//$(this).dialog('destroy').remove()                                                
-                            	$("#" + grid_id).trigger('reloadGrid')
+                            	$(this).dialog('destroy').remove()                                                
+                            	//$("#" + grid_id).trigger('reloadGrid')  //?? NOT RELOAD GRID CORRECTLY
                             },
                             position: {my:"top",at:"top",of:window},
                             title: 'New Action'                         
