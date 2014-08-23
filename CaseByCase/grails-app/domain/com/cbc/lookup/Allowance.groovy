@@ -1,7 +1,7 @@
 
 package com.cbc.lookup
 import com.cbc.*
-class Wage {
+class Allowance {
 	transient cbcApiService
 	static attachmentable = true
 	String name

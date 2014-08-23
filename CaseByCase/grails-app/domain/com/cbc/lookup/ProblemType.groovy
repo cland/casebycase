@@ -1,17 +1,21 @@
 
 package com.cbc.lookup
 import com.cbc.*
-class Wage {
+class ProblemType {
 	transient cbcApiService
 	static attachmentable = true
 	String name
+	ProblemType problemType
+	
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
 	static transients = ["createdByName","lastUpdatedByName"]
+	static hasMany = [problemTypes:ProblemType]
+	static belongsTo = [ProblemType]
     static constraints = {
-		name unique:true
+		problemType blank:true, nullable:true
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
 	}
