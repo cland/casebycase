@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- 
+
 <meta name="layout" content="main">
 <g:set var="entityName"
 	value="${message(code: 'category.label', default: 'Category')}" />
@@ -16,17 +16,7 @@
 <g:render template="style" ></g:render>
 </head>
 <body>
-	<a href="#list-category" class="skip" tabindex="-1"><g:message
-			code="default.link.skip.label" default="Skip to content&hellip;" /></a>
-	<div class="bread-crump">
-		<span class="r-arrow"></span>
-		<g:link controller="home" action="cbc">Home</g:link>
-		<span class="r-arrow"></span> <span class="current-crump"> here
-			edit... </span>
-	</div>
-	<div id="status1" class="leftbar" role="complementary">
-		<g:sideMenu default="${page_sidenav }"></g:sideMenu>
-	</div>
+	
 	<div id="list-category" class="content scaffold-list" role="main">
 		<h1>
 			<g:message code="default.list.label" args="[entityName]" />

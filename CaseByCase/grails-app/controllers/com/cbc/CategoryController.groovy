@@ -180,4 +180,8 @@ class CategoryController {
 		}
 		return nodeMapping
 	}
+	
+	def dialogList() {
+		
+	}
 }
