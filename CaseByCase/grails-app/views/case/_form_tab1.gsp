@@ -174,9 +174,11 @@
 		<div class="row">
 			<div class="cell"><label id="">Categorise:</label></div>
 			<div class="cell">
-				<span class="property-value" aria-labelledby="office-label">
-					-- category fields here --
+			<span class="property-value" aria-labelledby="office-label">			
+					<input id="category" name="category_select" value=""/>	
 				</span>
+				<a href="#" onclick="addCaseCategory('${caseInstance?.id}');return false">Add Category</a>
+
 			</div>
 		</div>
 		
@@ -325,6 +327,37 @@ function addPersonClient(_id){
 	                $dialog.dialog('open');
 	                
 	  } //end function addPersonClient()
+	  function addCaseCategory(_id){
+		  	var _link = "${g.createLink(controller: 'category', action: 'dialogList')}";
+		  	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')             
+		                .load(_link)     
+		                .dialog({
+		                    autoOpen: false,
+		                    dialogClass: 'no-close',
+		                    width:800,
+		                    beforeClose: function(event,ui){
+		                    	
+		                    },
+		                    buttons:{
+		                        "DONE":function(){
+		                      	  //location.reload();
+			                      	  $(this).dialog('close')
+		                            },
+		                         "CANCEL":function(){
+		                      	   $(this).dialog('close')
+		                             }
+		                       },
+		                    close: function(event,ui){
+		                  	  $(this).dialog('destroy').remove()
+		                  	  //location.reload();
+		                    },
+		                    position: {my:"top",at:"top",of:window},
+		                    title: 'Category Selection'                         
+		                });
+		                    
+		                $dialog.dialog('open');
+		                
+		  } //end function addCaseCategory()
   $(document).ready(function() {
 	//** PERSON CLIENT Auto Complete Call **//
 		 $.widget( "custom.catcomplete", $.ui.autocomplete, {

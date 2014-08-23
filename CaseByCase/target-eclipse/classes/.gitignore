@@ -1,5 +1,6 @@
 /DataSource.groovy
 /.gitignore
+<<<<<<< HEAD
 /_testemails
 /aclClass
 /aclEntry
@@ -131,3 +132,5 @@
 /UrlMappings.class
 /resources$_run_closure1.class
 /resources.class
+=======
+>>>>>>> refs/remotes/origin/master
