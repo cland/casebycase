@@ -42,6 +42,7 @@ class Case {
 	
 	/** 	*END FIELDS* 		**/
 	
+	static hasOne=[labour:Labour,eviction:Eviction]
 	static belongsTo = [office:Office]
 	static hasMany = [clients: Person,orgclients:Organisation,actions:Action]
     static constraints = {
