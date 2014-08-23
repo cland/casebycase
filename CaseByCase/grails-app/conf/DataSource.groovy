@@ -28,7 +28,7 @@ environments {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:mysql://localhost:3306/cbc_dev?autoreconnect=true"
         }
-    }
+    } 
     production {
 		//the datasource configuration should be in an external configuration. see Config.groovy for locations.
         dataSource {
