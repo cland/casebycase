@@ -1,5 +1,5 @@
 import com.cbc.*
-
+import grails.util.*
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.context.SecurityContextHolder as SCH
@@ -7,23 +7,50 @@ import org.springframework.security.core.context.SecurityContextHolder as SCH
 class BootStrap {
 def groupManagerService
 	def init = { servletContext ->
+		println "Bootstrap > environment: " + Environment.getCurrent()
+		def appName = grails.util.Metadata.current.'app.name'
+		println (">> Bootstrapping: ${appName} on OS >> " + System.properties["os.name"] )
+		boolean doBootStrap = false
+		def userlist = User.list()
+		if(userlist?.size() < 1){
+			println("BootStrap >> ON!")
+			doBootStrap = true
+		}else{
+		println("BootStrap >> off!")
+		}
+		if(doBootStrap){
+			switch(Environment.getCurrent()){
+				case "DEVELOPMENT":			
+					println ("1. Create users ...")
+					createUsers()
+				//	println ("2. Login ...")
+				//	loginAsAdmin()
+					println ("3. Initialize Request map ...")
+					initRequestmap()
+					println ("4. Add other components ...")
+					createOtherComponents()
+				//	println ("5. Logout ...")
+					// logout
+				//	SCH.clearContext()
+				break
+				case "PRODUCTION":
+				
+				break
+			} //end switch
+		} //end doBootStrap
 
-		println ("1. Create users ...")
-		createUsers()
-	//	println ("2. Login ...")
-	//	loginAsAdmin()
-		println ("3. Initialize Request map ...")
-		initRequestmap()
-		println ("4. Add other components ...")
-		createOtherComponents()
-	//	println ("5. Logout ...")
-		// logout
-	//	SCH.clearContext()
-	}
+		
+	} //end init
 	def destroy = {
 		
-	}
+	} //End destroy
 	
+	// *** HELPER FUNCTIONS ***
+	
+	/**
+	 * Creates initial users
+	 * @return
+	 */
 	private boolean createUsers() {
 		Citizenship rsa = new Citizenship(name:"RSA").save();
 		new Citizenship(name:"Permanent Residennce").save();
@@ -71,21 +98,30 @@ def groupManagerService
 			
 			1.times {
 				long id = it + 1
-				def user = new User(username: "dev$id", enabled: true, password: "password",person:personDev).save(flush:true)
+				def user = new User(username: "dev$id", enabled: true, password: "admin123",person:personDev).save(flush:true)
 				//UserRoleGroup.create user, devGroup
-				println ">> Adding dev user to office groups"
-				groupManagerService.addUserToGroup(user, mainOffice, SystemRoles.list())
+				if(!user.hasErrors()){
+					println ">> Adding dev user to office groups"
+					groupManagerService.addUserToGroup(user, mainOffice, SystemRoles.list())
+				}else{
+					println(user.errors)
+				}
+				
 			}
 		
 			println ">> Creating admin user..."
-			def admin = new User(username: 'admin', enabled: true, password: 'password',person:personAdmin).save(flush:true)
+			def admin = new User(username: 'admin', enabled: true, password: 'admin123',person:personAdmin).save(flush:true)
 		
-			UserRoleGroup.create admin, devGroup
-			UserRoleGroup.create admin, adminGroup, true
-			
-			//ADD Admin user to list of roles
-			println ">> Adding admin to office groups"
-			groupManagerService.addUserToGroup(admin, mainOffice, [SystemRoles.ROLE_OCO,SystemRoles.ROLE_CWO])
+			if(!admin.hasErrors()){
+				UserRoleGroup.create admin, devGroup
+				UserRoleGroup.create admin, adminGroup, true
+				
+				//ADD Admin user to list of roles
+				println ">> Adding admin to office groups"
+				groupManagerService.addUserToGroup(admin, mainOffice, [SystemRoles.ROLE_OCO,SystemRoles.ROLE_CWO])
+			}else{
+				println(admin.errors)
+			}
 		}catch(Exception e){
 			println "Error " + e
 			return false
@@ -95,14 +131,12 @@ def groupManagerService
 	} //end create users
 	private void loginAsAdmin() {
 		// have to be authenticated as an admin to create ACLs
-		SCH.context.authentication = new UsernamePasswordAuthenticationToken( 'admin', 'password', AuthorityUtils.createAuthorityList(SystemRoles.ROLE_ADMIN.value))
+		SCH.context.authentication = new UsernamePasswordAuthenticationToken( 'admin', 'admin123', AuthorityUtils.createAuthorityList(SystemRoles.ROLE_ADMIN.value))
 	}
 	
 	private void initRequestmap(){
 		
 		for (String url in [ '/',
-			 '/index',
-			 '/index.gsp',
 			 '/**/favicon.ico',
 			 '/**/js/**',
 			 '/**/css/**',
@@ -117,6 +151,8 @@ def groupManagerService
 		}
 			 // show and lists/index
 			 for (String url in [
+				 '/index',
+				 '/index.gsp',
 				 '/acl/**/**',
 				 '/**/show/**',
 				  '/**/index/**']) {
@@ -135,6 +171,7 @@ def groupManagerService
 			
 			 //strictly admin
 			 for (String url in [ '/requestmap/**',
+				 '/admin/**',
 				 '/role/**',
 				 '/roleGroup/**',
 				 '/user/**']) {

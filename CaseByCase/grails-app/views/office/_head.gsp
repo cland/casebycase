@@ -9,7 +9,7 @@ var cbc_params = {
 		staff_maingrid_id_pager : "staff_list_pager",
 		thisId : '${params?.id}',
 		staff_list_url : "../jq_list_staff?officeid=${params?.id}",
-		canEdit :${org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils.ifAnyGranted("ROLE_ADMIN")},
+		canEdit :${grails.plugin.springsecurity.SpringSecurityUtils.ifAnyGranted("ROLE_ADMIN")},
 		cases : {
 				edit_url : "../jq_remove_case", 
 				maingrid_id		: "case_list",

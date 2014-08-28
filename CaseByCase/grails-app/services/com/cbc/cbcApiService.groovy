@@ -1,11 +1,13 @@
 package com.cbc
 
+import grails.plugin.springsecurity.*
 import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap;
-import org.codehaus.groovy.grails.plugins.springsecurity.*
+//import org.codehaus.groovy.grails.plugins.springsecurity.*
 import org.grails.datastore.gorm.finders.MethodExpression.IsEmpty;
 
 import com.sun.org.apache.xalan.internal.xsltc.compiler.ForEach;
 import org.apache.commons.lang.RandomStringUtils
+
 class cbcApiService {
 	static transactional = false
 	def springSecurityService

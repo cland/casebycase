@@ -7,7 +7,7 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class RequestmapController {
-
+def springSecurityService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {

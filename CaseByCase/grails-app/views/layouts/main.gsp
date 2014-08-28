@@ -104,7 +104,7 @@
 			</sec:ifAnyGranted>
 			<div id="current-user"> <label><span class="r-arrow"></span></label>
 				<sec:ifLoggedIn>
-					<sec:loggedInUserInfo field="fullName" />
+					<sec:loggedInUserInfo field="username" />
 				</sec:ifLoggedIn> <sec:ifNotLoggedIn>Anonymous</sec:ifNotLoggedIn>
 			</div>
 		</div>	
