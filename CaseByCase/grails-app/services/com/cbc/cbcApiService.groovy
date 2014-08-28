@@ -52,12 +52,14 @@ class cbcApiService {
 	Long getCurrentUserId(){
 		long userId = 0 //.currentUser?.id //
 		if(springSecurityService.isLoggedIn()){
-			if(springSecurityService?.principal?.id) userId = springSecurityService?.principal?.id
+			User user = springSecurityService.getCurrentUser()
+			if(user) 
+				userId = user?.id
 		}
 		return userId
 	}
 	User getCurrentUser(){
-		return springSecurityService?.currentUser
+		return springSecurityService.getCurrentUser() // springSecurityService?.currentUser
 	}
 	User getUser(Long id){
 		return User.get(id)

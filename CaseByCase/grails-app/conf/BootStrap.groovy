@@ -1,19 +1,24 @@
 import com.cbc.*
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.context.SecurityContextHolder as SCH
 
 class BootStrap {
 def groupManagerService
 	def init = { servletContext ->
-		loginAsAdmin()
-		initRequestmap()
+
+		println ("1. Create users ...")
 		createUsers()
-		
-		
+	//	println ("2. Login ...")
+	//	loginAsAdmin()
+		println ("3. Initialize Request map ...")
+		initRequestmap()
+		println ("4. Add other components ...")
 		createOtherComponents()
+	//	println ("5. Logout ...")
 		// logout
-		SCH.clearContext()
+	//	SCH.clearContext()
 	}
 	def destroy = {
 		
@@ -158,7 +163,7 @@ def groupManagerService
 		new Race(name:"Coloured").save()
 		new Race(name:"Indian").save()
 		new Race(name:"Other").save()
-		if(adminUser) UserRole.create(adminUser, adminRole, true)
+		
 		//keywords for location
 		def keyword = new Keywords(name:"system_areas",category:"system_locations")
 		keyword.addToValues("one")

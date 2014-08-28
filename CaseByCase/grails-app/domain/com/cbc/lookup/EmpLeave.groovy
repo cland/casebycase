@@ -1,7 +1,7 @@
 
 package com.cbc.lookup
 import com.cbc.*
-class Leave {
+class EmpLeave {
 	transient cbcApiService
 	static attachmentable = true
 	String name
@@ -10,6 +10,9 @@ class Leave {
 	Date dateCreated
 	Date lastUpdated
 	static transients = ["createdByName","lastUpdatedByName"]
+	static mapping = {
+		table 'emp_leave'
+	}
     static constraints = {
 		name unique:true
 		lastUpdatedBy nullable:true
