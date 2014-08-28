@@ -70,8 +70,9 @@ grails.project.dependency.resolution = {
 		runtime ":jquery:1.10.2.2"
 		runtime ":resources:1.2.1"
 		
-		compile ':spring-security-core:1.2.7.3'
-		compile ":spring-security-ui:0.2"
+		//compile ':spring-security-core:1.2.7.3'
+		compile ":spring-security-core:2.0-RC4"
+		//compile ":spring-security-ui:0.2"
 		compile ":famfamfam:1.0.1"
 		compile ":mail:1.0.1"
 		compile ":jquery-ui:1.10.3"

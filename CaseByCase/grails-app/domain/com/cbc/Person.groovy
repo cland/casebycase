@@ -1,10 +1,13 @@
 package com.cbc
 import org.apache.commons.collections.list.LazyList;
 import org.apache.commons.collections.FactoryUtils;
+
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 class Person {
+	transient groupManagerService
 	transient cbcApiService
 	static attachmentable = true
 	static searchable = {
@@ -55,6 +58,7 @@ class Person {
 		'hasLoginDetails',
 		'primaryOffice',
 		'loginDetails',
+		'authorities',
 		'caseList' ]
 
 	static mapping = {
@@ -166,5 +170,10 @@ class Person {
 		return LazyList.decorate(
 		phones,
 		FactoryUtils.instantiateFactory(Phone.class))
+	}
+	public Set<RoleGroup> getAuthorities() {
+		User u = getLoginDetails()
+		if(!u) return []
+		return u.authorities
 	}
 } //end class

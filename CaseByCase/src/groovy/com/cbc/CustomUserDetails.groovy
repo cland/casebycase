@@ -1,5 +1,7 @@
 package com.cbc
-import org.codehaus.groovy.grails.plugins.springsecurity.*
+
+import org.codehaus.groovy.grails.plugin.springsecurity.*
+import grails.plugin.springsecurity.userdetails.GrailsUser
 import org.springframework.security.core.GrantedAuthority 
 import org.springframework.security.core.userdetails.User
 

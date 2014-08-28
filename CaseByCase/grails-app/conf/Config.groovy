@@ -208,62 +208,54 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 
-// Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.cbc.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.cbc.UserRole'
-grails.plugins.springsecurity.authority.className = 'com.cbc.Role'
-grails.plugins.springsecurity.ui.encodePassword = false //added manually
 
-//grails.plugins.springsecurity.securityConfigType = "Annotation"
-//grails.plugins.springsecurity.rejectIfNoRule = true
-
-/** ORDERING: REALLY-SECURE FIRST to LESS SECURE **/
-grails.plugins.springsecurity.controllerAnnotations.staticRules=[
-	//'/**': ['IS_AUTHENTICATED_FULLY'],
-	//** ADMIN ONLY
-	'/admin/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/personRole/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/userRole/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/organisation/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/organisation/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],	
-	'/organisation/list/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/role/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/user/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/user/list/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/user/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/person/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/person/list/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/person/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/image/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/image/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/document/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/document/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/keywords/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/keywords/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/category/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/category/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/region/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/region/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/country/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/country/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],	
-	 '/searchable/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	 '/search/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	 '/case/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	 '/office/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	 '/action/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	//** GENERAL AUTHENTICATED USER
-	'/home/**': ['IS_AUTHENTICATED_FULLY'],
-	
-	'/user/show/**': ['IS_AUTHENTICATED_FULLY'],
-	'/login/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
-	'/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
-	
-	'/ck/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY']
-//	/ck/standard/filemanager
-//	/ck/standard/uploader
-//	/ck/ofm/filemanager
-//	/ck/ofm/filetree
-]
+///** ORDERING: REALLY-SECURE FIRST to LESS SECURE **/
+//grails.plugins.springsecurity.controllerAnnotations.staticRules=[
+//	//'/**': ['IS_AUTHENTICATED_FULLY'],
+//	//** ADMIN ONLY
+//	'/admin/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/personRole/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/userRole/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/organisation/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/organisation/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],	
+//	'/organisation/list/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/role/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/user/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/user/list/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/user/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/person/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/person/list/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/person/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/image/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/image/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/document/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/document/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/keywords/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/keywords/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/category/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/category/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/region/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/region/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/country/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	'/country/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],	
+//	 '/searchable/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	 '/search/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	 '/case/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	 '/office/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	 '/action/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+//	//** GENERAL AUTHENTICATED USER
+//	'/home/**': ['IS_AUTHENTICATED_FULLY'],
+//	
+//	'/user/show/**': ['IS_AUTHENTICATED_FULLY'],
+//	'/login/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+//	'/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+//	
+//	'/ck/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY']
+////	/ck/standard/filemanager
+////	/ck/standard/uploader
+////	/ck/ofm/filemanager
+////	/ck/ofm/filetree
+//]
 
 //Audit Trail Config
 
@@ -317,4 +309,25 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules=[
 //		}
 //	}
 //}
+
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.cbc.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.cbc.UserRole'
+grails.plugin.springsecurity.authority.className = 'com.cbc.Role'
+grails.plugin.springsecurity.authority.groupAuthorityNameField = 'authorities'
+grails.plugin.springsecurity.useRoleGroups = true
+grails.plugin.springsecurity.requestMap.className = 'com.cbc.Requestmap'
+grails.plugin.springsecurity.securityConfigType = 'Requestmap'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/assets/**':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
+]
 

@@ -1,10 +1,13 @@
 package com.cbc
-import org.codehaus.groovy.grails.plugins.springsecurity.*
+
+import grails.plugin.springsecurity.SpringSecurityUtils
+import grails.plugin.springsecurity.userdetails.GrailsUser
+import grails.plugin.springsecurity.userdetails.GrailsUserDetailsService
 import org.springframework.security.core.authority.GrantedAuthorityImpl
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 
-class CustomUserDetailsService implements GrailsUserDetailsService {
+class CustomUserDetailsService implements GrailsUserDetailsService  {
 	/**
 	 * Some Spring Security classes (e.g. RoleHierarchyVoter) expect at least
 	 * one role, so we give a user with no granted roles this one which gets

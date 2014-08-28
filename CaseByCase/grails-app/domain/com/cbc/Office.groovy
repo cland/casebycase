@@ -1,8 +1,11 @@
 package com.cbc
 
 import java.util.Date;
+import java.util.List;
+
 
 class Office {
+	transient groupManagerService
 	transient cbcApiService
 	static attachmentable = true
 	/** Tab1: Setup and Members List **/
@@ -28,6 +31,7 @@ class Office {
 	
 	static belongsTo = []
 	static hasMany = [cases: Case, staff:Person, affiliates:Organisation,events:Event]
+	static transients = ["officeGroups"]
 	
     static constraints = {
 		name unique:true, blank:false
@@ -70,5 +74,7 @@ class Office {
 		office:this,
 		category:(region?.name ? region.name : "Unknown")]
 	}
-	
+	List<RoleGroup> getOfficeGroups(){
+		return groupManagerService.getOfficeGroups(this)
+	}
 } //end class

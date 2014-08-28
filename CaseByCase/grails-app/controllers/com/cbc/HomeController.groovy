@@ -1,6 +1,6 @@
 package com.cbc
 
-import grails.plugins.springsecurity.Secured
+import grails.plugin.springsecurity.annotation.*
 
 class HomeController {
 	def cbcApiService

@@ -1,18 +1,18 @@
 package com.cbc
 
-import java.util.Date;
-
 class User {
-	def cbcApiService
+
+	transient cbcApiService
 	transient springSecurityService
+
 	/** Tab1: Login Details **/
 	//**Fieldset basic details
 	String username
 	String password
 	String email
-	
-	//**Fieldset Access Rights 
-	boolean enabled
+
+	//**Fieldset Access Rights
+	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
@@ -26,27 +26,12 @@ class User {
 	Date dateCreated
 	Date lastUpdated
 	String history
-	
-	/** 	*END FIELDS* 		**/
-	
-	static transients = ["createdByName","lastUpdatedByName"]
-	static belongsTo = []
-	static hasMany = []	
-	
-	String toString(){
-		return username
-	}
-	String getCreatedByName(){
-		User user = User.get(createdBy)
-		return (user==null?"unknown":user?.person.toString())
-	}
-	String getLastUpdatedByName(){
-		User user = User.get(lastUpdatedBy)
-		return (user==null?"unknown":user?.person.toString())
-	}
+	/** *END FIELDS* **/
+	static transients = ['springSecurityService','authorities',"createdByName","lastUpdatedByName"]
+
 	static constraints = {
 		username blank: false, unique: true
-		password blank: false, password:true
+		password blank: false
 		email unique:true, blank:false, email:true
 		lastUpdatedBy nullable:true, editable:false
 		createdBy nullable:true, editable:false
@@ -56,28 +41,31 @@ class User {
 	static mapping = {
 		password column: '`password`'
 	}
-
-	Set<Role> getAuthorities() {
-		UserRole.findAllByUser(this).collect { it.role } as Set
+	String getCreatedByName(){
+		User user = User.get(createdBy)
+		return (user==null?"unknown":user?.person.toString())
 	}
-
+	String getLastUpdatedByName(){
+		User user = User.get(lastUpdatedBy)
+		return (user==null?"unknown":user?.person.toString())
+	}
 	def beforeInsert() {
 		encodePassword()
 		long curId = cbcApiService.getCurrentUserId()
 		createdBy = curId
 		lastUpdatedBy = curId
 	}
-
 	def beforeUpdate() {
 		if (isDirty('password')) {
-			encodePassword()
-		}
-		lastUpdatedBy = cbcApiService.getCurrentUserId()
+		encodePassword()
+	}
+	lastUpdatedBy = cbcApiService.getCurrentUserId()
+	}
+	Set<RoleGroup> getAuthorities() {
+		UserRoleGroup.findAllByUser(this).collect { it.roleGroup }
 	}
 
 	protected void encodePassword() {
-		password = springSecurityService.encodePassword(password)
+		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
-	
-	
 }
