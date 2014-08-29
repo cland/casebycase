@@ -263,8 +263,11 @@
 	</div>
 </fieldset>
 
-
 <script>
+function removeClient(id){
+	  $("#" + id).remove();
+	  $("#" + id + "-label").remove();
+}
 function addPersonClient(_id){
   	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')             
                 .load('${g.createLink(controller: 'person', action: 'dialogcreate',params:[caseid:_id])}')
@@ -433,10 +436,7 @@ function addPersonClient(_id){
 		});
   });
 
-  function removeClient(id){
-	  $("#" + id).remove();
-	  $("#" + id + "-label").remove();
-	 }
+  
 </script>
 
 

@@ -160,11 +160,14 @@ class Person {
 		return list
 	}
 	def toAutoCompleteMap(){
+		Office office = getPrimaryOffice()
 		return [id:id,
 		label:firstName + " " + lastName + " | " + idNumber + " | " + dateOfBirth?.format("dd MMM yyyy"),
 		value:id,
 		person:(this==null?Person.get(id):this),
-		category:(gender==null?"Unknown":gender)]
+		category:(gender==null?"Unknown":gender),
+		usergroups:(office==null?null:office.getOfficeGroups()),
+		officegroups:getAuthorities()]
 	}
 	def getPhonesList() {
 		return LazyList.decorate(

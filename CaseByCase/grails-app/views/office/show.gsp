@@ -35,6 +35,7 @@
 					<li><a href="#tab-1">Details</a></li>
 					<li><a href="#tab-2">Staff Members</a></li>		
 					<li><a href="#tab-3">Cases</a></li>
+					<li><a href="#tab-4">Access Rights</a></li>
 					<li><a href="#tab-admin">Admin</a></li>
 				</ul>
 				<div id="tab-1">
@@ -178,6 +179,33 @@
 						<table id="case_list" class="scroll jqTable"></table>
 						<!-- pager will hold our paginator -->
 						<div id="case_list_pager" class="scroll" style="text-align: center;"></div>
+					</div>
+				</div>
+				<div id="tab-4">
+					<br/><h2>Groups</h2>
+					<div>
+						<table>
+						<thead>
+							<tr>
+							
+								<g:sortableColumn property="name" title="${message(code: 'roleGroup.name.label', default: 'Name')}" />
+							
+								<g:sortableColumn property="description" title="${message(code: 'roleGroup.description.label', default: 'Description')}" />
+							
+							</tr>
+						</thead>
+						<tbody>
+						<g:each in="${officeInstance?.officeGroups}" status="i" var="roleGroupInstance">
+							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+							
+								<td><g:link controller="roleGroup" action="show" id="${roleGroupInstance.id}">${fieldValue(bean: roleGroupInstance, field: "name")}</g:link></td>
+							
+								<td>${fieldValue(bean: roleGroupInstance, field: "description")}</td>
+							
+							</tr>
+						</g:each>
+						</tbody>
+						</table>
 					</div>
 				</div>
 				<div id="tab-admin">

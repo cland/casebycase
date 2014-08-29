@@ -136,7 +136,7 @@ def groupManagerService
 	
 	private void initRequestmap(){
 		
-		for (String url in [ '/',
+		for (String url in [
 			 '/**/favicon.ico',
 			 '/**/js/**',
 			 '/**/css/**',
@@ -154,6 +154,8 @@ def groupManagerService
 				 '/index',
 				 '/index.gsp',
 				 '/acl/**/**',
+				 'person/personlist',
+				 'organisation/orglist',
 				 '/**/show/**',
 				  '/**/index/**']) {
 				  new Requestmap( url: url, configAttribute:'isFullyAuthenticated()').save()

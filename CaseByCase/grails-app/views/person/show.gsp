@@ -31,7 +31,7 @@
 			<div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Other</a></li>		
+					<li><a href="#tab-2">Access Rights</a></li>		
 				</ul>
 				<div id="tab-1">
 					<ol class="property-list person">
@@ -206,7 +206,13 @@
 				</div>
 				
 				<div id="tab-2">
-					
+					<div style="padding-left:50px;"><H3>Roles</H3>
+						<ul>
+							<g:each in="${personInstance?.authorities }" var="role">
+								<li>${role.name} &raquo; ${role.description }</li>
+							</g:each>
+						</ul>
+					</div>
 				</div>
 			</div>
 			<!--  *** END TABS *** -->
