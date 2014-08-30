@@ -8,66 +8,20 @@ import org.grails.datastore.gorm.finders.MethodExpression.IsEmpty;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.ForEach;
 import org.apache.commons.lang.RandomStringUtils
 
+/**
+ * This service class should hold business logic related to cbc application only. 
+ * @author Cland
+ *
+ */
 class cbcApiService {
 	static transactional = false
 	def springSecurityService
-	/**
-	 * This function is used to update the roles for a given user from the checkbox on the user gsp
-	 * @param userInstance
-	 * @param params
-	 * @return
-	 */
-    def updateRoles(User userInstance, GrailsParameterMap params) {
-		UserRole.removeAll(userInstance)
-		def roles = Role.list()
-		for(Role r : roles){
-			def tmp = params.list("role_${r.authority}")
-			if (tmp[0]) UserRole.create(userInstance, r, true)
-		}
-    } // function
-	def getUsersWithRole(List<String> rolelist){
-		List alldata = []
-		def role = null
-		for(int i=0;i<rolelist.size();i++){
-			role = Role.findByAuthority(rolelist[i])
-			//def data = UserRole.findByRole(role)*.user
-			def tmp = UserRole.findAllByRole(role)*.user
-			if( tmp ) alldata.addAll(tmp)
-		}		
-		return alldata?.unique()
-	} //
+	def groupManagerService
 	
 	
-		boolean isAdmin(){
-		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_ADMIN.value + "," + SystemRoles.ROLE_DEVELOPER.value))
-	}
-		
-
 	
-	boolean isDeveloper(){
-		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_DEVELOPER.value))
-	}
-	
-	boolean isReviewer(){
-		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_REVIEWER.value))
-	}
-	Long getCurrentUserId(){
-		long userId = 0 //.currentUser?.id //
-		if(springSecurityService.isLoggedIn()){
-			User user = springSecurityService.getCurrentUser()
-			if(user) 
-				userId = user?.id
-		}
-		return userId
-	}
-	User getCurrentUser(){
-		return springSecurityService.getCurrentUser() // springSecurityService?.currentUser
-	}
-	User getUser(Long id){
-		return User.get(id)
-	}
 	String getUserFullname(Long id){
-		User user = getUser(id)
+		User user = groupManagerService.getUser(id)
 		if(user) return user?.person.toString()
 		return ""
 	}
@@ -75,8 +29,8 @@ class cbcApiService {
 	String getHomeLink(){
 		def status = ""
 		if(springSecurityService.isLoggedIn()){
-			Long userId = getCurrentUserId() // springSecurityService?.currentUser?.id			
-			if(isAdmin()) return "/?" + status
+			Long userId = groupManagerService.getCurrentUserId() // springSecurityService?.currentUser?.id			
+			if(groupManagerService.isAdmin()) return "/?" + status
 		}
 		
 		//else we return the user back to home page.
@@ -84,8 +38,8 @@ class cbcApiService {
 	}
 	String getSideMenuName(def d = SideNav.MENU_STANDARD.toString()){
 		if(springSecurityService.isLoggedIn()){		
-			long userId = getCurrentUserId() //springSecurityService.currentUser?.id //?.principal?.id
-			if(!isAdmin() & d.equals(SideNav.MENU_ADMIN.toString())) return SideNav.MENU_STANDARD.String()
+			long userId = groupManagerService.getCurrentUserId() //springSecurityService.currentUser?.id //?.principal?.id
+			if(!groupManagerService.isAdmin() & d.equals(SideNav.MENU_ADMIN.toString())) return SideNav.MENU_STANDARD.String()
 			//return the requested menu.
 			return d
 		} 
@@ -106,4 +60,60 @@ class cbcApiService {
 		}
 		return max
 	} //end helper method findUpperIndex
+	
+	@Deprecated
+	/**
+	 * is the function isAdmin() in GroupManagerService instead
+	 */
+	boolean isAdmin(){
+		return groupManagerService.isAdmin()
+	}
+
+	@Deprecated
+	boolean isDeveloper(){
+		return groupManagerService.isDeveloper()
+	}
+	@Deprecated
+	boolean isReviewer(){
+		return groupManagerService.isReviewer()
+	}
+	@Deprecated
+	Long getCurrentUserId(){
+		return groupManagerService.getCurrentUserId()
+	}
+	@Deprecated
+	User getCurrentUser(){
+		return springSecurityService.getCurrentUser() // springSecurityService?.currentUser
+	}
+	@Deprecated
+	User getUser(Long id){
+		return groupManagerService.getUser(id)
+	}
+	/**
+	 * This function is used to update the roles for a given user from the checkbox on the user gsp
+	 * @param userInstance
+	 * @param params
+	 * @return
+	 */
+	@Deprecated
+	def updateRoles(User userInstance, GrailsParameterMap params) {
+		UserRole.removeAll(userInstance)
+		def roles = Role.list()
+		for(Role r : roles){
+			def tmp = params.list("role_${r.authority}")
+			if (tmp[0]) UserRole.create(userInstance, r, true)
+		}
+	} // function
+	@Deprecated
+	def getUsersWithRole(List<String> rolelist){
+		List alldata = []
+		def role = null
+		for(int i=0;i<rolelist.size();i++){
+			role = Role.findByAuthority(rolelist[i])
+			//def data = UserRole.findByRole(role)*.user
+			def tmp = UserRole.findAllByRole(role)*.user
+			if( tmp ) alldata.addAll(tmp)
+		}
+		return alldata?.unique()
+	} //
 }//end class

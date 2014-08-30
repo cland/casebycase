@@ -1,9 +1,10 @@
+<%@page import="org.apache.jasper.compiler.Node.ParamsAction"%>
 <%@ page import="com.cbc.User" %>
 <!-- *** START TABS *** -->
 <div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Personal Details</a></li>		
+					<li class="hide"><a href="#tab-2">Personal Details</a></li>		
 				</ul>
 		<div id="tab-1">
 		<fieldset><legend>Login Details</legend>
@@ -78,7 +79,7 @@
 		
 		<fieldset><legend>Personal Details</legend>
 			<div class="table">
-				<div class="row"><div class="cell"><label id="" for="clients"><g:message code="case.clients.label" default="Find a Person" /> </label></div>
+				<div class="row"><div class="cell">Find a Person: </div>
 					<div class="cell">
 						<span class="property-value" aria-labelledby="office-label">			
 							<input id="person-clients" name="client_select" value=""/>	
@@ -112,9 +113,12 @@
 		</fieldset>
 		
 		<fieldset><legend>Access Rights</legend>
-			<g:render template="editRoles" />
 			<div>
-				<table id="groups-table">
+				<div id="group-finder-div">
+					Find a Group: <input id="group-search" name="group_search" value=""/>
+				</div>
+			
+				<table id="groups-table-office">
 				<thead>
 					<tr>
 						<th></th>
@@ -123,10 +127,13 @@
 					</tr>
 				</thead>
 				<tbody id="groups-list">
-				<g:each in="${userInstance?.person?.office?.officeGroups}" status="i" var="roleGroupInstance">
+				<g:each in="${(params.action=="create"? [] : (userInstance?.authorities?.size() > 0 ? userInstance?.authorities:userInstance?.person?.office?.officeGroups))}" status="i" var="roleGroupInstance">
 					<g:set var="isRoleChecked" value="false" />
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						<td><g:checkBox name="${roleGroupInstance?.name}" id="${roleGroupInstance.id}" checked="${isRoleChecked}" label=""/></td>
+						<g:if test="${userInstance?.authorities?.contains(roleGroupInstance) }">
+							<g:set var="isRoleChecked" value="true" />
+						</g:if>
+						<td><g:checkBox name="officegroups" value="${roleGroupInstance.id}" checked='${isRoleChecked}' label=""/></td>
 						<td><g:link controller="roleGroup" action="show" id="${roleGroupInstance.id}">${fieldValue(bean: roleGroupInstance, field: "name")}</g:link></td>					
 						<td>${fieldValue(bean: roleGroupInstance, field: "description")}</td>					
 					</tr>
@@ -134,6 +141,8 @@
 				</tbody>
 				</table>
 			</div>
+			
+			
 		</fieldset>
 	</div>
 	
@@ -168,7 +177,8 @@ $(document).ready(function() {
 			});
 		}
 	});
-			
+
+	//** Person Picker			
 	$( "#person-clients" ).catcomplete({
 		source: function(request,response) {
 			$.ajax({
@@ -197,16 +207,49 @@ $(document).ready(function() {
 			$("#personid").prop("value",_id)
 			$("input[name='person.firstName']").prop("value",_firstname) 
 			$("input[name='person.lastName']").prop("value",_lastname)
-			if(_gender) $("select[name='person.gender'] option[" + _gender + "]").prop("selected","selected")
-			if(_raceid != null) $("select[name='person.race.id'] option[" + _raceid + "]").prop("selected","selected")
-			if(_officeid != null) $("select[name='person.office.id'] option[" + _officeid + "]").prop("selected","selected")
+			if(_gender) $("select[name='person.gender'] option[value=" + _gender + "]").prop("selected","selected")
+			if(_raceid != null) $("select[name='person.race.id'] option[value=" + _raceid + "]").prop("selected","selected")
+			if(_officeid != null) $("select[name='person.office.id'] option[value=" + _officeid + "]").prop("selected","selected")
 			
 			//update the groups list base on the office selected
 			if(_officegrps != null){
-				var tbody = $("#groups-list");
-				tbody.html = "";
-				tbody.append("<tr><td></td><td>My Group</td><td>description</td>");					
+				var _tbody = $("#groups-list");				
+				_tbody.html("");
+				$.each(_officegrps,function(item){
+					var _sel = '';
+					var _chbox = "<input type='checkbox' name='officegroups' value='" + this.id + "' " +_sel+ "/>";
+					_tbody.append("<tr><td>" + _chbox + "</td><td>" + this.name + "</td><td>" + this.description + "</td>");	
+				})
+									
 			}
+			ui.item.value = ""
+		}
+	});
+
+	// Groups Picker
+	$( "#group-search" ).catcomplete({
+		source: function(request,response) {
+			$.ajax({
+				url : "${g.createLink(controller: 'acl', action: 'grouplist')}", 
+				dataType: "json",
+				data : request,
+				success : function(data) {
+					response(data); // set the response
+				},
+				error : function() { // handle server errors
+					alert("Unable to retrieve records");
+				}
+			});
+		},
+		minLength : 2, // triggered only after minimum 2 characters have been entered.
+		select : function(event, ui) { // event handler when user selects a company from the list.
+			var _id = ui.item.id;
+			var _name = ui.item.rolegroup.name
+			var _desc = ui.item.rolegroup.description
+			var _tbody = $("#groups-list");
+			var _sel = 'checked';
+			var _chbox = "<input type='checkbox' name='officegroups' value='" + _id + "' " +_sel+ " class='group-other'/>";
+			_tbody.append("<tr><td>" + _chbox + "</td><td>" + _name + "</td><td>" + _desc + "</td>");	
 			ui.item.value = ""
 		}
 	});

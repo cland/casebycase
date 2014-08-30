@@ -20,4 +20,12 @@ class RoleGroup {
 	String toString(){
 		(!description?.equals("")? description : name)
 	}
-}
+	
+	def toAutoCompleteMap(){
+		
+		return [id:id,
+			label:name + " | " + description ,
+			value:id,
+			category:"Group",rolegroup:this]
+	}
+} //

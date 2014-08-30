@@ -1,6 +1,7 @@
 package com.cbc
 
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.*
 
 @Transactional
 class GroupManagerService {
@@ -75,6 +76,12 @@ class GroupManagerService {
 			if(group)UserRoleGroup.create user, group
 		}		
 	}
+	def addUserToGroup(User userInstance, def groupIdList){
+		groupIdList?.each{_id ->
+			RoleGroup rolegroup = RoleGroup.get(_id)
+			if(rolegroup) UserRoleGroup.create userInstance, rolegroup
+		}
+	}
 	def getUserGroups(User user){
 		return UserRoleGroup.findByUser(user)
 	}
@@ -99,5 +106,55 @@ class GroupManagerService {
 			new Role(authority:item?.value,description:item?.description).save(flush:true)
 		}
 		println "... DONE Generating ROLES!"
+	}
+	
+	def listGroups(params){
+		def term = "%" + params?.term + "%"
+		
+		def query = {
+			or {
+				ilike("name", term )
+				ilike("description", term)
+			}
+		}
+		def clist = RoleGroup.list() //RoleGroup.createCriteria().list(query)
+
+		def selectList = []
+		clist.each {
+			selectList.add(it.toAutoCompleteMap())
+		}
+		return selectList
+	
+	} //end list groups
+	
+	boolean isAdmin(){
+		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_ADMIN.value + "," + SystemRoles.ROLE_DEVELOPER.value))
+	}
+	boolean isDeveloper(){
+		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_DEVELOPER.value))
+	}
+	
+	boolean isReviewer(){
+		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_REVIEWER.value))
+	}
+	Long getCurrentUserId(){
+		long userId = 0 //.currentUser?.id //
+		if(springSecurityService.isLoggedIn()){
+			User user = springSecurityService.getCurrentUser()
+			if(user)
+				userId = user?.id
+		}
+		return userId
+	}
+	User getCurrentUser(){
+		return springSecurityService.getCurrentUser() // springSecurityService?.currentUser
+	}
+	User getUser(Long id){
+		return User.get(id)
+	}
+	String getUserFullname(Long id){
+		User user = getUser(id)
+		if(user) return user?.person.toString()
+		return ""
 	}
 } //END CLASS

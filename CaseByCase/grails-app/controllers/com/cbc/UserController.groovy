@@ -9,6 +9,7 @@ import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 @Transactional(readOnly = true)
 class UserController {
 	def cbcApiService
+	def groupManagerService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -28,12 +29,12 @@ class UserController {
 
     @Transactional
     def save(User userInstance) {
+		println(params)
         if (userInstance == null) {
             notFound()
             return
         }
-
-       
+	
 		if(!params?.person?.id){
 			if(params?.person?.id == ""){
 				def p = new Person(params?.person)
@@ -49,11 +50,18 @@ class UserController {
 			}
 		}
 
+		userInstance.save(flush:true)
 		if (userInstance.hasErrors()) {
 			println(userInstance.errors)
 			respond userInstance.errors, view:'create'
 			return
 		}
+		
+		//Add user to access groups
+		def officegroups = (params.list("officegroups")*.toLong())
+		println(officegroups)
+		groupManagerService.addUserToGroup(userInstance,officegroups)
+		
         request.withFormat {
             form {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'userInstance.label', default: 'User'), userInstance.toString()])
@@ -80,9 +88,12 @@ class UserController {
         }
 
         userInstance.save flush:true
-		//update the roles here
-		cbcApiService.updateRoles(userInstance, params)
-		//attachUploadedFilesTo(userInstance)
+		
+		//Add user to access groups - we clear all his groups first in this instance
+		UserRoleGroup.removeAll(userInstance, true)
+		def officegroups = (params.list("officegroups")*.toLong())
+		groupManagerService.addUserToGroup(userInstance,officegroups)
+		
         request.withFormat {
             form {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'User.label', default: 'User'), userInstance.toString()])

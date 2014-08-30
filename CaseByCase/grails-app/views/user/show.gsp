@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					...
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -31,9 +31,10 @@
 			<div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Login Details</a></li>
-					<li><a href="#tab-2">Personal Details</a></li>		
+					<li class="hide"><a href="#tab-2">Personal Details</a></li>		
 				</ul>
 				<div id="tab-1">
+				<fieldset><legend>Login Details</legend>
 					<ol class="property-list user">
 						
 							<g:if test="${userInstance?.username}">
@@ -54,39 +55,12 @@
 								
 							</li>
 							</g:if>
-						
-							<g:if test="${userInstance?.lastUpdatedByName}">
-							<li class="fieldcontain">
-								<span id="lastUpdatedBy-label" class="property-label"><g:message code="user.lastUpdatedBy.label" default="Last Updated By" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${userInstance}" field="lastUpdatedByName"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${userInstance?.createdByName}">
-							<li class="fieldcontain">
-								<span id="createdBy-label" class="property-label"><g:message code="user.createdBy.label" default="Created By" /></span>
-								
-									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${userInstance}" field="createdByName"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${userInstance?.history}">
-							<li class="fieldcontain">
-								<span id="history-label" class="property-label"><g:message code="user.history.label" default="History" /></span>
-								
-									<span class="property-value" aria-labelledby="history-label"><g:fieldValue bean="${userInstance}" field="history"/></span>
-								
-							</li>
-							</g:if>
-						
+
 							<g:if test="${userInstance?.accountExpired}">
 							<li class="fieldcontain">
 								<span id="accountExpired-label" class="property-label"><g:message code="user.accountExpired.label" default="Account Expired" /></span>
 								
-									<span class="property-value" aria-labelledby="accountExpired-label"><g:formatBoolean boolean="${userInstance?.accountExpired}" /></span>
+									<span class="property-value" aria-labelledby="accountExpired-label"><g:formatBoolean boolean="${userInstance?.accountExpired}" true="yes" false="no"/></span>
 								
 							</li>
 							</g:if>
@@ -95,63 +69,83 @@
 							<li class="fieldcontain">
 								<span id="accountLocked-label" class="property-label"><g:message code="user.accountLocked.label" default="Account Locked" /></span>
 								
-									<span class="property-value" aria-labelledby="accountLocked-label"><g:formatBoolean boolean="${userInstance?.accountLocked}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${userInstance?.dateCreated}">
-							<li class="fieldcontain">
-								<span id="dateCreated-label" class="property-label"><g:message code="user.dateCreated.label" default="Date Created" /></span>
-								
-									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${userInstance?.dateCreated}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${userInstance?.enabled}">
-							<li class="fieldcontain">
-								<span id="enabled-label" class="property-label"><g:message code="user.enabled.label" default="Enabled" /></span>
-								
-									<span class="property-value" aria-labelledby="enabled-label"><g:formatBoolean boolean="${userInstance?.enabled}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${userInstance?.lastUpdated}">
-							<li class="fieldcontain">
-								<span id="lastUpdated-label" class="property-label"><g:message code="user.lastUpdated.label" default="Last Updated" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${userInstance?.lastUpdated}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${userInstance?.passwordExpired}">
-							<li class="fieldcontain">
-								<span id="passwordExpired-label" class="property-label"><g:message code="user.passwordExpired.label" default="Password Expired" /></span>
-								
-									<span class="property-value" aria-labelledby="passwordExpired-label"><g:formatBoolean boolean="${userInstance?.passwordExpired}" /></span>
+									<span class="property-value" aria-labelledby="accountLocked-label"><g:formatBoolean boolean="${userInstance?.accountLocked}"  true="yes" false="no"/></span>
 								
 							</li>
 							</g:if>
 						
 							
-						
-						</ol>
-				</div>
-				
-				<div id="tab-2">
-					<ol class="property-list user">
-						<g:if test="${userInstance?.person}">
+							<g:if test="${userInstance?.enabled}">
 							<li class="fieldcontain">
-								<span id="person-label" class="property-label"><g:message code="user.person.label" default="Person" /></span>
+								<span id="enabled-label" class="property-label"><g:message code="user.enabled.label" default="Enabled" /></span>
 								
-									<span class="property-value" aria-labelledby="person-label"><g:link controller="person" action="show" id="${userInstance?.person?.id}">${userInstance?.person?.encodeAsHTML()}</g:link></span>
+									<span class="property-value" aria-labelledby="enabled-label"><g:formatBoolean boolean="${userInstance?.enabled}"  true="yes" false="no"/></span>
 								
 							</li>
 							</g:if>
-					</ol>
+			
+							<g:if test="${userInstance?.passwordExpired}">
+							<li class="fieldcontain">
+								<span id="passwordExpired-label" class="property-label"><g:message code="user.passwordExpired.label" default="Password Expired" /></span>
+								
+									<span class="property-value" aria-labelledby="passwordExpired-label"><g:formatBoolean boolean="${userInstance?.passwordExpired}"  true="yes" false="no"/></span>
+								
+							</li>
+							</g:if>
+						</ol>
+					</fieldset>
+					<fieldset><legend>Personal Details</legend>
+							<div class="table">
+								<div class="row">
+									<div class="cell"><label for="person.firstName"><g:message code="person.firstName.label" default="First Name" /></label></div>
+									<div class="cell">${userInstance?.person?.firstName}</div>
+									<div class="cell">
+										<label for="person.gender"><g:message code="person.gender.label" default="Gender" /></label>
+									</div>
+									<div class="cell">
+										${userInstance?.person?.gender}
+									</div>
+								</div>
+								<div class="row">
+									<div class="cell"><label for="person.lastName"><g:message code="person.lastName.label" default="Last Name" />	</label></div>
+									<div class="cell">${userInstance?.person?.lastName}</div>
+									<div class="cell"><label for="person.race"><g:message code="user.race.label" default="Race" /></label></div>
+									<div class="cell">${userInstance?.person?.race}</div>
+								</div>
+								<div class="row">
+									<div class="cell"><label for="office"><g:message code="person.office.label" default="Office" /><span class="required-indicator">*</span></label></div>
+									<div class="cell">${userInstance?.person?.office}</div>
+									<div class="cell"></div>
+									<div class="cell"></div>
+								</div>				
+							</div>
+						</fieldset>						
+					<fieldset><legend>Access Rights</legend>
+						<div>							
+							<table id="groups-table-office">
+							<thead>
+								<tr>
+									<th></th>
+									<g:sortableColumn property="name" title="${message(code: 'roleGroup.name.label', default: 'Group Name')}" />					
+									<g:sortableColumn property="description" title="${message(code: 'roleGroup.description.label', default: 'Description')}" />					
+								</tr>
+							</thead>
+							<tbody id="groups-list">
+							<g:each in="${userInstance?.authorities}" status="i" var="roleGroupInstance">								
+								<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">									
+									<td></td>
+									<td><g:link controller="roleGroup" action="show" id="${roleGroupInstance.id}">${fieldValue(bean: roleGroupInstance, field: "name")}</g:link></td>					
+									<td>${fieldValue(bean: roleGroupInstance, field: "description")}</td>					
+								</tr>
+							</g:each>
+							</tbody>
+							</table>
+						</div>	
+					</fieldset>	
+				</div>
+				
+				<div id="tab-2">
+					
 				</div>
 			</div>
 			<!--  *** END TABS *** -->

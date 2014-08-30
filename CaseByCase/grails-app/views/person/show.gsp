@@ -221,6 +221,11 @@
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${personInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					<sec:ifAnyGranted roles="${com.cbc.SystemRoles.ROLE_ADMIN },${com.cbc.SystemRoles.ROLE_OCO.value }">
+						<g:link class="add" controller="user" action="create" params="['person.id':personInstance.id]">
+							<g:message code="default.button.createlogin.label" default="Create Login" />
+						</g:link>
+					</sec:ifAnyGranted>
 				</fieldset>
 			</g:form>
 		</div>

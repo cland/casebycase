@@ -146,9 +146,9 @@ class Person {
 			createAlias('staff',"s")
 			eq('s.id',id)
 		}
-		Office o = null
+		
 		if(list.size() > 0) office = list.get(0) 
-		return o
+		return office
 	}
 
 	public List getCaseList(){
@@ -166,8 +166,8 @@ class Person {
 		value:id,
 		person:(this==null?Person.get(id):this),
 		category:(gender==null?"Unknown":gender),
-		usergroups:(office==null?null:office.getOfficeGroups()),
-		officegroups:getAuthorities()]
+		usergroups:getAuthorities(),
+		officegroups:(office==null?null:office.getOfficeGroups())]
 	}
 	def getPhonesList() {
 		return LazyList.decorate(
