@@ -22,7 +22,7 @@ def groupManagerService
 			switch(Environment.getCurrent()){
 				case "DEVELOPMENT":			
 					println ("1. Create users ...")
-					createUsers()
+					createUsers("admin123")
 				//	println ("2. Login ...")
 				//	loginAsAdmin()
 					println ("3. Initialize Request map ...")
@@ -34,7 +34,14 @@ def groupManagerService
 				//	SCH.clearContext()
 				break
 				case "PRODUCTION":
-				
+					println ("1. Create users ...")
+					createUsers("AdminCbC9")
+				//	println ("2. Login ...")
+				//	loginAsAdmin()
+					println ("3. Initialize Request map ...")
+					initRequestmap()
+					println ("4. Add other components ...")
+					createOtherComponents()
 				break
 			} //end switch
 		} //end doBootStrap
@@ -51,7 +58,7 @@ def groupManagerService
 	 * Creates initial users
 	 * @return
 	 */
-	private boolean createUsers() {
+	private boolean createUsers(String pwd) {
 		Citizenship rsa = new Citizenship(name:"RSA").save();
 		new Citizenship(name:"Permanent Residennce").save();
 		new Citizenship(name:"Temporary Residence").save();
@@ -98,7 +105,7 @@ def groupManagerService
 			
 			1.times {
 				long id = it + 1
-				def user = new User(username: "dev$id", enabled: true, password: "admin123",person:personDev).save(flush:true)
+				def user = new User(username: "dev$id", enabled: true, password: pwd,person:personDev).save(flush:true)
 				//UserRoleGroup.create user, devGroup
 				if(!user.hasErrors()){
 					println ">> Adding dev user to office groups"
@@ -110,7 +117,7 @@ def groupManagerService
 			}
 		
 			println ">> Creating admin user..."
-			def admin = new User(username: 'admin', enabled: true, password: 'admin123',person:personAdmin).save(flush:true)
+			def admin = new User(username: 'admin', enabled: true, password: pwd,person:personAdmin).save(flush:true)
 		
 			if(!admin.hasErrors()){
 				UserRoleGroup.create admin, devGroup
@@ -129,9 +136,9 @@ def groupManagerService
 		
 		return true
 	} //end create users
-	private void loginAsAdmin() {
+	private void loginAsAdmin(String pwd) {
 		// have to be authenticated as an admin to create ACLs
-		SCH.context.authentication = new UsernamePasswordAuthenticationToken( 'admin', 'admin123', AuthorityUtils.createAuthorityList(SystemRoles.ROLE_ADMIN.value))
+		SCH.context.authentication = new UsernamePasswordAuthenticationToken( 'admin', pwd, AuthorityUtils.createAuthorityList(SystemRoles.ROLE_ADMIN.value))
 	}
 	
 	private void initRequestmap(){
