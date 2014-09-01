@@ -14,6 +14,7 @@ class AclController {
 		render groupManagerService.getOfficeGroups(office) as JSON
 	}
 	def grouplist(){
-		render groupManagerService.listGroups() as JSON
+		render groupManagerService.listGroups(params) as JSON
 	}
-}
+		
+} //end class
