@@ -117,7 +117,7 @@ class GroupManagerService {
 				ilike("description", term)
 			}
 		}
-		def clist = RoleGroup.list() //RoleGroup.createCriteria().list(query)
+		def clist = RoleGroup.createCriteria().list(query)
 
 		def selectList = []
 		clist.each {

@@ -3,7 +3,7 @@
 <!-- *** START TABS *** -->
 <div id="tabs" style="display: none;">
 				<ul>
-					<li><a href="#tab-1">Details</a></li>
+					<li><a href="#tab-1"><g:message code="user.tab1.label" default="User Details" /></a></li>
 					<li class="hide"><a href="#tab-2">Personal Details</a></li>		
 				</ul>
 		<div id="tab-1">
