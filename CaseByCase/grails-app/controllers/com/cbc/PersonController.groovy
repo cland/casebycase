@@ -1,15 +1,14 @@
 package com.cbc
 
-
-
 import static org.springframework.http.HttpStatus.*
 import grails.converters.JSON
 import grails.transaction.Transactional
+import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 
 @Transactional(readOnly = true)
 class PersonController {
 	def autoCompleteService
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -61,6 +60,7 @@ class PersonController {
 			respond personInstance.errors, view:'create'
 			return
 		}
+		attachUploadedFilesTo(personInstance)
         request.withFormat {
             form {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'personInstance.label', default: 'Person'), personInstance.toString()])
@@ -112,6 +112,7 @@ class PersonController {
 		if(personInstance.hasErrors()){
 			println(personInstance.errors)
 		}
+		attachUploadedFilesTo(personInstance)
         request.withFormat {
             form {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Person.label', default: 'Person'), personInstance.toString()])

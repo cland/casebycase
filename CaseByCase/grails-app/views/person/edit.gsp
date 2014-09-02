@@ -40,7 +40,7 @@
 					<li><a href="#tab-2">Other</a></li>		
 				</ul>
 				<div id="tab-1">
-					<g:form url="[resource:personInstance, action:'update']" method="PUT" >
+					<g:uploadForm url="[resource:personInstance, action:'update']" method="POST" >
 						<g:hiddenField name="version" value="${personInstance?.version}" />
 						<fieldset class="form">
 							<g:render template="form"/>
@@ -48,7 +48,7 @@
 						<fieldset class="buttons">
 							<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
 						</fieldset>
-					</g:form>
+					</g:uploadForm>
 				</div>
 				
 				<div id="tab-2">

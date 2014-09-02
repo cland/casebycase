@@ -143,7 +143,7 @@ def groupManagerService
 	
 	private void initRequestmap(){
 		
-		for (String url in [
+		for (String url in [			 
 			 '/**/favicon.ico',
 			 '/**/js/**',
 			 '/**/css/**',
@@ -157,12 +157,12 @@ def groupManagerService
 			 new Requestmap( url: url, configAttribute: 'permitAll').save()
 		}
 			 // show and lists/index
-			 for (String url in [
+			 for (String url in ['/',
 				 '/index',
 				 '/index.gsp',
 				 '/acl/**/**',
-				 'person/personlist',
-				 'organisation/orglist',
+				 'person/personlist/**',
+				 'organisation/orglist/**',
 				 '/**/show/**',
 				  '/**/index/**']) {
 				  new Requestmap( url: url, configAttribute:'isFullyAuthenticated()').save()
@@ -171,6 +171,8 @@ def groupManagerService
 			 //editing for office admin
 			 for (String url in [
 				 '/**/create/**',
+				 '/**/dialogcreate/**',
+				 '/**/dialogsave/**',
 				 '/**/save/**',
 				 '/**/update/**',
 				 '/**/edit/**',]) {

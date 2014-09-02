@@ -14,15 +14,16 @@
 						</g:link>
 					</li>
 					<li>
+						<g:link class="create" controller="user" action="create" params="[sidebar:0]">
+							<g:message code="default.new.label" args="['User Profile']" default="New User Profile" />
+						</g:link>
+					</li>
+					<li>
 						<g:link class="index" controller="user" action="index" params="[sidebar:0]">
 							<g:message code="default.user.label" default="User Profiles" />
 						</g:link>
 					</li>	
-					<li>
-						<g:link class="create" controller="user" action="create" params="[sidebar:0]">
-							<g:message code="default.new.label" args="['User Profile']" default="New User Profile" />
-						</g:link>
-					</li>						
+										
 				</ul>
 			</div>
 

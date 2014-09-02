@@ -31,7 +31,8 @@
 			<div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Access Rights</a></li>		
+					<li><a href="#tab-2">Access Rights</a></li>	
+					<li><a href="#tab-3">Attachments</a></li>	
 				</ul>
 				<div id="tab-1">
 					<ol class="property-list person">
@@ -212,6 +213,25 @@
 								<li>${role.name} &raquo; ${role.description }</li>
 							</g:each>
 						</ul>
+					</div>
+				</div>
+				
+				<div id="tab-3">
+				<!-- Supporting documents -->
+					<div id="attachments" class="attachments">
+						<attachments:each bean="${personInstance}" status="i">	
+						<div class="photo-display float-left">
+						<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+							<img src="${resource(dir:'images/icons',file:'attach.png',plugin:'famfamfam')}" />			
+							<attachments:downloadLink attachment="${attachment}" inline="false" withContentType="false" />
+							${attachment.niceLength}
+							<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
+								returnPageURI="${createLink(action:'show', id:personInstance.id,absolute:true)}" />
+						</div>	
+							<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
+						
+						</attachments:each>
+						<div style="clear:both"></div>
 					</div>
 				</div>
 			</div>
