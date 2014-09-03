@@ -24,6 +24,9 @@ class Case {
 	CaseStatus status
 	Event thisevent		//if this case was created as a result of an event
 	
+	/** Tabs: labour and evictions **/
+	 Labour labour
+	 Eviction eviction
 	/** Tab4: Outcome **/
 	Date dateClosed
 	CaseOutcome outcome		//** Why closed
@@ -42,11 +45,10 @@ class Case {
 	
 	/** 	*END FIELDS* 		**/
 	
-	static hasOne=[labour:Labour,eviction:Eviction]
+	//static hasOne=[labour:Labour,eviction:Eviction]
 	static belongsTo = [office:Office]
 	static hasMany = [clients: Person,orgclients:Organisation,actions:Action]
-    static constraints = {
-		
+    static constraints = {		
 		priority nullable:true
 		status nullable:true
 		specialCase nullable:true
@@ -58,6 +60,9 @@ class Case {
 		dateClosed nullable:true
 		amtRecovered  nullable:true
 		bestPractice nullable:true
+		labour nullable:true
+		eviction nullable:true
+		amtRecovered nullable:true
     }
 	static mapping = {
 		table 'issue'  //def tableName = GrailsDomainBinder.getMapping(Case).table.name 

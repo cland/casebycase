@@ -161,8 +161,9 @@ def groupManagerService
 				 '/index',
 				 '/index.gsp',
 				 '/acl/**/**',
-				 'person/personlist/**',
-				 'organisation/orglist/**',
+				 '/person/personlist/**',
+				 '/case/jq_list_actions',
+				 '/organisation/orglist/**',
 				 '/**/show/**',
 				  '/**/index/**']) {
 				  new Requestmap( url: url, configAttribute:'isFullyAuthenticated()').save()

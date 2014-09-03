@@ -112,6 +112,6 @@
 	</label>
 	<g:select id="office" name="office.id" from="${com.cbc.Office.list()}" optionKey="id" required="" value="${personInstance?.office?.id}" class="many-to-one"/>
 </div>
-
-<g:render template="form_attach" model="[thisInstance:personInstance]"/>
-
+<g:if test="${params.action != 'dialogcreate' }">
+	<g:render template="form_attach" model="[thisInstance:personInstance]"/>
+</g:if>

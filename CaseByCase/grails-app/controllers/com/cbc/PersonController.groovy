@@ -8,7 +8,7 @@ import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 @Transactional(readOnly = true)
 class PersonController {
 	def autoCompleteService
-    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE", dialogsave: "POST", dialogsave: "POST"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -114,7 +114,7 @@ class PersonController {
 		}
 		attachUploadedFilesTo(personInstance)
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Person.label', default: 'Person'), personInstance.toString()])
                 redirect personInstance
             }
@@ -189,7 +189,7 @@ class PersonController {
 			pEntry = params.get('phones[' + index + ']')
 		}
 		personInstance.save flush:true
-
+		attachUploadedFilesTo(personInstance)
 		def response = [message: personInstance.toString() + " created!", id:personInstance.id]
 		render response as JSON
 	}
@@ -233,13 +233,13 @@ class PersonController {
 			pEntry = params.get('phones[' + index + ']')
 		}
 		personInstance.properties = params
-
+		
 		if (!personInstance.save(flush: true)) {			
 			def response = [message: "Error: Failed to save exam!", id:personInstance.id]
 			render response as JSON
 			return
 		}
-
+		attachUploadedFilesTo(personInstance)
 		def response = [message: personInstance.toString() + " updated!", id:personInstance.id]
 		render response as JSON
 	}

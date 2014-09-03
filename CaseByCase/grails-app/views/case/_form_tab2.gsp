@@ -36,7 +36,7 @@
 			</div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:field name="amtRecovered" type="number" value="${fieldValue(bean: caseInstance, field: 'amtRecovered')}" required=""/>
+					<g:field name="amtRecovered" type="number" value="${fieldValue(bean: caseInstance, field: 'amtRecovered')}" />
 				</span>
 			</div>
 			
