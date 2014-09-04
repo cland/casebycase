@@ -1,6 +1,12 @@
 <%@ page import="com.cbc.AgeGroup" %>
 
-
+<div class="fieldcontain ${hasErrors(bean: ageGroupInstance, field: 'name', 'error')} ">
+	<label for="name">
+		<g:message code="ageGroup.name.label" default="Name" />
+		
+	</label>
+	<g:textField name="name" value="${ageGroupInstance?.name}"/>
+</div>
 
 <div class="fieldcontain ${hasErrors(bean: ageGroupInstance, field: 'lowerAge', 'error')} required">
 	<label for="lowerAge">
@@ -26,27 +32,6 @@
 	<g:select name="gender" from="${ageGroupInstance.constraints.gender.inList}" value="${ageGroupInstance?.gender}" valueMessagePrefix="ageGroup.gender" noSelection="['': '']"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: ageGroupInstance, field: 'lastUpdatedBy', 'error')} required">
-	<label for="lastUpdatedBy">
-		<g:message code="ageGroup.lastUpdatedBy.label" default="Last Updated By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="lastUpdatedBy" type="number" value="${ageGroupInstance.lastUpdatedBy}" required=""/>
-</div>
 
-<div class="fieldcontain ${hasErrors(bean: ageGroupInstance, field: 'createdBy', 'error')} required">
-	<label for="createdBy">
-		<g:message code="ageGroup.createdBy.label" default="Created By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="createdBy" type="number" value="${ageGroupInstance.createdBy}" required=""/>
-</div>
 
-<div class="fieldcontain ${hasErrors(bean: ageGroupInstance, field: 'name', 'error')} ">
-	<label for="name">
-		<g:message code="ageGroup.name.label" default="Name" />
-		
-	</label>
-	<g:textField name="name" value="${ageGroupInstance?.name}"/>
-</div>
 

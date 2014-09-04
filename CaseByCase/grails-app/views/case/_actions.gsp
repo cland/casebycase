@@ -10,11 +10,12 @@ $(document).ready(function() {
       autowidth: true,
       height:"100%",
       datatype: "json",
-      colNames:['Action Type','Case Worker','Subject','id','<input class="edit" type="button" name="Add_Case" onClick="addActionRow(\''+cbc_params.thisId+'\',\''+cbc_params.actions.maingrid_id+'\');" id="staff_add" value="Add"/>'],
+      colNames:['Action Type','Case Worker','Subject','Status','id','<input class="edit" type="button" name="Add_Case" onClick="addActionRow(\''+cbc_params.thisId+'\',\''+cbc_params.actions.maingrid_id+'\');" id="staff_add" value="Add"/>'],
       colModel:[
         {name:'actiontype', editable:false},						        
         {name:'owner', editable:false},
-        {name:'subject', editable:false},					             
+        {name:'subject', editable:false},
+        {name:'followUpStatus', editable:false},          
         {name:'id',hidden:true},
         {name:'act',index:'act', width:100,sortable:false,search:false}
        // {name:'modid',index:'modid',editable:true, hidden:true,sortable:false,search:false,editoptions:{defaultValue:cbc_params.thisId}}

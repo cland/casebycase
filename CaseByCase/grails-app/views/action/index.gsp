@@ -29,20 +29,13 @@
 			</g:if>
 			<table>
 			<thead>
-					<tr>
-					
-						<g:sortableColumn property="date" title="${message(code: 'action.date.label', default: 'Date')}" />
-					
-						<g:sortableColumn property="actionToFrom" title="${message(code: 'action.actionToFrom.label', default: 'Action To From')}" />
-					
-						<g:sortableColumn property="description" title="${message(code: 'action.description.label', default: 'Description')}" />
-					
-						<g:sortableColumn property="subject" title="${message(code: 'action.subject.label', default: 'Subject')}" />
-					
+					<tr>					
+						<g:sortableColumn property="date" title="${message(code: 'action.date.label', default: 'Date')}" />																
+						<g:sortableColumn property="subject" title="${message(code: 'action.subject.label', default: 'Subject')}" />								
 						<g:sortableColumn property="followUpStatus" title="${message(code: 'action.followUpStatus.label', default: 'Follow Up Status')}" />
-					
-						<g:sortableColumn property="disbursementAmount" title="${message(code: 'action.disbursementAmount.label', default: 'Disbursement Amount')}" />
-					
+						<g:sortableColumn property="actionOwner" title="${message(code: 'action.actionowner.label', default: 'Assigned Agent')}" />
+						<g:sortableColumn property="actionToFrom" title="${message(code: 'action.actionToFrom.label', default: 'Action To From')}" />					
+						<g:sortableColumn property="caseNumber" title="${message(code: 'action.casenumber.label', default: 'Case Number')}" />					
 					</tr>
 				</thead>
 				<tbody>
@@ -50,17 +43,15 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${actionInstance.id}">${fieldValue(bean: actionInstance, field: "date")}</g:link></td>
-					
-						<td>${fieldValue(bean: actionInstance, field: "actionToFrom")}</td>
-					
-						<td>${fieldValue(bean: actionInstance, field: "description")}</td>
-					
 						<td>${fieldValue(bean: actionInstance, field: "subject")}</td>
-					
 						<td>${fieldValue(bean: actionInstance, field: "followUpStatus")}</td>
-					
-						<td>${fieldValue(bean: actionInstance, field: "disbursementAmount")}</td>
-					
+						<td>${actionInstance?.actionOwner}</td>
+						<td>${fieldValue(bean: actionInstance, field: "actionToFrom")}</td>					
+						<td>
+							<g:if test="${actionInstance?.thiscase}">
+							<g:link action="show" controller="case" id="${actionInstance?.thiscase?.id}">${actionInstance?.thiscase}</g:link>
+							</g:if>
+						</td>					
 					</tr>
 				</g:each>
 				</tbody>

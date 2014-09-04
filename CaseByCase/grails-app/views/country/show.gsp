@@ -6,7 +6,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'country.label', default: 'Country')}" />
 		<title><g:appTitle title=""><g:message code="default.show.label" args="[entityName]" /></g:appTitle></title>
-		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
+		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_ADMIN}" />
 		<g:render template="head"></g:render>
 	</head>
 	<body>

@@ -40,14 +40,6 @@
 	<g:select name="followUpStatus" from="${actionInstance.constraints.followUpStatus.inList}" required="" value="${actionInstance?.followUpStatus}" valueMessagePrefix="action.followUpStatus"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'disbursementAmount', 'error')} required">
-	<label for="disbursementAmount">
-		<g:message code="action.disbursementAmount.label" default="Disbursement Amount" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="disbursementAmount" type="number" value="${fieldValue(bean: actionInstance, field: 'disbursementAmount')}" required=""/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'isPrivate', 'error')} ">
 	<label for="isPrivate">
 		<g:message code="action.isPrivate.label" default="Is Private" />
@@ -79,15 +71,13 @@
 	</label>
 	<g:datePicker name="followUpDate" precision="day"  value="${actionInstance?.followUpDate}"  />
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'followers', 'error')} ">
-	<label for="followers">
-		<g:message code="action.followers.label" default="Followers" />
-		
+<div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'disbursementAmount', 'error')} required">
+	<label for="disbursementAmount">
+		<g:message code="action.disbursementAmount.label" default="Disbursement Amount" />
+		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="followers" from="${com.cbc.User.list()}" multiple="multiple" optionKey="id" size="5" value="${actionInstance?.followers*.id}" class="many-to-many"/>
+	<g:field name="disbursementAmount" type="number" value="${fieldValue(bean: actionInstance, field: 'disbursementAmount')}" required=""/>
 </div>
-
 <div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'thiscase', 'error')} required">
 	<label for="thiscase">
 		<g:message code="action.thiscase.label" default="Case" />

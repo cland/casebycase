@@ -6,7 +6,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'casePriority.label', default: 'CasePriority')}" />
 		<title><g:appTitle title=""><g:message code="default.list.label" args="[entityName]" /></g:appTitle></title>
-		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
+		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_ADMIN}" />
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
 	</head>
 	<body>
