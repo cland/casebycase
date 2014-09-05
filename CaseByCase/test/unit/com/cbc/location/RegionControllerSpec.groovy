@@ -1,8 +1,6 @@
-package com.cbc
+package com.cbc.location
 
 
-
-import com.cbc.location.Region;
 
 import grails.test.mixin.*
 import spock.lang.*

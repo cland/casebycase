@@ -1,5 +1,8 @@
 import com.cbc.*
+import com.cbc.location.*
+
 import grails.util.*
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.context.SecurityContextHolder as SCH
@@ -20,7 +23,8 @@ def groupManagerService
 		}
 		if(doBootStrap){
 			switch(Environment.getCurrent()){
-				case "DEVELOPMENT":			
+				case "DEVELOPMENT":		
+				createLocations()
 					println ("1. Create users ...")
 					createUsers("admin123")
 				//	println ("2. Login ...")
@@ -28,6 +32,7 @@ def groupManagerService
 					println ("3. Initialize Request map ...")
 					initRequestmap()
 					println ("4. Add other components ...")
+					
 					createOtherComponents()
 				//	println ("5. Logout ...")
 					// logout
@@ -191,21 +196,71 @@ def groupManagerService
 			}
 	} //end method
 	
-	private void createOtherComponents(){
-		def sa = new Country(name:"South Africa")
-		sa.addToRegions(new Region(name:"Western Cape"))
-		sa.addToRegions(new Region(name:"KZN"))
-		sa.addToRegions(new Region(name:"Limpopo"))
-		sa.addToRegions(new Region(name:"Mpumalanga"))
-		sa.addToRegions(new Region(name:"Gauteng"))
-		sa.addToRegions(new Region(name:"North West"))
-		sa.addToRegions(new Region(name:"Free State"))
-		sa.addToRegions(new Region(name:"Eastern Cape"))
-		sa.addToRegions(new Region(name:"Northern Cape"))
+	private void createLocations(){
+		println ">> Creating locations... "
+		def sa = new Country(name:"South Africa",code:"za")
+		def r = new Region(name:"Western Cape",code:"WC")
+		def d1 = new District(name:"Cape Winelands",code:"DC2")
+		def m1 = new Municipality(name:"Drakenstein",code:"WC023")
+		def mp1 = new MainPlace(name:"Saron",code:"sar034")
+		def s1 = new Suburb(name:"Saron Suburb",code:"SS1")
+		def s2 = new Suburb(name:"Saron2 suburb",code:"SS2")
+		println ("-> Suburb: " + s1 + " : -> Suburb: " + s2 + "->> MP: " + mp1)
+	//	mp1.addToSuburbs(s1)
+	//	mp1.addToSuburbs(s2)
+		def mp2 = new MainPlace(name:"Paarl",code:"paa098")
+		s1 = new Suburb(name:"Chicago",code:"chix01")
+		s2 = new Suburb(name:"Dalvale",code:"dal0342")
+	//	mp2.addToPlaces(s1)
+	//	mp2.addToPlaces(s2)
+		m1.addToPlaces(mp1)
+		m1.addToPlaces(mp2)
+		
+		def m2 = new Municipality(name:"Breede Valley",code:"WC025")
+		mp1 = new MainPlace(name:"Saron",code:"sar034")
+		s1 = new Suburb(name:"Saron Suburb",code:"SS1")
+		s2 = new Suburb(name:"Saron2 suburb",code:"SS2")
+	//	mp1.addToPlaces(s1)
+	//	mp1.addToPlaces(s2)
+		mp2 = new MainPlace(name:"Paarl",code:"paa098")
+		s1 = new Suburb(name:"Chicago",code:"chix01")
+		s2 = new Suburb(name:"Dalvale",code:"dal0342")
+	//	mp2.addToPlaces(s1)
+	//	mp2.addToPlaces(s2)
+		m2.addToPlaces(mp1)
+		m2.addToPlaces(mp2)
+		
+		
+		d1.addToMunicipalities(m1)
+		d1.addToMunicipalities(m2)
+		r.addToDistricts(d1)	
+		
+		
+		def d2 = new District(name:"West Coast",code:"DC1")
+		m1 = new Municipality(name:"Cederberg",code:"WC012")
+		m2 = new Municipality(name:"Bergrivier",code:"WC013")
+		d2.addToMunicipalities(m1)
+		d2.addToMunicipalities(m2)
+		r.addToDistricts(d1)
+		r.addToDistricts(d2)
+		sa.addToRegions(r)
+		
+		sa.addToRegions(new Region(name:"KZN",code:"ND"))
+		sa.addToRegions(new Region(name:"Limpopo",code:"LI"))
+		sa.addToRegions(new Region(name:"Mpumalanga",code:"MP"))
+		sa.addToRegions(new Region(name:"Gauteng",code:"GP"))
+		sa.addToRegions(new Region(name:"North West",code:"NW"))
+		sa.addToRegions(new Region(name:"Free State",code:"FS"))
+		sa.addToRegions(new Region(name:"Eastern Cape",code:"EC"))
+		sa.addToRegions(new Region(name:"Northern Cape",code:"NC"))
 		sa.save()
 		if(sa.hasErrors()){
-		println(sa.errors)
+			println(sa.errors)
 		}
+		
+	} //
+	
+	private void createOtherComponents(){		
 		new Race(name:"Asian").save()
 		new Race(name:"Black").save()
 		new Race(name:"Caucasian").save()

@@ -1,15 +1,13 @@
-package com.cbc
+package com.cbc.location
 
 
-
-import com.cbc.location.Region;
 
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(RegionController)
-@Mock(Region)
-class RegionControllerSpec extends Specification {
+@TestFor(MunicipalityController)
+@Mock(Municipality)
+class MunicipalityControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
@@ -23,8 +21,8 @@ class RegionControllerSpec extends Specification {
             controller.index()
 
         then:"The model is correct"
-            !model.regionInstanceList
-            model.regionInstanceCount == 0
+            !model.municipalityInstanceList
+            model.municipalityInstanceCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -32,31 +30,31 @@ class RegionControllerSpec extends Specification {
             controller.create()
 
         then:"The model is correctly created"
-            model.regionInstance!= null
+            model.municipalityInstance!= null
     }
 
     void "Test the save action correctly persists an instance"() {
 
         when:"The save action is executed with an invalid instance"
-            def region = new Region()
-            region.validate()
-            controller.save(region)
+            def municipality = new Municipality()
+            municipality.validate()
+            controller.save(municipality)
 
         then:"The create view is rendered again with the correct model"
-            model.regionInstance!= null
+            model.municipalityInstance!= null
             view == 'create'
 
         when:"The save action is executed with a valid instance"
             response.reset()
             populateValidParams(params)
-            region = new Region(params)
+            municipality = new Municipality(params)
 
-            controller.save(region)
+            controller.save(municipality)
 
         then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/region/show/1'
+            response.redirectedUrl == '/municipality/show/1'
             controller.flash.message != null
-            Region.count() == 1
+            Municipality.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -68,11 +66,11 @@ class RegionControllerSpec extends Specification {
 
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
-            def region = new Region(params)
-            controller.show(region)
+            def municipality = new Municipality(params)
+            controller.show(municipality)
 
         then:"A model is populated containing the domain instance"
-            model.regionInstance == region
+            model.municipalityInstance == municipality
     }
 
     void "Test that the edit action returns the correct model"() {
@@ -84,11 +82,11 @@ class RegionControllerSpec extends Specification {
 
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
-            def region = new Region(params)
-            controller.edit(region)
+            def municipality = new Municipality(params)
+            controller.edit(municipality)
 
         then:"A model is populated containing the domain instance"
-            model.regionInstance == region
+            model.municipalityInstance == municipality
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -96,28 +94,28 @@ class RegionControllerSpec extends Specification {
             controller.update(null)
 
         then:"A 404 error is returned"
-            response.redirectedUrl == '/region/index'
+            response.redirectedUrl == '/municipality/index'
             flash.message != null
 
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def region = new Region()
-            region.validate()
-            controller.update(region)
+            def municipality = new Municipality()
+            municipality.validate()
+            controller.update(municipality)
 
         then:"The edit view is rendered again with the invalid instance"
             view == 'edit'
-            model.regionInstance == region
+            model.municipalityInstance == municipality
 
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            region = new Region(params).save(flush: true)
-            controller.update(region)
+            municipality = new Municipality(params).save(flush: true)
+            controller.update(municipality)
 
         then:"A redirect is issues to the show action"
-            response.redirectedUrl == "/region/show/$region.id"
+            response.redirectedUrl == "/municipality/show/$municipality.id"
             flash.message != null
     }
 
@@ -126,23 +124,23 @@ class RegionControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
-            response.redirectedUrl == '/region/index'
+            response.redirectedUrl == '/municipality/index'
             flash.message != null
 
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def region = new Region(params).save(flush: true)
+            def municipality = new Municipality(params).save(flush: true)
 
         then:"It exists"
-            Region.count() == 1
+            Municipality.count() == 1
 
         when:"The domain instance is passed to the delete action"
-            controller.delete(region)
+            controller.delete(municipality)
 
         then:"The instance is deleted"
-            Region.count() == 0
-            response.redirectedUrl == '/region/index'
+            Municipality.count() == 0
+            response.redirectedUrl == '/municipality/index'
             flash.message != null
     }
 }

@@ -62,6 +62,10 @@
 			<h3><g:message code="default.lookup.menu" default="Lookup Types" /></h3>
 			<div>
 			<ul>
+					<li><g:link class="create" controller="country" action="create"><g:message code="default.new.label" args="['Country']" /></g:link></li>
+					<li><g:link class="list" controller="country" action="index"><g:message code="default.list.label" args="['Countries']" /></g:link></li>
+					<li><g:link class="create" controller="region" action="create"><g:message code="default.new.label" args="['Region']" /></g:link></li>
+					<li><g:link class="list" controller="region" action="index"><g:message code="default.list.label" args="['Regions']" /></g:link></li>
 					<li><g:link class="create" controller="caseStatus" action="create">
 							<g:message code="default.new.label" args="['Case Status']" /></g:link></li>
 					<li><g:link class="list" controller="caseStatus" action="index">
@@ -107,11 +111,8 @@
 							<g:message code="default.list.label" args="['Action Types']" />
 						</g:link>
 					</li>
-					<li><g:link class="create" controller="region" action="create">
-							<g:message code="default.new.label" args="['Region']" /></g:link></li>
-					<li><g:link class="list" controller="region" action="index">
-							<g:message code="default.list.label" args="['Region']" />
-						</g:link></li>
+					
+					
 					<li><g:link class="create" controller="race" action="create">
 							<g:message code="default.new.label" args="['Race']" /></g:link></li>
 					<li><g:link class="list" controller="race" action="index">

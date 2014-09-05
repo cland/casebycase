@@ -1,4 +1,4 @@
-package com.cbc
+package com.cbc.location
 
 import java.util.Date;
 
@@ -6,13 +6,15 @@ class Country {
 	transient cbcApiService
 	static attachmentable = true
 	String name
+	String code
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
 	static hasMany = [regions:Region]
 	static constraints = {
-		name(blank:false)
+		name(blank:false, unique:true)
+		code blank:false,unique:true
 		lastUpdatedBy nullable:true, editable:false
 		createdBy nullable:true, editable:false
 	}

@@ -2,6 +2,8 @@ package com.cbc
 
 import java.util.Date;
 
+import com.cbc.location.Region;
+
 class City {
 	transient cbcApiService
 	String name

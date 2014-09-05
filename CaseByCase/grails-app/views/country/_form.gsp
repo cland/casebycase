@@ -1,4 +1,4 @@
-<%@ page import="com.cbc.Country" %>
+<%@ page import="com.cbc.location.Country" %>
 
 
 
@@ -8,6 +8,14 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="name" required="" value="${countryInstance?.name}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: countryInstance, field: 'code', 'error')} required">
+	<label for="code">
+		<g:message code="country.code.label" default="Code" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="code" required="" value="${countryInstance?.code}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: countryInstance, field: 'lastUpdatedBy', 'error')} required">

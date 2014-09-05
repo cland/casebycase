@@ -1,16 +1,16 @@
 
-<%@ page import="com.cbc.location.Country" %>
+<%@ page import="com.cbc.location.Suburb" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'country.label', default: 'Country')}" />
+		<g:set var="entityName" value="${message(code: 'suburb.label', default: 'Suburb')}" />
 		<title><g:appTitle title=""><g:message code="default.list.label" args="[entityName]" /></g:appTitle></title>
 		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_ADMIN}" />
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
 	</head>
 	<body>
-		<a href="#list-country" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<a href="#list-suburb" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="bread-crump">
 				<span class="r-arrow"></span>
 				<g:link controller="home" action="cbc">Home</g:link>
@@ -22,7 +22,7 @@
 		<div id="status1" class="leftbar" role="complementary">
 			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
-		<div id="list-country" class="content scaffold-list" role="main">
+		<div id="list-suburb" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
@@ -31,42 +31,26 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="name" title="${message(code: 'country.name.label', default: 'Name')}" />
+						<g:sortableColumn property="name" title="${message(code: 'suburb.name.label', default: 'Name')}" />
 					
-						<g:sortableColumn property="code" title="${message(code: 'country.code.label', default: 'Code')}" />
-					
-						<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'country.lastUpdatedBy.label', default: 'Last Updated By')}" />
-					
-						<g:sortableColumn property="createdBy" title="${message(code: 'country.createdBy.label', default: 'Created By')}" />
-					
-						<g:sortableColumn property="dateCreated" title="${message(code: 'country.dateCreated.label', default: 'Date Created')}" />
-					
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'country.lastUpdated.label', default: 'Last Updated')}" />
+						<g:sortableColumn property="code" title="${message(code: 'suburb.code.label', default: 'Code')}" />
 					
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${countryInstanceList}" status="i" var="countryInstance">
+				<g:each in="${suburbInstanceList}" status="i" var="suburbInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${countryInstance.id}">${fieldValue(bean: countryInstance, field: "name")}</g:link></td>
+						<td><g:link action="show" id="${suburbInstance.id}">${fieldValue(bean: suburbInstance, field: "name")}</g:link></td>
 					
-						<td>${fieldValue(bean: countryInstance, field: "code")}</td>
-					
-						<td>${fieldValue(bean: countryInstance, field: "lastUpdatedBy")}</td>
-					
-						<td>${fieldValue(bean: countryInstance, field: "createdBy")}</td>
-					
-						<td><g:formatDate date="${countryInstance.dateCreated}" /></td>
-					
-						<td><g:formatDate date="${countryInstance.lastUpdated}" /></td>
+						<td>${fieldValue(bean: suburbInstance, field: "code")}</td>
 					
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate total="${countryInstanceCount ?: 0}" />
+				<g:paginate total="${suburbInstanceCount ?: 0}" />
 			</div>
 		</div>
 		<script>

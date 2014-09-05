@@ -1,11 +1,11 @@
-<%@ page import="com.cbc.Country" %>
+<%@ page import="com.cbc.location.Country" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'country.label', default: 'Country')}" />
 		<title><g:appTitle title=""><g:message code="default.edit.label" args="[entityName]" /></g:appTitle></title>
-		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_ADMIN}" /> 
+		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_ADMIN}" />
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
 	</head>
 	<body>

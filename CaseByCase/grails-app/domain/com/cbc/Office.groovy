@@ -3,6 +3,8 @@ package com.cbc
 import java.util.Date;
 import java.util.List;
 
+import com.cbc.location.Region;
+
 
 class Office {
 	transient groupManagerService

@@ -1,5 +1,5 @@
 
-<%@ page import="com.cbc.Region" %>
+<%@ page import="com.cbc.location.Region" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,7 +7,7 @@
 		<g:set var="entityName" value="${message(code: 'region.label', default: 'Region')}" />
 		<title><g:appTitle title=""><g:message code="default.show.label" args="[entityName]" /></g:appTitle></title>
 		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_ADMIN}" />
-		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
+		<g:render template="head"></g:render>
 	</head>
 	<body>
 		<a href="#show-region" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -41,6 +41,15 @@
 								<span id="name-label" class="property-label"><g:message code="region.name.label" default="Name" /></span>
 								
 									<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${regionInstance}" field="name"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${regionInstance?.code}">
+							<li class="fieldcontain">
+								<span id="code-label" class="property-label"><g:message code="region.code.label" default="Code" /></span>
+								
+									<span class="property-value" aria-labelledby="code-label"><g:fieldValue bean="${regionInstance}" field="code"/></span>
 								
 							</li>
 							</g:if>
@@ -88,6 +97,17 @@
 								<span id="dateCreated-label" class="property-label"><g:message code="region.dateCreated.label" default="Date Created" /></span>
 								
 									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${regionInstance?.dateCreated}" /></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${regionInstance?.districts}">
+							<li class="fieldcontain">
+								<span id="districts-label" class="property-label"><g:message code="region.districts.label" default="Districts" /></span>
+								
+									<g:each in="${regionInstance.districts}" var="d">
+									<span class="property-value" aria-labelledby="districts-label"><g:link controller="district" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></span>
+									</g:each>
 								
 							</li>
 							</g:if>

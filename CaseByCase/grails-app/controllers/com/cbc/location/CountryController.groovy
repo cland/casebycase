@@ -1,11 +1,8 @@
-package com.cbc
+package com.cbc.location
 
 
 
 import static org.springframework.http.HttpStatus.*
-
-import com.cbc.location.Country;
-
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)

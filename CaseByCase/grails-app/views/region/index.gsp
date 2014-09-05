@@ -1,5 +1,5 @@
 
-<%@ page import="com.cbc.Region" %>
+<%@ page import="com.cbc.location.Region" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -33,6 +33,8 @@
 					
 						<g:sortableColumn property="name" title="${message(code: 'region.name.label', default: 'Name')}" />
 					
+						<g:sortableColumn property="code" title="${message(code: 'region.code.label', default: 'Code')}" />
+					
 						<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'region.lastUpdatedBy.label', default: 'Last Updated By')}" />
 					
 						<g:sortableColumn property="createdBy" title="${message(code: 'region.createdBy.label', default: 'Created By')}" />
@@ -40,8 +42,6 @@
 						<th><g:message code="region.country.label" default="Country" /></th>
 					
 						<g:sortableColumn property="dateCreated" title="${message(code: 'region.dateCreated.label', default: 'Date Created')}" />
-					
-						<g:sortableColumn property="lastUpdated" title="${message(code: 'region.lastUpdated.label', default: 'Last Updated')}" />
 					
 					</tr>
 				</thead>
@@ -51,6 +51,8 @@
 					
 						<td><g:link action="show" id="${regionInstance.id}">${fieldValue(bean: regionInstance, field: "name")}</g:link></td>
 					
+						<td>${fieldValue(bean: regionInstance, field: "code")}</td>
+					
 						<td>${fieldValue(bean: regionInstance, field: "lastUpdatedBy")}</td>
 					
 						<td>${fieldValue(bean: regionInstance, field: "createdBy")}</td>
@@ -58,8 +60,6 @@
 						<td>${fieldValue(bean: regionInstance, field: "country")}</td>
 					
 						<td><g:formatDate date="${regionInstance.dateCreated}" /></td>
-					
-						<td><g:formatDate date="${regionInstance.lastUpdated}" /></td>
 					
 					</tr>
 				</g:each>

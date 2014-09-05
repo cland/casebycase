@@ -1,5 +1,5 @@
 
-<%@ page import="com.cbc.Country" %>
+<%@ page import="com.cbc.location.Country" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -41,6 +41,15 @@
 								<span id="name-label" class="property-label"><g:message code="country.name.label" default="Name" /></span>
 								
 									<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${countryInstance}" field="name"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${countryInstance?.code}">
+							<li class="fieldcontain">
+								<span id="code-label" class="property-label"><g:message code="country.code.label" default="Code" /></span>
+								
+									<span class="property-value" aria-labelledby="code-label"><g:fieldValue bean="${countryInstance}" field="code"/></span>
 								
 							</li>
 							</g:if>
