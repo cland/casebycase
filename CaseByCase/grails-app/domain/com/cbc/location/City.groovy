@@ -1,8 +1,6 @@
-package com.cbc
+package com.cbc.location
 
 import java.util.Date;
-
-import com.cbc.location.Region;
 
 class City {
 	transient cbcApiService
