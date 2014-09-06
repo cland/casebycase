@@ -1,24 +1,26 @@
 
 package com.cbc
 
-class Labour {
+class WorkHours {
 	transient cbcApiService
 	static attachmentable = true
-	String name
-	WorkHours workhours
-	LeaveDays leavedays
+	long overtime
+	long daily
+	long weekend
+	long holiday
+	static belongsTo = [labour:Labour]
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
-	static belongsTo=[thiscase:Case]
 	static transients = ["createdByName","lastUpdatedByName"]
     static constraints = {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
 	}
+	
 	String toString(){
-		"${name}"
+		"Overtime: ${overtime}, Daily: ${daily}"
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
@@ -48,6 +50,4 @@ class Labour {
 	 }
 	
 } //end class
-
-
 import java.util.Date
