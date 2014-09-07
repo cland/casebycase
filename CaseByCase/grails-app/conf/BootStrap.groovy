@@ -31,7 +31,7 @@ def groupManagerService
 				//	loginAsAdmin()
 					println ("3. Initialize Request map ...")
 					initRequestmap()
-					println ("4. Add other components ...")
+					println ("4. Add other components of the app ...")
 					
 					createOtherComponents()
 				//	println ("5. Logout ...")
