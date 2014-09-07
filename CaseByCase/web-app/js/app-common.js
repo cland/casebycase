@@ -181,3 +181,47 @@ var cbc_datepickers = {
 			}	
 		}		
 } //end cland_datepicker
+
+var cbc_location = {
+		load_districts: function comboboxDistricts(data){			
+			//this.combobox_options(data,"#district","--select district--","",true)
+			var _el = $("select#district");
+			_el.empty();
+			_el.append( $("<option>")
+				    .val("")
+				    .html("--select district--")
+				);
+			if(!$.isEmptyObject(data)){
+									
+				$.each(data,function(index,item){					
+					_el.append( $("<option>")
+					    .val(item.id)
+					    .html(item.name)
+					);
+				});
+			}
+		},
+		load_municipalities: function comboboxMunicipalities(data){
+			
+		},
+		combobox_options: function c_options(data,combobox_id,select0name,select0value,refresh){
+			
+			var _select = $("select" + combobox_id);
+			if(refresh) _select.empty();
+			_select.append( $("<option>")
+				    .val(select0value)
+				    .html(select0name)
+				);
+			if(!$.isEmptyObject(data)){
+									
+				$.each(data,function(index,item){					
+					_select.append( $("<option>")
+					    .val(item.id)
+					    .html(item.name)
+					);
+				});
+			}else{
+				//alert("No data returned")
+			}
+		}
+} //end location helper namespace

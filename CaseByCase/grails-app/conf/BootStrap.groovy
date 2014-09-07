@@ -169,6 +169,8 @@ def groupManagerService
 				 '/person/personlist/**',
 				 '/case/jq_list_actions',
 				 '/organisation/orglist/**',
+				 '/country/**',
+				 '/region/**',
 				 '/**/show/**',
 				  '/**/index/**']) {
 				  new Requestmap( url: url, configAttribute:'isFullyAuthenticated()').save()

@@ -102,6 +102,40 @@
 							</g:if>
 						
 						</ol>
+				<fieldset><legend>Example</legend>
+			<div class="table">
+				<div class="row">
+					<div class="cell">Region:</div>
+					<div class="cell">
+					<g:select id="region" name="region.id" from="${com.cbc.location.Region.list()}" 
+						optionKey="id" required="" value="${districtInstance?.region?.id}" class="many-to-one"
+						onchange="${remoteFunction(
+			            controller:'country', 
+			            action:'getDistricts', 
+			            params:'\'id=\' + escape(this.value)', 
+			            onSuccess:'testD(data)')}"
+					/>
+					</div>					
+				</div>
+				<div class="row">
+				<div class="cell">District:</div>
+					<div class="cell"><g:select name="district" from="['-select region-':'']" id="discrict"></g:select></div>					
+				</div>
+				<div class="row">
+					<div class="cell">Municipality:</div>
+					<div class="cell"></div>
+				</div>
+				<div class="row">
+					<div class="cell">Main Place:</div>
+					<div class="cell"></div>
+				</div>
+				<div class="row">
+					<div class="cell">Suburb/Village:</div>
+					<div class="cell"></div>
+				</div>
+			</div>
+			</fieldset>
+					
 				</div>
 				
 				<div id="tab-2">
@@ -139,7 +173,26 @@
 									}
 						});		                
 			});  
+
+			function testD(data){
+				//cbc_location.load_districts
+				var _el = $("select#district");
+				_el.empty();
+				$("select#district").append( $("<option>")
+					    .val("")
+					    .html("--select district--")
+					);
+				if(!$.isEmptyObject(data)){							
+					$.each(data,function(index,item){	
+						alert(item.name)				
+						_el.append( $("<option>")
+						    .val(item.id)
+						    .html(item.name)
+						);
+					});
+				}
+			}
 		</script>	
-</script>		
+		
 	</body>
 </html>

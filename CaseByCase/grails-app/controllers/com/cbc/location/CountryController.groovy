@@ -1,8 +1,7 @@
 package com.cbc.location
 
-
-
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -101,4 +100,27 @@ class CountryController {
             '*'{ render status: NOT_FOUND }
         }
     }
-}
+	
+	/** SUPPORTING ACTIONS **/
+	def getRegions = {
+		def country = Country.get(params.id)
+		render country?.regions as JSON
+	} //end getRegions
+	def getDistricts = {
+		def region = Region.get(params.id)
+		render region?.districts as JSON
+	} //end getDistricts
+	def getMunicipalities = {
+		def district = District.get(params.id)
+		render district?.municipalities as JSON
+	} //end Municipalities
+	def getMainPlaces = {
+		def municipality = Municipality.get(params.id)
+		render municipality?.places as JSON
+	} //
+	def getSuburbs = {
+		def mainplace = MainPlace.get(params.id)
+		render mainplace?.suburbs as JSON
+	} //
+	
+} //end class
