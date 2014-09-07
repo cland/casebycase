@@ -18,7 +18,7 @@ def groupManagerService
 		if(userlist?.size() < 1){
 			println("BootStrap >> ON!")
 			doBootStrap = true
-		}else{
+		}else{ 
 		println("BootStrap >> off!")
 		}
 		if(doBootStrap){
