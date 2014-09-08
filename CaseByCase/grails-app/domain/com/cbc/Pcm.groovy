@@ -15,6 +15,7 @@ class Pcm {
 	String name		
 	AgeGroup agegroup
 	Region region
+	Location location
 	
 	//Case
 	String description
@@ -29,6 +30,7 @@ class Pcm {
     static constraints = {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
+		location nullable:true
 	}
 	String toString(){
 		"${name} ${sender}"
@@ -62,5 +64,6 @@ class Pcm {
 	
 } //end class
 import java.util.Date
+import com.cbc.location.Location
 import com.cbc.location.Region;
 

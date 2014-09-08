@@ -8,9 +8,11 @@ class Location {
 	Municipality municipality
 	MainPlace mainplace
 	Suburb suburb
-	
+	String township
+	String description
     static constraints = {
-		
+		township blank:true, nullable:true
+		description blank:true,nullable:true
 	}
 	String toString(){
 		""

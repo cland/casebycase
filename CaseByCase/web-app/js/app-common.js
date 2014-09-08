@@ -200,10 +200,10 @@ var cbc_location = {
 				this.reset_options(subfields)
 			}
 		},
-		reset_options: function r_options(subfields){
-			var _f = subfiels.split(",")
-			$.each(_f,function(value){
-				alert("reset: " + value)
+		reset_options: function r_options(subfields){	
+			var _f = subfields.split(",")
+			$.each(_f,function(index,value){
+				$("#" + value).empty().append("<option value=''>--</option>");
 			})
 		}
 } //end location helper namespace

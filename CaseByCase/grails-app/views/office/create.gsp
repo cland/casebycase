@@ -14,7 +14,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					new office
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">

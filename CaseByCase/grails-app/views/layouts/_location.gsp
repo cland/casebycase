@@ -25,7 +25,7 @@
 		<div class="row">
 			<div class="cell">Municipality:</div>
 			<div class="cell">
-				<select name="location.municipality" id="muni_options" onchange="onLocationChange(this,'getMainPlaces','suburb_options')">
+				<select name="location.municipality" id="muni_options" onchange="onLocationChange(this,'getMainPlaces','mainplace_options','suburb_options')">
 					<option value="">--</option>
 				</select>
 			</div>
@@ -33,7 +33,7 @@
 		<div class="row">
 			<div class="cell">Main Place:</div>
 			<div class="cell">
-				<select name="location.mainplace" id="mainplace_options" onchange="onLocationChange(this,'getSuburbs','')">
+				<select name="location.mainplace" id="mainplace_options" onchange="onLocationChange(this,'getSuburbs','suburb_options','')">
 					<option value="">--</option>
 				</select>
 			</div>

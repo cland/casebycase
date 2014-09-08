@@ -2,6 +2,7 @@ package com.cbc
 import org.apache.commons.collections.list.LazyList;
 import org.apache.commons.collections.FactoryUtils;
 
+import com.cbc.location.Location
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -32,7 +33,7 @@ class Person {
 	
 	/** Tab3: Contact Details **/
 	List phones // = new ArrayList()
-	
+	Location location
 	/** Tab4: Employment Profile **/
 	String empHowJobFound
 	String empHowJobFoundDesc
@@ -80,6 +81,7 @@ class Person {
 		history nullable:true,editable:false
 		email nullable:true,email:true
 		citizenship nullable:true 
+		location nullable:true
     }
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()

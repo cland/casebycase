@@ -102,7 +102,7 @@
 							</g:if>
 						
 						</ol>
-			<fieldset><legend>Example</legend>
+			<fieldset><legend>Location Example</legend>
 			 <g:render template="../layouts/location" bean="${locationInstance}" var="locationInstance" model="[stage:'stage1']"></g:render>
 			</fieldset>
 					

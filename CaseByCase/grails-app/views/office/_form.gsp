@@ -62,9 +62,9 @@
 		<g:message code="country.region.label" default="Region" />
 		
 	</label>
-	<span class="property-value" aria-labelledby="office-label">
-		<g:select id="region" name="region.id" from="${com.cbc.Region.list()}" optionKey="id" required="" value="${officeInstance?.region?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
-	</span>
+	<fieldset><legend>Geographical Location</legend>
+		<g:render template="../layouts/location" bean="${officeInstance?.location}" var="locationInstance" model="[stage:'stage1']"></g:render>
+	</fieldset>
 
 </div>
 

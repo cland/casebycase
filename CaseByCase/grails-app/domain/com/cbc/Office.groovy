@@ -3,6 +3,7 @@ package com.cbc
 import java.util.Date;
 import java.util.List;
 
+import com.cbc.location.Location;
 import com.cbc.location.Region;
 
 
@@ -19,9 +20,7 @@ class Office {
 	String contactNumber
 	String faxNumber
 	String cellphoneNumber
-	//MunicipalAreaDefinition location
-	Region region
-	String locationDesc
+	Location location
 	
 	/** Tab3: Admin Tracking Information **/
 	long createdBy
@@ -33,7 +32,7 @@ class Office {
 	
 	static belongsTo = []
 	static hasMany = [cases: Case, staff:Person, affiliates:Organisation,events:Event]
-	static transients = ["officeGroups"]
+	static transients = ["officeGroups","region"]
 	
     static constraints = {
 		name unique:true, blank:false
@@ -46,8 +45,7 @@ class Office {
 		lastUpdatedBy nullable:true, editable:false
 		createdBy nullable:true, editable:false
 		history nullable:true,editable:false
-		locationDesc nullable:true,widget:'textarea'
-		region nullable:true
+		location nullable:true
     }
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
@@ -66,6 +64,9 @@ class Office {
 	def onLoad = {
 		// your code goes here
 	}
+	String getRegion(){
+		return location?.region?.name
+	}
 	String toString(){
 		return name + " (" + code + ")"
 	}
@@ -74,7 +75,7 @@ class Office {
 		label:name + " (" + Status + ") | " + contactNumber + " | " + email,
 		value:id,
 		office:this,
-		category:(region?.name ? region.name : "Unknown")]
+		category:(location?.region?.name ? location?.region.name : "Unknown")]
 	}
 	List<RoleGroup> getOfficeGroups(){
 		return groupManagerService.getOfficeGroups(this)
