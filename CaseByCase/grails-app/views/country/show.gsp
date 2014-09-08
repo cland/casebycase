@@ -113,25 +113,41 @@
 			            controller:'country', 
 			            action:'getDistricts', 
 			            params:'\'id=\' + escape(this.value)', 
-			            onSuccess:'testD(data)')}"
+			            onSuccess:'cbc_location.load_districts(data,\'district_options\')')}"
 					/>
 					</div>					
 				</div>
 				<div class="row">
 				<div class="cell">District:</div>
-					<div class="cell"><g:select name="district" from="['-select region-':'']" id="discrict"></g:select></div>					
+					<div class="cell">
+						<select name="district" id="district_options" onchange="onLocationChange(this,'getMunicipalities','muni_options')">
+							<option value="">--</option>
+						</select>
+					</div>					
 				</div>
 				<div class="row">
 					<div class="cell">Municipality:</div>
-					<div class="cell"></div>
+					<div class="cell">
+						<select name="municipality" id="muni_options" onchange="onLocationChange(this,'getMainPlaces','mainplace_options')">
+							<option value="">--</option>
+						</select>
+					</div>
 				</div>
 				<div class="row">
 					<div class="cell">Main Place:</div>
-					<div class="cell"></div>
+					<div class="cell">
+						<select name="mainplace" id="mainplace_options" onchange="onLocationChange(this,'getSuburbs','suburb_options')">
+							<option value="">--</option>
+						</select>
+					</div>
 				</div>
 				<div class="row">
 					<div class="cell">Suburb/Village:</div>
-					<div class="cell"></div>
+					<div class="cell">
+						<select name="suburb" id="suburb_options">
+							<option value="">--</option>
+						</select>
+					</div>
 				</div>
 			</div>
 			</fieldset>
@@ -152,7 +168,8 @@
 			</g:form>
 		</div>
 		<script>
-			$(document).ready(function() {		
+			$(document).ready(function() {	
+	
 				$("#accordion" ).accordion({ active: cbc_params.active_sidebar() });
 			
 				$("#tabs").tabs(
@@ -174,23 +191,20 @@
 						});		                
 			});  
 
-			function testD(data){
-				//cbc_location.load_districts
-				var _el = $("select#district");
-				_el.empty();
-				$("select#district").append( $("<option>")
-					    .val("")
-					    .html("--select district--")
-					);
-				if(!$.isEmptyObject(data)){							
-					$.each(data,function(index,item){	
-						alert(item.name)				
-						_el.append( $("<option>")
-						    .val(item.id)
-						    .html(item.name)
-						);
-					});
-				}
+			function onLocationChange(el,action_name,field_id){
+				var _link ="${resource()}/country/" + action_name;					
+				var _id= el.value;
+				$.ajax({
+					url : _link, 
+					dataType: "json",
+					data : 'id=' + _id,
+					success : function(data) {
+						cbc_location.load_municipalities(data,field_id);
+					},
+					error : function() { // handle server errors
+						alert("Unable to retrieve items");
+					}
+				});
 			}
 		</script>	
 		

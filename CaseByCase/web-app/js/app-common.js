@@ -183,45 +183,22 @@ var cbc_datepickers = {
 } //end cland_datepicker
 
 var cbc_location = {
-		load_districts: function comboboxDistricts(data){			
-			//this.combobox_options(data,"#district","--select district--","",true)
-			var _el = $("select#district");
-			_el.empty();
-			_el.append( $("<option>")
-				    .val("")
-				    .html("--select district--")
-				);
-			if(!$.isEmptyObject(data)){
-									
-				$.each(data,function(index,item){					
-					_el.append( $("<option>")
-					    .val(item.id)
-					    .html(item.name)
-					);
-				});
-			}
+		load_districts: function comboboxDistricts(data,field_id){			
+			this.combobox_options(data,field_id,"--select district--","",true)			
 		},
-		load_municipalities: function comboboxMunicipalities(data){
-			
+		load_municipalities: function comboboxMunicipalities(data,field_id){
+			this.combobox_options(data,field_id,"--select municipalities--","",true)
 		},
-		combobox_options: function c_options(data,combobox_id,select0name,select0value,refresh){
-			
-			var _select = $("select" + combobox_id);
-			if(refresh) _select.empty();
-			_select.append( $("<option>")
-				    .val(select0value)
-				    .html(select0name)
-				);
+		combobox_options: function c_options(data,combobox_id,select0name,select0value,refresh){			
+			var _el = $("#" + combobox_id);
+			if(refresh) _el.empty();			
 			if(!$.isEmptyObject(data)){
-									
-				$.each(data,function(index,item){					
-					_select.append( $("<option>")
-					    .val(item.id)
-					    .html(item.name)
-					);
+				_el.append("<option value='" +select0value + "'>" + select0name + "</option>");
+				$.each(data,function(index,item){							
+					_el.append($("<option />").prop("value", item.id).text(item.name));				
 				});
 			}else{
-				//alert("No data returned")
+				_el.append("<option value=''>-- No options found --</option>");
 			}
 		}
 } //end location helper namespace
