@@ -15,6 +15,7 @@ class CountryController {
     }
 
     def show(Country countryInstance) {
+		
         respond countryInstance
     }
 

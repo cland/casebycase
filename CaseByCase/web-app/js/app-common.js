@@ -183,13 +183,10 @@ var cbc_datepickers = {
 } //end cland_datepicker
 
 var cbc_location = {
-		load_districts: function comboboxDistricts(data,field_id){			
-			this.combobox_options(data,field_id,"--select district--","",true)			
-		},
-		load_municipalities: function comboboxMunicipalities(data,field_id){
-			this.combobox_options(data,field_id,"--select municipalities--","",true)
-		},
-		combobox_options: function c_options(data,combobox_id,select0name,select0value,refresh){			
+		load_districts: function comboboxDistricts(data,field_id,subfields){			
+			this.combobox_options(data,field_id,"--select district--","",true,subfields)			
+		},		
+		combobox_options: function c_options(data,combobox_id,select0name,select0value,refresh,subfields){			
 			var _el = $("#" + combobox_id);
 			if(refresh) _el.empty();			
 			if(!$.isEmptyObject(data)){
@@ -199,6 +196,14 @@ var cbc_location = {
 				});
 			}else{
 				_el.append("<option value=''>-- No options found --</option>");
+				//set reset all sub options
+				this.reset_options(subfields)
 			}
+		},
+		reset_options: function r_options(subfields){
+			var _f = subfiels.split(",")
+			$.each(_f,function(value){
+				alert("reset: " + value)
+			})
 		}
 } //end location helper namespace

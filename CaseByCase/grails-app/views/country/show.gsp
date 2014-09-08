@@ -102,54 +102,8 @@
 							</g:if>
 						
 						</ol>
-				<fieldset><legend>Example</legend>
-			<div class="table">
-				<div class="row">
-					<div class="cell">Region:</div>
-					<div class="cell">
-					<g:select id="region" name="region.id" from="${com.cbc.location.Region.list()}" 
-						optionKey="id" required="" value="${districtInstance?.region?.id}" class="many-to-one"
-						onchange="${remoteFunction(
-			            controller:'country', 
-			            action:'getDistricts', 
-			            params:'\'id=\' + escape(this.value)', 
-			            onSuccess:'cbc_location.load_districts(data,\'district_options\')')}"
-					/>
-					</div>					
-				</div>
-				<div class="row">
-				<div class="cell">District:</div>
-					<div class="cell">
-						<select name="district" id="district_options" onchange="onLocationChange(this,'getMunicipalities','muni_options')">
-							<option value="">--</option>
-						</select>
-					</div>					
-				</div>
-				<div class="row">
-					<div class="cell">Municipality:</div>
-					<div class="cell">
-						<select name="municipality" id="muni_options" onchange="onLocationChange(this,'getMainPlaces','mainplace_options')">
-							<option value="">--</option>
-						</select>
-					</div>
-				</div>
-				<div class="row">
-					<div class="cell">Main Place:</div>
-					<div class="cell">
-						<select name="mainplace" id="mainplace_options" onchange="onLocationChange(this,'getSuburbs','suburb_options')">
-							<option value="">--</option>
-						</select>
-					</div>
-				</div>
-				<div class="row">
-					<div class="cell">Suburb/Village:</div>
-					<div class="cell">
-						<select name="suburb" id="suburb_options">
-							<option value="">--</option>
-						</select>
-					</div>
-				</div>
-			</div>
+			<fieldset><legend>Example</legend>
+			 <g:render template="../layouts/location" bean="${locationInstance}" var="locationInstance" model="[stage:'stage1']"></g:render>
 			</fieldset>
 					
 				</div>
@@ -190,22 +144,7 @@
 									}
 						});		                
 			});  
-
-			function onLocationChange(el,action_name,field_id){
-				var _link ="${resource()}/country/" + action_name;					
-				var _id= el.value;
-				$.ajax({
-					url : _link, 
-					dataType: "json",
-					data : 'id=' + _id,
-					success : function(data) {
-						cbc_location.load_municipalities(data,field_id);
-					},
-					error : function() { // handle server errors
-						alert("Unable to retrieve items");
-					}
-				});
-			}
+			
 		</script>	
 		
 	</body>
