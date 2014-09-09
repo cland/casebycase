@@ -14,7 +14,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					new office
+					New office
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">

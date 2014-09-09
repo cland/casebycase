@@ -242,7 +242,7 @@
 			<div class="cell"><label id="">Case worker</label></div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					-- Case worker (User) lookup field here --
+					<g:select id="assignedTo" name="assignedto.id" from="${com.cbc.User.list()}" optionKey="id" required="" value="${caseInstance?.assignedTo?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
 				</span>
 			</div>
 		</div>
@@ -250,13 +250,13 @@
 			<div class="cell"><label id="">Case respondent</label></div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					-- Case respondent field here --
+					<g:textField name="respondent" value="${caseInstance?.respondent }"/>
 				</span>
 			</div>
-			<div class="cell"><label id="" for="thisevent"><g:message code="case.thisevent.label" default="Event" /> </label></div>
+			<div class="cell"><label id="" for=""></div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:select id="thisevent" name="thisevent.id" from="${com.cbc.Event.list()}" optionKey="id" value="${caseInstance?.thisevent?.id}" class="many-to-one" noSelection="['null': '']"/>
+					
 				</span>
 			</div>
 		</div>
@@ -437,6 +437,7 @@ function addPersonClient(_id){
   });
 
   
+
 </script>
 
 

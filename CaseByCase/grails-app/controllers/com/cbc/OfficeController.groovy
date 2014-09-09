@@ -76,7 +76,17 @@ class OfficeController {
             respond officeInstance.errors, view:'edit'
             return
         }
-
+		//Save location information
+		try{
+			Location location = cbcApiService.saveLocation(params)
+			officeInstance.location = location
+		}catch(Exception e){
+			println("Failed to save new location..."  + e)
+			flash.message = "Error: Failed to save login details due to an error saving person details."
+			
+			render(view: "create", model: [officeInstance: officeInstance])
+			return
+		}
         officeInstance.save flush:true
 		if(params?.gengrps == true){
 			//generate groups

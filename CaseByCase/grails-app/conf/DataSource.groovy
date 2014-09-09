@@ -17,7 +17,7 @@ environments {
         dataSource {
             username = "root"
 			password = "Cland001"
-            dbCreate = "create" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:mysql://localhost:3306/cbc_dev?autoreconnect=true"
         }
     }

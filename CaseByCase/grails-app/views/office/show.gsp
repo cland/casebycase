@@ -18,7 +18,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Office: ${officeInstance?.name }
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -53,18 +53,7 @@
 								<div class="cell"><label id="status-label"><g:message code="office.status.label" default="Status" /></label></div>
 								<div class="cell"><span class="property-value" aria-labelledby="status-label"><g:fieldValue bean="${officeInstance}" field="status"/></span></div>
 							</div>
-							<div class="row">
-								<div class="cell"><label id="contactNumber-label" ><g:message code="office.contactNumber.label" default="Contact Number" /></label></div>
-								<div class="cell"><span class="property-value" aria-labelledby="contactNumber-label"><g:fieldValue bean="${officeInstance}" field="contactNumber"/></span></div>
-							</div>
-							<div class="row">
-								<div class="cell"><label id="cellphoneNumber-label"><g:message code="office.cellphoneNumber.label" default="Cellphone Number" /></label></div>
-								<div class="cell"><span class="property-value" aria-labelledby="cellphoneNumber-label"><g:fieldValue bean="${officeInstance}" field="cellphoneNumber"/></span></div>
-							</div>
-							<div class="row">
-								<div class="cell"><label id="faxNumber-label"><g:message code="office.faxNumber.label" default="Fax Number" /></label></div>
-								<div class="cell"><span class="property-value" aria-labelledby="faxNumber-label"><g:fieldValue bean="${officeInstance}" field="faxNumber"/></span></div>
-							</div>
+							
 							<div class="row">
 								<div class="cell"><label id="affiliates-label"><g:message code="office.affiliates.label" default="Affiliates" /></label></div>
 								<div class="cell"><g:each in="${officeInstance.affiliates}" var="a">
@@ -80,33 +69,21 @@
 					</div>
 					</fieldset>
 					<br/>
-					<fieldset><legend>CONTACT NUMBERS</legend></fieldset>
-					<br/>
-					<fieldset><legend>Geographical Location</legend>
-						<g:render template="../layouts/location" bean="${locationInstance}" var="locationInstance" model="[mode:'read']"></g:render>
-					</fieldset>
-					<br/>
-					<fieldset><legend>POSTAL ADDRESS</legend>
-						<div class="table">
-								<div class="row">
-									<div class="cell"><label>Line 1:</label></div>
-									<div class="cell">-- line 1 field --</div>
-								</div>
-								<div class="row">
-									<div class="cell"><label>Line 2:</label></div>
-									<div class="cell">-- line 2 field --</div>
-								</div>
-								<div class="row">
-									<div class="cell"><label>Town/City:</label></div>
-									<div class="cell">-- town/city field --</div>
-								</div>
-								<div class="row">
-									<div class="cell"><label>Postal Code:</label></div>
-									<div class="cell">-- line 1 field --</div>
-								</div>
+					<fieldset><legend>CONTACT NUMBERS</legend>
+						<div class="row">
+							<div class="cell"><label id="contactNumber-label" ><g:message code="office.contactNumber.label" default="Contact Number" /></label></div>
+							<div class="cell"><span class="property-value" aria-labelledby="contactNumber-label"><g:fieldValue bean="${officeInstance}" field="contactNumber"/></span></div>
+						</div>
+						<div class="row">
+							<div class="cell"><label id="cellphoneNumber-label"><g:message code="office.cellphoneNumber.label" default="Cellphone Number" /></label></div>
+							<div class="cell"><span class="property-value" aria-labelledby="cellphoneNumber-label"><g:fieldValue bean="${officeInstance}" field="cellphoneNumber"/></span></div>
+						</div>
+						<div class="row">
+							<div class="cell"><label id="faxNumber-label"><g:message code="office.faxNumber.label" default="Fax Number" /></label></div>
+							<div class="cell"><span class="property-value" aria-labelledby="faxNumber-label"><g:fieldValue bean="${officeInstance}" field="faxNumber"/></span></div>
 						</div>
 					</fieldset>
-					<br/>
+										
 					<fieldset><legend>Geographical Location</legend>
 							<g:render template="../layouts/location" bean="${officeInstance?.location}" var="locationInstance" model="[mode:'read']"></g:render>
 					</fieldset>
@@ -166,7 +143,9 @@
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${officeInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					<g:link class="add" controller="user" action="create" params="['office.id': officeInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'case.label', default: 'Staff')])}</g:link>
 					<g:link class="add" controller="case" action="create" params="['office.id': officeInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'case.label', default: 'Case')])}</g:link>
+					
 				</fieldset>
 			</g:form>
 		</div>
@@ -210,7 +189,7 @@
 			      autowidth: true,
 			      height:"100%",
 			      datatype: "json",
-			      colNames:['Name','Role(s)','Login Name','id','<input class="edit" type="button" name="Add_Staff" onClick="addStaffRow(\''+cbc_params.thisId+'\',\''+cbc_params.staff_maingrid_id+'\');" id="staff_add" value="Add"/>'],
+			      colNames:['Name','Role(s)','Login Name','id','<input style="display:none" class="edit" type="button" name="Add_Staff" onClick="return false;addStaffRow(\''+cbc_params.thisId+'\',\''+cbc_params.staff_maingrid_id+'\');" id="staff_add" value=""/>'],
 			      colModel:[
 			        {name:'fullname', editable:false},						        
 			        {name:'roles', editable:false},
@@ -297,9 +276,9 @@
 					  	
 					  }
 					  function addStaffRow(person_id, grid_id){
-					  	 var $dialog = $('<div></div>')
-			           
-			                        .load('../user/create?person.id=' + person_id)
+						 var _link = "${g.createLink(controller:'user',action:'create')}/persion.id=" + person_id;
+					  	 var $dialog = $('<div></div>')			           				
+			                        .load(_link)
 			                        .dialog({
 			                            autoOpen: false,
 			                            width:350,
