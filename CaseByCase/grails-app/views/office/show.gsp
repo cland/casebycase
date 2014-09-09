@@ -82,31 +82,8 @@
 					<br/>
 					<fieldset><legend>CONTACT NUMBERS</legend></fieldset>
 					<br/>
-					<fieldset><legend>PHYSICAL ADDRESS</legend>
-						<div class="table">
-							<div class="row">
-								<div class="cell"><label>Line 1:</label></div>
-								<div class="cell"><span class="property-value">-- line 1 field --</span></div>
-							</div>
-							<div class="row">
-								<div class="cell"><label>Line 2:</label></div>
-								<div class="cell">-- line 2 field --</div>
-							</div>
-							
-							<div class="row">
-								<div class="cell"><label><g:message code="country.region.label" default="Region" /></label></div>
-								<div class="cell">-- region --</div>
-							</div>
-
-							<div class="row">
-								<div class="cell"><label>Town/City:</label></div>
-								<div class="cell">-- town/city field --</div>
-							</div>
-							<div class="row">
-								<div class="cell"><label>Postal Code:</label></div>
-								<div class="cell">-- line 1 field --</div>
-							</div>
-						</div>
+					<fieldset><legend>Geographical Location</legend>
+						<g:render template="../layouts/location" bean="${locationInstance}" var="locationInstance" model="[mode:'read']"></g:render>
 					</fieldset>
 					<br/>
 					<fieldset><legend>POSTAL ADDRESS</legend>
@@ -130,37 +107,8 @@
 						</div>
 					</fieldset>
 					<br/>
-					<fieldset><legend>GEOGRAPHICAL DETAILS</legend>
-						<div class="table">
-							<div class="row">
-								<div class="cell"><label>Province:</label></div>
-								<div class="cell">-- field --</div>
-							</div>
-							<div class="row">
-								<div class="cell"><label>District:</label></div>
-								<div class="cell">-- line 2 field --</div>
-							</div>
-							<div class="row">
-								<div class="cell"><label>Municipality:</label></div>
-								<div class="cell">-- town/city field --</div>
-							</div>
-							<div class="row">
-								<div class="cell"><label>Main Place:</label></div>
-								<div class="cell">-- line 1 field --</div>
-							</div>
-							<div class="row">
-								<div class="cell"><label>Suburb/Village:</label></div>
-								<div class="cell">-- field --</div>
-							</div>
-							<div class="row">
-								<div class="cell"><label>Township:</label></div>
-								<div class="cell">-- field --</div>
-							</div>
-							<div class="row">
-								<div class="cell"><label>Description of where office is located:</label></div>
-								<div class="cell">-- field --</div>
-							</div>
-						</div>					
+					<fieldset><legend>Geographical Location</legend>
+							<g:render template="../layouts/location" bean="${officeInstance?.location}" var="locationInstance" model="[mode:'read']"></g:render>
 					</fieldset>
 				</div>
 				

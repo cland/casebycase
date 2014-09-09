@@ -3,6 +3,7 @@ package com.cbc
 
 
 import static org.springframework.http.HttpStatus.*
+import com.cbc.location.Location
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -34,7 +35,17 @@ class PcmController {
             respond pcmInstance.errors, view:'create'
             return
         }
-
+		try{
+			Location location = cbcApiService.saveLocation(params)
+			pcmInstance.location = location
+			pcmInstance = pcmInstance.merge()
+		}catch(Exception e){
+			println("Failed to save new location..."  + e)
+			flash.message = "Error: Failed to save login details due to an error saving person details."
+			
+			render(view: "create", model: [pcmInstance: pcmInstance])
+			return
+		}
         pcmInstance.save flush:true
 
         request.withFormat {

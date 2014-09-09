@@ -63,7 +63,7 @@
 		
 	</label>
 	<fieldset><legend>Geographical Location</legend>
-		<g:render template="../layouts/location" bean="${officeInstance?.location}" var="locationInstance" model="[stage:'stage1']"></g:render>
+		<g:render template="../layouts/location" bean="${officeInstance?.location}" var="locationInstance" model="[mode:'edit']"></g:render>
 	</fieldset>
 
 </div>

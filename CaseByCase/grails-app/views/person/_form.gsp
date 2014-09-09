@@ -113,7 +113,7 @@
 	<g:select id="office" name="office.id" from="${com.cbc.Office.list()}" optionKey="id" required="" value="${personInstance?.office?.id}" class="many-to-one"/>
 </div>
 <fieldset><legend>Geographical Location</legend>
-	<g:render template="../layouts/location" bean="${locationInstance}" var="locationInstance" model="[stage:'stage1']"></g:render>
+	<g:render template="../layouts/location" bean="${locationInstance}" var="locationInstance" model="[mode:'edit']"></g:render>
 </fieldset>
 <g:if test="${params.action != 'dialogcreate' }">
 	<g:render template="form_attach" model="[thisInstance:personInstance]"/>

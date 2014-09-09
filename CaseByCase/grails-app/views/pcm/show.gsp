@@ -35,34 +35,30 @@
 				</ul>
 				<div id="tab-1">
 					<ol class="property-list pcm">
-						
-							<g:if test="${pcmInstance?.lastUpdatedBy}">
+						<g:if test="${pcmInstance?.pcmDate}">
 							<li class="fieldcontain">
-								<span id="lastUpdatedBy-label" class="property-label"><g:message code="pcm.lastUpdatedBy.label" default="Last Updated By" /></span>
+								<span id="pcmDate-label" class="property-label"><g:message code="pcm.pcmDate.label" default="Pcm Date" /></span>
 								
-									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${pcmInstance}" field="lastUpdatedBy"/></span>
+									<span class="property-value" aria-labelledby="pcmDate-label"><g:formatDate date="${pcmInstance?.pcmDate}" /></span>
 								
 							</li>
 							</g:if>
-						
-							<g:if test="${pcmInstance?.createdBy}">
+						<g:if test="${pcmInstance?.sender}">
 							<li class="fieldcontain">
-								<span id="createdBy-label" class="property-label"><g:message code="pcm.createdBy.label" default="Created By" /></span>
+								<span id="sender-label" class="property-label"><g:message code="pcm.sender.label" default="Sender" /></span>
 								
-									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${pcmInstance}" field="createdBy"/></span>
+									<span class="property-value" aria-labelledby="sender-label"><g:fieldValue bean="${pcmInstance}" field="sender"/></span>
+								
+							</li>
+							</g:if>	
+						<g:if test="${pcmInstance?.receiver}">
+							<li class="fieldcontain">
+								<span id="receiver-label" class="property-label"><g:message code="pcm.receiver.label" default="Receiver" /></span>
+								
+									<span class="property-value" aria-labelledby="receiver-label"><g:fieldValue bean="${pcmInstance}" field="receiver"/></span>
 								
 							</li>
 							</g:if>
-						
-							<g:if test="${pcmInstance?.agegroup}">
-							<li class="fieldcontain">
-								<span id="agegroup-label" class="property-label"><g:message code="pcm.agegroup.label" default="Agegroup" /></span>
-								
-									<span class="property-value" aria-labelledby="agegroup-label"><g:link controller="ageGroup" action="show" id="${pcmInstance?.agegroup?.id}">${pcmInstance?.agegroup?.encodeAsHTML()}</g:link></span>
-								
-							</li>
-							</g:if>
-						
 							<g:if test="${pcmInstance?.content}">
 							<li class="fieldcontain">
 								<span id="content-label" class="property-label"><g:message code="pcm.content.label" default="Content" /></span>
@@ -70,35 +66,8 @@
 									<span class="property-value" aria-labelledby="content-label"><g:fieldValue bean="${pcmInstance}" field="content"/></span>
 								
 							</li>
-							</g:if>
-						
-							<g:if test="${pcmInstance?.dateCreated}">
-							<li class="fieldcontain">
-								<span id="dateCreated-label" class="property-label"><g:message code="pcm.dateCreated.label" default="Date Created" /></span>
-								
-									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${pcmInstance?.dateCreated}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${pcmInstance?.description}">
-							<li class="fieldcontain">
-								<span id="description-label" class="property-label"><g:message code="pcm.description.label" default="Description" /></span>
-								
-									<span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${pcmInstance}" field="description"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${pcmInstance?.lastUpdated}">
-							<li class="fieldcontain">
-								<span id="lastUpdated-label" class="property-label"><g:message code="pcm.lastUpdated.label" default="Last Updated" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${pcmInstance?.lastUpdated}" /></span>
-								
-							</li>
-							</g:if>
-						
+							</g:if>	
+							
 							<g:if test="${pcmInstance?.name}">
 							<li class="fieldcontain">
 								<span id="name-label" class="property-label"><g:message code="pcm.name.label" default="Name" /></span>
@@ -107,24 +76,24 @@
 								
 							</li>
 							</g:if>
-						
-							<g:if test="${pcmInstance?.pcmDate}">
+													
+							<g:if test="${pcmInstance?.agegroup}">
 							<li class="fieldcontain">
-								<span id="pcmDate-label" class="property-label"><g:message code="pcm.pcmDate.label" default="Pcm Date" /></span>
+								<span id="agegroup-label" class="property-label"><g:message code="pcm.agegroup.label" default="Agegroup" /></span>
 								
-									<span class="property-value" aria-labelledby="pcmDate-label"><g:formatDate date="${pcmInstance?.pcmDate}" /></span>
+									<span class="property-value" aria-labelledby="agegroup-label"><g:link controller="ageGroup" action="show" id="${pcmInstance?.agegroup?.id}">${pcmInstance?.agegroup?.encodeAsHTML()}</g:link></span>
 								
 							</li>
 							</g:if>
-						
-							<g:if test="${pcmInstance?.receiver}">
+							<g:render template="../layouts/location" bean="${pcmInstance?.location}" var="locationInstance" model="[mode:'read']"></g:render>
+							<g:if test="${pcmInstance?.description}">
 							<li class="fieldcontain">
-								<span id="receiver-label" class="property-label"><g:message code="pcm.receiver.label" default="Receiver" /></span>
+								<span id="description-label" class="property-label"><g:message code="pcm.description.label" default="Description" /></span>
 								
-									<span class="property-value" aria-labelledby="receiver-label"><g:fieldValue bean="${pcmInstance}" field="receiver"/></span>
+									<span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${pcmInstance}" field="description"/></span>
 								
 							</li>
-							</g:if>
+							</g:if>				
 						
 							<g:if test="${pcmInstance?.referredBy}">
 							<li class="fieldcontain">
@@ -142,27 +111,10 @@
 									<span class="property-value" aria-labelledby="referredTo-label"><g:link controller="office" action="show" id="${pcmInstance?.referredTo?.id}">${pcmInstance?.referredTo?.encodeAsHTML()}</g:link></span>
 								
 							</li>
-							</g:if>
-						
-							<g:if test="${pcmInstance?.region}">
-							<li class="fieldcontain">
-								<span id="region-label" class="property-label"><g:message code="pcm.region.label" default="Region" /></span>
-								
-									<span class="property-value" aria-labelledby="region-label"><g:link controller="region" action="show" id="${pcmInstance?.region?.id}">${pcmInstance?.region?.encodeAsHTML()}</g:link></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${pcmInstance?.sender}">
-							<li class="fieldcontain">
-								<span id="sender-label" class="property-label"><g:message code="pcm.sender.label" default="Sender" /></span>
-								
-									<span class="property-value" aria-labelledby="sender-label"><g:fieldValue bean="${pcmInstance}" field="sender"/></span>
-								
-							</li>
-							</g:if>
+							</g:if>	
 						
 						</ol>
+						
 				</div>
 				
 				<div id="tab-2">

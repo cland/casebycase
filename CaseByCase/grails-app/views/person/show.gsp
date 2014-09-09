@@ -204,6 +204,9 @@
 							</td>
 						</tr>
 						</table>
+						<fieldset><legend>Geographical Location</legend>
+							<g:render template="../layouts/location" bean="${personInstance?.location}" var="locationInstance" model="[mode:'read']"></g:render>
+						</fieldset>
 				</div>
 				
 				<div id="tab-2">

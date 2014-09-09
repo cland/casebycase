@@ -5,6 +5,7 @@ import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap;
 //import org.codehaus.groovy.grails.plugins.springsecurity.*
 import org.grails.datastore.gorm.finders.MethodExpression.IsEmpty;
 
+import com.cbc.location.Location
 import com.sun.org.apache.xalan.internal.xsltc.compiler.ForEach;
 import org.apache.commons.lang.RandomStringUtils
 
@@ -19,6 +20,20 @@ class cbcApiService {
 	def groupManagerService
 	
 	
+	Location saveLocation(params) throws Exception{
+		def location = null
+		if(!params?.location?.id){
+			if(params?.location?.id == ""){
+				location = new Location(params?.location)
+				if(!location.save(flush:true)){
+					throw new Exception("Failed to save new location..."  + location?.errors)
+				}				
+			}
+		}else{
+			println("No location to deal with ??? ")
+		}
+		return location
+	}
 	
 	String getUserFullname(Long id){
 		User user = groupManagerService.getUser(id)

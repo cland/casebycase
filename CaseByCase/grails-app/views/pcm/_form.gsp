@@ -47,7 +47,7 @@
 	</label>
 	<g:select id="agegroup" name="agegroup.id" from="${com.cbc.AgeGroup.list()}" optionKey="id" required="" value="${pcmInstance?.agegroup?.id}" class="many-to-one"/>
 </div>
-<g:render template="../layouts/location" bean="${officeInstance?.location}" var="locationInstance" model="[stage:'stage1']"></g:render>
+<g:render template="../layouts/location" bean="${officeInstance?.location}" var="locationInstance" model="[mode:'edit']"></g:render>
 </fieldset>
 <br/>
 

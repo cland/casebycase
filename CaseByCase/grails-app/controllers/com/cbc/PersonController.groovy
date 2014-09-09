@@ -3,11 +3,14 @@ package com.cbc
 import static org.springframework.http.HttpStatus.*
 import grails.converters.JSON
 import grails.transaction.Transactional
+
+import com.cbc.location.Location
 import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 
 @Transactional(readOnly = true)
 class PersonController {
 	def autoCompleteService
+	def cbcApiService
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE", dialogsave: "POST", dialogsave: "POST"]
 
     def index(Integer max) {
@@ -54,6 +57,18 @@ class PersonController {
 			pEntry = params.get('phones[' + index + ']')
 		}
 		
+		try{
+			Location location = cbcApiService.saveLocation(params)
+			personInstance.location = location
+			personInstance = personInstance.merge()				
+		}catch(Exception e){
+			println("Failed to save new location..."  + e)
+			flash.message = "Error: Failed to save login details due to an error saving person details."
+			
+			render(view: "create", model: [personInstance: personInstance])
+			return
+		}
+				
         personInstance.save flush:true
 		if (personInstance.hasErrors()) {
 			println("Person has errors: " + personInstance.errors)

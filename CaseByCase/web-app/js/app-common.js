@@ -183,16 +183,18 @@ var cbc_datepickers = {
 } //end cland_datepicker
 
 var cbc_location = {
-		load_districts: function comboboxDistricts(data,field_id,subfields){			
-			this.combobox_options(data,field_id,"--select district--","",true,subfields)			
+		load_districts: function comboboxDistricts(data,field_id,subfields,defaultValue){			
+			this.combobox_options(data,field_id,"--select district--","",true,subfields,defaultValue)			
 		},		
-		combobox_options: function c_options(data,combobox_id,select0name,select0value,refresh,subfields){			
+		combobox_options: function c_options(data,combobox_id,select0name,select0value,refresh,subfields,defaultValue){			
 			var _el = $("#" + combobox_id);
 			if(refresh) _el.empty();			
 			if(!$.isEmptyObject(data)){
 				_el.append("<option value='" +select0value + "'>" + select0name + "</option>");
-				$.each(data,function(index,item){							
-					_el.append($("<option />").prop("value", item.id).text(item.name));				
+				$.each(data,function(index,item){
+					var _selected = "";
+					if(item.value==defaultValue) _selected = "";
+					_el.append("<option value='" +item.value + "' " + _selected + ">" + item.name + "</option>");				
 				});
 			}else{
 				_el.append("<option value=''>-- No options found --</option>");
@@ -205,5 +207,13 @@ var cbc_location = {
 			$.each(_f,function(index,value){
 				$("#" + value).empty().append("<option value=''>--</option>");
 			})
+		},
+		current: {
+			country:'0',
+			region:'0',
+			district:'0',
+			municipality:'0',
+			mainplace:'0',
+			suburb:'0'
 		}
 } //end location helper namespace

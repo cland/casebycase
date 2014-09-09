@@ -3,6 +3,7 @@ package com.cbc
 
 
 import static org.springframework.http.HttpStatus.*
+import com.cbc.location.Location
 import grails.transaction.Transactional
 import grails.converters.JSON
 @Transactional(readOnly = true)
@@ -35,7 +36,19 @@ class OfficeController {
             respond officeInstance.errors, view:'create'
             return
         }
-
+		//Save location information
+		try{
+			Location location = cbcApiService.saveLocation(params)
+			officeInstance.location = location
+			officeInstance = officeInstance.merge()
+		}catch(Exception e){
+			println("Failed to save new location..."  + e)
+			flash.message = "Error: Failed to save login details due to an error saving person details."
+			
+			render(view: "create", model: [officeInstance: officeInstance])
+			return
+		}
+		//save the form
         officeInstance.save flush:true
 		//generate groups
 		groupManagerService.generateOfficeGroups(officeInstance)
