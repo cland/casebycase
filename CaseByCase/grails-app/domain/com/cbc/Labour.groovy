@@ -7,7 +7,7 @@ class Labour {
 	String name
 	//WorkHours workhours
 	//LeaveDays leavedays
-	long createdBy
+	long createdBy 
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
