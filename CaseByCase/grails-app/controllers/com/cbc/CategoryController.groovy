@@ -3,6 +3,7 @@ package com.cbc
 
 
 import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -178,6 +179,16 @@ class CategoryController {
 			}
 		}
 		return nodeMapping
+	}
+	
+	def ajaxNodeChildren(){
+		def parentNode = Category.get(params?.parentid)
+		def nodeChildren = Category.createCriteria().list {
+			if(parentNode) eq('category', parentNode)
+			order("name", "asc")
+		}
+		
+		render nodeChildren as JSON
 	}
 	
 	def dialogList() {
