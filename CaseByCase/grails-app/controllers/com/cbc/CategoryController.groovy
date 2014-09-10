@@ -188,7 +188,7 @@ class CategoryController {
 			order("name", "asc")
 		}
 		
-		render nodeChildren as JSON
+		render nodeChildren*.toTreeMap() as JSON
 	}
 	
 	def dialogList() {

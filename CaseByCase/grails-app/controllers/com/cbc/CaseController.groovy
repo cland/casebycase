@@ -12,7 +12,7 @@ class CaseController {
 	def cbcApiService
 	def autoCompleteService
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
         respond Case.list(params), model:[caseInstanceCount: Case.count()]
     }
 

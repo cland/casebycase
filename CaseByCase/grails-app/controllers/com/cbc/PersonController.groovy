@@ -14,7 +14,7 @@ class PersonController {
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE", dialogsave: "POST", dialogsave: "POST"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
         respond Person.list(params), model:[personInstanceCount: Person.count()]
     }
 

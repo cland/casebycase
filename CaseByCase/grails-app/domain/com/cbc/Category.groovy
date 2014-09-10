@@ -16,7 +16,9 @@ class Category {
 
 	static transients = [
 		"createdByName",
-		"lastUpdatedByName"
+		"lastUpdatedByName",
+		"level",
+		"hasChildren"
 	]
 
 	static hasMany = [categories:Category]
@@ -28,21 +30,29 @@ class Category {
 		createdBy nullable:true, editable:false
 	}
 
+	int getLevel(Category cat){
+		if(!cat || cat?.id == 1) return 0
+		return getLevel(cat?.category) + 1
+	}
+	def getNodeChildren(){
+		if(!hasChildren()) return []
+		return categories*.toTreeMap()
+	}
+	boolean hasChildren(){
+		return (categories?.size() > 0)
+	}
+	def toTreeMap(){
+		return [id:id,
+			title:name,
+			has_children:hasChildren(),
+			level:getLevel(this),
+			children:getNodeChildren(),
+			value:id,
+			link:''
+			]
+	}
+	
 	String toString(){
-		/*boolean checkCategory = false
-		 Category current = this
-		 String itemString = ""
-		 while(!checkCategory){
-		 Category parent = current.category
-		 if(parent !=null){
-		 itemString = parent.name + "-" + itemString
-		 }else{ 
-		 checkCategory = true
-		 }
-		 current = parent
-		 }
-		 itemString += this.name
-		 return itemString*/
 		return name
 	}
 

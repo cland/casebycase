@@ -11,7 +11,7 @@ def springSecurityService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 50, 100)
         respond Requestmap.list(params), model:[requestmapInstanceCount: Requestmap.count()]
     }
 

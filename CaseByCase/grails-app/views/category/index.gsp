@@ -10,7 +10,7 @@
 <title><g:appTitle title="">
 		<g:message code="default.list.label" args="[entityName]" />
 	</g:appTitle></title>
-<g:javascript library="categoryHierarchyStructure" />
+<%--<g:javascript library="categoryHierarchyStructure" />--%>
 <g:javascript library="treeselect" />
 <g:set var="page_sidenav" value="sidenav-admin" />
 <g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
@@ -36,17 +36,21 @@
 				${flash.message}
 			</div>
 		</g:if>
-		<div id="hierarchyStructure" class="hierarchyStructure"></div>
+<%--		<div id="hierarchyStructure" class="hierarchyStructure"></div>--%>
 		
-		<fieldset><legend>TREESELECT TEST</legend>
-		
-		<div class="chosentree"></div>
+		<fieldset><legend>TREESELECT TEST</legend>		
+			<div class="chosentree"></div>
 		</fieldset>
 		
 	</div>
 
-	<script>
-	
+	<script>	
+	/*
+	try:: =>  
+	http://www.jstree.com/demo/
+		OR
+	http://www.jeasyui.com/demo/main/index.php?plugin=ComboTree&theme=default&dir=ltr&pitem=
+	*/
 		$(document).ready(function() {
 			$("#accordion").accordion({
 				active : cbc_params.active_sidebar()
@@ -72,28 +76,58 @@
 			});
 
 			$('div.chosentree').chosentree({
-			      width: 500,
+			      width: 400,
+			      inputId:'category-select',
+			      inputName:'mycategory',
 			      deepLoad: true,
-			      selected:function (node){
-				      alert("selected!")
-				      },
+			      default_value: {}, 
+			      input_placeholder:'Please Only One',		    
+			      selected:mySelection(),
 			      load: function(node, callback) {
 			        /**
 			         * This would typically call jQuery.ajax to load a new node
 			         * on your server where you would return the tree structure
 			         * for the provided node.
 			         */
-			    	  setTimeout(function() {
-			              callback(loadChildren(node, 0));
-			            }, 1000);   
+			        loadMyChildren(node, 0,1,callback)
+			         //callback(n);
+<%--			    	  setTimeout(function() {--%>
+<%--			              callback(loadChildren(node, 0));--%>
+<%--			            }, 1000);   --%>
 			      }
 			 });
 		}); // end ready
 
+		var mySelection = function(){
+			
+			};
+		var loadMyChildren = function(node,level,_id,callback){
+	    	var _link ="${resource()}/category/ajaxNodeChildren";		 	
+	 		$.ajax({
+	 			url : _link, 
+	 			dataType: "json",
+	 			data : 'parentid=' + _id,
+	 			success : function(data) {		 			
+		 			$.each(data,function(index,item){
+			 			//item.link="/cbc/category/show/" + item.id
+		 				node.children.push(item)
+			 			});
+	 				//return node;
+	 				callback(node)
+	 			},
+	 			error : function() { // handle server errors
+	 				alert("Unable to retrieve data");
+	 				return node;
+	 			}
+	 		});
+		 };
+
+
+		 //example function
 		 var maxDepth = 3;
 	     var loadChildren = function(node, level) {
 	       var hasChildren = node.level < maxDepth;
-	       for (var i=0; i<8; i++) {
+	       for (var i=0; i<2; i++) {
 	         var id = node.id + (i+1).toString();
 	         node.children.push({
 	           id:id,
@@ -108,6 +142,7 @@
 	       }
 	       return node;
 	     };
+	     
 	</script>
 </body>
 </html>

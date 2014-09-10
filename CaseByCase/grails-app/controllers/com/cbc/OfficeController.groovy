@@ -13,7 +13,7 @@ class OfficeController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 50, 100)
         respond Office.list(params), model:[officeInstanceCount: Office.count()]
     }
 
