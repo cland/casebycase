@@ -9,7 +9,7 @@ class Labour {
 	//LeaveDays leavedays
 	long createdBy   
 	long lastUpdatedBy
-	Date dateCreated
+	Date dateCreated 
 	Date lastUpdated
 	//static belongsTo=[thiscase:Case]
 	static transients = ["createdByName","lastUpdatedByName"]
