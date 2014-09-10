@@ -8,7 +8,7 @@ class WorkHours {
 	long daily
 	long weekend
 	long holiday
-	static belongsTo = [labour:Labour]
+	//static belongsTo = [labour:Labour]
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
@@ -17,6 +17,7 @@ class WorkHours {
     static constraints = {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
+		 
 	}
 	
 	String toString(){

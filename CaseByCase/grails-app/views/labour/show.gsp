@@ -216,6 +216,42 @@
 								
 							</li>
 							</g:if>
+							
+							<g:if test="${labourInstance?.workhours?.overtime}">
+							<li class="fieldcontain">
+								<span id="workhours-label" class="property-label"><g:message code="labour.workhours.overtime.label" default="Overtime" /></span>
+								
+									<span class="property-value" aria-labelledby="workhours-label"><g:fieldValue bean="${labourInstance}" field="workhours.overtime"/></span>
+								
+							</li>
+							</g:if>
+							
+							<g:if test="${labourInstance?.workhours?.daily}">
+							<li class="fieldcontain">
+								<span id="workhours-label" class="property-label"><g:message code="labour.workhours.overtime.label" default="Daily" /></span>
+								
+									<span class="property-value" aria-labelledby="workhours-label"><g:fieldValue bean="${labourInstance}" field="workhours.daily"/></span>
+								
+							</li>
+							</g:if>
+							
+							<g:if test="${labourInstance?.workhours?.weekend}">
+							<li class="fieldcontain">
+								<span id="workhours-label" class="property-label"><g:message code="labour.workhours.weekend.label" default="Saturday/Sunday" /></span>
+								
+									<span class="property-value" aria-labelledby="workhours-label"><g:fieldValue bean="${labourInstance}" field="workhours.weekend"/></span>
+								
+							</li>
+							</g:if>
+							
+							<g:if test="${labourInstance?.workhours?.holiday}">
+							<li class="fieldcontain">
+								<span id="workhours-label" class="property-label"><g:message code="labour.workhours.holiday.label" default="Public Holday" /></span>
+								
+									<span class="property-value" aria-labelledby="workhours-label"><g:fieldValue bean="${labourInstance}" field="workhours.holiday"/></span>
+								
+							</li>
+							</g:if>
 						
 						</ol>
 				</div>

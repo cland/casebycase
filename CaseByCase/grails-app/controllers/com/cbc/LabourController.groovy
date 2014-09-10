@@ -21,10 +21,17 @@ class LabourController {
 
     def create() {
         respond new Labour(params)
+		//respond new WorkHours(params.overtime, params.weekend, params.holiday)
     }
 
     @Transactional
     def save(Labour labourInstance) {
+		WorkHours workhours = new WorkHours()
+		workhours.overtime = (params.overtime).toLong()
+		workhours.weekend = (params.weekend).toLong()
+		workhours.holiday = (params.holiday).toLong()
+		//workhours.labour = labourInstance
+		labourInstance.workhours = workhours
         if (labourInstance == null) {
             notFound()
             return
@@ -34,7 +41,8 @@ class LabourController {
             respond labourInstance.errors, view:'create'
             return
         }
-
+		
+		workhours.save flush: true
         labourInstance.save flush:true
 
         request.withFormat {

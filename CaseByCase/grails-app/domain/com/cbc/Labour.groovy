@@ -5,7 +5,7 @@ class Labour {
 	transient cbcApiService
 	static attachmentable = true
 	String name
-	//WorkHours workhours
+	WorkHours workhours
 	//LeaveDays leavedays
 	long createdBy   
 	long lastUpdatedBy
@@ -53,7 +53,7 @@ class Labour {
 		hoursWorked nullable: true, blank: true, inList: ["Weekly", "Fortnightly", "Monthly"]
 		earnings nullable: true, blank: true, inList: ["Weekly", "Fortnightly", "Monthly"]
 		//leavedays nullable: true, blank: true
-		//workhours nullable: true, blank: true
+		workhours nullable: true, blank: true
 	}
 	String toString(){
 		"${name}"
