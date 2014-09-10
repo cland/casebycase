@@ -46,68 +46,68 @@
 	</div>
 
 	<script>
-	 var maxDepth = 3;
-     var loadChildren = function(node, level) {
-       var hasChildren = node.level < maxDepth;
-       for (var i=0; i<8; i++) {
-         var id = node.id + (i+1).toString();
-         node.children.push({
-           id:id,
-           title:'Node ' + id,
-           has_children:hasChildren,
-           level: node.level + 1,
-           children:[]
-         });
-         if (hasChildren && level < 2) {
-           loadChildren(node.children[i], (level+1));
-         }
-       }
-       return node;
-     };
-		$(document).ready(
+	
+		$(document).ready(function() {
+			$("#accordion").accordion({
+				active : cbc_params.active_sidebar()
+			});
 
-				$('div.chosentree').chosentree({
-				      width: 500,
-				      deepLoad: true,
-				      load: function(node, callback) {
-				        /**
-				         * This would typically call jQuery.ajax to load a new node
-				         * on your server where you would return the tree structure
-				         * for the provided node.
-				         */
-				    	  setTimeout(function() {
-				              callback(loadChildren(node, 0));
-				            }, 1000);    
-				      }
-				 });
-
-				
-						function() {
-							$("#accordion").accordion({
-								active : cbc_params.active_sidebar()
+			$("#tabs").tabs({
+				active : cbc_params
+						.active_tab(),
+				create : function(event, ui) {
+					//executed after is created								
+					$('#tabs').show()
+				},
+				show : function(event, ui) {
+					//on every tabs clicked
+				},
+				beforeLoad : function(event, ui) {
+					ui.jqXHR
+							.error(function() {
+								ui.panel
+										.html("Couldn't load this tab. We'll try to fix this as soon as possible. ");
 							});
+				}
+			});
 
-							$("#tabs")
-									.tabs(
-											{
-												active : cbc_params
-														.active_tab(),
-												create : function(event, ui) {
-													//executed after is created								
-													$('#tabs').show()
-												},
-												show : function(event, ui) {
-													//on every tabs clicked
-												},
-												beforeLoad : function(event, ui) {
-													ui.jqXHR
-															.error(function() {
-																ui.panel
-																		.html("Couldn't load this tab. We'll try to fix this as soon as possible. ");
-															});
-												}
-											});
-						});
+			$('div.chosentree').chosentree({
+			      width: 500,
+			      deepLoad: true,
+			      selected:function (node){
+				      alert("selected!")
+				      },
+			      load: function(node, callback) {
+			        /**
+			         * This would typically call jQuery.ajax to load a new node
+			         * on your server where you would return the tree structure
+			         * for the provided node.
+			         */
+			    	  setTimeout(function() {
+			              callback(loadChildren(node, 0));
+			            }, 1000);   
+			      }
+			 });
+		}); // end ready
+
+		 var maxDepth = 3;
+	     var loadChildren = function(node, level) {
+	       var hasChildren = node.level < maxDepth;
+	       for (var i=0; i<8; i++) {
+	         var id = node.id + (i+1).toString();
+	         node.children.push({
+	           id:id,
+	           title:'Node ' + id,
+	           has_children:hasChildren,
+	           level: node.level + 1,
+	           children:[]
+	         });
+	         if (hasChildren && level < 2) {
+	           loadChildren(node.children[i], (level+1));
+	         }
+	       }
+	       return node;
+	     };
 	</script>
 </body>
 </html>

@@ -149,6 +149,5 @@
 						});		                
 			});  
 		</script>
-	</script>
 </body>
 </html>
