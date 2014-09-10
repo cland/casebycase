@@ -24,4 +24,11 @@ modules = {
 		resource url: 'css/hierarchy.css'
 		
 	}
+	treeselect{
+		dependsOn 'application'
+		resource url:'js/jquery.treeselect.js'
+		resource url:'js/jquery.chosentree.js'
+		resource url:'css/treeselect.css'
+		resource url:'css/chosentree.css'
+	}
 }
