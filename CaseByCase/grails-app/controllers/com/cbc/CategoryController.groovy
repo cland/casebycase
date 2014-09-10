@@ -24,8 +24,7 @@ class CategoryController {
 	}
 
 	@Transactional
-	def save(Category categoryInstance) {
-		print params
+	def save(Category categoryInstance) {		
 		if (categoryInstance == null) {
 			notFound()
 			return
@@ -37,7 +36,7 @@ class CategoryController {
 		}
 
 		categoryInstance.save flush:true
-
+		
 		request.withFormat {
 			form {
 				flash.message = message(code: 'default.created.message', args: [

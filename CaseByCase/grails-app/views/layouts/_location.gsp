@@ -8,6 +8,9 @@
 				<g:select id="country" name="location.country.id" from="${com.cbc.location.Country.list()}" 
 					optionKey="id" required="" 
 					value="${locationInstance?.country?.id}" class="many-to-one"/>
+					<g:if test="${params?.action=='edit' }">
+					<span class="r-arrow"></span><span><a href="#" onclick="resetLocations();return false;">Reset Options</a></span>
+					</g:if>	
 				</g:if>	
 				<g:else><span class="property-value">${locationInstance?.country?.name }</span></g:else>
 			</div>	
@@ -25,8 +28,9 @@
 		            controller:'country', 
 		            action:'getDistricts', 
 		            params:'\'id=\' + escape(this.value)', 
-		            onSuccess:'cbc_location.load_districts(data,\'district_options\',\'muni_options,mainplace_options,suburb_options\')')}"
+		            onSuccess:'cbc_location.load_districts(data,\'district_options\',\'muni_options,mainplace_options,suburb_options\', \'' + locationInstance?.district?.id + '\')')}"
 				/>
+				
 				</g:if>
 				<g:else><span class="property-value">${locationInstance?.region?.name }</span></g:else>
 			</div>					
@@ -35,7 +39,7 @@
 		<div class="cell"><label>District:</label></div>
 			<div class="cell">
 				<g:if test="${isEditMode }">
-				<select name="location.district.id" id="district_options" onchange="onLocationChange(this,'getMunicipalities','muni_options','mainplace_options,suburb_options')">
+				<select name="location.district.id" id="district_options" onchange="onLocationChange(this,'getMunicipalities','muni_options','mainplace_options,suburb_options','${locationInstance?.municipality?.id}')">
 					<option value="">--</option>
 				</select>
 				</g:if>
@@ -47,7 +51,7 @@
 			<div class="cell"><label>Municipality:</label></div>
 			<div class="cell">
 				<g:if test="${isEditMode }">
-				<select name="location.municipality.id" id="muni_options" onchange="onLocationChange(this,'getMainPlaces','mainplace_options','suburb_options')">
+				<select name="location.municipality.id" id="muni_options" onchange="onLocationChange(this,'getMainPlaces','mainplace_options','suburb_options','${locationInstance?.mainplace?.id}')">
 					<option value="">--</option>
 				</select>
 				</g:if>
@@ -58,7 +62,7 @@
 			<div class="cell"><label>Main Place:</label></div>
 			<div class="cell">
 				<g:if test="${isEditMode}">
-				<select name="location.mainplace.id" id="mainplace_options" onchange="onLocationChange(this,'getSuburbs','suburb_options','')">
+				<select name="location.mainplace.id" id="mainplace_options" onchange="onLocationChange(this,'getSuburbs','suburb_options','','${locationInstance?.suburb?.id}')">
 					<option value="">--</option>
 				</select>
 				</g:if>
@@ -101,17 +105,17 @@
 	
 	$(document).ready(function() {
 		//initialize all the combobox fields	
-		cbc_location.current.country = ${locationInstance?.country?.id}
-		cbc_location.current.region = ${locationInstance?.region?.id}
-		cbc_location.current.district = ${locationInstance?.district?.id}
-		cbc_location.current.municipality = ${locationInstance?.municipality?.id}
-		cbc_location.current.mainplace = ${locationInstance?.mainplace?.id}
-		cbc_location.current.suburb = ${locationInstance?.suburb?.id}
+		cbc_location.current.country = "${locationInstance?.country?.id}";
+		cbc_location.current.region = "${locationInstance?.region?.id}";
+		cbc_location.current.district = "${locationInstance?.district?.id}";
+		cbc_location.current.municipality = "${locationInstance?.municipality?.id}";
+		cbc_location.current.mainplace = "${locationInstance?.mainplace?.id}";
+		cbc_location.current.suburb = "${locationInstance?.suburb?.id}";
 		
-		load_options(cbc_location.current.region,"country","getDistricts","district_options","",cbc_location.current.district)
-		load_options(cbc_location.current.district,"country","getMunicipalities","muni_options","",cbc_location.current.municipality)
-		load_options(cbc_location.current.municipality,"country","getMainPlaces","mainplace_options","",cbc_location.current.mainplace)
-		load_options(cbc_location.current.mainplace,"country","getSuburbs","suburb_options","",cbc_location.current.suburb)
+		if(cbc_location.current.region != "") load_options(cbc_location.current.region,"country","getDistricts","district_options","",cbc_location.current.district);
+		if(cbc_location.current.municipality != "") load_options(cbc_location.current.district,"country","getMunicipalities","muni_options","",cbc_location.current.municipality);
+		if(cbc_location.current.mainplace != "") load_options(cbc_location.current.municipality,"country","getMainPlaces","mainplace_options","",cbc_location.current.mainplace);
+		if(cbc_location.current.suburb != "") load_options(cbc_location.current.mainplace,"country","getSuburbs","suburb_options","",cbc_location.current.suburb);
 			
 	});
 	function load_options(_id,controller_name,action_name,field_id,subfields,defaultValue){
@@ -129,8 +133,19 @@
 			}
 		});
 	}
-	function onLocationChange(el,action_name,field_id,subfields){	
-		load_options(el.value,"country",action_name,field_id,subfields,'')
+	function onLocationChange(el,action_name,field_id,subfields,defaultValue){	
+		load_options(el.value,"country",action_name,field_id,subfields,defaultValue)
+	}
+	function resetLocations(){
+		if(cbc_location.current.country != "") $("#country option[value=" + cbc_location.current.country + "]").prop('selected','selected');		
+		if(cbc_location.current.region != "") {
+			load_options(cbc_location.current.region,"country","getDistricts","district_options","",cbc_location.current.district);
+			$("#region option[value=" + cbc_location.current.region + "]").prop('selected','selected');
+		}
+		if(cbc_location.current.municipality != "") load_options(cbc_location.current.district,"country","getMunicipalities","muni_options","",cbc_location.current.municipality);
+		if(cbc_location.current.mainplace != "") load_options(cbc_location.current.municipality,"country","getMainPlaces","mainplace_options","",cbc_location.current.mainplace);
+		if(cbc_location.current.suburb != "") load_options(cbc_location.current.mainplace,"country","getSuburbs","suburb_options","",cbc_location.current.suburb);
+		return false;
 	}
 </script>		
 </g:if>

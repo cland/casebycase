@@ -18,8 +18,9 @@
 	<div class="bread-crump">
 		<span class="r-arrow"></span>
 		<g:link controller="home" action="cbc">Home</g:link>
-		<span class="r-arrow"></span> <span class="current-crump"> here
-			edit... </span>
+		<span class="r-arrow"></span>
+		<g:link controller="category" action="index">Categories</g:link>
+		<span class="r-arrow"></span> <span class="current-crump"> ${ categoryInstance?.name}</span>
 	</div>
 	<div id="status1" class="leftbar" role="complementary">
 		<g:sideMenu default="${page_sidenav }"></g:sideMenu>

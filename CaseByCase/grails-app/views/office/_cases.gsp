@@ -10,7 +10,7 @@ $(document).ready(function() {
       autowidth: true,
       height:"100%",
       datatype: "json",
-      colNames:['Case No.','Date Opened','Subject','id','<input class="edit" type="button" name="Add_Case" onClick="addCaseRow(\''+cbc_params.thisId+'\',\''+cbc_params.cases.maingrid_id+'\');" id="staff_add" value="Add"/>'],
+      colNames:['Case No.','Date Opened','Subject','id','<input style="display:none" class="edit" type="button" name="Add_Case" onClick="return false;addCaseRow(\''+cbc_params.thisId+'\',\''+cbc_params.cases.maingrid_id+'\');" id="staff_add" value=""/>'],
       colModel:[
         {name:'caseno', editable:false},						        
         {name:'date_opened', editable:false},

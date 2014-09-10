@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					...
+					User: ${userInstance?.username }
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -98,23 +98,23 @@
 							<div class="table">
 								<div class="row">
 									<div class="cell"><label for="person.firstName"><g:message code="person.firstName.label" default="First Name" /></label></div>
-									<div class="cell">${userInstance?.person?.firstName}</div>
+									<div class="cell"><span class="property-value">${userInstance?.person?.firstName}</span></div>
 									<div class="cell">
 										<label for="person.gender"><g:message code="person.gender.label" default="Gender" /></label>
 									</div>
 									<div class="cell">
-										${userInstance?.person?.gender}
+										<span class="property-value">${userInstance?.person?.gender}</span>
 									</div>
 								</div>
 								<div class="row">
 									<div class="cell"><label for="person.lastName"><g:message code="person.lastName.label" default="Last Name" />	</label></div>
-									<div class="cell">${userInstance?.person?.lastName}</div>
+									<div class="cell"><span class="property-value">${userInstance?.person?.lastName}</span></div>
 									<div class="cell"><label for="person.race"><g:message code="user.race.label" default="Race" /></label></div>
-									<div class="cell">${userInstance?.person?.race}</div>
+									<div class="cell"><span class="property-value">${userInstance?.person?.race}</span></div>
 								</div>
 								<div class="row">
 									<div class="cell"><label for="office"><g:message code="person.office.label" default="Office" /><span class="required-indicator">*</span></label></div>
-									<div class="cell">${userInstance?.person?.office}</div>
+									<div class="cell"><span class="property-value"><g:link controller="office" action="show" id="${userInstance?.person?.office?.id}">${userInstance?.person?.office}</g:link></span></div>
 									<div class="cell"></div>
 									<div class="cell"></div>
 								</div>				

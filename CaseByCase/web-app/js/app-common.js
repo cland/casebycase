@@ -193,8 +193,8 @@ var cbc_location = {
 				_el.append("<option value='" +select0value + "'>" + select0name + "</option>");
 				$.each(data,function(index,item){
 					var _selected = "";
-					if(item.value==defaultValue) _selected = "";
-					_el.append("<option value='" +item.value + "' " + _selected + ">" + item.name + "</option>");				
+					if(item.id.toString()==defaultValue) _selected = "selected";
+					_el.append("<option value='" +item.id + "' " + _selected + ">" + item.name + "</option>");				
 				});
 			}else{
 				_el.append("<option value=''>-- No options found --</option>");

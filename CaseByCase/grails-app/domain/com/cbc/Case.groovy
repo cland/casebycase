@@ -14,7 +14,8 @@ class Case {
 	Date problemStart
 	String description
 	String subject
-	
+	User assignedTo
+	String respondent
 	CasePriority priority
 	/** Tab2: Categorisation **/
 	
@@ -63,6 +64,8 @@ class Case {
 		labour nullable:true
 		eviction nullable:true
 		amtRecovered nullable:true
+		assignedTo nullable:true
+		respondent nullable:true
     }
 	static mapping = {
 		table 'issue'  //def tableName = GrailsDomainBinder.getMapping(Case).table.name 

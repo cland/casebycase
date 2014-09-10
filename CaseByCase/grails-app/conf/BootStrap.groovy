@@ -168,6 +168,8 @@ def groupManagerService
 				 '/acl/**/**',
 				 '/person/personlist/**',
 				 '/case/jq_list_actions',
+				 '/office/jq_list_cases',
+				 '/office/jq_list_staff',
 				 '/organisation/orglist/**',
 				 '/country/**',
 				 '/region/**',
