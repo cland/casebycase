@@ -31,4 +31,10 @@ modules = {
 		resource url:'css/treeselect.css'
 		resource url:'css/chosentree.css'
 	}
+	
+	jstree{
+		dependsOn 'application'
+		resource url:'js/jstree/jstree.js'		
+		resource url:'js/jstree/themes/default/style.css'
+	}	
 }

@@ -48,7 +48,8 @@ class Category {
 			level:getLevel(this),
 			children:getNodeChildren(),
 			value:id,
-			link:''
+			text:name,
+			state:[opened:false,disabled:false,selected:false]			
 			]
 	}
 	

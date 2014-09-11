@@ -11,7 +11,8 @@
 		<g:message code="default.list.label" args="[entityName]" />
 	</g:appTitle></title>
 <%--<g:javascript library="categoryHierarchyStructure" />--%>
-<g:javascript library="treeselect" />
+<%--<g:javascript library="treeselect" />--%>
+<g:javascript library="jstree" />
 <g:set var="page_sidenav" value="sidenav-admin" />
 <g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
 <g:render template="style" ></g:render>
@@ -37,6 +38,24 @@
 			</div>
 		</g:if>
 <%--		<div id="hierarchyStructure" class="hierarchyStructure"></div>--%>
+		
+		
+		<fieldset><legend>jsTree Test</legend>
+		  <div id="jstree">
+			    <!-- in this example the tree is populated from inline HTML -->
+			    <ul>
+			      <li>Root node 1
+			        <ul>
+			          <li id="child_node_1">Child node 1</li>
+			          <li>Child node 2</li>
+			        </ul>
+			      </li>
+			      <li>Root node 2</li>
+			    </ul>
+			  </div>
+			<button>demo button</button>
+		
+		</fieldset>
 		
 		<fieldset><legend>TREESELECT TEST</legend>		
 			<div class="chosentree"></div>
@@ -75,32 +94,53 @@
 				}
 			});
 
-			$('div.chosentree').chosentree({
-			      width: 400,
-			      inputId:'category-select',
-			      inputName:'mycategory',
-			      deepLoad: true,
-			      default_value: {}, 
-			      input_placeholder:'Please Only One',		    
-			      selected:mySelection(),
-			      load: function(node, callback) {
-			        /**
-			         * This would typically call jQuery.ajax to load a new node
-			         * on your server where you would return the tree structure
-			         * for the provided node.
-			         */
-			        loadMyChildren(node, 0,1,callback)
-			         //callback(n);
-<%--			    	  setTimeout(function() {--%>
-<%--			              callback(loadChildren(node, 0));--%>
-<%--			            }, 1000);   --%>
-			      }
-			 });
+			$('#jstree').jstree({
+				"core" : {
+			    	"multiple" : false,
+			    	"animation" : 0,
+			    	'data' : {
+			    	    'url' :"${resource()}/category/ajaxNodeChildren?parentid=1",
+			    	    'data' : function (node) {
+			    	      		return { 'id' : node.id };
+			    	 		}
+			  		}
+				}
+			});
+		    // 7 bind to events triggered on the tree
+		    $('#jstree').on("changed.jstree", function (e, data) {
+		      console.log(data.selected);
+		    });
+		    // 8 interact with the tree - either way is OK
+		    $('button').on('click', function () {
+			    //** Options to select a node **//
+		    //  $('#jstree').jstree(true).select_node('16');  //** Option 1
+		    //  $('#jstree').jstree('select_node', '16'); //** Option 2
+		      $.jstree.reference('#jstree').select_node('16'); //** Option 3
+		    });
+
+			
+<%--			$('div.chosentree').chosentree({--%>
+<%--			      width: 400,--%>
+<%--			      inputId:'category-select',--%>
+<%--			      inputName:'mycategory',--%>
+<%--			      deepLoad: true,--%>
+<%--			      default_value: {}, --%>
+<%--			      input_placeholder:'Please Only One',		    --%>
+<%--			      selected:mySelection(),--%>
+<%--			      load: function(node, callback) {--%>
+<%--			        /**--%>
+<%--			         * This would typically call jQuery.ajax to load a new node--%>
+<%--			         * on your server where you would return the tree structure--%>
+<%--			         * for the provided node.--%>
+<%--			         */--%>
+<%--			        loadMyChildren(node, 0,1,callback)--%>
+<%--			         //callback(n);--%>
+<%--			      }--%>
+<%--			 });--%>
+			 
 		}); // end ready
 
-		var mySelection = function(){
-			
-			};
+
 		var loadMyChildren = function(node,level,_id,callback){
 	    	var _link ="${resource()}/category/ajaxNodeChildren";		 	
 	 		$.ajax({
@@ -121,27 +161,6 @@
 	 			}
 	 		});
 		 };
-
-
-		 //example function
-		 var maxDepth = 3;
-	     var loadChildren = function(node, level) {
-	       var hasChildren = node.level < maxDepth;
-	       for (var i=0; i<2; i++) {
-	         var id = node.id + (i+1).toString();
-	         node.children.push({
-	           id:id,
-	           title:'Node ' + id,
-	           has_children:hasChildren,
-	           level: node.level + 1,
-	           children:[]
-	         });
-	         if (hasChildren && level < 2) {
-	           loadChildren(node.children[i], (level+1));
-	         }
-	       }
-	       return node;
-	     };
 	     
 	</script>
 </body>
