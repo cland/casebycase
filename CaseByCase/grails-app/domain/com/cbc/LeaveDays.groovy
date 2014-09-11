@@ -8,7 +8,7 @@ class LeaveDays {
 	Long sick
 	Long maternity
 	Long family
-	static belongsTo = [labour:Labour]
+	//static belongsTo = [labour:Labour]
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated

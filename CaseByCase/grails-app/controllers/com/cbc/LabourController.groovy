@@ -30,7 +30,14 @@ class LabourController {
 		workhours.overtime = (params.overtime).toLong()
 		workhours.weekend = (params.weekend).toLong()
 		workhours.holiday = (params.holiday).toLong()
-		//workhours.labour = labourInstance
+		
+		LeaveDays leavedays = new LeaveDays()
+		leavedays.annual = (params.annual).toLong()
+		leavedays.sick = (params.sick).toLong()
+		leavedays.maternity = (params.maternity).toLong()
+		leavedays.family = (params.family).toLong()
+		
+		labourInstance.leavedays = leavedays
 		labourInstance.workhours = workhours
         if (labourInstance == null) {
             notFound()
@@ -42,6 +49,7 @@ class LabourController {
             return
         }
 		
+		leavedays.save flush: true
 		workhours.save flush: true
         labourInstance.save flush:true
 
@@ -56,6 +64,7 @@ class LabourController {
 
     def edit(Labour labourInstance) {
         respond labourInstance
+		
     }
 
     @Transactional

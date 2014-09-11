@@ -169,7 +169,32 @@
 	</label>
 	<g:textField name="holiday" value="${labourInstance?.workhours?.holiday}"/>
 </div>
-
-
-
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'leavedays', 'error')} ">
+	<label for="leavedays.annual">
+		<g:message code="leavedays.annual.label" default="Annual" />
+		
+	</label>
+	<g:textField name="annual" value="${labourInstance?.leavedays?.annual}"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'leavedays', 'error')} ">
+	<label for="leavedays.sick">
+		<g:message code="leavedays.sick.label" default="Sick" />
+		
+	</label>
+	<g:textField name="sick" value="${labourInstance?.leavedays?.sick}"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'leavedays', 'error')} ">
+	<label for="leavedays.maternity">
+		<g:message code="leavedays.maternity.label" default="Maternity" />
+		
+	</label>
+	<g:textField name="maternity" value="${labourInstance?.leavedays?.maternity}"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'leavedays', 'error')} ">
+	<label for="leavedays.family">
+		<g:message code="leavedays.family.label" default="Family Responsibility" />
+		
+	</label>
+	<g:textField name="family" value="${labourInstance?.leavedays?.family}"/>
+</div>
 

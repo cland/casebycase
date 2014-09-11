@@ -6,7 +6,7 @@ class Labour {
 	static attachmentable = true
 	String name
 	WorkHours workhours
-	//LeaveDays leavedays
+	LeaveDays leavedays
 	long createdBy   
 	long lastUpdatedBy
 	Date dateCreated 
