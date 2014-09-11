@@ -6,6 +6,7 @@
 		<title><g:appTitle title=""><g:message code="default.create.label" args="[entityName]" /></g:appTitle></title>
 		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
+		<g:javascript library="jstree" />
 	</head>
 	<body>
 		<a href="#create-case" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -62,6 +63,7 @@
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 				</fieldset>
+				
 			</g:uploadForm>
 			<!--  *** END TABS *** -->			
 			

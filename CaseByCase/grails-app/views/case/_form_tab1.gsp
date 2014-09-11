@@ -174,11 +174,14 @@
 		<div class="row">
 			<div class="cell"><label id="">Categorise:</label></div>
 			<div class="cell">
-			<span class="property-value" aria-labelledby="office-label">			
-					<input id="category" name="category_select" value=""/>	
-				</span>
-				<a href="#" onclick="addCaseCategory('${caseInstance?.id}');return false">Add Category</a>
-
+				
+				<select id="categories" multiple="multiple" name="categories" class="hide">
+					<g:each var="c" in="${caseInstance?.categories }" status="i">
+						<option id="category-${c.id }" selected='selected' value="${c.id }"></option>
+					</g:each>
+				</select>
+				
+				<div id="category_tree"></div>
 			</div>
 		</div>
 		
@@ -242,7 +245,7 @@
 			<div class="cell"><label id="">Case worker</label></div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:select id="assignedTo" name="assignedto.id" from="${com.cbc.User.list()}" optionKey="id" required="" value="${caseInstance?.assignedTo?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
+					<g:select id="assignedTo" name="assignedTo.id" from="${com.cbc.User.list()}" optionKey="id" required="" value="${caseInstance?.assignedTo?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
 				</span>
 			</div>
 		</div>
@@ -362,6 +365,7 @@ function addPersonClient(_id){
 		                
 		  } //end function addCaseCategory()
   $(document).ready(function() {
+	  
 	//** PERSON CLIENT Auto Complete Call **//
 		 $.widget( "custom.catcomplete", $.ui.autocomplete, {
 			_create: function() {
@@ -434,9 +438,46 @@ function addPersonClient(_id){
 				ui.item.value = ""
 			}
 		});
-  });
 
-  
+		//Categories jsTree
+		$('#category_tree').jstree({
+			"core" : {
+		    	"multiple" : false,
+		    	"animation" : 0,
+		    	'data' : {
+		    	    'url' :"${resource()}/category/ajaxNodeChildren?parentid=1",
+		    	    'data' : function (node) {
+		    	      		return { 'id' : node.id };
+		    	 		}
+		  		}
+			}
+		});
+	    // bind to events triggered on the tree
+	    $('#category_tree').on("changed.jstree", function (e, data) {
+	    	  _id = data.selected;
+	    	  _text = data.instance.get_node(data.selected[0]).text
+		      //console.log(data.selected + " = " + _text);
+		      $("#categories").html("<option id='category-" + _id + "' selected='selected' value='" + _id + "'></option>")
+		      //open any related tabs
+	    });
+	    $('#category_tree').on("loaded.jstree", function (e, data) {
+	    	var _tree = $('#category_tree')
+	    	 _tree.jstree('close_all')
+	    	 _tree.jstree('select_node', '${categoryInstance?.id}');		      
+	    });
+	    
+	    //form events:
+	    //** on status change, open/hide the outcome tab
+	    $("#status").on("change",function(e){
+	    	var _selected = $("#status option:selected").text();
+	    	if(_selected=='Closed' || _selected=='Case Closed - Intimidation' ){
+	    		$( "#tabs" ).tabs( "enable",  3  )
+	    	}else{
+	    		$( "#tabs" ).tabs(  "disable", 3  )
+	    	}
+	    });
+	   
+  });
 
 </script>
 

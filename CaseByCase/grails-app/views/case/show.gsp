@@ -1,5 +1,6 @@
 
 <%@ page import="com.cbc.Case" %>
+<g:set var="categoryInstance" value="${caseInstance?.categories?.find{true} }"/>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,7 +9,7 @@
 		<title><g:appTitle title=""><g:message code="default.show.label" args="[entityName]" /></g:appTitle></title>
 		<g:set var="page_sidenav" value="sidenav-public" />
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
-		<g:javascript library="jquerygrid" />
+		<g:javascript library="jquerygrid" />		
 		<link rel="stylesheet" href="/cbc/css/ui.jqgrid.css" type="text/css">
 	</head>
 	<body>
@@ -18,7 +19,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Case: ${caseInstance?.subject } (${caseInstance?.caseNumber })
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -75,7 +76,7 @@
 						<div class="row">
 							<div class="cell">
 								<label id="clients-label">
-									<g:message code="case.clients.label" default="Clients" />								
+									<g:message code="case.personclients.label" default="People" />								
 								</label>
 							</div>
 							<div class="cell">
@@ -85,7 +86,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="cell"><label id="orgclients-label"><g:message code="case.orgclients.label" default="Orgclients" /> </label></div>
+							<div class="cell"><label id="orgclients-label"><g:message code="case.orgclients.label" default="Organisation(s)" /> </label></div>
 							<div class="cell">
 								<g:each in="${caseInstance.orgclients}" var="o">
 									<span class="property-value" aria-labelledby="orgclients-label"><g:link controller="organisation" action="show" id="${o.id}">${o?.encodeAsHTML()}</g:link></span>
@@ -127,28 +128,27 @@
 								</span>
 							</div>
 						</div>
+						<div class="row">
+							<div class="cell"><label id="priority-label"><g:message code="case.priority.label" default="Priority" /></label></div>
+							<div class="cell">
+								<span class="property-value" aria-labelledby="priority-label">
+									${caseInstance?.priority?.encodeAsHTML()}
+								</span>
+							</div>
+						</div>
 						
 					</div> <!-- End Div-Table -->
-					<ol class="property-list case">
-					<g:if test="${caseInstance?.priority}">
-							<li class="fieldcontain">
-								<span id="priority-label" class="property-label"><g:message code="case.priority.label" default="Priority" /></span>
-								
-									<span class="property-value" aria-labelledby="priority-label"><g:link controller="casePriority" action="show" id="${caseInstance?.priority?.id}">${caseInstance?.priority?.encodeAsHTML()}</g:link></span>
-								
-							</li>
-							</g:if>
-					</ol>
+					
 					
 				</fieldset>
 				<br/>
 				<fieldset><legend>CATEGORISATION</legend>
 					<div class="table">
 							<div class="row">
-								<div class="cell"><label id="">Categorise:</label></div>
+								<div class="cell"><label id="">Category:</label></div>
 								<div class="cell">
 									<span class="property-value" aria-labelledby="office-label">
-										-- category fields here --
+										${categoryInstance?.getFullCategoryName(categoryInstance)}
 									</span>
 								</div>
 							</div>
@@ -202,15 +202,35 @@
 										<g:link controller="office" action="show" id="${caseInstance?.office?.id}">${caseInstance?.office?.encodeAsHTML()}</g:link>
 									</span>
 								</div>
+								<div class="cell">
+									<label id="assignedto"><g:message code="case.assignedTo.label" default="Case Worker" /></label>
+								</div>
+								<div class="cell">
+									<span class="property-value" aria-labelledby="office-label">
+										<g:if test="${caseInstance?.assignedTo}"><g:link controller="user" action="show" id="${caseInstance?.assignedTo?.id}">${caseInstance?.assignedTo?.encodeAsHTML()}</g:link></g:if>
+									</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="cell"><label id="respondent-label"><g:message code="case.respondent.label" default="Respondent" /></label></div>
+								<div class="cell">
+									<span class="property-value" aria-labelledby="office-label">${caseInstance?.respondent?.encodeAsHTML()}</span>
+								</div>
+								<div class="cell">
+									<label id="assignedto"></label>
+								</div>
+								<div class="cell">
+									<span class="property-value" aria-labelledby="office-label">
+										
+									</span>
+								</div>
 							</div>
 						</div>
 						<ol class="property-list case">
 							<g:if test="${caseInstance?.thisevent}">
 							<li class="fieldcontain">
-								<span id="thisevent-label" class="property-label"><g:message code="case.thisevent.label" default="Thisevent" /></span>
-								
+								<span id="thisevent-label" class="property-label"><g:message code="case.thisevent.label" default="Thisevent" /></span>			
 									<span class="property-value" aria-labelledby="thisevent-label"><g:link controller="event" action="show" id="${caseInstance?.thisevent?.id}">${caseInstance?.thisevent?.encodeAsHTML()}</g:link></span>
-								
 							</li>
 							</g:if>
 						</ol>
@@ -236,10 +256,8 @@
 							</g:if>	
 							<g:if test="${caseInstance?.outcome}">
 									<li class="fieldcontain">
-										<span id="outcome-label" class="property-label"><g:message code="case.outcome.label" default="Outcome" /></span>
-										
-											<span class="property-value" aria-labelledby="outcome-label"><g:link controller="caseOutcome" action="show" id="${caseInstance?.outcome?.id}">${caseInstance?.outcome?.encodeAsHTML()}</g:link></span>
-										
+										<span id="outcome-label" class="property-label"><g:message code="case.outcome.label" default="Outcome" /></span>										
+											<span class="property-value" aria-labelledby="outcome-label"><g:link controller="caseOutcome" action="show" id="${caseInstance?.outcome?.id}">${caseInstance?.outcome?.encodeAsHTML()}</g:link></span>										
 									</li>
 							</g:if>
 							<g:if test="${caseInstance?.amtRecovered}">
@@ -291,7 +309,7 @@
 					</div>
 				</div>
 				
-				<div id="tab-admin">
+				<div id="tab-admin" class="">
 					--history, created,update by etc --
 				</div>
 			</div>
@@ -313,7 +331,7 @@
 								active:cbc_params.active_tab(),
 								create: function (event,ui){	
 									//executed after is created								
-									$('#tabs').show()
+									$('#tabs').show()									
 								},
 								show: function(event,ui){
 									//on every tabs clicked

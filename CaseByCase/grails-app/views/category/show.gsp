@@ -51,14 +51,15 @@
 									bean="${categoryInstance}" field="name" /></span></li>
 					</g:if>
 
-					<g:if test="${categoryInstance?.category}">
+					
+					<g:if test="${categoryInstance?.parent}">
 						<li class="fieldcontain"><span id="category-label"
 							class="property-label"><g:message
-									code="category.category.label" default="Category" /></span> <span
+									code="category.parent.label" default="Parent" /></span> <span
 							class="property-value" aria-labelledby="category-label"><g:link
 									controller="category" action="show"
-									id="${categoryInstance?.category?.id}">
-									${categoryInstance?.category?.encodeAsHTML()}
+									id="${categoryInstance?.parent?.id}">
+									${categoryInstance?.parent?.encodeAsHTML()}
 								</g:link></span></li>
 					</g:if>
 					<g:if test="${categoryInstance?.categories}">
@@ -73,6 +74,11 @@
 							</g:each></li>
 					</g:if>
 				</ol>
+				<fieldset><legend>Transients</legend>
+					<b>Level:</b> ${categoryInstance.getLevel(categoryInstance) } <br/>
+					<b>Full name:</b> ${categoryInstance.getFullCategoryName(categoryInstance) } <br/>
+					<b>Parent Category at Level 1:</b> ${categoryInstance.getParentCategoryAtLevel(categoryInstance,1) } <br/>
+				</fieldset>
 			</div>
 
 			<div id="tab-2">

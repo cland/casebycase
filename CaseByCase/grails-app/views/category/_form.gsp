@@ -1,7 +1,5 @@
 <%@ page import="com.cbc.Category"%>
 
-
-
 <div
 	class="fieldcontain ${hasErrors(bean: categoryInstance, field: 'name', 'error')} required">
 	<label for="name"> <g:message code="category.name.label"
@@ -10,8 +8,7 @@
 	<g:textField name="name" required="" value="${categoryInstance?.name}" />
 </div>
 
-<g:hiddenField name="category.id" id="category"
-	value="${categoryInstance?.category?.id?categoryInstance.category.id:1}" />
+<g:hiddenField name="parent.id" id="parent" value="${categoryInstance?.parent?.id?categoryInstance.parent.id:1}" />
 
 <div
 	class="fieldcontain ${hasErrors(bean: categoryInstance, field: 'categories', 'error')} ">

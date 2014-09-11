@@ -63,7 +63,7 @@ class CaseController {
             respond caseInstance.errors, view:'edit'
             return
         }
-
+		
         caseInstance.save flush:true
 		
 		attachUploadedFilesTo(caseInstance)

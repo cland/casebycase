@@ -19,7 +19,7 @@ class Case {
 	CasePriority priority
 	/** Tab2: Categorisation **/
 	
-	//String category   	
+	   	
 	boolean childHeadedHouse
 	boolean specialCase
 	CaseStatus status
@@ -48,7 +48,7 @@ class Case {
 	
 	//static hasOne=[labour:Labour,eviction:Eviction]
 	static belongsTo = [office:Office]
-	static hasMany = [clients: Person,orgclients:Organisation,actions:Action]
+	static hasMany = [clients: Person,orgclients:Organisation,actions:Action,categories:Category]
     static constraints = {		
 		priority nullable:true
 		status nullable:true

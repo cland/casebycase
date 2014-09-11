@@ -1,4 +1,5 @@
 <%@ page import="com.cbc.Case" %>
+<g:set var="categoryInstance" value="${caseInstance?.categories?.find{true} }"/>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,6 +8,7 @@
 		<title><g:appTitle title=""><g:message code="default.edit.label" args="[entityName]" /></g:appTitle></title>
 		<g:set var="page_sidenav" value="sidenav-public" />
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
+		<g:javascript library="jstree" />
 	</head>
 	<body>
 		<a href="#edit-case" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -15,7 +17,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Case: ${caseInstance?.subject } (${caseInstance?.caseNumber })
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -69,7 +71,8 @@
 			
 		</div>
 		<script>
-			$(document).ready(function() {		
+			$(document).ready(function() {	
+					
 				$("#accordion" ).accordion({ active: cbc_params.active_sidebar() });
 			
 				$("#tabs").tabs(
@@ -78,6 +81,7 @@
 								create: function (event,ui){	
 									//executed after is created								
 									$('#tabs').show()
+									$( "#tabs" ).tabs( "option", "disabled", [ 1, 2, 3 ] )
 								},
 								show: function(event,ui){
 									//on every tabs clicked

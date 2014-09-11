@@ -184,7 +184,7 @@ class CategoryController {
 	def ajaxNodeChildren(){
 		def parentNode = Category.get(params?.parentid)
 		def nodeChildren = Category.createCriteria().list {
-			if(parentNode) eq('category', parentNode)
+			if(parentNode) eq('parent', parentNode)
 			order("name", "asc")
 		}
 		
