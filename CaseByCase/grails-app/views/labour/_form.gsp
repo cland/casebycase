@@ -148,26 +148,26 @@
 	</label>
 	<g:textField name="name" value="${labourInstance?.name}"/>
 </div>
-<div class="fieldcontain ${hasErrors(bean: workHoursInstance, field: 'overtime', 'error')} ">
-	<label for="name">
-		<g:message code="workHours.overtime.label" default="Overtime" />
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'workhours', 'error')} ">
+	<label for="workhours.overtime">
+		<g:message code="workhours.overtime.label" default="Overtime" />
 		
 	</label>
-	<g:textField name="overtime" value="${workHoursInstance?.overtime}"/>
+	<g:textField name="overtime" value="${labourInstance?.workhours?.overtime}"/>
 </div>
-<div class="fieldcontain ${hasErrors(bean: workHoursInstance, field: 'overtime', 'error')} ">
-	<label for="weekend">
-		<g:message code="workHours.overtime.label" default="Saturday/Sunday" />
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'workhours', 'error')} ">
+	<label for="workhours.weekend">
+		<g:message code="workhours.weekend.label" default="Saturday/Sunday" />
 		
 	</label>
-	<g:textField name="weekend" value="${workHoursInstance?.weekend}"/>
+	<g:textField name="weekend" value="${labourInstance?.workhours?.weekend}"/>
 </div>
-<div class="fieldcontain ${hasErrors(bean: workHoursInstance, field: 'holiday', 'error')} ">
-	<label for="holiday">
-		<g:message code="workHours.overtime.label" default="Public Holiday" />
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'workhours', 'error')} ">
+	<label for="workhours.holiday">
+		<g:message code="workhours.holiday.label" default="Public Holiday" />
 		
 	</label>
-	<g:textField name="holiday" value="${workHoursInstance?.holiday}"/>
+	<g:textField name="holiday" value="${labourInstance?.workhours?.holiday}"/>
 </div>
 
 
