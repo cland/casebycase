@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Events
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -27,40 +27,24 @@
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
+			<table class="dataTable">
 			<thead>
 					<tr>
-					
-						<g:sortableColumn property="topic" title="${message(code: 'event.topic.label', default: 'Topic')}" />
-					
-						<g:sortableColumn property="refno" title="${message(code: 'event.refno.label', default: 'Refno')}" />
-					
 						<g:sortableColumn property="date" title="${message(code: 'event.date.label', default: 'Date')}" />
-					
+						<g:sortableColumn property="topic" title="${message(code: 'event.topic.label', default: 'Event Name')}" />
 						<g:sortableColumn property="venue" title="${message(code: 'event.venue.label', default: 'Venue')}" />
-					
-						<g:sortableColumn property="description" title="${message(code: 'event.description.label', default: 'Description')}" />
-					
-						<g:sortableColumn property="objective" title="${message(code: 'event.objective.label', default: 'Objective')}" />
-					
+						<g:sortableColumn property="eventType" title="${message(code: 'event.eventtype.label', default: 'Type')}" />
+						<g:sortableColumn property="outcome" title="${message(code: 'event.outcome.label', default: 'Outcome')}" />					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${eventInstanceList}" status="i" var="eventInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${eventInstance.id}">${fieldValue(bean: eventInstance, field: "topic")}</g:link></td>
-					
-						<td>${fieldValue(bean: eventInstance, field: "refno")}</td>
-					
 						<td><g:formatDate date="${eventInstance.date}" /></td>
-					
+						<td><g:link action="show" id="${eventInstance.id}">${fieldValue(bean: eventInstance, field: "topic")}</g:link></td>
 						<td>${fieldValue(bean: eventInstance, field: "venue")}</td>
-					
-						<td>${fieldValue(bean: eventInstance, field: "description")}</td>
-					
-						<td>${fieldValue(bean: eventInstance, field: "objective")}</td>
-					
+						<td>${fieldValue(bean: eventInstance, field: "eventType")}</td>
+						<td>${fieldValue(bean: eventInstance, field: "outcome")}</td>				
 					</tr>
 				</g:each>
 				</tbody>

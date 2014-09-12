@@ -3,7 +3,7 @@
 <fieldset><legend>PCM DETAILS</legend>
 <div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'pcmDate', 'error')} required">
 	<label for="pcmDate">
-		<g:message code="pcm.pcmDate.label" default="Pcm Date" />
+		<g:message code="pcm.pcmDate.label" default="Please Call Me Date" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:datePicker name="pcmDate" precision="day"  value="${pcmInstance?.pcmDate}"  />
@@ -42,7 +42,7 @@
 </div>
 <div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'agegroup', 'error')} required">
 	<label for="agegroup">
-		<g:message code="pcm.agegroup.label" default="Agegroup" />
+		<g:message code="pcm.agegroup.label" default="Age Group" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="agegroup" name="agegroup.id" from="${com.cbc.AgeGroup.list()}" optionKey="id" required="" value="${pcmInstance?.agegroup?.id}" class="many-to-one"/>
@@ -58,7 +58,8 @@
 		<g:message code="pcm.description.label" default="Description" />
 		
 	</label>
-	<g:textField name="description" value="${pcmInstance?.description}"/>
+	<g:textArea name="description">${pcmInstance?.description}</g:textArea>
+	
 </div>
 <div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'referredBy', 'error')} ">
 	<label for="referredBy">

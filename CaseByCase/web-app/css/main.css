@@ -947,3 +947,8 @@ div .screen-dialog .content {width:99%;}
 .person-entry-label:hover,.org-entry-label:hover {background:#99ccff;Border:solid 1px #000;}
 .entry-rm {float:right;}
 .org-entry-label{}
+.dataTable tr td {
+	 border-bottom : solid 1px #FFDAB9;
+	 padding: 5px 0 5px 0;
+	 font-size:0.9em;
+}

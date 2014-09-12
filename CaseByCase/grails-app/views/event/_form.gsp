@@ -39,7 +39,8 @@
 		<g:message code="event.description.label" default="Description" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="description" required="" value="${eventInstance?.description}"/>
+	<g:textArea name="description">${eventInstance?.description}</g:textArea>
+	
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'objective', 'error')} ">
@@ -47,7 +48,7 @@
 		<g:message code="event.objective.label" default="Objective" />
 		
 	</label>
-	<g:textField name="objective" value="${eventInstance?.objective}"/>
+	<g:textArea name="objective">${eventInstance?.objective}</g:textArea>	
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'totalMale', 'error')} required">
@@ -65,8 +66,20 @@
 	</label>
 	<g:field name="totalFemale" type="number" value="${eventInstance.totalFemale}" required=""/>
 </div>
-
-
+<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'femaleYouth', 'error')} required">
+	<label for="femaleYouth">
+		<g:message code="event.femaleYouth.label" default="Female Youth" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="femaleYouth" type="number" value="${eventInstance.femaleYouth}" required=""/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'maleYouth', 'error')} required">
+	<label for="maleYouth">
+		<g:message code="event.maleYouth.label" default="Male Youth" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="maleYouth" type="number" value="${eventInstance.maleYouth}" required=""/>
+</div>
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'eventParticipants', 'error')} required">
 	<label for="eventParticipants">
 		<g:message code="event.eventParticipants.label" default="Event Participants" />
@@ -83,13 +96,7 @@
 	<g:select id="eventType" name="eventType.id" from="${com.cbc.EventType.list()}" optionKey="id" required="" value="${eventInstance?.eventType?.id}" class="many-to-one"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'femaleYouth', 'error')} required">
-	<label for="femaleYouth">
-		<g:message code="event.femaleYouth.label" default="Female Youth" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="femaleYouth" type="number" value="${eventInstance.femaleYouth}" required=""/>
-</div>
+
 
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'focusAreas', 'error')} ">
 	<label for="focusAreas">
@@ -98,38 +105,12 @@
 	</label>
 	<g:select name="focusAreas" from="${com.cbc.EventFocusArea.list()}" multiple="multiple" optionKey="id" size="5" value="${eventInstance?.focusAreas*.id}" class="many-to-many"/>
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'followers', 'error')} ">
-	<label for="followers">
-		<g:message code="event.followers.label" default="Followers" />
-		
-	</label>
-	<g:select name="followers" from="${com.cbc.User.list()}" multiple="multiple" optionKey="id" size="5" value="${eventInstance?.followers*.id}" class="many-to-many"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'funders', 'error')} ">
-	<label for="funders">
-		<g:message code="event.funders.label" default="Funders" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${eventInstance?.funders?}" var="f">
-    <li><g:link controller="funder" action="show" id="${f.id}">${f?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="funder" action="create" params="['event.id': eventInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'funder.label', default: 'Funder')])}</g:link>
-</li>
-</ul>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'maleYouth', 'error')} required">
-	<label for="maleYouth">
-		<g:message code="event.maleYouth.label" default="Male Youth" />
+<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'outcome', 'error')} required">
+	<label for="outcome">
+		<g:message code="event.outcome.label" default="Outcome" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="maleYouth" type="number" value="${eventInstance.maleYouth}" required=""/>
+	<g:select id="outcome" name="outcome.id" from="${com.cbc.EventOutcome.list()}" optionKey="id" required="" value="${eventInstance?.outcome?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'office', 'error')} required">
@@ -140,19 +121,20 @@
 	<g:select id="office" name="office.id" from="${com.cbc.Office.list()}" optionKey="id" required="" value="${eventInstance?.office?.id}" class="many-to-one"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'outcome', 'error')} required">
-	<label for="outcome">
-		<g:message code="event.outcome.label" default="Outcome" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="outcome" name="outcome.id" from="${com.cbc.EventOutcome.list()}" optionKey="id" required="" value="${eventInstance?.outcome?.id}" class="many-to-one"/>
-</div>
+
 
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'user', 'error')} required">
 	<label for="user">
-		<g:message code="event.user.label" default="User" />
+		<g:message code="event.user.label" default="Event caseworker" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="user" name="user.id" from="${com.cbc.User.list()}" optionKey="id" required="" value="${eventInstance?.user?.id}" class="many-to-one"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'followers', 'error')} ">
+	<label for="followers">
+		<g:message code="event.followers.label" default="Other workers" />
+		
+	</label>
+	<g:select name="followers" from="${com.cbc.User.list()}" multiple="multiple" optionKey="id" size="5" value="${eventInstance?.followers*.id}" class="many-to-many"/>
 </div>
 

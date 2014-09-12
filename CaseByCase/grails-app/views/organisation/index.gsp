@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Organisations
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -27,40 +27,22 @@
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
+			<table class="dataTable">
 			<thead>
-					<tr>
-					
+					<tr>		
 						<g:sortableColumn property="name" title="${message(code: 'organisation.name.label', default: 'Name')}" />
-					
 						<g:sortableColumn property="status" title="${message(code: 'organisation.status.label', default: 'Status')}" />
-					
 						<g:sortableColumn property="phoneNo" title="${message(code: 'organisation.phoneNo.label', default: 'Phone No')}" />
-					
 						<g:sortableColumn property="email" title="${message(code: 'organisation.email.label', default: 'Email')}" />
-					
-						<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'organisation.lastUpdatedBy.label', default: 'Last Updated By')}" />
-					
-						<g:sortableColumn property="createdBy" title="${message(code: 'organisation.createdBy.label', default: 'Created By')}" />
-					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${organisationInstanceList}" status="i" var="organisationInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
 						<td><g:link action="show" id="${organisationInstance.id}">${fieldValue(bean: organisationInstance, field: "name")}</g:link></td>
-					
 						<td>${fieldValue(bean: organisationInstance, field: "status")}</td>
-					
 						<td>${fieldValue(bean: organisationInstance, field: "phoneNo")}</td>
-					
 						<td>${fieldValue(bean: organisationInstance, field: "email")}</td>
-					
-						<td>${fieldValue(bean: organisationInstance, field: "lastUpdatedBy")}</td>
-					
-						<td>${fieldValue(bean: organisationInstance, field: "createdBy")}</td>
-					
 					</tr>
 				</g:each>
 				</tbody>

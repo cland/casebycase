@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'pcm.label', default: 'Pcm')}" />
+		<g:set var="entityName" value="${message(code: 'pcm.label', default: 'Please Call Me')}" />
 		<title><g:appTitle title=""><g:message code="default.list.label" args="[entityName]" /></g:appTitle></title>
 		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					PCM List
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -27,40 +27,28 @@
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
+			<table class="dataTable">
 			<thead>
-					<tr>
-					
-						<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'pcm.lastUpdatedBy.label', default: 'Last Updated By')}" />
-					
-						<g:sortableColumn property="createdBy" title="${message(code: 'pcm.createdBy.label', default: 'Created By')}" />
-					
-						<th><g:message code="pcm.agegroup.label" default="Agegroup" /></th>
-					
-						<g:sortableColumn property="content" title="${message(code: 'pcm.content.label', default: 'Content')}" />
-					
-						<g:sortableColumn property="dateCreated" title="${message(code: 'pcm.dateCreated.label', default: 'Date Created')}" />
-					
-						<g:sortableColumn property="description" title="${message(code: 'pcm.description.label', default: 'Description')}" />
-					
+					<tr>		
+						<g:sortableColumn property="pcmDate" title="${message(code: 'pcm.pcmDate.label', default: 'Date')}" />	
+						<th><g:message code="pcm.sender.label" default="Sender" /></th>								
+						<g:sortableColumn property="name" title="${message(code: 'pcm.name.label', default: 'Name')}" />						
+						<th><g:message code="pcm.agegroup.label" default="Age Group" /></th>
+						<g:sortableColumn property="Gender" title="${message(code: 'pcm.gender.label', default: 'Gender')}" />
+						<th><g:message code="pcm.referredTo.label" default="Referred To" /></th>
+						<g:sortableColumn property="referredBy" title="${message(code: 'pcm.referredBy.label', default: 'Referred By')}" />					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${pcmInstanceList}" status="i" var="pcmInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${pcmInstance.id}">${fieldValue(bean: pcmInstance, field: "lastUpdatedBy")}</g:link></td>
-					
-						<td>${fieldValue(bean: pcmInstance, field: "createdBy")}</td>
-					
-						<td>${fieldValue(bean: pcmInstance, field: "agegroup")}</td>
-					
-						<td>${fieldValue(bean: pcmInstance, field: "content")}</td>
-					
-						<td><g:formatDate date="${pcmInstance.dateCreated}" /></td>
-					
-						<td>${fieldValue(bean: pcmInstance, field: "description")}</td>
-					
+						<td><g:formatDate date="${pcmInstance.pcmDate}" /></td>
+						<td><g:link action="show" id="${pcmInstance.id}">${fieldValue(bean: pcmInstance, field: "sender")}</g:link></td>
+						<td>${fieldValue(bean: pcmInstance, field: "name")}</td>	
+						<td>${fieldValue(bean: pcmInstance, field: "agegroup")}</td>	
+						<td>${fieldValue(bean: pcmInstance, field: "Gender")}</td>
+						<td>${fieldValue(bean: pcmInstance, field: "referredTo")}</td>
+						<td>${fieldValue(bean: pcmInstance, field: "referredBy")}</td>
 					</tr>
 				</g:each>
 				</tbody>

@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Cases
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -27,7 +27,7 @@
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
+			<table class="dataTable">
 			<thead>
 					<tr>
 						<g:sortableColumn property="date" title="${message(code: 'case.dateopen.label', default: 'Date Opened')}" />
@@ -40,7 +40,7 @@
 				<tbody>
 				<g:each in="${caseInstanceList}" status="i" var="caseInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						<td><g:link action="show" id="${caseInstance.id}">${fieldValue(bean: caseInstance, field: "dateOpen")}</g:link></td>
+						<td><g:link action="show" id="${caseInstance.id}"><g:formatDate  date="${caseInstance?.dateOpen}"/></g:link></td>
 						<td><g:link action="show" id="${caseInstance.id}">${fieldValue(bean: caseInstance, field: "caseNumber")}</g:link></td>					
 						<td>${fieldValue(bean: caseInstance, field: "subject")}</td>					
 						<td>${fieldValue(bean: caseInstance, field: "status")}</td>					

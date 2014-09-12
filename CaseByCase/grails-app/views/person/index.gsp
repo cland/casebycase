@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					People
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -27,20 +27,14 @@
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
+			<table class="dataTable">
 			<thead>
 					<tr>
-					
-						<g:sortableColumn property="firstName" title="${message(code: 'person.firstName.label', default: 'First Name')}" />
-					
-						<g:sortableColumn property="lastName" title="${message(code: 'person.lastName.label', default: 'Last Name')}" />
-					
-						<g:sortableColumn property="title" title="${message(code: 'person.title.label', default: 'Title')}" />
-					
-						<g:sortableColumn property="knownAs" title="${message(code: 'person.knownAs.label', default: 'Known As')}" />
-					
-						<g:sortableColumn property="dateOfBirth" title="${message(code: 'person.dateOfBirth.label', default: 'Date Of Birth')}" />										
-					
+						<g:sortableColumn property="firstName" title="${message(code: 'person.firstName.label', default: 'First Name')}" />		
+						<g:sortableColumn property="lastName" title="${message(code: 'person.lastName.label', default: 'Last Name')}" />					
+						<g:sortableColumn property="title" title="${message(code: 'person.title.label', default: 'Title')}" />		
+						<g:sortableColumn property="gender" title="${message(code: 'person.gender.label', default: 'Gender')}" />		
+						<g:sortableColumn property="dateOfBirth" title="${message(code: 'person.dateOfBirth.label', default: 'Date Of Birth')}" />													
 					</tr>
 				</thead>
 				<tbody>
@@ -53,7 +47,7 @@
 					
 						<td>${fieldValue(bean: personInstance, field: "title")}</td>
 					
-						<td>${fieldValue(bean: personInstance, field: "knownAs")}</td>
+						<td>${fieldValue(bean: personInstance, field: "gender")}</td>
 					
 						<td><g:formatDate date="${personInstance.dateOfBirth}" /></td>
 					

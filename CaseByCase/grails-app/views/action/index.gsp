@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Actions
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -27,14 +27,14 @@
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
+			<table class="dataTable">
 			<thead>
 					<tr>					
 						<g:sortableColumn property="date" title="${message(code: 'action.date.label', default: 'Date')}" />																
-						<g:sortableColumn property="subject" title="${message(code: 'action.subject.label', default: 'Subject')}" />								
+						<g:sortableColumn property="subject" title="${message(code: 'action.subject.label', default: 'Action')}" />								
 						<g:sortableColumn property="followUpStatus" title="${message(code: 'action.followUpStatus.label', default: 'Follow Up Status')}" />
 						<g:sortableColumn property="actionOwner" title="${message(code: 'action.actionowner.label', default: 'Assigned Agent')}" />
-						<g:sortableColumn property="actionToFrom" title="${message(code: 'action.actionToFrom.label', default: 'Action To From')}" />					
+										
 						<g:sortableColumn property="caseNumber" title="${message(code: 'action.casenumber.label', default: 'Case Number')}" />					
 					</tr>
 				</thead>
@@ -46,7 +46,7 @@
 						<td>${fieldValue(bean: actionInstance, field: "subject")}</td>
 						<td>${fieldValue(bean: actionInstance, field: "followUpStatus")}</td>
 						<td>${actionInstance?.actionOwner}</td>
-						<td>${fieldValue(bean: actionInstance, field: "actionToFrom")}</td>					
+										
 						<td>
 							<g:if test="${actionInstance?.thiscase}">
 							<g:link action="show" controller="case" id="${actionInstance?.thiscase?.id}">${actionInstance?.thiscase}</g:link>

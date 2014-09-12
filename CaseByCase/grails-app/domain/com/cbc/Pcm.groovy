@@ -14,7 +14,7 @@ class Pcm {
 	//Client details
 	String name		
 	AgeGroup agegroup
-	Region region
+	
 	Location location
 	
 	//Case
@@ -31,6 +31,7 @@ class Pcm {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
 		location nullable:true
+		receiver nullable:true
 	}
 	String toString(){
 		"${name} ${sender}"

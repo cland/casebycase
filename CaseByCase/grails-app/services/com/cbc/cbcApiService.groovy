@@ -40,6 +40,12 @@ class cbcApiService {
 		if(user) return user?.person.toString()
 		return ""
 	}
+	Office getUserPrimaryOffice(User user = null){
+		if(user == null){
+			user = springSecurityService.getCurrentUser()
+		}
+		return user?.person?.getPrimaryOffice()
+	} //end function
 	
 	String getHomeLink(){
 		def status = ""
