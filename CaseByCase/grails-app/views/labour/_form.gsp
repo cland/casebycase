@@ -24,6 +24,11 @@
 		
 	</label>
 	<g:select name="tradeUnionMember" from="${labourInstance.constraints.tradeUnionMember.inList}" value="${labourInstance?.tradeUnionMember}" valueMessagePrefix="labour.tradeUnionMember" noSelection="['': '']"/>
+	<label for="specifyMembership">
+		<g:message code="labour.specifyMembership.label" default="Specify, if yes:" />
+		
+	</label>
+	<g:textField name="specifyMembership" value="${labourInstance?.specifyMembership}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'employerDetail', 'error')} ">
@@ -50,6 +55,14 @@
 	<g:select name="memberOfWorkUnion" from="${labourInstance.constraints.memberOfWorkUnion.inList}" value="${labourInstance?.memberOfWorkUnion}" valueMessagePrefix="labour.memberOfWorkUnion" noSelection="['': '']"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'name', 'error')} ">
+	<label for="name">
+		<g:message code="labour.name.label" default="Name" />
+		
+	</label>
+	<g:textField name="name" value="${labourInstance?.name}"/>
+</div>
+<fieldset><legend>TYPE OF PROBLEM</legend>
 <div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'wages', 'error')} ">
 	<label for="wages">
 		<g:message code="labour.wages.label" default="Wages" />
@@ -105,9 +118,9 @@
 	</label>
 	<g:select name="uif" from="${labourInstance.constraints.uif.inList}" value="${labourInstance?.uif}" valueMessagePrefix="labour.uif" noSelection="['': '']"/>
 </div>
+</fieldset>
 
-
-
+<fieldset><legend>LABOUR CONTRACT</legend>
 <div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'allowAmount', 'error')} ">
 	<label for="allowAmount">
 		<g:message code="labour.allowAmount.label" default="Allow Amount" />
@@ -127,27 +140,21 @@
 <div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'hoursWorked', 'error')} ">
 	<label for="hoursWorked">
 		<g:message code="labour.hoursWorked.label" default="Hours Worked" />
-		
 	</label>
+	<g:textField name="hoursWorkedValue" value="${labourInstance?.hoursWorkedValue}"/>
 	<g:select name="hoursWorked" from="${labourInstance.constraints.hoursWorked.inList}" value="${labourInstance?.hoursWorked}" valueMessagePrefix="labour.hoursWorked" noSelection="['': '']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'earnings', 'error')} ">
 	<label for="earnings">
 		<g:message code="labour.earnings.label" default="Earnings" />
-		
 	</label>
+	<g:textField name="earningsValue" value="${labourInstance?.earningsValue}"/>
 	<g:select name="earnings" from="${labourInstance.constraints.earnings.inList}" value="${labourInstance?.earnings}" valueMessagePrefix="labour.earnings" noSelection="['': '']"/>
 </div>
 
 
-<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'name', 'error')} ">
-	<label for="name">
-		<g:message code="labour.name.label" default="Name" />
-		
-	</label>
-	<g:textField name="name" value="${labourInstance?.name}"/>
-</div>
+<fieldset><legend>WORK HOURS</legend>
 <div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'workhours', 'error')} ">
 	<label for="workhours.overtime">
 		<g:message code="workhours.overtime.label" default="Overtime" />
@@ -169,7 +176,9 @@
 	</label>
 	<g:textField name="holiday" value="${labourInstance?.workhours?.holiday}"/>
 </div>
-<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'leavedays', 'error')} ">
+</fieldset>
+<fieldset><legend>LEAVE DAYS</legend>
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'annual', 'error')} ">
 	<label for="leavedays.annual">
 		<g:message code="leavedays.annual.label" default="Annual" />
 		
@@ -197,4 +206,5 @@
 	</label>
 	<g:textField name="family" value="${labourInstance?.leavedays?.family}"/>
 </div>
-
+</fieldset>
+</fieldset>

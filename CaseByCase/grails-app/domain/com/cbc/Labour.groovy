@@ -15,6 +15,7 @@ class Labour {
 	static transients = ["createdByName","lastUpdatedByName"]
 	
 	String tradeUnionMember
+	String specifyMembership
 	String employerDetail
 	String unionAtWork
 	String memberOfWorkUnion
@@ -25,11 +26,13 @@ class Labour {
 	String healthAndSafety
 	String dismisal
 	String uif
-	Integer workHours
+	//Integer workHours
 	Double allowAmount
 	Double allowBenefit
 	String hoursWorked
+	Integer hoursWorkedValue
 	String earnings
+	String earningsValue
 	
 	
 	
@@ -47,13 +50,16 @@ class Labour {
 		healthAndSafety nullable: true, blank: true, inList: ["Workmen't Compensation"]
 		dismisal nullable: true, blank: true, inList: ["Rentrenchment", "Work Performance", "Misconduct", "Contract"]
 		uif nullable: true, blank: true, inList: ["Non-Contribution", "Non-Registration", "UI.19"]
-		workHours nullable: true, blank: true
+		//workHours nullable: true, blank: true
 		allowAmount nullable: true, blank: true
 		allowBenefit nullable: true, blank: true
 		hoursWorked nullable: true, blank: true, inList: ["Weekly", "Fortnightly", "Monthly"]
 		earnings nullable: true, blank: true, inList: ["Weekly", "Fortnightly", "Monthly"]
-		//leavedays nullable: true, blank: true
+		leavedays nullable: true, blank: true
 		workhours nullable: true, blank: true
+		earningsValue nullable:true, blank:true
+		hoursWorkedValue nullable:true, blank:true
+		specifyMembership nullable:true, blank:true
 	}
 	String toString(){
 		"${name}"
