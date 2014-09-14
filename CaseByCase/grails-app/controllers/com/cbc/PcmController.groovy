@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class PcmController {
-
+	def cbcApiService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -40,8 +40,8 @@ class PcmController {
 			pcmInstance.location = location
 			pcmInstance = pcmInstance.merge()
 		}catch(Exception e){
-			println("Failed to save new location..."  + e)
-			flash.message = "Error: Failed to save login details due to an error saving person details."
+			println("Failed to save new location... "  + e)
+			flash.message = "Error: Failed to save form due to an error saving location details."
 			
 			render(view: "create", model: [pcmInstance: pcmInstance])
 			return

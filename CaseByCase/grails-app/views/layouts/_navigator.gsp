@@ -1,12 +1,12 @@
 <%@ page import="com.cbc.SystemRoles" %>
 
-	<ul class="sf-menu" id="main-top-menu">
+<ul class="sf-menu" id="main-top-menu">
 		
 		<li>
 			<a class="home-link" href="${createLink(uri: '/')}"><g:message code="default.home.label" default="Home"/></a>
 			<ul>
 		        <li><a class="aboutus-link" href="${createLink(uri: '/home/aboutus')}"><g:message code="default.aboutus.label" default="About us" /></a>	</li>
-				<li><a class="newsevents-link" href="${createLink(uri: '/home/news')}"><g:message code="default.newsevents.label" default="News"/></a></li>
+<%--				<li><a class="newsevents-link" href="${createLink(uri: '/home/news')}"><g:message code="default.newsevents.label" default="News"/></a></li>--%>
             </ul>
 		</li>
 		<sec:ifLoggedIn>
@@ -41,10 +41,10 @@
             <li>				
 				<a class="reports-link" href="${createLink(uri: '/')}"><g:message code="default.reports.label" default="Reports"/></a>
 				<ul>
-			        <li><a class="stdreports-link" href="${createLink(uri: '/home/')}"><g:message code="default.standard.label" default="Standard" /></a></li>		        
-					<li><a class="custreports-link" href="${createLink(uri: '/home/')}"><g:message code="default.custom.label" default="Custom"/></a></li>
-					<li><a class="eventreports-link" href="${createLink(uri: '/')}"><g:message code="default.events.label" default="Events"/></a></li>				
-					<li><a class="pcmreports-link" href="${createLink(uri: '/')}"><g:message code="default.pcm.label" default="PCM"/></a></li>
+			        <li><a class="stdreports-link" href="${createLink(uri: '/report/index')}"><g:message code="default.standard.label" default="Standard" /></a></li>		        
+					<li><a class="custreports-link" href="${createLink(uri: '/report/index')}"><g:message code="default.custom.label" default="Custom"/></a></li>
+					<li><a class="eventreports-link" href="${createLink(uri: '/report/index')}"><g:message code="default.events.label" default="Events"/></a></li>				
+					<li><a class="pcmreports-link" href="${createLink(uri: '/report/index')}"><g:message code="default.pcm.label" default="PCM"/></a></li>
             	</ul>
 			</li>				
 			<li>
@@ -78,18 +78,9 @@
 					<g:link controller="login" action="index" class="login">
 						<g:message code="default.login.label" default="Login"/>
 					</g:link>
-<%--				<g:link controller="home" action="index" class="home">--%>
-<%--					<g:message code="default.anonymous.label" default="Anonymous"/>--%>
-<%--				</g:link>--%>
-<%--				<ul>--%>
-<%--					<li>--%>
-<%--					<g:link controller="login" action="index" class="login">--%>
-<%--						<g:message code="default.login.label" default="Login"/>--%>
-<%--					</g:link>	--%>
-<%--					</li>--%>
-<%--				</ul>--%>
 			</li>
 		</sec:ifNotLoggedIn>
-	</ul>
+
+</ul>
 	
 

@@ -65,16 +65,12 @@
 			<h3><g:message code="default.reports.menu" default="Reports" /></h3>
 			<div>
 				<ul>
-					<li><g:link class="create" controller="person" action="create">
+					<li><g:link class="create" controller="report" action="index">
 							<g:message code="default.new.label" args="['Standard']" /></g:link></li>
-					<li><g:link class="list" controller="person" action="index">
+					<li><g:link class="list" controller="report" action="index">
 							<g:message code="default.list.label" args="['Advanced']" />
 						</g:link></li>
-					<li><g:link class="create" controller="organisation" action="create">
-							<g:message code="default.new.label" args="['Organisation']" /></g:link></li>
-					<li><g:link class="list" controller="organisation" action="index">
-							<g:message code="default.list.label" args="['Organisations']" />
-						</g:link></li>						
+									
 				</ul>
 			</div>
 						

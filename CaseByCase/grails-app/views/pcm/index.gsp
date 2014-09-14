@@ -23,7 +23,7 @@
 			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="list-pcm" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1><g:message code="default.list.label" args="['Please Call Me']" /></h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -33,8 +33,7 @@
 						<g:sortableColumn property="pcmDate" title="${message(code: 'pcm.pcmDate.label', default: 'Date')}" />	
 						<th><g:message code="pcm.sender.label" default="Sender" /></th>								
 						<g:sortableColumn property="name" title="${message(code: 'pcm.name.label', default: 'Name')}" />						
-						<th><g:message code="pcm.agegroup.label" default="Age Group" /></th>
-						<g:sortableColumn property="Gender" title="${message(code: 'pcm.gender.label', default: 'Gender')}" />
+						<g:sortableColumn property="agegroup" title="${message(code: 'pcm.agegroup.label', default: 'Age Group')}" />
 						<th><g:message code="pcm.referredTo.label" default="Referred To" /></th>
 						<g:sortableColumn property="referredBy" title="${message(code: 'pcm.referredBy.label', default: 'Referred By')}" />					
 					</tr>
@@ -44,9 +43,8 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						<td><g:formatDate date="${pcmInstance.pcmDate}" /></td>
 						<td><g:link action="show" id="${pcmInstance.id}">${fieldValue(bean: pcmInstance, field: "sender")}</g:link></td>
-						<td>${fieldValue(bean: pcmInstance, field: "name")}</td>	
-						<td>${fieldValue(bean: pcmInstance, field: "agegroup")}</td>	
-						<td>${fieldValue(bean: pcmInstance, field: "Gender")}</td>
+						<td>${fieldValue(bean: pcmInstance, field: "name")}</td>
+						<td>${fieldValue(bean: pcmInstance, field: "agegroup")}</td>
 						<td>${fieldValue(bean: pcmInstance, field: "referredTo")}</td>
 						<td>${fieldValue(bean: pcmInstance, field: "referredBy")}</td>
 					</tr>

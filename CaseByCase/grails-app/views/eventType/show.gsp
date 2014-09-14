@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Event: ${ }
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -35,7 +35,14 @@
 				</ul>
 				<div id="tab-1">
 					<ol class="property-list eventType">
-						
+						<g:if test="${eventTypeInstance?.name}">
+							<li class="fieldcontain">
+								<span id="name-label" class="property-label"><g:message code="eventType.name.label" default="Name" /></span>
+								
+									<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${eventTypeInstance}" field="name"/></span>
+								
+							</li>
+							</g:if>
 							<g:if test="${eventTypeInstance?.lastUpdatedBy}">
 							<li class="fieldcontain">
 								<span id="lastUpdatedBy-label" class="property-label"><g:message code="eventType.lastUpdatedBy.label" default="Last Updated By" /></span>
@@ -72,14 +79,7 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${eventTypeInstance?.name}">
-							<li class="fieldcontain">
-								<span id="name-label" class="property-label"><g:message code="eventType.name.label" default="Name" /></span>
-								
-									<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${eventTypeInstance}" field="name"/></span>
-								
-							</li>
-							</g:if>
+							
 						
 						</ol>
 				</div>
@@ -120,6 +120,6 @@
 						});		                
 			});  
 		</script>	
-</script>		
+	
 	</body>
 </html>

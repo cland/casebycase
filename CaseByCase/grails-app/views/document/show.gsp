@@ -16,14 +16,14 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Document: ${documentInstance?.name }
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
 			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="show-document" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<h1><g:message code="default.show.label" args="['Page']" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -49,28 +49,12 @@
 							<li class="fieldcontain">
 								<span id="content-label" class="property-label"><g:message code="document.content.label" default="Content" /></span>
 								
-									<span class="property-value" aria-labelledby="content-label"><g:fieldValue bean="${documentInstance}" field="content"/></span>
+								<span class="property-value" aria-labelledby="content-label">
+									${documentInstance?.content?.decodeHTML()} 
+								</span>
 								
 							</li>
-							</g:if>
-						
-							<g:if test="${documentInstance?.lastUpdatedBy}">
-							<li class="fieldcontain">
-								<span id="lastUpdatedBy-label" class="property-label"><g:message code="document.lastUpdatedBy.label" default="Last Updated By" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${documentInstance}" field="lastUpdatedBy"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${documentInstance?.createdBy}">
-							<li class="fieldcontain">
-								<span id="createdBy-label" class="property-label"><g:message code="document.createdBy.label" default="Created By" /></span>
-								
-									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${documentInstance}" field="createdBy"/></span>
-								
-							</li>
-							</g:if>
+							</g:if>										
 						
 							<g:if test="${documentInstance?.docType}">
 							<li class="fieldcontain">
@@ -80,25 +64,7 @@
 								
 							</li>
 							</g:if>
-						
-							<g:if test="${documentInstance?.dateCreated}">
-							<li class="fieldcontain">
-								<span id="dateCreated-label" class="property-label"><g:message code="document.dateCreated.label" default="Date Created" /></span>
-								
-									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${documentInstance?.dateCreated}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${documentInstance?.lastUpdated}">
-							<li class="fieldcontain">
-								<span id="lastUpdated-label" class="property-label"><g:message code="document.lastUpdated.label" default="Last Updated" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${documentInstance?.lastUpdated}" /></span>
-								
-							</li>
-							</g:if>
-						
+
 						</ol>
 				</div>
 				

@@ -16,46 +16,35 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					User List
+					Staff List
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
 			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="list-user" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<h1><g:message code="default.list.label" args="['Staff']" /></h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<table>
+			<table class="dataTable">
 			<thead>
 					<tr>
-					
-						<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
-					
-						
+						<g:sortableColumn property="person.firstName" title="${message(code: 'person.firstName.label', default: 'Name')}" />				
+						<g:sortableColumn property="person.lastName" title="${message(code: 'person.lastName.label', default: 'Surname')}" />					
+						<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Login Name')}" />
 						<g:sortableColumn property="email" title="${message(code: 'user.email.label', default: 'Email')}" />
-					
-						<g:sortableColumn property="lastUpdatedByName" title="${message(code: 'user.lastUpdatedBy.label', default: 'Last Updated By')}" />
-					
-						<g:sortableColumn property="createdByName" title="${message(code: 'user.createdBy.label', default: 'Created By')}" />
-					
-						
+						<g:sortableColumn property="person.office" title="${message(code: 'person.office.label', default: 'Office')}" />		
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${userInstanceList}" status="i" var="userInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
+						<td>${fieldValue(bean: userInstance, field: "person.firstName")}</td>
+						<td>${fieldValue(bean: userInstance, field: "person.lastName")}</td>
 						<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
-					
-					
 						<td>${fieldValue(bean: userInstance, field: "email")}</td>
-					
-						<td>${fieldValue(bean: userInstance, field: "lastUpdatedByName")}</td>
-					
-						<td>${fieldValue(bean: userInstance, field: "createdByName")}</td>				
-					
+						<td>${fieldValue(bean: userInstance, field: "person.office")}</td>	
 					</tr>
 				</g:each>
 				</tbody>

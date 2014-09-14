@@ -173,6 +173,7 @@ def groupManagerService
 				 '/organisation/orglist/**',
 				 '/country/**',
 				 '/region/**',
+				 '/report/**',
 				 '/**/show/**',
 				  '/**/index/**']) {
 				  new Requestmap( url: url, configAttribute:'isFullyAuthenticated()').save()

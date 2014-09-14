@@ -68,7 +68,9 @@ class User {
 	protected void encodePassword() {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
-	
+	String getFullname(){
+		return person?.toString()
+	}
 	String toString(){	
 		return username 
 	}

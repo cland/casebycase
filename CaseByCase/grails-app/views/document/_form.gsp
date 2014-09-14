@@ -15,23 +15,9 @@
 		<g:message code="document.content.label" default="Content" />
 		
 	</label>
-	<g:textField name="content" value="${documentInstance?.content}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: documentInstance, field: 'lastUpdatedBy', 'error')} required">
-	<label for="lastUpdatedBy">
-		<g:message code="document.lastUpdatedBy.label" default="Last Updated By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="lastUpdatedBy" type="number" value="${documentInstance.lastUpdatedBy}" required=""/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: documentInstance, field: 'createdBy', 'error')} required">
-	<label for="createdBy">
-		<g:message code="document.createdBy.label" default="Created By" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:field name="createdBy" type="number" value="${documentInstance.createdBy}" required=""/>
+	<ckeditor:editor name="content" height="400px" width="80%" toolbar="custom">
+		${documentInstance?.content}
+	</ckeditor:editor>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: documentInstance, field: 'docType', 'error')} ">

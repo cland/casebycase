@@ -21,7 +21,7 @@
 			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="create-user" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
+			<h1><g:message code="default.create.label" args="['Staff']" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>

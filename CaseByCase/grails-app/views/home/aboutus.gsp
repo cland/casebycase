@@ -95,6 +95,7 @@
 			h1 {font-weight:bold;font-size:1.3em;}
 			.caption {padding:5px;}
 		</style>
+		<g:render template="head"></g:render>
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -103,7 +104,7 @@
 			<g:render template="../layouts/sidenav-public"/>
 		</div>
 		<div id="page-body" role="main">
-			<h1>About us</h1>
+			
 			<div class="content">
 			${com.cbc.Document.findByName('$aboutus')?.content?.decodeHTML() }
 			
@@ -181,5 +182,28 @@
 			<br/>
 		</div>
 		</div>
+<script>
+	$(document).ready(function() {		
+		$("#accordion" ).accordion({ active: cbc_params.active_sidebar() });
+	
+		$("#tabs").tabs(
+				{
+				active:cbc_params.active_tab(),
+				create: function (event,ui){	
+					//executed after is created								
+					$('#tabs').show()
+				},
+				show: function(event,ui){
+					//on every tabs clicked
+				},
+				beforeLoad : function(event, ui) {
+						ui.jqXHR.error(function() {
+							ui.panel
+							.html("Couldn't load this tab. We'll try to fix this as soon as possible. ");
+						});
+					}
+		});		                
+	});  
+</script>		
 	</body>
 </html>

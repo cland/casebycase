@@ -25,8 +25,8 @@ class cbcApiService {
 		if(!params?.location?.id){
 			if(params?.location?.id == ""){
 				location = new Location(params?.location)
-				if(!location.save(flush:true)){
-					throw new Exception("Failed to save new location..."  + location?.errors)
+				if(!location.save()){
+					throw new Exception("Failed to save new location... "  + location?.errors)
 				}				
 			}
 		}else{
