@@ -14,6 +14,11 @@ class OfficeController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 50, 100)
+		
+		Office o = Office.findByName("Athlone AO")
+		Office mo = Office.findByName("Main Office")
+		println ">> Is Athlone reviewer: " + groupManagerService.isOfficeReviewer(o)
+		//println ">> Is Main Office OCO: " + groupManagerService.isOfficeAdmin(mo)
         respond Office.list(params), model:[officeInstanceCount: Office.count()]
     }
 

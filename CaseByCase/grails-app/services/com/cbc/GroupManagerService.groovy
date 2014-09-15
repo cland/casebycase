@@ -1,5 +1,6 @@
 package com.cbc
 
+import com.cbc.location.Region
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.*
 
@@ -26,11 +27,35 @@ class GroupManagerService {
 		
 		println "... Done generating Office Groups..."
     }// end generateGroups
-	private String getGroupNamePrefix(Office office){
-		return "GROUP_" + office?.code?.toString()?.toUpperCase()?.replace(" ","_")
+	
+	def generateRegionGroups(Region region) {
+		println "... Generating Region Groups..."
+		//def _tmp = getGroupNamePrefix(office) //"GROUP_" + office?.code?.toString()?.toUpperCase()?.replace(" ","_")
+		def _tmp_desc = region?.name?.toString()	
+		def regionPCOGroup = new RoleGroup(name: _GroupName(region,SystemRoles.ROLE_PCO.getKey()),description:_tmp_desc + " - National Co-Ordinators - Statistical Information Only" ).save(flush:true)		
+		RoleGroupRole.create regionPCOGroup, Role.findByAuthority(SystemRoles.ROLE_PCO.value)		
+		println "... Done generating Region Groups..."
+	}// end generateRegion Groups
+	def getRegionGroups(Region region){
+		List <RoleGroup> grplist = []
+		
+		RoleGroup grp = RoleGroup.findByName(_GroupName(region,SystemRoles.ROLE_PCO.getKey()))
+		if(grp) grplist.add(grp)
+		
+		return grplist
 	}
-	private String _GroupName(Office office, def rolename){
-		return getGroupNamePrefix(office) + "_" + rolename
+	private String getGroupNamePrefix(Object obj){
+		if(obj.instanceOf(Office)){
+			Office office = (Office)obj
+			return "GROUP_" + office?.code?.toString()?.toUpperCase()?.replace(" ","_")
+		}
+		if(obj.instanceOf(Region)){
+			Region region = (Region)obj
+			return "GROUP_REGION_" + region?.code?.toString()?.toUpperCase()?.replace(" ","_")
+		}
+	}
+	private String _GroupName(Object obj, def rolename){
+		return getGroupNamePrefix(obj) + "_" + rolename
 	}
 	def getOfficeGroups(Office office){
 		List <RoleGroup> grplist = []
@@ -62,6 +87,14 @@ class GroupManagerService {
 		officeReaderGroup?.delete flush:true
 		officeReviewerGroup?.delete flush:true
 	}
+	
+	def removeRegionGroups(Region region){
+		def _tmp_desc = region?.name?.toString()			
+		def regionPCOGroup = RoleGroup.findByName(_GroupName(region,SystemRoles.ROLE_PCO.getKey()))			
+		RoleGroupRole.remove regionPCOGroup, Role.findByAuthority(SystemRoles.ROLE_PCO.value)
+		regionPCOGroup?.delete flush:true
+	}
+	
 	/**
 	 * On user for, expect to select roles for user and then based on those roles add to the given office groups
 	 * @param user
@@ -133,9 +166,72 @@ class GroupManagerService {
 	boolean isDeveloper(){
 		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_DEVELOPER.value))
 	}
+	/**
+	 * Can read statistical information at a national level
+	 * @return
+	 */
+	boolean isNCO(){
+		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_NCO.value))
+	}
+	/**
+	 * Can read statistical information at a regional level for a given region
+	 * @param region
+	 * @return
+	 */
+	boolean isPCO(Region region){
+		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(region,SystemRoles.ROLE_PCO?.getKey()))		
+		return isMember(roleGroup)
+	}
+	/**
+	 * Can manage office users, office information, create/edit cases.
+	 * @param office
+	 * @return
+	 */
+	boolean isOfficeAdmin(Office office){
+		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_OCO?.getKey()))		
+		return isMember(roleGroup)
+	}
+	/**
+	 * Can create/edit cases and actions only
+	 * @param office
+	 * @return
+	 */
+	boolean isOfficeWorker(Office office){
+		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_CWO?.getKey()))		
+		return isMember(roleGroup)
+	}
+	/**
+	 * Can read and edit certain cases that are marked as private
+	 * @param office
+	 * @return
+	 */
+	boolean isOfficeSpecialWorker(Office office){
+		return false
+	}
 	
-	boolean isReviewer(){
-		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_REVIEWER.value))
+	/**
+	 * Can read only - full information i.e. including personal information like firstname, surname
+	 * @param office
+	 * @return
+	 */
+	boolean isOfficeReviewer(Office office){
+		println "\tGetting rolegroup for '" + _GroupName(office,SystemRoles.ROLE_REVIEWER?.getKey()) + "'"
+		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_REVIEWER?.getKey()))		
+		return isMember(roleGroup)
+	}
+	/**
+	 * Can read only - limited information i.e. NO personal information such as surname or first name
+	 * @param office
+	 * @return
+	 */
+	boolean isOfficeReader(Office office){
+		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_READER?.getKey()))		
+		return isMember(roleGroup)
+	}
+	
+	boolean isMember(RoleGroup roleGroup){	
+		println("\t\tRoles: " + roleGroup.getAuthorities())	
+		return SpringSecurityUtils.ifAnyGranted(roleGroup.getAuthorities())		
 	}
 	Long getCurrentUserId(){
 		long userId = 0 //.currentUser?.id //

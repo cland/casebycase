@@ -103,6 +103,9 @@ class Person {
 	def onLoad = {
 		// your code goes here
 	}
+	String getSecureFirstName(){		
+		return firstName
+	}
 	String toString(){
 		return firstName + " " + lastName
 	}

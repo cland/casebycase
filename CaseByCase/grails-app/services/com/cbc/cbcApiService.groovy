@@ -1,5 +1,6 @@
 package com.cbc
 
+import javassist.expr.Instanceof;
 import grails.plugin.springsecurity.*
 import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap;
 //import org.codehaus.groovy.grails.plugins.springsecurity.*
@@ -46,6 +47,15 @@ class cbcApiService {
 		}
 		return user?.person?.getPrimaryOffice()
 	} //end function
+	boolean canView(Object obj){
+		
+		if(obj.instanceOf(Person)){
+			Person p = obj
+			
+		}else(obj.instanceOf(Office)){
+			Office o = obj
+		}
+	} //end can view
 	
 	String getHomeLink(){
 		def status = ""
@@ -81,7 +91,7 @@ class cbcApiService {
 		}
 		return max
 	} //end helper method findUpperIndex
-	
+		
 	@Deprecated
 	/**
 	 * is the function isAdmin() in GroupManagerService instead
@@ -96,7 +106,7 @@ class cbcApiService {
 	}
 	@Deprecated
 	boolean isReviewer(){
-		return groupManagerService.isReviewer()
+		return groupManagerService.isNCO()
 	}
 	@Deprecated
 	Long getCurrentUserId(){
