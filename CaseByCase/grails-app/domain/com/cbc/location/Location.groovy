@@ -15,7 +15,7 @@ class Location {
 		description blank:true,nullable:true
 	}
 	String toString(){
-		""
+		"Country:${country},Region:${region},District:${district},Municipality:${municipality},MainPlace:${mainplace},Suburb:${suburb}"
 	}
 	def beforeInsert = {
 		

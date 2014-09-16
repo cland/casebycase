@@ -13,17 +13,19 @@ class GroupManagerService {
 		def _tmp_desc = office?.name?.toString()
 
 		
-		def officeAdminGroup = new RoleGroup(name: _GroupName(office,SystemRoles.ROLE_OCO.getKey()),description:_tmp_desc + " - Admins" ).save(flush:true)		
-		def officeWorkerGroup = new RoleGroup(name:_GroupName(office,SystemRoles.ROLE_CWO.getKey()),description:_tmp_desc + " - Case Workers").save(flush:true)
-		def officeSPGroup = new RoleGroup(name:_GroupName(office,SystemRoles.ROLE_SPO.getKey()),description:_tmp_desc + " - Special Workers").save(flush:true)
-		def officeReviewerGroup = new RoleGroup(name:_GroupName(office,SystemRoles.ROLE_REVIEWER.getKey()),description:_tmp_desc + " - Readers Full").save(flush:true)
-		def officeReaderGroup = new RoleGroup(name:_GroupName(office,SystemRoles.ROLE_REVIEWER.getKey()),description:_tmp_desc + " - Readers Limited").save(flush:true)
+		def officeAdminGroup = new RoleGroup(name: _GroupName(office,SystemRoles.ROLE_OCO.getKey()),description:_tmp_desc + " - " + SystemRoles.ROLE_OCO.description ).save()		
+		def officeWorkerGroup = new RoleGroup(name:_GroupName(office,SystemRoles.ROLE_CWO.getKey()),description:_tmp_desc + " - " +SystemRoles.ROLE_CWO.description).save()
+		def officeSPGroup = new RoleGroup(name:_GroupName(office,SystemRoles.ROLE_SPO.getKey()),description:_tmp_desc + " - " + SystemRoles.ROLE_SPO.description).save()
+		def officeReviewerGroup = new RoleGroup(name:_GroupName(office,SystemRoles.ROLE_REVIEWER.getKey()),description:_tmp_desc + " - " + SystemRoles.ROLE_REVIEWER.description).save()
+		def officeReaderGroup = new RoleGroup(name:_GroupName(office,SystemRoles.ROLE_READER.getKey()),description:_tmp_desc + " - " + SystemRoles.ROLE_READER.description).save()
 		
-		RoleGroupRole.create officeAdminGroup, Role.findByAuthority(SystemRoles.ROLE_OCO.value)
-		RoleGroupRole.create officeWorkerGroup, Role.findByAuthority(SystemRoles.ROLE_CWO.value)
-		RoleGroupRole.create officeSPGroup, Role.findByAuthority(SystemRoles.ROLE_SPO.value)
-		RoleGroupRole.create officeReviewerGroup, Role.findByAuthority(SystemRoles.ROLE_REVIEWER.value)
-		RoleGroupRole.create officeReaderGroup, Role.findByAuthority(SystemRoles.ROLE_READER.value)
+		
+		if(officeAdminGroup?.hasErrors()) println("RoleGroup Error: " + officeAdminGroup.errors)
+		if(officeAdminGroup) RoleGroupRole.create officeAdminGroup, Role.findByAuthority(SystemRoles.ROLE_OCO.value)
+		if(officeWorkerGroup) RoleGroupRole.create officeWorkerGroup, Role.findByAuthority(SystemRoles.ROLE_CWO.value)
+		if(officeSPGroup) RoleGroupRole.create officeSPGroup, Role.findByAuthority(SystemRoles.ROLE_SPO.value)
+		if(officeReviewerGroup) RoleGroupRole.create officeReviewerGroup, Role.findByAuthority(SystemRoles.ROLE_REVIEWER.value)
+		if(officeReaderGroup) RoleGroupRole.create officeReaderGroup, Role.findByAuthority(SystemRoles.ROLE_READER.value)
 		
 		println "... Done generating Office Groups..."
     }// end generateGroups
@@ -188,7 +190,6 @@ class GroupManagerService {
 	 * @return
 	 */
 	boolean isOfficeAdmin(Office office){
-		println "\tGetting rolegroup for '" + _GroupName(office,SystemRoles.ROLE_OCO?.getKey()) + "'"
 		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_OCO?.getKey()))		
 		return isMember(roleGroup)
 	}
@@ -216,7 +217,6 @@ class GroupManagerService {
 	 * @return
 	 */
 	boolean isOfficeReviewer(Office office){
-		println "\tGetting rolegroup for '" + _GroupName(office,SystemRoles.ROLE_REVIEWER?.getKey()) + "'"
 		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_REVIEWER?.getKey()))		
 		return isMember(roleGroup)
 	}
@@ -231,9 +231,8 @@ class GroupManagerService {
 		return isMember(roleGroup)
 	}
 	
-	boolean isMember(RoleGroup roleGroup){	
-		println("\t\tRoles: " + roleGroup.toAutoCompleteMap() + " " + roleGroup.getAuthorities()*.authority)	
-		return SpringSecurityUtils.ifAnyGranted(roleGroup.getAuthorities()*.authority?.toString())		
+	boolean isMember(RoleGroup roleGroup){		
+		return SpringSecurityUtils.ifAnyGranted(roleGroup.getAuthorities()*.authority?.join(","))		
 	}
 	Long getCurrentUserId(){
 		long userId = 0 //.currentUser?.id //
@@ -254,5 +253,23 @@ class GroupManagerService {
 		User user = getUser(id)
 		if(user) return user?.person.toString()
 		return ""
+	}
+	
+	def assignOfficeGroupRoles(Office office){
+		def _tmp_desc = office?.name?.toString()
+		
+		def officeAdminGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_OCO.getKey()))
+		def officeWorkerGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_CWO.getKey()))
+		def officeSPGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_SPO.getKey()))
+		def officeReviewerGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_REVIEWER.getKey()))
+		def officeReaderGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_READER.getKey()))		
+
+		if(!officeReaderGroup) officeReaderGroup = new RoleGroup(name:_GroupName(office,SystemRoles.ROLE_READER.getKey()),description:_tmp_desc + " - " + SystemRoles.ROLE_READER.description).save()
+		
+		if(officeAdminGroup) RoleGroupRole.create officeAdminGroup, Role.findByAuthority(SystemRoles.ROLE_OCO.value)
+		if(officeWorkerGroup) RoleGroupRole.create officeWorkerGroup, Role.findByAuthority(SystemRoles.ROLE_CWO.value)
+		if(officeSPGroup) RoleGroupRole.create officeSPGroup, Role.findByAuthority(SystemRoles.ROLE_SPO.value)
+		if(officeReviewerGroup) RoleGroupRole.create officeReviewerGroup, Role.findByAuthority(SystemRoles.ROLE_REVIEWER.value)
+		if(officeReaderGroup) RoleGroupRole.create officeReaderGroup, Role.findByAuthority(SystemRoles.ROLE_READER.value)
 	}
 } //END CLASS

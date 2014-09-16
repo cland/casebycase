@@ -41,7 +41,7 @@ class RoleGroupRole implements Serializable {
 
 	static RoleGroupRole create(RoleGroup roleGroup, Role role, boolean flush = false) {
 		def instance = new RoleGroupRole(roleGroup: roleGroup, role: role)
-		instance.save(flush: flush, insert: true)
+		instance.save(flush: flush, insert: true)		
 		instance
 	}
 

@@ -17,8 +17,8 @@ class OfficeController {
 		
 		Office o = Office.findByName("Athlone AO")
 		Office mo = Office.findByName("Main Office")
-		//println ">> Is Athlone reviewer: " + groupManagerService.isOfficeAdmin(o)
-		println ">> Is Main Office OCO: " + groupManagerService.isOfficeAdmin(mo)
+		println ">> Is Athlone reviewer: " + groupManagerService.isOfficeReviewer(o)
+		//println ">> Is Main Office OCO: " + groupManagerService.isOfficeAdmin(mo)
         respond Office.list(params), model:[officeInstanceCount: Office.count()]
     }
 
@@ -44,8 +44,10 @@ class OfficeController {
 		//Save location information
 		try{
 			Location location = cbcApiService.saveLocation(params)
-			officeInstance.location = location
-			officeInstance = officeInstance.merge()
+			if(location){
+				officeInstance.location = location
+				officeInstance = officeInstance.merge()
+			}
 		}catch(Exception e){
 			println("Failed to save new location..."  + e)
 			flash.message = "Error: Failed to save login details due to an error saving person details."
@@ -84,19 +86,18 @@ class OfficeController {
 		//Save location information
 		try{
 			Location location = cbcApiService.saveLocation(params)
-			officeInstance.location = location
+			if(location) officeInstance.location = location
 		}catch(Exception e){
 			println("Failed to save new location..."  + e)
-			flash.message = "Error: Failed to save login details due to an error saving person details."
+			flash.message = "Error: Failed to form due to an error saving location details."
 			
 			render(view: "create", model: [officeInstance: officeInstance])
 			return
 		}
         officeInstance.save flush:true
-		if(params?.gengrps == true){
-			//generate groups
-			groupManagerService.generateOfficeGroups(officeInstance)
-		}
+		
+		//groupManagerService.assignOfficeGroupRoles(officeInstance)
+
         request.withFormat {
             form {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Office.label', default: 'Office'), officeInstance.toString()])

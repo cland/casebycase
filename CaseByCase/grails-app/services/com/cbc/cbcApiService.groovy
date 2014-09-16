@@ -22,16 +22,14 @@ class cbcApiService {
 	
 	
 	Location saveLocation(params) throws Exception{
-		def location = null
-		if(!params?.location?.id){
-			if(params?.location?.id == ""){
-				location = new Location(params?.location)
-				if(!location.save()){
+		def location = null	
+		if(!params?.location?.id){		
+			if(params?.location?.id == ""){				
+				location = new Location(params?.location).save()			
+				if(location.hasErrors()){
 					throw new Exception("Failed to save new location... "  + location?.errors)
-				}				
+				}
 			}
-		}else{
-			println("No location to deal with ??? ")
 		}
 		return location
 	}

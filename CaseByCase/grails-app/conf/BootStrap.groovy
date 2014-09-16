@@ -194,6 +194,8 @@ def groupManagerService
 			 //strictly admin
 			 for (String url in [ '/requestmap/**',
 				 '/admin/**',
+				 '/**/delete/**',
+				 '/office/delete/**',
 				 '/role/**',
 				 '/roleGroup/**',
 				 '/user/**']) {

@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Role Group
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -53,7 +53,14 @@
 								
 							</li>
 							</g:if>
-						
+							<li class="fieldcontain">
+								<span id="authorities-label" class="property-label"><g:message code="roleGroup.authorities.label" default="Authorities" /></span>
+								
+									<span class="property-value" aria-labelledby="description-label">
+										${roleGroupInstance?.getAuthorities()*.authority?.join(",") }
+									</span>
+								
+							</li>
 						</ol>
 				</div>
 				
