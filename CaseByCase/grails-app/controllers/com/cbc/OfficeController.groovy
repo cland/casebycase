@@ -17,8 +17,8 @@ class OfficeController {
 		
 		Office o = Office.findByName("Athlone AO")
 		Office mo = Office.findByName("Main Office")
-		println ">> Is Athlone reviewer: " + groupManagerService.isOfficeReviewer(o)
-		//println ">> Is Main Office OCO: " + groupManagerService.isOfficeAdmin(mo)
+		//println ">> Is Athlone reviewer: " + groupManagerService.isOfficeAdmin(o)
+		println ">> Is Main Office OCO: " + groupManagerService.isOfficeAdmin(mo)
         respond Office.list(params), model:[officeInstanceCount: Office.count()]
     }
 

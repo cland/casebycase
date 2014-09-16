@@ -188,6 +188,7 @@ class GroupManagerService {
 	 * @return
 	 */
 	boolean isOfficeAdmin(Office office){
+		println "\tGetting rolegroup for '" + _GroupName(office,SystemRoles.ROLE_OCO?.getKey()) + "'"
 		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_OCO?.getKey()))		
 		return isMember(roleGroup)
 	}
@@ -225,13 +226,14 @@ class GroupManagerService {
 	 * @return
 	 */
 	boolean isOfficeReader(Office office){
-		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_READER?.getKey()))		
+		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_READER?.getKey()))	
+			
 		return isMember(roleGroup)
 	}
 	
 	boolean isMember(RoleGroup roleGroup){	
-		println("\t\tRoles: " + roleGroup.getAuthorities())	
-		return SpringSecurityUtils.ifAnyGranted(roleGroup.getAuthorities())		
+		println("\t\tRoles: " + roleGroup.toAutoCompleteMap() + " " + roleGroup.getAuthorities()*.authority)	
+		return SpringSecurityUtils.ifAnyGranted(roleGroup.getAuthorities()*.authority?.toString())		
 	}
 	Long getCurrentUserId(){
 		long userId = 0 //.currentUser?.id //
