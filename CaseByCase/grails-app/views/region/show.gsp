@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Region: ${regionInstance?.name }
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -31,7 +31,7 @@
 			<div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Other</a></li>		
+					<li><a href="#tab-2">Access Rights</a></li>	
 				</ul>
 				<div id="tab-1">
 					<ol class="property-list region">
@@ -53,25 +53,7 @@
 								
 							</li>
 							</g:if>
-						
-							<g:if test="${regionInstance?.lastUpdatedBy}">
-							<li class="fieldcontain">
-								<span id="lastUpdatedBy-label" class="property-label"><g:message code="region.lastUpdatedBy.label" default="Last Updated By" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${regionInstance}" field="lastUpdatedBy"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${regionInstance?.createdBy}">
-							<li class="fieldcontain">
-								<span id="createdBy-label" class="property-label"><g:message code="region.createdBy.label" default="Created By" /></span>
-								
-									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${regionInstance}" field="createdBy"/></span>
-								
-							</li>
-							</g:if>
-						
+
 							<g:if test="${regionInstance?.cities}">
 							<li class="fieldcontain">
 								<span id="cities-label" class="property-label"><g:message code="region.cities.label" default="Cities" /></span>
@@ -91,41 +73,41 @@
 								
 							</li>
 							</g:if>
-						
-							<g:if test="${regionInstance?.dateCreated}">
-							<li class="fieldcontain">
-								<span id="dateCreated-label" class="property-label"><g:message code="region.dateCreated.label" default="Date Created" /></span>
-								
-									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${regionInstance?.dateCreated}" /></span>
-								
-							</li>
-							</g:if>
-						
+
 							<g:if test="${regionInstance?.districts}">
 							<li class="fieldcontain">
 								<span id="districts-label" class="property-label"><g:message code="region.districts.label" default="Districts" /></span>
-								
 									<g:each in="${regionInstance.districts}" var="d">
-									<span class="property-value" aria-labelledby="districts-label"><g:link controller="district" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></span>
-									</g:each>
-								
+										<span class="property-value" aria-labelledby="districts-label"><g:link controller="district" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></span>
+									</g:each>							
 							</li>
-							</g:if>
-						
-							<g:if test="${regionInstance?.lastUpdated}">
-							<li class="fieldcontain">
-								<span id="lastUpdated-label" class="property-label"><g:message code="region.lastUpdated.label" default="Last Updated" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${regionInstance?.lastUpdated}" /></span>
-								
-							</li>
-							</g:if>
-						
+							</g:if>													
 						</ol>
 				</div>
 				
 				<div id="tab-2">
-					
+					<br/><h2>Groups</h2>
+					<div>
+						<table>
+						<thead>
+							<tr>				
+								<g:sortableColumn property="name" title="${message(code: 'roleGroup.name.label', default: 'Name')}" />					
+								<g:sortableColumn property="description" title="${message(code: 'roleGroup.description.label', default: 'Description')}" />						
+							</tr>
+						</thead>
+						<tbody>
+						<g:each in="${regionInstance?.regionGroups}" status="i" var="roleGroupInstance">
+							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+							
+								<td><g:link controller="roleGroup" action="show" id="${roleGroupInstance.id}">${fieldValue(bean: roleGroupInstance, field: "name")}</g:link></td>
+							
+								<td>${fieldValue(bean: roleGroupInstance, field: "description")}</td>
+							
+							</tr>
+						</g:each>
+						</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 			<!--  *** END TABS *** -->

@@ -11,8 +11,7 @@ class GroupManagerService {
 		println "... Generating Office Groups..."
 		//def _tmp = getGroupNamePrefix(office) //"GROUP_" + office?.code?.toString()?.toUpperCase()?.replace(" ","_") 
 		def _tmp_desc = office?.name?.toString()
-
-		
+	
 		def officeAdminGroup = new RoleGroup(name: _GroupName(office,SystemRoles.ROLE_OCO.getKey()),description:_tmp_desc + " - " + SystemRoles.ROLE_OCO.description ).save()		
 		def officeWorkerGroup = new RoleGroup(name:_GroupName(office,SystemRoles.ROLE_CWO.getKey()),description:_tmp_desc + " - " +SystemRoles.ROLE_CWO.description).save()
 		def officeSPGroup = new RoleGroup(name:_GroupName(office,SystemRoles.ROLE_SPO.getKey()),description:_tmp_desc + " - " + SystemRoles.ROLE_SPO.description).save()
@@ -31,13 +30,16 @@ class GroupManagerService {
     }// end generateGroups
 	
 	def generateRegionGroups(Region region) {
-		println "... Generating Region Groups..."
-		//def _tmp = getGroupNamePrefix(office) //"GROUP_" + office?.code?.toString()?.toUpperCase()?.replace(" ","_")
-		def _tmp_desc = region?.name?.toString()	
-		def regionPCOGroup = new RoleGroup(name: _GroupName(region,SystemRoles.ROLE_PCO.getKey()),description:_tmp_desc + " - National Co-Ordinators - Statistical Information Only" ).save(flush:true)		
-		RoleGroupRole.create regionPCOGroup, Role.findByAuthority(SystemRoles.ROLE_PCO.value)		
-		println "... Done generating Region Groups..."
+		if(getRegionGroups(region)){
+			println "... Generating Region Group..."
+			//def _tmp = getGroupNamePrefix(office) //"GROUP_" + office?.code?.toString()?.toUpperCase()?.replace(" ","_")
+			def _tmp_desc = region?.name?.toString()	
+			def regionPCOGroup = new RoleGroup(name: _GroupName(region,SystemRoles.ROLE_PCO.getKey()),description:_tmp_desc + " - " + SystemRoles.ROLE_PCO.description ).save(flush:true)		
+			RoleGroupRole.create regionPCOGroup, Role.findByAuthority(SystemRoles.ROLE_PCO.value)		
+			println "... Done generating Region Groups..."
+		}
 	}// end generateRegion Groups
+	
 	def getRegionGroups(Region region){
 		List <RoleGroup> grplist = []
 		
@@ -53,7 +55,7 @@ class GroupManagerService {
 		}
 		if(obj.instanceOf(Region)){
 			Region region = (Region)obj
-			return "GROUP_REGION_" + region?.code?.toString()?.toUpperCase()?.replace(" ","_")
+			return "GROUP_REGION_" + region?.name?.toString()?.toUpperCase()?.replace(" ","_")
 		}
 	}
 	private String _GroupName(Object obj, def rolename){

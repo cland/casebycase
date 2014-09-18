@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Regions
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -35,31 +35,19 @@
 					
 						<g:sortableColumn property="code" title="${message(code: 'region.code.label', default: 'Code')}" />
 					
-						<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'region.lastUpdatedBy.label', default: 'Last Updated By')}" />
-					
-						<g:sortableColumn property="createdBy" title="${message(code: 'region.createdBy.label', default: 'Created By')}" />
-					
+						
 						<th><g:message code="region.country.label" default="Country" /></th>
 					
-						<g:sortableColumn property="dateCreated" title="${message(code: 'region.dateCreated.label', default: 'Date Created')}" />
-					
+						
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${regionInstanceList}" status="i" var="regionInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${regionInstance.id}">${fieldValue(bean: regionInstance, field: "name")}</g:link></td>
-					
+						<td><g:link action="show" id="${regionInstance.id}">${fieldValue(bean: regionInstance, field: "name")}</g:link></td>					
 						<td>${fieldValue(bean: regionInstance, field: "code")}</td>
-					
-						<td>${fieldValue(bean: regionInstance, field: "lastUpdatedBy")}</td>
-					
-						<td>${fieldValue(bean: regionInstance, field: "createdBy")}</td>
-					
 						<td>${fieldValue(bean: regionInstance, field: "country")}</td>
-					
-						<td><g:formatDate date="${regionInstance.dateCreated}" /></td>
 					
 					</tr>
 				</g:each>

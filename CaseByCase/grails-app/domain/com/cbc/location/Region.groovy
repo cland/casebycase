@@ -1,8 +1,12 @@
 package com.cbc.location
 
 import java.util.Date;
+import java.util.List;
+
+import com.cbc.RoleGroup;
 
 class Region {
+	transient groupManagerService
 	transient cbcApiService
 	String name
 	String code
@@ -12,6 +16,7 @@ class Region {
 	Date lastUpdated
 	static belongsTo = [country:Country]
 	static hasMany = [cities:City,districts:District]
+	static transients = ["regionGroups"]
 	static constraints = {
 		name(blank:false,unique:true)
 		code blank:false,unique:true
@@ -33,5 +38,15 @@ class Region {
 
 	String toString(){
 		"${name}"
+	}
+	def toAutoCompleteMap(){
+		return [id:id,
+		label:name + " (" + code + ")",
+		value:id,
+		region:this,
+		category:(country?.name ? country?.name : "Unknown")]
+	}
+	List<RoleGroup> getOfficeGroups(){
+		return groupManagerService.getRegionGroups(this)
 	}
 } //end of class

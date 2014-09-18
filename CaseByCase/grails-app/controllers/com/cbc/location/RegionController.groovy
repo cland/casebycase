@@ -7,7 +7,8 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class RegionController {
-
+	def cbcApiService
+	def groupManagerService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -36,7 +37,8 @@ class RegionController {
         }
 
         regionInstance.save flush:true
-
+		//generate groups
+		if(!regionInstance?.hasErrors()) groupManagerService.generateRegionGroups(regionInstance)
         request.withFormat {
             form {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'regionInstance.label', default: 'Region'), regionInstance.toString()])
@@ -63,7 +65,9 @@ class RegionController {
         }
 
         regionInstance.save flush:true
-
+		//generate groups
+		if(!regionInstance?.hasErrors()) groupManagerService.generateRegionGroups(regionInstance)
+		
         request.withFormat {
             form {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Region.label', default: 'Region'), regionInstance.toString()])
