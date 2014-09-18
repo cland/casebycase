@@ -31,6 +31,15 @@
 		<g:message code="mainPlace.suburbs.label" default="Suburbs" />
 		
 	</label>
-	<g:select name="suburbs" from="${com.cbc.location.Suburb.list()}" multiple="multiple" optionKey="id" size="5" value="${mainPlaceInstance?.suburbs*.id}" class="many-to-many"/>
+	
+<ul class="one-to-many">
+<g:each in="${mainPlaceInstance?.suburbs?}" var="s">
+    <li><g:link controller="suburb" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="suburb" action="create" params="['mainPlace.id': mainPlaceInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'suburb.label', default: 'Suburb')])}</g:link>
+</li>
+</ul>
+
 </div>
 

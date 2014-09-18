@@ -36,5 +36,10 @@ modules = {
 		dependsOn 'application'
 		resource url:'js/jstree/jstree.js'		
 		resource url:'js/jstree/themes/default/style.css'
-	}	
+	}
+	chosen{
+		dependsOn 'application'
+		resource url:'js/chosen/chosen.jquery.js'
+		resource url:'js/chosen/chosen.css'
+	}
 }

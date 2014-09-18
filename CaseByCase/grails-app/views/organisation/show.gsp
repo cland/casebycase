@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					${organisationInstance?.name }
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -72,38 +72,13 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${organisationInstance?.lastUpdatedBy}">
-							<li class="fieldcontain">
-								<span id="lastUpdatedBy-label" class="property-label"><g:message code="organisation.lastUpdatedBy.label" default="Last Updated By" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${organisationInstance}" field="lastUpdatedBy"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${organisationInstance?.createdBy}">
-							<li class="fieldcontain">
-								<span id="createdBy-label" class="property-label"><g:message code="organisation.createdBy.label" default="Created By" /></span>
-								
-									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${organisationInstance}" field="createdBy"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${organisationInstance?.dateCreated}">
-							<li class="fieldcontain">
-								<span id="dateCreated-label" class="property-label"><g:message code="organisation.dateCreated.label" default="Date Created" /></span>
-								
-									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${organisationInstance?.dateCreated}" /></span>
-								
-							</li>
-							</g:if>
-						
 							<g:if test="${organisationInstance?.isHost}">
 							<li class="fieldcontain">
 								<span id="isHost-label" class="property-label"><g:message code="organisation.isHost.label" default="Is Host" /></span>
 								
-									<span class="property-value" aria-labelledby="isHost-label"><g:formatBoolean boolean="${organisationInstance?.isHost}" /></span>
+									<span class="property-value" aria-labelledby="isHost-label">
+									<g:formatBoolean boolean="${organisationInstance?.isHost}" true="yes" false="no"/>
+									</span>
 								
 							</li>
 							</g:if>
@@ -112,16 +87,9 @@
 							<li class="fieldcontain">
 								<span id="isMember-label" class="property-label"><g:message code="organisation.isMember.label" default="Is Member" /></span>
 								
-									<span class="property-value" aria-labelledby="isMember-label"><g:formatBoolean boolean="${organisationInstance?.isMember}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${organisationInstance?.lastUpdated}">
-							<li class="fieldcontain">
-								<span id="lastUpdated-label" class="property-label"><g:message code="organisation.lastUpdated.label" default="Last Updated" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${organisationInstance?.lastUpdated}" /></span>
+									<span class="property-value" aria-labelledby="isMember-label">
+									<g:formatBoolean boolean="${organisationInstance?.isMember}" true="yes" false="no"/>
+									</span>
 								
 							</li>
 							</g:if>

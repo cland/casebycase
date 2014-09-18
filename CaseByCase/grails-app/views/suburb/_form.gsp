@@ -18,3 +18,11 @@
 	<g:textField name="code" required="" value="${suburbInstance?.code}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: suburbInstance, field: 'mainplace', 'error')} required">
+	<label for="mainplace">
+		<g:message code="suburb.mainplace.label" default="Mainplace" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="mainplace" name="mainplace.id" from="${com.cbc.location.MainPlace.list()}" optionKey="id" required="" value="${suburbInstance?.mainplace?.id}" class="many-to-one"/>
+</div>
+

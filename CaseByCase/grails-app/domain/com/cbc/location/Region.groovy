@@ -46,7 +46,7 @@ class Region {
 		region:this,
 		category:(country?.name ? country?.name : "Unknown")]
 	}
-	List<RoleGroup> getOfficeGroups(){
+	List<RoleGroup> getRegionGroups(){
 		return groupManagerService.getRegionGroups(this)
 	}
 } //end of class

@@ -52,21 +52,16 @@
 
 <div class="fieldcontain ${hasErrors(bean: officeInstance, field: 'affiliates', 'error')} ">
 	<label for="affiliates">
-		<g:message code="office.affiliates.label" default="Affiliates" />
+		<g:message code="office.affiliates.label" default="Affiliated To" />
 		
 	</label>
-	<g:select name="affiliates" from="${com.cbc.Organisation.list()}" multiple="multiple" optionKey="id" size="5" value="${officeInstance?.affiliates*.id}" class="many-to-many"/>
+	<g:select id="affiliates" name="affiliates" from="${com.cbc.Organisation.findAll{isMember==true}}" multiple="multiple" optionKey="id" size="5" value="${officeInstance?.affiliates*.id}" class="many-to-many"/>
 </div>
-<div class="fieldcontain ${hasErrors(bean: officeInstance, field: 'regions', 'error')} ">
-	<label for="region">
-		<g:message code="country.region.label" default="Region" />
-		
-	</label>
-	<fieldset><legend>Geographical Location</legend>
-		<g:render template="../layouts/location" bean="${officeInstance?.location}" var="locationInstance" model="[mode:'edit']"></g:render>
-	</fieldset>
 
-</div>
+<fieldset><legend>Geographical Location</legend>
+	<g:render template="../layouts/location" bean="${officeInstance?.location}" var="locationInstance" model="[mode:'edit']"></g:render>
+</fieldset>
+
 
 
 

@@ -171,6 +171,8 @@ def groupManagerService
 				 '/office/jq_list_cases',
 				 '/office/jq_list_staff',
 				 '/organisation/orglist/**',
+				 '/labour/**',
+				 '/eviction/**',
 				 '/country/**',
 				 '/region/**',
 				 '/report/**',

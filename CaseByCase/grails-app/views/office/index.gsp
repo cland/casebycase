@@ -37,12 +37,12 @@
 					
 						<g:sortableColumn property="status" title="${message(code: 'office.status.label', default: 'Status')}" />
 					
-						<g:sortableColumn property="contactNumber" title="${message(code: 'office.contactNumber.label', default: 'Contact Number')}" />
+						<g:sortableColumn property="contactNumber" title="${message(code: 'office.contactNumber.label', default: 'Contact No.')}" />
 					
-						<g:sortableColumn property="cellphoneNumber" title="${message(code: 'office.cellphoneNumber.label', default: 'Cellphone Number')}" />
+						<g:sortableColumn property="cellphoneNumber" title="${message(code: 'office.cellphoneNumber.label', default: 'Cellphone No.')}" />
 					
-						<g:sortableColumn property="faxNumber" title="${message(code: 'office.faxNumber.label', default: 'Fax Number')}" />
-					
+						<g:sortableColumn property="faxNumber" title="${message(code: 'office.faxNumber.label', default: 'Fax No.')}" />
+						<g:sortableColumn property="location.region" title="${message(code: 'location.region.label', default: 'Region')}" />
 					</tr>
 				</thead>
 				<tbody>
@@ -60,7 +60,7 @@
 						<td>${fieldValue(bean: officeInstance, field: "cellphoneNumber")}</td>
 					
 						<td>${fieldValue(bean: officeInstance, field: "faxNumber")}</td>
-					
+						<td>${fieldValue(bean: officeInstance, field: "location.region")}</td>
 					</tr>
 				</g:each>
 				</tbody>

@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					Organisations
+					Organisation List
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -34,6 +34,8 @@
 						<g:sortableColumn property="status" title="${message(code: 'organisation.status.label', default: 'Status')}" />
 						<g:sortableColumn property="phoneNo" title="${message(code: 'organisation.phoneNo.label', default: 'Phone No')}" />
 						<g:sortableColumn property="email" title="${message(code: 'organisation.email.label', default: 'Email')}" />
+						<g:sortableColumn property="isHost" title="${message(code: 'organisation.ishost.label', default: 'Host')}" />
+						<g:sortableColumn property="isMember" title="${message(code: 'organisation.ismember.label', default: 'Member')}" />
 					</tr>
 				</thead>
 				<tbody>
@@ -43,6 +45,8 @@
 						<td>${fieldValue(bean: organisationInstance, field: "status")}</td>
 						<td>${fieldValue(bean: organisationInstance, field: "phoneNo")}</td>
 						<td>${fieldValue(bean: organisationInstance, field: "email")}</td>
+						<td><g:formatBoolean boolean="${organisationInstance?.isHost}" true="yes" false="no"/></td>
+						<td><g:formatBoolean boolean="${organisationInstance?.isMember}" true="yes" false="no"/></td>
 					</tr>
 				</g:each>
 				</tbody>

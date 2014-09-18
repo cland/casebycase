@@ -6,6 +6,7 @@
 		<title><g:appTitle title=""><g:message code="default.create.label" args="[entityName]" /></g:appTitle></title>
 		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_ADMIN}" />
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
+		
 	</head>
 	<body>
 		<a href="#create-office" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -57,7 +58,8 @@
 			
 		</div>
 		<script>
-			$(document).ready(function() {		
+			$(document).ready(function() {	
+			
 				$("#accordion" ).accordion({ active: cbc_params.active_sidebar() });
 			
 				$("#tabs").tabs(

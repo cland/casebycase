@@ -56,8 +56,9 @@
 							
 							<div class="row">
 								<div class="cell"><label id="affiliates-label"><g:message code="office.affiliates.label" default="Affiliates" /></label></div>
-								<div class="cell"><g:each in="${officeInstance.affiliates}" var="a">
-									<span class="property-value" aria-labelledby="affiliates-label"><g:link controller="organisation" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
+								<div class="cell">
+									<g:each in="${officeInstance.affiliates}" var="a">
+										<span class="property-value" aria-labelledby="affiliates-label"><span class="r-arrow"></span> <g:link controller="organisation" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span><br/>
 									</g:each>
 								</div>
 							</div>

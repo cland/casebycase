@@ -35,6 +35,8 @@
 					
 						<g:sortableColumn property="code" title="${message(code: 'suburb.code.label', default: 'Code')}" />
 					
+						<th><g:message code="suburb.mainplace.label" default="Mainplace" /></th>
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -44,6 +46,8 @@
 						<td><g:link action="show" id="${suburbInstance.id}">${fieldValue(bean: suburbInstance, field: "name")}</g:link></td>
 					
 						<td>${fieldValue(bean: suburbInstance, field: "code")}</td>
+					
+						<td>${fieldValue(bean: suburbInstance, field: "mainplace")}</td>
 					
 					</tr>
 				</g:each>

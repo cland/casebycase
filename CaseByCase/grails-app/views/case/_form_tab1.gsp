@@ -239,13 +239,13 @@
 			</div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:select id="office" name="office.id" from="${com.cbc.Office.list()}" optionKey="id" required="" value="${caseInstance?.office?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
+					<g:select id="office" name="office.id" from="${cbcApiService?.getUserAllowedOffices()}" optionKey="id" required="" value="${cbcApiService?.getUserPrimaryOffice()?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
 				</span>
 			</div>
 			<div class="cell"><label id="">Case worker</label></div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:select id="assignedTo" name="assignedTo.id" from="${com.cbc.User.list()}" optionKey="id" required="" value="${caseInstance?.assignedTo?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
+					<g:select id="assignedTo" name="assignedTo.id" from="${com.cbc.User.list()*.person}" optionKey="id" required="" value="${caseInstance?.assignedTo?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
 				</span>
 			</div>
 		</div>

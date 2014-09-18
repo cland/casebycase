@@ -54,6 +54,15 @@
 							</li>
 							</g:if>
 						
+							<g:if test="${suburbInstance?.mainplace}">
+							<li class="fieldcontain">
+								<span id="mainplace-label" class="property-label"><g:message code="suburb.mainplace.label" default="Mainplace" /></span>
+								
+									<span class="property-value" aria-labelledby="mainplace-label"><g:link controller="mainPlace" action="show" id="${suburbInstance?.mainplace?.id}">${suburbInstance?.mainplace?.encodeAsHTML()}</g:link></span>
+								
+							</li>
+							</g:if>
+						
 						</ol>
 				</div>
 				

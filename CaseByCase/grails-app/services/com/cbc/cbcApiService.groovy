@@ -45,6 +45,15 @@ class cbcApiService {
 		}
 		return user?.person?.getPrimaryOffice()
 	} //end function
+	
+	def getUserAllowedOffices(User user = null){
+		if(user == null){
+			user = springSecurityService.getCurrentUser()
+		}
+		//TODO: Search for office the user is elligible to work with. NB: groups will have the final say if user is actually allowed.
+		return user?.person?.getPrimaryOffice() as List
+	}
+	
 	boolean canView(Object obj){
 		
 		if(obj.instanceOf(Person)){

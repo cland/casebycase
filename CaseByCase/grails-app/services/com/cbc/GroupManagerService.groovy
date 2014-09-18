@@ -30,7 +30,8 @@ class GroupManagerService {
     }// end generateGroups
 	
 	def generateRegionGroups(Region region) {
-		if(getRegionGroups(region)){
+		def tmp = getRegionGroups(region)
+		if(tmp?.size() == 0){
 			println "... Generating Region Group..."
 			//def _tmp = getGroupNamePrefix(office) //"GROUP_" + office?.code?.toString()?.toUpperCase()?.replace(" ","_")
 			def _tmp_desc = region?.name?.toString()	
@@ -42,10 +43,8 @@ class GroupManagerService {
 	
 	def getRegionGroups(Region region){
 		List <RoleGroup> grplist = []
-		
 		RoleGroup grp = RoleGroup.findByName(_GroupName(region,SystemRoles.ROLE_PCO.getKey()))
 		if(grp) grplist.add(grp)
-		
 		return grplist
 	}
 	private String getGroupNamePrefix(Object obj){
