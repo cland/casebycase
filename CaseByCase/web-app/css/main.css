@@ -952,3 +952,23 @@ div .screen-dialog .content {width:99%;}
 	 padding: 5px 0 5px 0;
 	 font-size:0.9em;
 }
+ul.menu_list_items li{	
+	border-bottom:solid 1px #FFDAB9;
+	padding-top:0.2em;
+	padding-left:0.2em;
+	padding-bottom:0.2em;
+}
+ul.menu_list_items li:hover{
+	background:#FFDAB9;
+	color:#000;
+}
+ul.menu_list_items li:before{
+	content:"\00BB";
+	color:orange;
+}
+ul.menu_list_items li a{
+	text-decoration:none;	
+}
+.ui-accordion .ui-accordion-content {
+	padding:1em !important;
+}

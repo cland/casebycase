@@ -7,7 +7,7 @@
 
 			<h3><g:message code="default.mywork.menu" default="My Work" /></h3>
 			<div>
-				<ul>
+				<ul class="menu_list_items">
 					<li>
 						<g:link class="create" controller="case" action="create">
 							<g:message code="default.new.label" args="['Case']" />
@@ -32,7 +32,7 @@
 			</div>
 			<h3><g:message code="default.clients.menu" default="Clients" /></h3>
 			<div>
-				<ul>
+				<ul class="menu_list_items">
 					<li><g:link class="create" controller="person" action="create">
 							<g:message code="default.new.label" args="['Person Client']" /></g:link></li>
 					<li><g:link class="list" controller="person" action="index">
@@ -47,7 +47,7 @@
 			</div>
 			<h3><g:message code="default.pcm.menu" default="Please Call Me" /></h3>
 			<div>
-				<ul>
+				<ul class="menu_list_items">
 					<li>
 						<g:link class="create" controller="pcm" action="create">
 							<g:message code="default.new.label" args="['PCM']" />
@@ -64,7 +64,7 @@
 			
 			<h3><g:message code="default.reports.menu" default="Reports" /></h3>
 			<div>
-				<ul>
+				<ul class="menu_list_items">
 					<li><g:link class="create" controller="report" action="index">
 							<g:message code="default.new.label" args="['Standard']" /></g:link></li>
 					<li><g:link class="list" controller="report" action="index">

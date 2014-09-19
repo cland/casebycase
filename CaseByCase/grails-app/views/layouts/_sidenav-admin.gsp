@@ -2,7 +2,7 @@
 	<div id="accordion" style="font-size: 14px;">
 			<h3><g:message code="default.offices.menu" default="Offices & Users" /></h3>
 			<div>
-				<ul>
+				<ul class="menu_list_items">
 					<li>
 						<g:link class="create" controller="office" action="create">
 							<g:message code="default.new.label" args="['Office']" params="[sidebar:0]"/>
@@ -29,7 +29,7 @@
 
 			<h3><g:message code="default.clients.menu" default="Clients" /></h3>
 			<div>
-				<ul>
+				<ul class="menu_list_items">
 					<li><g:link class="create" controller="person" action="create">
 							<g:message code="default.new.label" args="['Person Client']" /></g:link></li>
 					<li><g:link class="list" controller="person" action="index">
@@ -45,7 +45,7 @@
 			
 			<h3><g:message code="default.reports.menu" default="Reports" /></h3>
 			<div>
-				<ul>
+				<ul class="menu_list_items">
 					<li><g:link class="create" controller="report" action="index">
 							<g:message code="default.new.label" args="['Standard']" /></g:link></li>
 					<li><g:link class="list" controller="report" action="index">
@@ -56,11 +56,11 @@
 
 			<h3><g:message code="default.lookup.menu" default="Lookup Types" /></h3>
 			<div>
-			<ul>
-					<li><g:link class="create" controller="country" action="create"><g:message code="default.new.label" args="['Country']" /></g:link></li>
-					<li><g:link class="list" controller="country" action="index"><g:message code="default.list.label" args="['Countries']" /></g:link></li>
-					<li><g:link class="create" controller="region" action="create"><g:message code="default.new.label" args="['Region']" /></g:link></li>
-					<li><g:link class="list" controller="region" action="index"><g:message code="default.list.label" args="['Regions']" /></g:link></li>
+			<ul class="menu_list_items">
+					<li><g:link class="create" controller="country" action="create"> <g:message code="default.new.label" args="['Country']" /></g:link></li>
+					<li><g:link class="list" controller="country" action="index"> <g:message code="default.list.label" args="['Countries']" /></g:link></li>
+					<li><g:link class="create" controller="region" action="create"> <g:message code="default.new.label" args="['Region']" /></g:link></li>
+					<li><g:link class="list" controller="region" action="index"> <g:message code="default.list.label" args="['Regions']" /></g:link></li>
 					<li><g:link class="create" controller="caseStatus" action="create">
 							<g:message code="default.new.label" args="['Case Status']" /></g:link></li>
 					<li><g:link class="list" controller="caseStatus" action="index">
