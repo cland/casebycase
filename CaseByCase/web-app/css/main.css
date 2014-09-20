@@ -121,6 +121,7 @@ h1 {
 }
 .page-header .action-div a:hover ,.action-div a:hover{
 	background:#ccc;
+	color:#000;
 }
 ul {
 	padding: 0;
@@ -280,7 +281,7 @@ fieldset {border:solid 1px #999;margin-bottom:1em;}
 
 .fieldcontain label,
 .fieldcontain .property-label {
-	color: #8C8C8C;
+	color: #595757
 	text-align: right;
 	width: 25%;
 }
@@ -298,8 +299,8 @@ label {
 	cursor: pointer;
 	display: inline-block;
 	margin: 0 0.25em 0 0;
-	font-weight:bold;
-	color:#8C8C8C;	
+	font-weight:normal;
+	color:#595757;	
 }
 
 input, select, textarea {
@@ -740,7 +741,7 @@ tr > td:last-child, tr > th:last-child {
     vertical-align: text-top;
 }
 .fieldcontain label, .fieldcontain .property-label {
-    color: #8C8C8C;
+    color: #595757;
 }
 .ui-widget{
 	font-family:"Arial","Verdana","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
@@ -803,7 +804,7 @@ p {
     margin-bottom:0.8em;
     
 }
-.profile-row label, .role-details label {color:#8C8C8C;font-size:0.9em;}
+.profile-row label, .role-details label {color:#595757;font-size:0.9em;}
 .summary-row .cast-details,.profile-row .cast-details {
     float: left;
     border: none 1px #0e8523;
@@ -841,7 +842,7 @@ p {
     margin-bottom:15px;
     text-align:left;
 }
-.detailed-row label,.summary-row label, .headshot-row label{font-weight:bold; color:#8C8C8C;}
+.detailed-row label,.summary-row label, .headshot-row label{font-weight:bold; color:#595757;}
 .detailed-row .cast-details {
     float: left;
     border: none 1px #0e8523;

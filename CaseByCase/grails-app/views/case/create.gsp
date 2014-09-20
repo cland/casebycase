@@ -79,7 +79,12 @@
 								active:cbc_params.active_tab(),
 								create: function (event,ui){	
 									//executed after is created								
-									$('#tabs').show()
+									$('#tabs').show();
+									$( "#tabs" ).tabs( "option", "disabled", [1, 2, 3 ] );
+									//get the tab divs and disable the fields inside
+									disableInputs("#tab-labour", true);
+									disableInputs("#tab-evictions", true);
+									disableInputs("#tab-2",true)									
 								},
 								show: function(event,ui){
 									//on every tabs clicked
@@ -93,6 +98,8 @@
 				}); //end tabs
 	                
 			});  
+
+			
 		</script>		
 	</body>
 </html>

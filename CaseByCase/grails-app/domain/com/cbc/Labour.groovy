@@ -6,6 +6,8 @@ class Labour {
 	static attachmentable = true
 	WorkHours workhours
 	LeaveDays leavedays
+	AllowanceAmount allowAmount
+	BenefitsAmount allowBenefit
 	long createdBy   
 	long lastUpdatedBy
 	Date dateCreated 
@@ -26,15 +28,12 @@ class Labour {
 	ProblemType dismisal
 	ProblemType uif
 	//Integer workHours
-	Double allowAmount
-	Double allowBenefit
+
 	String hoursWorked
 	Integer hoursWorkedValue
 	String earnings
 	String earningsValue
-	
-	
-	
+
 	static constraints = {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
@@ -43,8 +42,6 @@ class Labour {
 		unionAtWork nullable: true, blank: true, inList: ["Yes", "No"]
 		memberOfWorkUnion nullable: true, blank: true, inList: ["Yes", "No"]
 		//workHours nullable: true, blank: true
-		allowAmount nullable: true, blank: true
-		allowBenefit nullable: true, blank: true
 		hoursWorked nullable: true, blank: true, inList: ["Weekly", "Fortnightly", "Monthly"]
 		earnings nullable: true, blank: true, inList: ["Weekly", "Fortnightly", "Monthly"]
 		leavedays nullable: true, blank: true

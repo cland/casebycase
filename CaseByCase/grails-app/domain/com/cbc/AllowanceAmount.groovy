@@ -1,13 +1,9 @@
 
 package com.cbc
 
-class WorkHours {
+class AllowanceAmount {
 	transient cbcApiService
-	long overtime
-	long daily
-	long weekend
-	long holiday
-	//static belongsTo = [labour:Labour]
+	Double nightWork
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
@@ -16,11 +12,9 @@ class WorkHours {
     static constraints = {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
-		 
 	}
-	
 	String toString(){
-		"Overtime: ${overtime}, Daily: ${daily}"
+		String.format("#.##", nightWork)
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()

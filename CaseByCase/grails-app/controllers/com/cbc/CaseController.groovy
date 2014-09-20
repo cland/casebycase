@@ -26,6 +26,7 @@ class CaseController {
 
     @Transactional
     def save(Case caseInstance) {
+		println(params)
         if (caseInstance == null) {
             notFound()
             return

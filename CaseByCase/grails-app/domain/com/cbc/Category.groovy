@@ -19,7 +19,9 @@ class Category {
 		"lastUpdatedByName",
 		"level",
 		"hasChildren",
-		"fullCategoryName"
+		"fullCategoryName",
+		"rootParentName",
+		"rootParentId"
 	]
 
 	static hasMany = [categories:Category]
@@ -45,6 +47,14 @@ class Category {
 		if(level >= l) return cat
 		return getParentCategoryAtLevel(cat?.parent,level)
 	}
+	String getRootParentName(Category cat){
+		def category = getParentCategoryAtLevel(cat,1)
+		return category?.name
+	}
+	long getRootParentId(Category cat){
+		def category = getParentCategoryAtLevel(cat,1)
+		return category?.id
+	}
 	def getNodeChildren(){
 		if(!hasChildren()) return []
 		return categories*.toTreeMap()
@@ -60,7 +70,9 @@ class Category {
 			children:getNodeChildren(),
 			value:id,
 			text:name,
-			state:[opened:false,disabled:false,selected:false]			
+			state:[opened:false,disabled:false,selected:false],
+			root_parent_id:getRootParentId(this),
+			root_parent_name: getRootParentName(this)			
 			]
 	}
 	

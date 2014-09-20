@@ -455,26 +455,27 @@ function addPersonClient(_id){
 	    // bind to events triggered on the tree
 	    $('#category_tree').on("changed.jstree", function (e, data) {
 	    	  _id = data.selected;
-	    	  _text = data.instance.get_node(data.selected[0]).text
-		      //console.log(data.selected + " = " + _text);
+	    	  _node = data.instance.get_node(data.selected[0])
+	    	  _text = _node.text
+	    	  _root_parent_name = _node.original.root_parent_name;
 		      $("#categories").html("<option id='category-" + _id + "' selected='selected' value='" + _id + "'></option>")
 		      //open any related tabs
+		      _root_parent_name = _node.original.root_parent_name;
+		      onSelectCategory(_root_parent_name)
 	    });
 	    $('#category_tree').on("loaded.jstree", function (e, data) {
 	    	var _tree = $('#category_tree')
 	    	 _tree.jstree('close_all')
-	    	 _tree.jstree('select_node', '${categoryInstance?.id}');		      
+	    	 _tree.jstree('select_node', '${categoryInstance?.id}');
+	    	 _root_parent_name = '${categoryInstance?.getRootParentName()}';
+		      onSelectCategory(_root_parent_name)
+		      onCaseStatusChange("#tabs","#tab-2", 3)		      
 	    });
 	    
 	    //form events:
 	    //** on status change, open/hide the outcome tab
 	    $("#status").on("change",function(e){
-	    	var _selected = $("#status option:selected").text();
-	    	if(_selected=='Closed' || _selected=='Case Closed - Intimidation' ){
-	    		$( "#tabs" ).tabs( "enable",  3  )
-	    	}else{
-	    		$( "#tabs" ).tabs(  "disable", 3  )
-	    	}
+	    	onCaseStatusChange("#tabs","#tab-2", 3)	    	
 	    });
 	   
   });

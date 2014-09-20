@@ -81,7 +81,7 @@
 								create: function (event,ui){	
 									//executed after is created								
 									$('#tabs').show()
-									$( "#tabs" ).tabs( "option", "disabled", [ 1, 2, 3 ] )
+									
 								},
 								show: function(event,ui){
 									//on every tabs clicked
@@ -94,6 +94,7 @@
 									}
 						});		                
 			});  
+			
 		</script>			
 	</body>
 </html>

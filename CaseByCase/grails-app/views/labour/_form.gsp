@@ -1,12 +1,15 @@
 <%@ page import="com.cbc.Labour" %>
-
-
 <div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'tradeUnionMember', 'error')} ">
 	<label for="tradeUnionMember">
 		<g:message code="labour.tradeUnionMember.label" default="Trade Union Member" />
 		
 	</label>
 	<g:select name="tradeUnionMember" from="${labourInstance.constraints.tradeUnionMember.inList}" value="${labourInstance?.tradeUnionMember}" valueMessagePrefix="labour.tradeUnionMember" noSelection="['': '']"/>
+	<label for="specifyMembership">
+		<g:message code="labour.specifyMembership.label" default="Specify, if yes:" />
+		
+	</label>
+	<g:textField name="specifyMembership" value="${labourInstance?.specifyMembership}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'employerDetail', 'error')} ">
@@ -33,78 +36,7 @@
 	<g:select name="memberOfWorkUnion" from="${labourInstance.constraints.memberOfWorkUnion.inList}" value="${labourInstance?.memberOfWorkUnion}" valueMessagePrefix="labour.memberOfWorkUnion" noSelection="['': '']"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'allowAmount', 'error')} ">
-	<label for="allowAmount">
-		<g:message code="labour.allowAmount.label" default="Allow Amount" />
-		
-	</label>
-	<g:field type="number" name="allowAmount" value="${fieldValue(bean: labourInstance, field: 'allowAmount')}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'allowBenefit', 'error')} ">
-	<label for="allowBenefit">
-		<g:message code="labour.allowBenefit.label" default="Allow Benefit" />
-		
-	</label>
-	<g:field type="number" name="allowBenefit" value="${fieldValue(bean: labourInstance, field: 'allowBenefit')}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'hoursWorked', 'error')} ">
-	<label for="hoursWorked">
-		<g:message code="labour.hoursWorked.label" default="Hours Worked" />
-		
-	</label>
-	<g:select name="hoursWorked" from="${labourInstance.constraints.hoursWorked.inList}" value="${labourInstance?.hoursWorked}" valueMessagePrefix="labour.hoursWorked" noSelection="['': '']"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'earnings', 'error')} ">
-	<label for="earnings">
-		<g:message code="labour.earnings.label" default="Earnings" />
-		
-	</label>
-	<g:select name="earnings" from="${labourInstance.constraints.earnings.inList}" value="${labourInstance?.earnings}" valueMessagePrefix="labour.earnings" noSelection="['': '']"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'leavedays', 'error')} ">
-	<label for="leavedays">
-		<g:message code="labour.leavedays.label" default="Leavedays" />
-		
-	</label>
-	<g:select id="leavedays" name="leavedays.id" from="${com.cbc.LeaveDays.list()}" optionKey="id" value="${labourInstance?.leavedays?.id}" class="many-to-one" noSelection="['null': '']"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'workhours', 'error')} ">
-	<label for="workhours">
-		<g:message code="labour.workhours.label" default="Workhours" />
-		
-	</label>
-	<g:select id="workhours" name="workhours.id" from="${com.cbc.WorkHours.list()}" optionKey="id" value="${labourInstance?.workhours?.id}" class="many-to-one" noSelection="['null': '']"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'earningsValue', 'error')} ">
-	<label for="earningsValue">
-		<g:message code="labour.earningsValue.label" default="Earnings Value" />
-		
-	</label>
-	<g:textField name="earningsValue" value="${labourInstance?.earningsValue}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'hoursWorkedValue', 'error')} ">
-	<label for="hoursWorkedValue">
-		<g:message code="labour.hoursWorkedValue.label" default="Hours Worked Value" />
-		
-	</label>
-	<g:field name="hoursWorkedValue" type="number" value="${labourInstance.hoursWorkedValue}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'specifyMembership', 'error')} ">
-	<label for="specifyMembership">
-		<g:message code="labour.specifyMembership.label" default="Specify Membership" />
-		
-	</label>
-	<g:textField name="specifyMembership" value="${labourInstance?.specifyMembership}"/>
-</div>
-
+<fieldset><legend>TYPE OF PROBLEM</legend>
 <div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'allowProblem', 'error')} required">
 	<label for="allowProblem">
 		<g:message code="labour.allowProblem.label" default="Allow Problem" />
@@ -160,4 +92,88 @@
 	</label>
 	<g:select id="wages" name="wages.id" from="${com.cbc.lookup.ProblemType.findByName("Wages")?.problemTypes}" optionKey="id" required="" value="${labourInstance?.wages?.id}" class="many-to-one" noSelection="['':'-select-']"/>
 </div>
+</fieldset>
 
+<fieldset><legend>LABOUR CONTRACT</legend>
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'hoursWorked', 'error')} ">
+	<label for="hoursWorked">
+		<g:message code="labour.hoursWorked.label" default="Hours Worked" />
+	</label>
+	<g:textField name="hoursWorkedValue" value="${labourInstance?.hoursWorkedValue}"/>
+	<g:select name="hoursWorked" from="${labourInstance.constraints.hoursWorked.inList}" value="${labourInstance?.hoursWorked}" valueMessagePrefix="labour.hoursWorked" noSelection="['': '']"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'earnings', 'error')} ">
+	<label for="earnings">
+		<g:message code="labour.earnings.label" default="Earnings" />
+	</label>
+	<g:textField name="earningsValue" value="${labourInstance?.earningsValue}"/>
+	<g:select name="earnings" from="${labourInstance.constraints.earnings.inList}" value="${labourInstance?.earnings}" valueMessagePrefix="labour.earnings" noSelection="['': '']"/>
+</div>
+<fieldset><legend>Work Hours</legend>
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'workhours', 'error')} ">
+	<label for="workhours.overtime">
+		<g:message code="workhours.overtime.label" default="Overtime" />
+		
+	</label>
+	<g:textField name="overtime" value="${labourInstance?.workhours?.overtime}"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'workhours', 'error')} ">
+	<label for="workhours.weekend">
+		<g:message code="workhours.weekend.label" default="Saturday/Sunday" />
+		
+	</label>
+	<g:textField name="weekend" value="${labourInstance?.workhours?.weekend}"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'workhours', 'error')} ">
+	<label for="workhours.holiday">
+		<g:message code="workhours.holiday.label" default="Public Holiday" />
+		
+	</label>
+	<g:textField name="holiday" value="${labourInstance?.workhours?.holiday}"/>
+</div>
+</fieldset>
+<fieldset><legend>Allowance Amount</legend>
+	<label for="allowAmount.nightWork">
+		<g:message code="allowamount.nightwork.label" default="Night Work" />	
+	</label>
+	<g:field type="number" name="annual" value="${labourInstance?.allowAmount?.nightWork}"/>
+</fieldset>
+<fieldset><legend>Benefits Amount</legend>
+	<label for="allowBenefit.pensionFund">
+		<g:message code="allowbenefit.pensionfund.label" default="Provident/Pension Fund" />	
+	</label>
+	<g:field type="number" name="annual" value="${labourInstance?.allowBenefit?.pensionFund}"/>
+</fieldset>
+<fieldset><legend>Leave Days</legend>
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'annual', 'error')} ">
+	<label for="leavedays.annual">
+		<g:message code="leavedays.annual.label" default="Annual" />
+		
+	</label>
+	<g:textField name="annual" value="${labourInstance?.leavedays?.annual}"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'leavedays', 'error')} ">
+	<label for="leavedays.sick">
+		<g:message code="leavedays.sick.label" default="Sick" />
+		
+	</label>
+	<g:textField name="sick" value="${labourInstance?.leavedays?.sick}"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'leavedays', 'error')} ">
+	<label for="leavedays.maternity">
+		<g:message code="leavedays.maternity.label" default="Maternity" />
+		
+	</label>
+	<g:textField name="maternity" value="${labourInstance?.leavedays?.maternity}"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'leavedays', 'error')} ">
+	<label for="leavedays.family">
+		<g:message code="leavedays.family.label" default="Family Responsibility" />
+		
+	</label>
+	<g:textField name="family" value="${labourInstance?.leavedays?.family}"/>
+</div>
+</fieldset>
+
+</fieldset>
