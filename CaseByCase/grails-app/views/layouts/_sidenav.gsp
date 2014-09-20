@@ -20,3 +20,4 @@
 		<g:render template="${layoutPath}/menu_lookups"/>	
 	</sec:ifAnyGranted>
 </div>
+

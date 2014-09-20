@@ -70,6 +70,8 @@ class Case {
 	static mapping = {
 		table 'issue'  //def tableName = GrailsDomainBinder.getMapping(Case).table.name 
 		amtRecovered defaultValue : new Double(0.0)
+		labour cascade:"all-delete-orphan"
+		eviction cascade:"all-delete-orphan"
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()

@@ -104,7 +104,7 @@
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>	
 		
 		<div id="status1" class="leftbar" role="complementary">
-			<g:render template="../layouts/sidenav-public"/>
+			<g:render template="../layouts/sidenav"/>
 		</div>
 		<div id="page-body" role="main">	
 			

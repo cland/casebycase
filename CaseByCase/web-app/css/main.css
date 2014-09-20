@@ -95,7 +95,33 @@ h1 {
 	background-image:linear-gradient(to  left, #AAA, #fff);
 	padding:5px 0.25em;
 }
-
+.page-header{
+	color: #48802c;
+	font-weight: normal;
+	font-size: 1.25em;
+	margin: 0.8em 0 0.3em 0;
+/* 	background-image: bisque; */
+	background-image:linear-gradient(to  left, #AAA, #fff);
+	padding:5px 0.25em;
+}
+.page-header .action-div, .action-div{
+	width: 50%;
+	float: right;
+	text-align: right;
+	padding-right: 0.2em;
+	padding-bottom:0.2em;
+}
+.page-header .action-div a, .action-div a{
+	background:#444;
+	color:#fff;
+	font-size:0.8em;
+	padding:0.3em;
+	border:solid 1px #fff;
+	text-decoration:none;
+}
+.page-header .action-div a:hover ,.action-div a:hover{
+	background:#ccc;
+}
 ul {
 	padding: 0;
 }
@@ -896,7 +922,7 @@ table tr td.sub-head {font-weight:bold;font-size:0.9em;text-align:center;}
 #remember_me_holder {display:none;}
 .display-date-field, input.display-date-field:focus  {background:#F9DCB1;font-size:0.8em;width:270px;border:none;}
 div.nav ul li div#search{margin-left:150px;}
-#search{}
+#search{display:none;}
 .print-preview-only{display:none;}
 .many-to-many-400{height:400px}
 .export{float:right !important; width:35% !important;font-size:0.9em;font-size: 0.7em;

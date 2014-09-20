@@ -4,7 +4,6 @@ package com.cbc
 class Labour {
 	transient cbcApiService
 	static attachmentable = true
-	String name
 	WorkHours workhours
 	LeaveDays leavedays
 	long createdBy   
@@ -19,13 +18,13 @@ class Labour {
 	String employerDetail
 	String unionAtWork
 	String memberOfWorkUnion
-	String wages
-	String leaveProblem
-	String allowProblem
-	String benefitsProblem
-	String healthAndSafety
-	String dismisal
-	String uif
+	ProblemType wages
+	ProblemType leaveProblem
+	ProblemType allowProblem
+	ProblemType benefitsProblem
+	ProblemType healthAndSafety
+	ProblemType dismisal
+	ProblemType uif
 	//Integer workHours
 	Double allowAmount
 	Double allowBenefit
@@ -43,13 +42,6 @@ class Labour {
 		employerDetail nullable: true, blank: true
 		unionAtWork nullable: true, blank: true, inList: ["Yes", "No"]
 		memberOfWorkUnion nullable: true, blank: true, inList: ["Yes", "No"]
-		wages nullable: true, blank: true, inList: ["Unpaid", "underpaid", "Outstanding", "Illegal Deductions"]
-		leaveProblem nullable: true, blank: true, inList: ["Annual", "Sick", "Maternity", "Family Responsibility"]
-		allowProblem nullable: true, blank: true, inList: ["Night Work"]
-		benefitsProblem nullable: true, blank: true, inList: ["Provident/Pension Fund Non-Contribution", "Provident/Pension Fund Non-Payment to Fund", "Provident Other"]
-		healthAndSafety nullable: true, blank: true, inList: ["Workmen't Compensation"]
-		dismisal nullable: true, blank: true, inList: ["Rentrenchment", "Work Performance", "Misconduct", "Contract"]
-		uif nullable: true, blank: true, inList: ["Non-Contribution", "Non-Registration", "UI.19"]
 		//workHours nullable: true, blank: true
 		allowAmount nullable: true, blank: true
 		allowBenefit nullable: true, blank: true
@@ -62,7 +54,7 @@ class Labour {
 		specifyMembership nullable:true, blank:true
 	}
 	String toString(){
-		"${name}"
+		"${id}"
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
@@ -93,4 +85,5 @@ class Labour {
 	
 } //end class
 
+import com.cbc.lookup.ProblemType
 import java.util.Date

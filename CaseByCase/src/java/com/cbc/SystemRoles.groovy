@@ -16,7 +16,8 @@ public enum SystemRoles {
 	ROLE_CWO("ROLE_CWO","Case Worker Officer"),
 	ROLE_SPO("ROLE_SPO","Special Case Worker"),
 	ROLE_REVIEWER("ROLE_READER_FULL","Can Read Full Only for a given office"),
-	ROLE_READER("ROLE_READER_LIMITED","Can Read Limited Only for a given office")
+	ROLE_READER("ROLE_READER_LIMITED","Can Read Limited Only for a given office"),
+	ROLE_PCM("ROLE_PCM","Please Call Me Access")
 	final String value;
 	final String description;
 	SystemRoles(String value) {

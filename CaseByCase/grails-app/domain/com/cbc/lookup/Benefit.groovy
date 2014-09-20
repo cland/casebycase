@@ -3,7 +3,6 @@ package com.cbc.lookup
 import com.cbc.*
 class Benefit {
 	transient cbcApiService
-	static attachmentable = true
 	String name
 	long createdBy
 	long lastUpdatedBy
@@ -36,14 +35,7 @@ class Benefit {
 	def onLoad = {
 		// your code goes here
 	}
-	/**
-	 * To ensure that all attachments are removed when the "owner" domain is deleted.
-	 */
-	transient def beforeDelete = {
-		withNewSession{
-		  removeAttachments()
-		}
-	 }
+	
 	
 } //end class
 import java.util.Date

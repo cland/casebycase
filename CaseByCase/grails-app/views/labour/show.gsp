@@ -31,7 +31,7 @@
 			<div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Work Hours</a></li>		
+					<li><a href="#tab-2">Other</a></li>		
 				</ul>
 				<div id="tab-1">
 					<ol class="property-list labour">
@@ -50,32 +50,6 @@
 								<span id="createdBy-label" class="property-label"><g:message code="labour.createdBy.label" default="Created By" /></span>
 								
 									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${labourInstance}" field="createdBy"/></span>
-								
-							</li>
-							</g:if>
-							<g:if test="${labourInstance?.dateCreated}">
-							<li class="fieldcontain">
-								<span id="dateCreated-label" class="property-label"><g:message code="labour.dateCreated.label" default="Date Created" /></span>
-								
-									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${labourInstance?.dateCreated}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${labourInstance?.lastUpdated}">
-							<li class="fieldcontain">
-								<span id="lastUpdated-label" class="property-label"><g:message code="labour.lastUpdated.label" default="Last Updated" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${labourInstance?.lastUpdated}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${labourInstance?.name}">
-							<li class="fieldcontain">
-								<span id="name-label" class="property-label"><g:message code="labour.name.label" default="Name" /></span>
-								
-									<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${labourInstance}" field="name"/></span>
 								
 							</li>
 							</g:if>
@@ -115,74 +89,7 @@
 								
 							</li>
 							</g:if>
-						</ol>
-							<fieldset><legend>Type of problem</legend>
-							<ol class="property-list labour">
-							<g:if test="${labourInstance?.wages}">
-							<li class="fieldcontain">
-								<span id="wages-label" class="property-label"><g:message code="labour.wages.label" default="Wages" /></span>
-								
-									<span class="property-value" aria-labelledby="wages-label"><g:fieldValue bean="${labourInstance}" field="wages"/></span>
-								
-							</li>
-							</g:if>
 						
-							<g:if test="${labourInstance?.leaveProblem}">
-							<li class="fieldcontain">
-								<span id="leaveProblem-label" class="property-label"><g:message code="labour.leaveProblem.label" default="Leave Problem" /></span>
-								
-									<span class="property-value" aria-labelledby="leaveProblem-label"><g:fieldValue bean="${labourInstance}" field="leaveProblem"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${labourInstance?.allowProblem}">
-							<li class="fieldcontain">
-								<span id="allowProblem-label" class="property-label"><g:message code="labour.allowProblem.label" default="Allow Problem" /></span>
-								
-									<span class="property-value" aria-labelledby="allowProblem-label"><g:fieldValue bean="${labourInstance}" field="allowProblem"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${labourInstance?.benefitsProblem}">
-							<li class="fieldcontain">
-								<span id="benefitsProblem-label" class="property-label"><g:message code="labour.benefitsProblem.label" default="Benefits Problem" /></span>
-								
-									<span class="property-value" aria-labelledby="benefitsProblem-label"><g:fieldValue bean="${labourInstance}" field="benefitsProblem"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${labourInstance?.healthAndSafety}">
-							<li class="fieldcontain">
-								<span id="healthAndSafety-label" class="property-label"><g:message code="labour.healthAndSafety.label" default="Health And Safety" /></span>
-								
-									<span class="property-value" aria-labelledby="healthAndSafety-label"><g:fieldValue bean="${labourInstance}" field="healthAndSafety"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${labourInstance?.dismisal}">
-							<li class="fieldcontain">
-								<span id="dismisal-label" class="property-label"><g:message code="labour.dismisal.label" default="Dismisal" /></span>
-								
-									<span class="property-value" aria-labelledby="dismisal-label"><g:fieldValue bean="${labourInstance}" field="dismisal"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${labourInstance?.uif}">
-							<li class="fieldcontain">
-								<span id="uif-label" class="property-label"><g:message code="labour.uif.label" default="Uif" /></span>
-								
-									<span class="property-value" aria-labelledby="uif-label"><g:fieldValue bean="${labourInstance}" field="uif"/></span>
-								
-							</li>
-							</g:if>
-						</ol></fieldset>
-						<fieldset><legend>Labour Contract</legend>
-						<ol class="property-list labour">
 							<g:if test="${labourInstance?.allowAmount}">
 							<li class="fieldcontain">
 								<span id="allowAmount-label" class="property-label"><g:message code="labour.allowAmount.label" default="Allow Amount" /></span>
@@ -213,94 +120,152 @@
 							<g:if test="${labourInstance?.earnings}">
 							<li class="fieldcontain">
 								<span id="earnings-label" class="property-label"><g:message code="labour.earnings.label" default="Earnings" /></span>
-								    <span class="property-value" aria-labelledby="earningsValue-label"><g:fieldValue bean="${labourInstance}" field="earningsValue"/></span>
-								    <span class="property-value" aria-labelledby="earnings-label"><g:fieldValue bean="${labourInstance}" field="earnings"/></span>
-									
+								
+									<span class="property-value" aria-labelledby="earnings-label"><g:fieldValue bean="${labourInstance}" field="earnings"/></span>
+								
 							</li>
 							</g:if>
-							</ol>
-							
-							<fieldset><legend>Hours of Work</legend>
-							<ol class="property-list labour">
-							<g:if test="${labourInstance?.workhours?.overtime}">
+						
+							<g:if test="${labourInstance?.leavedays}">
 							<li class="fieldcontain">
-								<span id="workhours-label" class="property-label"><g:message code="labour.workhours.overtime.label" default="Overtime" /></span>
+								<span id="leavedays-label" class="property-label"><g:message code="labour.leavedays.label" default="Leavedays" /></span>
 								
-									<span class="property-value" aria-labelledby="workhours-label"><g:fieldValue bean="${labourInstance}" field="workhours.overtime"/></span>
+									<span class="property-value" aria-labelledby="leavedays-label"><g:link controller="leaveDays" action="show" id="${labourInstance?.leavedays?.id}">${labourInstance?.leavedays?.encodeAsHTML()}</g:link></span>
 								
 							</li>
 							</g:if>
-							
-							<g:if test="${labourInstance?.workhours?.daily}">
+						
+							<g:if test="${labourInstance?.workhours}">
 							<li class="fieldcontain">
-								<span id="workhours-label" class="property-label"><g:message code="labour.workhours.overtime.label" default="Daily" /></span>
+								<span id="workhours-label" class="property-label"><g:message code="labour.workhours.label" default="Workhours" /></span>
 								
-									<span class="property-value" aria-labelledby="workhours-label"><g:fieldValue bean="${labourInstance}" field="workhours.daily"/></span>
+									<span class="property-value" aria-labelledby="workhours-label"><g:link controller="workHours" action="show" id="${labourInstance?.workhours?.id}">${labourInstance?.workhours?.encodeAsHTML()}</g:link></span>
 								
 							</li>
 							</g:if>
-							
-							<g:if test="${labourInstance?.workhours?.weekend}">
+						
+							<g:if test="${labourInstance?.earningsValue}">
 							<li class="fieldcontain">
-								<span id="workhours-label" class="property-label"><g:message code="labour.workhours.weekend.label" default="Saturday/Sunday" /></span>
+								<span id="earningsValue-label" class="property-label"><g:message code="labour.earningsValue.label" default="Earnings Value" /></span>
 								
-									<span class="property-value" aria-labelledby="workhours-label"><g:fieldValue bean="${labourInstance}" field="workhours.weekend"/></span>
+									<span class="property-value" aria-labelledby="earningsValue-label"><g:fieldValue bean="${labourInstance}" field="earningsValue"/></span>
 								
 							</li>
 							</g:if>
-							
-							<g:if test="${labourInstance?.workhours?.holiday}">
+						
+							<g:if test="${labourInstance?.hoursWorkedValue}">
 							<li class="fieldcontain">
-								<span id="workhours-label" class="property-label"><g:message code="labour.workhours.holiday.label" default="Public Holday" /></span>
+								<span id="hoursWorkedValue-label" class="property-label"><g:message code="labour.hoursWorkedValue.label" default="Hours Worked Value" /></span>
 								
-									<span class="property-value" aria-labelledby="workhours-label"><g:fieldValue bean="${labourInstance}" field="workhours.holiday"/></span>
+									<span class="property-value" aria-labelledby="hoursWorkedValue-label"><g:fieldValue bean="${labourInstance}" field="hoursWorkedValue"/></span>
 								
 							</li>
 							</g:if>
-							</ol>
-							</fieldset>
-							<fieldset><legend>Leave Days</legend>
-							<ol class="property-list labour">
-							<g:if test="${labourInstance?.leavedays?.annual}">
+						
+							<g:if test="${labourInstance?.specifyMembership}">
 							<li class="fieldcontain">
-								<span id="leavedays-label" class="property-label"><g:message code="labour.leavedays.annual.label" default="Annual" /></span>
+								<span id="specifyMembership-label" class="property-label"><g:message code="labour.specifyMembership.label" default="Specify Membership" /></span>
 								
-									<span class="property-value" aria-labelledby="leavedays-label"><g:fieldValue bean="${labourInstance}" field="leavedays.annual"/></span>
+									<span class="property-value" aria-labelledby="specifyMembership-label"><g:fieldValue bean="${labourInstance}" field="specifyMembership"/></span>
 								
 							</li>
 							</g:if>
-							
-							<g:if test="${labourInstance?.leavedays?.sick}">
+						
+							<g:if test="${labourInstance?.allowProblem}">
 							<li class="fieldcontain">
-								<span id="leavedays-label" class="property-label"><g:message code="labour.leavedays.sick.label" default="Sick" /></span>
+								<span id="allowProblem-label" class="property-label"><g:message code="labour.allowProblem.label" default="Allow Problem" /></span>
 								
-									<span class="property-value" aria-labelledby="leavedays-label"><g:fieldValue bean="${labourInstance}" field="leavedays.sick"/></span>
+									<span class="property-value" aria-labelledby="allowProblem-label"><g:link controller="problemType" action="show" id="${labourInstance?.allowProblem?.id}">${labourInstance?.allowProblem?.encodeAsHTML()}</g:link></span>
 								
 							</li>
 							</g:if>
-							
-							<g:if test="${labourInstance?.leavedays?.maternity}">
+						
+							<g:if test="${labourInstance?.benefitsProblem}">
 							<li class="fieldcontain">
-								<span id="leavedays-label" class="property-label"><g:message code="labour.workhours.weekend.label" default="Maternity" /></span>
+								<span id="benefitsProblem-label" class="property-label"><g:message code="labour.benefitsProblem.label" default="Benefits Problem" /></span>
 								
-									<span class="property-value" aria-labelledby="leavedays-label"><g:fieldValue bean="${labourInstance}" field="leavedays.maternity"/></span>
+									<span class="property-value" aria-labelledby="benefitsProblem-label"><g:link controller="problemType" action="show" id="${labourInstance?.benefitsProblem?.id}">${labourInstance?.benefitsProblem?.encodeAsHTML()}</g:link></span>
 								
 							</li>
 							</g:if>
-							
-							<g:if test="${labourInstance?.leavedays?.family}">
+						
+							<g:if test="${labourInstance?.dateCreated}">
 							<li class="fieldcontain">
-								<span id="leavedays-label" class="property-label"><g:message code="labour.leavedays.family.label" default="Family Responsibility" /></span>
+								<span id="dateCreated-label" class="property-label"><g:message code="labour.dateCreated.label" default="Date Created" /></span>
 								
-									<span class="property-value" aria-labelledby="leavedays-label"><g:fieldValue bean="${labourInstance}" field="leavedays.family"/></span>
+									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${labourInstance?.dateCreated}" /></span>
 								
 							</li>
 							</g:if>
-							</ol>
-							</fieldset>
-							</fieldset>
-						</div>
-							<div id="tab-2">
+						
+							<g:if test="${labourInstance?.dismisal}">
+							<li class="fieldcontain">
+								<span id="dismisal-label" class="property-label"><g:message code="labour.dismisal.label" default="Dismisal" /></span>
+								
+									<span class="property-value" aria-labelledby="dismisal-label"><g:link controller="problemType" action="show" id="${labourInstance?.dismisal?.id}">${labourInstance?.dismisal?.encodeAsHTML()}</g:link></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${labourInstance?.healthAndSafety}">
+							<li class="fieldcontain">
+								<span id="healthAndSafety-label" class="property-label"><g:message code="labour.healthAndSafety.label" default="Health And Safety" /></span>
+								
+									<span class="property-value" aria-labelledby="healthAndSafety-label"><g:link controller="problemType" action="show" id="${labourInstance?.healthAndSafety?.id}">${labourInstance?.healthAndSafety?.encodeAsHTML()}</g:link></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${labourInstance?.lastUpdated}">
+							<li class="fieldcontain">
+								<span id="lastUpdated-label" class="property-label"><g:message code="labour.lastUpdated.label" default="Last Updated" /></span>
+								
+									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${labourInstance?.lastUpdated}" /></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${labourInstance?.leaveProblem}">
+							<li class="fieldcontain">
+								<span id="leaveProblem-label" class="property-label"><g:message code="labour.leaveProblem.label" default="Leave Problem" /></span>
+								
+									<span class="property-value" aria-labelledby="leaveProblem-label"><g:link controller="problemType" action="show" id="${labourInstance?.leaveProblem?.id}">${labourInstance?.leaveProblem?.encodeAsHTML()}</g:link></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${labourInstance?.name}">
+							<li class="fieldcontain">
+								<span id="name-label" class="property-label"><g:message code="labour.name.label" default="Name" /></span>
+								
+									<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${labourInstance}" field="name"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${labourInstance?.uif}">
+							<li class="fieldcontain">
+								<span id="uif-label" class="property-label"><g:message code="labour.uif.label" default="Uif" /></span>
+								
+									<span class="property-value" aria-labelledby="uif-label"><g:link controller="problemType" action="show" id="${labourInstance?.uif?.id}">${labourInstance?.uif?.encodeAsHTML()}</g:link></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${labourInstance?.wages}">
+							<li class="fieldcontain">
+								<span id="wages-label" class="property-label"><g:message code="labour.wages.label" default="Wages" /></span>
+								
+									<span class="property-value" aria-labelledby="wages-label"><g:link controller="problemType" action="show" id="${labourInstance?.wages?.id}">${labourInstance?.wages?.encodeAsHTML()}</g:link></span>
+								
+							</li>
+							</g:if>
+						
+						</ol>
+				</div>
+				
+				<div id="tab-2">
+					
 				</div>
 			</div>
 			<!--  *** END TABS *** -->
@@ -334,6 +299,7 @@
 									}
 						});		                
 			});  
-		</script>		
+		</script>	
+</script>		
 	</body>
 </html>

@@ -1,8 +1,8 @@
 package com.cbc
 
 public enum SideNav {
-	MENU_ADMIN("sidenav-admin"),
-	MENU_STANDARD("sidenav-public"),
+	MENU_ADMIN("sidenav"),
+	MENU_STANDARD("sidenav"),
 	
 	final String value;
 	

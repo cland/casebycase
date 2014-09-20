@@ -21,6 +21,11 @@ def groupManagerService
 		}else{ 
 		println("BootStrap >> off!")
 		}
+		
+//		def pcmRole = new Role(name:SystemRoles.ROLE_PCM,description:"Please Call Me Role").save(flush:true)
+//		def pcmGroup = new RoleGroup(name:"GROUP_PCM",description:"Please Call Me access group").save(flush:true)
+//		RoleGroupRole.create pcmGroup, pcmRole
+		
 		if(doBootStrap){
 			switch(Environment.getCurrent()){
 				case "DEVELOPMENT":		
@@ -99,14 +104,16 @@ def groupManagerService
 			println ">> find a admin and dev roles"
 			def adminRole = Role.findByAuthority(SystemRoles.ROLE_ADMIN.value)	// new Role(authority:"ROLE_ADMIN").save(flush:true)
 			def devRole = Role.findByAuthority(SystemRoles.ROLE_DEVELOPER.value) //new Role(authority:"ROLE_USER").save(flush:true)
+			def pcmRole = Role.findByAuthority(SystemRoles.ROLE_PCM.value)
 			
 			//SYSTEM ADMIN group(s)
 			def adminGroup = new RoleGroup(name:"GROUP_ADMIN",description:"Administrators").save(flush:true)
 			def devGroup = new RoleGroup(name:"GROUP_DEVELOPER",description:"Developers").save(flush:true)
-			
+			def pcmGroup = new RoleGroup(name:"GROUP_PCM",description:"Please Call Me access").save(flush:true)
 			println ">> creating RoleGroupRoles..."
 			RoleGroupRole.create adminGroup, adminRole
 			RoleGroupRole.create devGroup, devRole
+			RoleGroupRole.create pcmGroup, pcmRole
 			
 			1.times {
 				long id = it + 1
@@ -126,9 +133,10 @@ def groupManagerService
 		
 			if(!admin.hasErrors()){
 				UserRoleGroup.create admin, devGroup
+				UserRoleGroup.create admin, pcmGroup
 				UserRoleGroup.create admin, adminGroup, true
 				
-				//ADD Admin user to list of roles
+				//Add Admin user to list of roles
 				println ">> Adding admin to office groups"
 				groupManagerService.addUserToGroup(admin, mainOffice, [SystemRoles.ROLE_OCO,SystemRoles.ROLE_CWO])
 			}else{

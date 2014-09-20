@@ -3,8 +3,8 @@ package com.cbc.lookup
 import com.cbc.*
 class ProblemType {
 	transient cbcApiService
-	static attachmentable = true
 	String name
+	String label
 	ProblemType problemType
 	
 	long createdBy
@@ -16,17 +16,20 @@ class ProblemType {
 	static belongsTo = [ProblemType]
     static constraints = {
 		problemType blank:true, nullable:true
+		label blank:true,nullable:true
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
 	}
 	String toString(){
-		"${name}"
+		(label?label:name)
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
+		if(label == "" | label == null) label = name
 	}
 	def beforeUpdate = {
 		lastUpdatedBy = cbcApiService.getCurrentUserId()
+		if(!label) label = name
 	}
 
 	String getCreatedByName(){
@@ -40,14 +43,7 @@ class ProblemType {
 	def onLoad = {
 		// your code goes here
 	}
-	/**
-	 * To ensure that all attachments are removed when the "owner" domain is deleted.
-	 */
-	transient def beforeDelete = {
-		withNewSession{
-		  removeAttachments()
-		}
-	 }
+	
 	
 } //end class
 import java.util.Date

@@ -7,7 +7,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'case.label', default: 'Case')}" />
 		<title><g:appTitle title=""><g:message code="default.show.label" args="[entityName]" /></g:appTitle></title>
-		<g:set var="page_sidenav" value="sidenav-public" />
+		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
 		<g:javascript library="jquerygrid" />		
 		<link rel="stylesheet" href="/cbc/css/ui.jqgrid.css" type="text/css">
