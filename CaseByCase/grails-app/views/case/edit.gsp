@@ -1,4 +1,5 @@
 <%@ page import="com.cbc.Case" %>
+<g:set var="cbcApiService" bean="cbcApiService"/>
 <g:set var="categoryInstance" value="${caseInstance?.categories?.find{true} }"/>
 <!DOCTYPE html>
 <html>

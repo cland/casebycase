@@ -23,7 +23,11 @@
 			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="list-user" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="['Staff']" /></h1>
+			
+			<div class="page-header">
+				<g:message code="default.list.label" args="['Staff']" />
+				<div class="action-div" ><g:link controller="user" action="create" >New Staff</g:link></div>
+			</div>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>

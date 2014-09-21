@@ -3,6 +3,8 @@ package com.cbc
 import static org.springframework.http.HttpStatus.*
 import grails.converters.JSON
 import grails.transaction.Transactional
+
+import com.cbc.location.Location;
 import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 
 @Transactional(readOnly = true)
@@ -37,6 +39,20 @@ class CaseController {
             return
         }
 
+		//save evictions and labour
+		try{
+			Labour labour = saveLabour(params)
+			if(labour){
+				caseInstance.labour = labour
+				caseInstance = caseInstance.merge()
+			}
+		}catch(Exception e){
+			println(">> "+ e)
+			flash.message = "Error: Failed to save form due to an errors on some fields."
+			
+			//render(view: "create", model: [caseInstance: caseInstance,params:params])
+			//return
+		}
         caseInstance.save flush:true
 		println(">> Uploading files...")
 		attachUploadedFilesTo(caseInstance)
@@ -147,5 +163,32 @@ class CaseController {
 		List clients = autoCompleteService.searchPeople(params)
 		clients.addAll(autoCompleteService.searchOrgs(params))
 		render clients as JSON
+	}
+	private Labour saveLabour(params) throws Exception{
+		def labour = null
+		if(!params?.labour?.id){
+			if(params?.labour?.id == ""){
+				println(">>> " + params?.labour)
+				labour = new Labour(params?.labour).save()
+				println(">>> Labour..." + labour)
+				if(labour?.hasErrors() || !labour){
+					println "Errors: " + labour?.errors
+					throw new Exception("Failed to save new labour details... "  + labour?.errors)
+				}
+			}
+		}
+		return labour
+	}
+	private Eviction saveEvictions(params) throws Exception{
+		def eviction = null
+		if(!params?.eviction?.id){
+			if(params?.eviction?.id == ""){
+				eviction = new Eviction(params?.eviction).save()
+				if(eviction.hasErrors()){
+					throw new Exception("Failed to save new eviction details... "  + eviction?.errors)
+				}
+			}
+		}
+		return eviction
 	}
 } //end class

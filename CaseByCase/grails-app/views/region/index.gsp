@@ -23,7 +23,10 @@
 			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="list-region" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<div class="page-header">
+				<g:message code="default.list.label" args="[entityName]" />
+				<div class="action-div" ><g:link controller="region" action="create" >New Region</g:link></div>
+			</div>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>

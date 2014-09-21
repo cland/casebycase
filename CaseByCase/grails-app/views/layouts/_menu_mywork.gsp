@@ -1,11 +1,6 @@
 <h3><g:message code="default.mywork.menu" default="My Work" /></h3>
 <div>
-	<ul class="menu_list_items">
-		<li>
-			<g:link class="create" controller="case" action="create">
-				<g:message code="default.new.label" args="['Case']" />
-			</g:link>
-		</li>
+	<ul class="menu_list_items">		
 		<li>
 			<g:link class="list" controller="case" action="index">
 				<g:message code="default.list.label" args="['Cases']" />

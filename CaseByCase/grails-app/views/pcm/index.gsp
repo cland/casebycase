@@ -23,7 +23,11 @@
 			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="list-pcm" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="['Please Call Me']" /></h1>
+			
+			<div class="page-header">
+				<g:message code="default.list.label" args="['Please Call Me']" />
+				<div class="action-div" ><g:link controller="pcm" action="create" >New PCM</g:link></div>
+			</div>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>

@@ -23,7 +23,11 @@
 			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="list-race" class="content scaffold-list" role="main">
-			<h1><g:message code="default.reportpanel.label" default="Reports Panel" /></h1>
+			
+			<div class="page-header">
+				<g:message code="default.reportpanel.label" default="Reports Panel" />
+				<div class="action-div" ></div>
+			</div>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>

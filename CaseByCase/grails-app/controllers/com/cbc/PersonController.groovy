@@ -59,11 +59,13 @@ class PersonController {
 		
 		try{
 			Location location = cbcApiService.saveLocation(params)
-			personInstance.location = location
-			personInstance = personInstance.merge()				
+			if(location){
+				personInstance.location = location
+				personInstance = personInstance.merge()		
+			}		
 		}catch(Exception e){
 			println("Failed to save new location..."  + e)
-			flash.message = "Error: Failed to save login details due to an error saving person details."
+			flash.message = "Error: Failed to save form due to an error saving location details."
 			
 			render(view: "create", model: [personInstance: personInstance])
 			return
@@ -122,7 +124,17 @@ class PersonController {
 			index++
 			pEntry = params.get('phones[' + index + ']')
 		}
-	
+		//Save location information
+		try{
+			Location location = cbcApiService.saveLocation(params)
+			if(location) personInstance.location = location
+		}catch(Exception e){
+			println("Failed to save new location..."  + e)
+			flash.message = "Error: Failed to save form due to an error saving location details."
+			
+			render(view: "create", model: [personInstance: personInstance])
+			return
+		}
         personInstance.save flush:true
 		if(personInstance.hasErrors()){
 			println(personInstance.errors)

@@ -16,14 +16,17 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Countries
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
 			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="list-country" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<div class="page-header">
+				<g:message code="default.list.label" args="[entityName]" />
+				<div class="action-div" ><g:link controller="country" action="create" >New Country</g:link></div>
+			</div>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>

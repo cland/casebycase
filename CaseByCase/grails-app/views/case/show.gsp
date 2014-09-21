@@ -1,6 +1,8 @@
-
+<g:set var="cbcApiService" bean="cbcApiService"/>
 <%@ page import="com.cbc.Case" %>
 <g:set var="categoryInstance" value="${caseInstance?.categories?.find{true} }"/>
+<g:set var="rootCategory" value="${categoryInstance?.getRootParentName(categoryInstance) }"/>
+<g:set var="outcomeTabOn" value="${(caseInstance?.status?.name == 'Case Closed - Intimidation'  )}"/>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -19,7 +21,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					Case: ${caseInstance?.subject } (${caseInstance?.caseNumber })
+					Case: ${caseInstance?.subject } (${caseInstance?.caseNumber }) 
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -34,9 +36,15 @@
 			<div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-labour">Labour</a></li>
-					<li><a href="#tab-evictions">Evictions</a></li>
-					<li><a href="#tab-2">Outcome & Metrics</a></li>	
+					<g:if test="${rootCategory == "Labour"}">
+						<li><a href="#tab-labour">Labour</a></li>
+					</g:if>
+					<g:if test="${rootCategory == "Eviction"}">
+						<li><a href="#tab-evictions">Evictions</a></li>
+					</g:if>
+					<g:if test="${outcomeTabOn == true }">
+						<li><a href="#tab-2">Outcome & Metrics</a></li>	
+					</g:if>
 					<li><a href="#tab-3">Attachments</a></li>
 					<li><a href="#tab-4">Actions</a></li>
 					<li><a href="#tab-admin">Admin</a></li>
@@ -237,50 +245,56 @@
 					</fieldset>
 				
 				</div> <!-- END TAB 1 -->
-												
-				
-				<div id="tab-evictions"></div>
-				
-				<div id="tab-labour"></div>
-				
-				<div id="tab-2">
-					<!-- Outcome -->
-					<ol class="property-list case">
-							<g:if test="${caseInstance?.dateClosed}">
-							<li class="fieldcontain">
-								<span id="dateClosed-label" class="property-label"><g:message code="case.dateClosed.label" default="Date Closed" /></span>
-								
-									<span class="property-value" aria-labelledby="dateClosed-label"><g:formatDate date="${caseInstance?.dateClosed}" /></span>
-								
-							</li>
-							</g:if>	
-							<g:if test="${caseInstance?.outcome}">
-									<li class="fieldcontain">
-										<span id="outcome-label" class="property-label"><g:message code="case.outcome.label" default="Outcome" /></span>										
-											<span class="property-value" aria-labelledby="outcome-label"><g:link controller="caseOutcome" action="show" id="${caseInstance?.outcome?.id}">${caseInstance?.outcome?.encodeAsHTML()}</g:link></span>										
-									</li>
-							</g:if>
-							<g:if test="${caseInstance?.amtRecovered}">
-							<li class="fieldcontain">
-								<span id="amtRecovered-label" class="property-label"><g:message code="case.amtRecovered.label" default="Amt Recovered" /></span>
-								
-									<span class="property-value" aria-labelledby="amtRecovered-label"><g:fieldValue bean="${caseInstance}" field="amtRecovered"/></span>
-								
-							</li>
-							</g:if>
 						
-							<g:if test="${caseInstance?.bestPractice}">
-							<li class="fieldcontain">
-								<span id="bestPractice-label" class="property-label"><g:message code="case.bestPractice.label" default="Best Practice" /></span>
-								
-									<span class="property-value" aria-labelledby="bestPractice-label"><g:formatBoolean boolean="${caseInstance?.bestPractice}" /></span>
-								
-							</li>
-							</g:if>
-					</ol>
-					
-				</div>
+				<g:if test="${rootCategory == "Labour"}">								
+					<div id="tab-labour">
+						<g:render template="form_labour"/>
+					</div>
+				</g:if>
+				<g:if test="${rootCategory == "Eviction"}">
+					<div id="tab-evictions">
+					</div>
+				</g:if>
 				
+				
+				<g:if test="${outcomeTabOn == true }">
+					<div id="tab-2">
+						<!-- Outcome -->
+						<ol class="property-list case">
+								<g:if test="${caseInstance?.dateClosed}">
+								<li class="fieldcontain">
+									<span id="dateClosed-label" class="property-label"><g:message code="case.dateClosed.label" default="Date Closed" /></span>
+									
+										<span class="property-value" aria-labelledby="dateClosed-label"><g:formatDate date="${caseInstance?.dateClosed}" /></span>
+									
+								</li>
+								</g:if>	
+								<g:if test="${caseInstance?.outcome}">
+										<li class="fieldcontain">
+											<span id="outcome-label" class="property-label"><g:message code="case.outcome.label" default="Outcome" /></span>										
+												<span class="property-value" aria-labelledby="outcome-label"><g:link controller="caseOutcome" action="show" id="${caseInstance?.outcome?.id}">${caseInstance?.outcome?.encodeAsHTML()}</g:link></span>										
+										</li>
+								</g:if>
+								<g:if test="${caseInstance?.amtRecovered}">
+								<li class="fieldcontain">
+									<span id="amtRecovered-label" class="property-label"><g:message code="case.amtRecovered.label" default="Amt Recovered" /></span>
+									
+										<span class="property-value" aria-labelledby="amtRecovered-label"><g:fieldValue bean="${caseInstance}" field="amtRecovered"/></span>
+									
+								</li>
+								</g:if>
+							
+								<g:if test="${caseInstance?.bestPractice}">
+								<li class="fieldcontain">
+									<span id="bestPractice-label" class="property-label"><g:message code="case.bestPractice.label" default="Best Practice" /></span>
+									
+										<span class="property-value" aria-labelledby="bestPractice-label"><g:formatBoolean boolean="${caseInstance?.bestPractice}" /></span>
+									
+								</li>
+								</g:if>
+						</ol>					
+					</div>
+				</g:if>
 				<div id="tab-3">
 					<!-- Supporting documents -->
 					<div id="attachments" class="attachments">

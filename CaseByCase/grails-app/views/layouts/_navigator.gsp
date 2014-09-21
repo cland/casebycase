@@ -9,7 +9,7 @@
 <%--				<li><a class="newsevents-link" href="${createLink(uri: '/home/news')}"><g:message code="default.newsevents.label" default="News"/></a></li>--%>
             </ul>
 		</li>
-		<sec:ifLoggedIn>
+		<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_OCO },${SystemRoles.ROLE_CWO }">
 			<li>				
 				<a class="mywork-link" href="${createLink(uri: '/case/index')}"><g:message code="default.mywork.label" default="My Work"/></a>
 				<ul>
@@ -32,12 +32,17 @@
 					<li><a class="listevent-link" href="${createLink(uri: '/event/index')}"><g:message code="default.eventlist.label" default="Events List"/></a></li>								
             	</ul>
             </li>
-            	
+          </sec:ifAnyGranted>	
+          <sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_PCM }">
             <li><a class="pcm-link" href="${createLink(uri: '/pcm/index')}"><g:message code="default.pcm.label" default="Please Call Me"/></a>
             	<ul>
 			        <li><a class="newpcm-link" href="${createLink(uri: '/pcm/create')}"><g:message code="default.newpcm.label" default="New PCM" /></a></li>		        
 					<li><a class="listpcm-link" href="${createLink(uri: '/pcm/index')}"><g:message code="default.pcmlist.label" default="PCM List"/></a></li>								
             	</ul>
+            </li>
+          </sec:ifAnyGranted>	
+          
+          <sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_OCO },${SystemRoles.ROLE_NCO },${SystemRoles.ROLE_PCO }">          
             <li>				
 				<a class="reports-link" href="${createLink(uri: '/')}"><g:message code="default.reports.label" default="Reports"/></a>
 				<ul>
@@ -46,7 +51,10 @@
 					<li><a class="eventreports-link" href="${createLink(uri: '/report/index')}"><g:message code="default.events.label" default="Events"/></a></li>				
 					<li><a class="pcmreports-link" href="${createLink(uri: '/report/index')}"><g:message code="default.pcm.label" default="PCM"/></a></li>
             	</ul>
-			</li>				
+			</li>
+		</sec:ifAnyGranted>
+		
+		<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">				
 			<li>
 				<g:link controller="admin" action="cbc" class="admin-link"> <g:message code="default.admin.label" default="Admin" /></g:link>
 				<ul>
@@ -57,7 +65,7 @@
 					<li><a class="lookuptypes-link" href="${createLink(uri: '/caseStatus/index')}"><g:message code="default.lookuptypes.label" default="Lookup Types" /></a></li>
 				</ul>
 			</li>
-		</sec:ifLoggedIn>						
+		</sec:ifAnyGranted>					
 				
 <%--		<li class="float-right">--%>
 <%--			<a href="javascript:printFriendly(true,false);" style="" class="print-button">--%>

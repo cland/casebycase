@@ -15,9 +15,9 @@ class OfficeController {
     def index(Integer max) {
         params.max = Math.min(max ?: 50, 100)
 		
-		Office o = Office.findByName("Athlone AO")
-		Office mo = Office.findByName("Main Office")
-		println ">> Is Athlone reviewer: " + groupManagerService.isOfficeReviewer(o)
+		//Office o = Office.findByName("Athlone AO")
+		//Office mo = Office.findByName("Main Office")
+		//println ">> Is Athlone reviewer: " + groupManagerService.isOfficeReviewer(o)
 		//println ">> Is Main Office OCO: " + groupManagerService.isOfficeAdmin(mo)
         respond Office.list(params), model:[officeInstanceCount: Office.count()]
     }
@@ -50,7 +50,7 @@ class OfficeController {
 			}
 		}catch(Exception e){
 			println("Failed to save new location..."  + e)
-			flash.message = "Error: Failed to save login details due to an error saving person details."
+			flash.message = "Error: Failed to save office details due to an error saving location details."
 			
 			render(view: "create", model: [officeInstance: officeInstance])
 			return
@@ -89,7 +89,7 @@ class OfficeController {
 			if(location) officeInstance.location = location
 		}catch(Exception e){
 			println("Failed to save new location..."  + e)
-			flash.message = "Error: Failed to form due to an error saving location details."
+			flash.message = "Error: Failed to update form due to an error saving location details."
 			
 			render(view: "create", model: [officeInstance: officeInstance])
 			return
