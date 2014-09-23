@@ -25,18 +25,6 @@ class LabourController {
 
     @Transactional
     def save(Labour labourInstance) {
-//		WorkHours workhours = new WorkHours()
-//		workhours.overtime = (params.overtime).toLong()
-//		workhours.weekend = (params.weekend).toLong()
-//		workhours.holiday = (params.holiday).toLong()
-//		LeaveDays leavedays = new LeaveDays()
-//		leavedays.annual = (params.annual).toLong()
-//		leavedays.sick = (params.sick).toLong()
-//		leavedays.maternity = (params.maternity).toLong()
-//		leavedays.family = (params.family).toLong()
-//		labourInstance.leavedays = leavedays
-//		labourInstance.workhours = workhours
-		
         if (labourInstance == null) {
             notFound()
             return
@@ -46,8 +34,7 @@ class LabourController {
             respond labourInstance.errors, view:'create'
             return
         }
-//		leavedays.save flush: true
-//		workhours.save flush: true
+
         labourInstance.save flush:true
 
         request.withFormat {

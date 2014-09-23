@@ -90,24 +90,6 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${labourInstance?.allowAmount}">
-							<li class="fieldcontain">
-								<span id="allowAmount-label" class="property-label"><g:message code="labour.allowAmount.label" default="Allow Amount" /></span>
-								
-									<span class="property-value" aria-labelledby="allowAmount-label"><g:fieldValue bean="${labourInstance}" field="allowAmount"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${labourInstance?.allowBenefit}">
-							<li class="fieldcontain">
-								<span id="allowBenefit-label" class="property-label"><g:message code="labour.allowBenefit.label" default="Allow Benefit" /></span>
-								
-									<span class="property-value" aria-labelledby="allowBenefit-label"><g:fieldValue bean="${labourInstance}" field="allowBenefit"/></span>
-								
-							</li>
-							</g:if>
-						
 							<g:if test="${labourInstance?.hoursWorked}">
 							<li class="fieldcontain">
 								<span id="hoursWorked-label" class="property-label"><g:message code="labour.hoursWorked.label" default="Hours Worked" /></span>
@@ -171,6 +153,24 @@
 							</li>
 							</g:if>
 						
+							<g:if test="${labourInstance?.wages}">
+							<li class="fieldcontain">
+								<span id="wages-label" class="property-label"><g:message code="labour.wages.label" default="Wages" /></span>
+								
+									<span class="property-value" aria-labelledby="wages-label"><g:link controller="problemType" action="show" id="${labourInstance?.wages?.id}">${labourInstance?.wages?.encodeAsHTML()}</g:link></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${labourInstance?.leaveProblem}">
+							<li class="fieldcontain">
+								<span id="leaveProblem-label" class="property-label"><g:message code="labour.leaveProblem.label" default="Leave Problem" /></span>
+								
+									<span class="property-value" aria-labelledby="leaveProblem-label"><g:link controller="problemType" action="show" id="${labourInstance?.leaveProblem?.id}">${labourInstance?.leaveProblem?.encodeAsHTML()}</g:link></span>
+								
+							</li>
+							</g:if>
+						
 							<g:if test="${labourInstance?.allowProblem}">
 							<li class="fieldcontain">
 								<span id="allowProblem-label" class="property-label"><g:message code="labour.allowProblem.label" default="Allow Problem" /></span>
@@ -189,11 +189,11 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${labourInstance?.dateCreated}">
+							<g:if test="${labourInstance?.healthAndSafety}">
 							<li class="fieldcontain">
-								<span id="dateCreated-label" class="property-label"><g:message code="labour.dateCreated.label" default="Date Created" /></span>
+								<span id="healthAndSafety-label" class="property-label"><g:message code="labour.healthAndSafety.label" default="Health And Safety" /></span>
 								
-									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${labourInstance?.dateCreated}" /></span>
+									<span class="property-value" aria-labelledby="healthAndSafety-label"><g:link controller="problemType" action="show" id="${labourInstance?.healthAndSafety?.id}">${labourInstance?.healthAndSafety?.encodeAsHTML()}</g:link></span>
 								
 							</li>
 							</g:if>
@@ -207,11 +207,38 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${labourInstance?.healthAndSafety}">
+							<g:if test="${labourInstance?.uif}">
 							<li class="fieldcontain">
-								<span id="healthAndSafety-label" class="property-label"><g:message code="labour.healthAndSafety.label" default="Health And Safety" /></span>
+								<span id="uif-label" class="property-label"><g:message code="labour.uif.label" default="Uif" /></span>
 								
-									<span class="property-value" aria-labelledby="healthAndSafety-label"><g:link controller="problemType" action="show" id="${labourInstance?.healthAndSafety?.id}">${labourInstance?.healthAndSafety?.encodeAsHTML()}</g:link></span>
+									<span class="property-value" aria-labelledby="uif-label"><g:link controller="problemType" action="show" id="${labourInstance?.uif?.id}">${labourInstance?.uif?.encodeAsHTML()}</g:link></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${labourInstance?.allowAmount}">
+							<li class="fieldcontain">
+								<span id="allowAmount-label" class="property-label"><g:message code="labour.allowAmount.label" default="Allow Amount" /></span>
+								
+									<span class="property-value" aria-labelledby="allowAmount-label"><g:link controller="allowanceAmount" action="show" id="${labourInstance?.allowAmount?.id}">${labourInstance?.allowAmount?.encodeAsHTML()}</g:link></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${labourInstance?.allowBenefit}">
+							<li class="fieldcontain">
+								<span id="allowBenefit-label" class="property-label"><g:message code="labour.allowBenefit.label" default="Allow Benefit" /></span>
+								
+									<span class="property-value" aria-labelledby="allowBenefit-label"><g:link controller="benefitsAmount" action="show" id="${labourInstance?.allowBenefit?.id}">${labourInstance?.allowBenefit?.encodeAsHTML()}</g:link></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${labourInstance?.dateCreated}">
+							<li class="fieldcontain">
+								<span id="dateCreated-label" class="property-label"><g:message code="labour.dateCreated.label" default="Date Created" /></span>
+								
+									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${labourInstance?.dateCreated}" /></span>
 								
 							</li>
 							</g:if>
@@ -225,38 +252,11 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${labourInstance?.leaveProblem}">
+							<g:if test="${labourInstance?.thiscase}">
 							<li class="fieldcontain">
-								<span id="leaveProblem-label" class="property-label"><g:message code="labour.leaveProblem.label" default="Leave Problem" /></span>
+								<span id="thiscase-label" class="property-label"><g:message code="labour.thiscase.label" default="Thiscase" /></span>
 								
-									<span class="property-value" aria-labelledby="leaveProblem-label"><g:link controller="problemType" action="show" id="${labourInstance?.leaveProblem?.id}">${labourInstance?.leaveProblem?.encodeAsHTML()}</g:link></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${labourInstance?.name}">
-							<li class="fieldcontain">
-								<span id="name-label" class="property-label"><g:message code="labour.name.label" default="Name" /></span>
-								
-									<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${labourInstance}" field="name"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${labourInstance?.uif}">
-							<li class="fieldcontain">
-								<span id="uif-label" class="property-label"><g:message code="labour.uif.label" default="Uif" /></span>
-								
-									<span class="property-value" aria-labelledby="uif-label"><g:link controller="problemType" action="show" id="${labourInstance?.uif?.id}">${labourInstance?.uif?.encodeAsHTML()}</g:link></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${labourInstance?.wages}">
-							<li class="fieldcontain">
-								<span id="wages-label" class="property-label"><g:message code="labour.wages.label" default="Wages" /></span>
-								
-									<span class="property-value" aria-labelledby="wages-label"><g:link controller="problemType" action="show" id="${labourInstance?.wages?.id}">${labourInstance?.wages?.encodeAsHTML()}</g:link></span>
+									<span class="property-value" aria-labelledby="thiscase-label"><g:link controller="case" action="show" id="${labourInstance?.thiscase?.id}">${labourInstance?.thiscase?.encodeAsHTML()}</g:link></span>
 								
 							</li>
 							</g:if>

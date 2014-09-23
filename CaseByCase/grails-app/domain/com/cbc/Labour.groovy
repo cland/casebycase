@@ -34,6 +34,8 @@ class Labour {
 	String earnings
 	String earningsValue
 
+	static belongsTo = [thiscase:Case]
+	 
 	static constraints = {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
@@ -49,6 +51,13 @@ class Labour {
 		earningsValue nullable:true, blank:true
 		hoursWorkedValue nullable:true, blank:true
 		specifyMembership nullable:true, blank:true
+		wages nullable:true, blank:true
+		leaveProblem nullable:true, blank:true
+		allowProblem nullable:true, blank:true
+		benefitsProblem nullable:true, blank:true
+		healthAndSafety nullable:true, blank:true
+		dismisal nullable:true, blank:true
+		uif nullable:true, blank:true
 	}
 	String toString(){
 		"${id}"
