@@ -248,7 +248,7 @@
 						
 				<g:if test="${rootCategory == "Labour"}">								
 					<div id="tab-labour">
-						<g:render template="form_labour"/>
+						<g:render template="form_labour" model="[mode:'read']"/>
 					</div>
 				</g:if>
 				<g:if test="${rootCategory == "Eviction"}">

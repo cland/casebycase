@@ -253,7 +253,7 @@
 			<div class="cell"><label id="">Case respondent</label></div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:textField name="respondent" value="${caseInstance?.respondent }"/>
+					<g:textArea name="respondent">${caseInstance?.respondent }</g:textArea>
 				</span>
 			</div>
 			<div class="cell"></div>

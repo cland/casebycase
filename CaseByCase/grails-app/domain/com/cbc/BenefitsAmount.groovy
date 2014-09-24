@@ -3,7 +3,7 @@ package com.cbc
 
 class BenefitsAmount {
 	transient cbcApiService
-	Double pensionFund //Provident/Pension Fund amount
+	BigDecimal pensionFund //Provident/Pension Fund amount
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
@@ -13,14 +13,17 @@ class BenefitsAmount {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
 	}
+	static mapping = {
+		pensionFund defaultValue : new Double(0.0)
+	}
 	String toString(){
-		String.format("#.##", pensionFund)
+		pensionFund?.toString()
 	}
 	def beforeInsert = {
-		createdBy = cbcApiService.getCurrentUserId()
+		createdBy = cbcApiService?.getCurrentUserId()
 	}
 	def beforeUpdate = {
-		lastUpdatedBy = cbcApiService.getCurrentUserId()
+		lastUpdatedBy = cbcApiService?.getCurrentUserId()
 	}
 
 	String getCreatedByName(){

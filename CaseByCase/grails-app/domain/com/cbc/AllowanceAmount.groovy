@@ -3,7 +3,7 @@ package com.cbc
 
 class AllowanceAmount {
 	transient cbcApiService
-	Double nightWork
+	BigDecimal nightWork
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
@@ -13,8 +13,11 @@ class AllowanceAmount {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
 	}
+	static mapping = {
+		nightWork defaultValue : new Double(0.0)
+	}
 	String toString(){
-		String.format("#.##", nightWork)
+		nightWork?.toString()
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()

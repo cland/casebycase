@@ -45,12 +45,13 @@ def groupManagerService
 				break
 				case "PRODUCTION":
 					println ("1. Create users ...")
-					createUsers("AdminCbC9")
+					createUsers("admin123")
 				//	println ("2. Login ...")
 				//	loginAsAdmin()
 					println ("3. Initialize Request map ...")
 					initRequestmap()
-					println ("4. Add other components ...")
+					println ("4. Add other components of the app ...")
+					
 					createOtherComponents()
 				break
 			} //end switch
@@ -184,6 +185,8 @@ def groupManagerService
 				 '/country/**',
 				 '/region/**',
 				 '/report/**',
+				 '/category/**',
+				 '/case/index/**',
 				 '/**/show/**',
 				  '/**/index/**']) {
 				  new Requestmap( url: url, configAttribute:'isFullyAuthenticated()').save()

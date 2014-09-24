@@ -62,15 +62,11 @@
 									</g:each>
 								</div>
 							</div>
-							
-							<div class="row">
-								<div class="cell"><label id="faxNumber-label"><g:message code="office.faxNumber.label" default="Fax Number" /></label></div>
-								<div class="cell"><span class="property-value" aria-labelledby="faxNumber-label"><g:fieldValue bean="${officeInstance}" field="faxNumber"/></span></div>
-							</div>
+
 					</div>
 					</fieldset>
 					<br/>
-					<fieldset><legend>CONTACT NUMBERS</legend>
+					<fieldset><legend>CONTACT DETAILS</legend>
 						<div class="row">
 							<div class="cell"><label id="contactNumber-label" ><g:message code="office.contactNumber.label" default="Contact Number" /></label></div>
 							<div class="cell"><span class="property-value" aria-labelledby="contactNumber-label"><g:fieldValue bean="${officeInstance}" field="contactNumber"/></span></div>
@@ -82,6 +78,10 @@
 						<div class="row">
 							<div class="cell"><label id="faxNumber-label"><g:message code="office.faxNumber.label" default="Fax Number" /></label></div>
 							<div class="cell"><span class="property-value" aria-labelledby="faxNumber-label"><g:fieldValue bean="${officeInstance}" field="faxNumber"/></span></div>
+						</div>
+						<div class="row">
+							<div class="cell"><label id="email-label"><g:message code="office.email.label" default="Email" /></label></div>
+							<div class="cell"><span class="property-value" aria-labelledby="email-label"><g:fieldValue bean="${officeInstance}" field="email"/></span></div>
 						</div>
 					</fieldset>
 										

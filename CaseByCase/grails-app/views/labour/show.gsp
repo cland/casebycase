@@ -234,6 +234,15 @@
 							</li>
 							</g:if>
 						
+							<g:if test="${labourInstance?.specifyWorkUnion}">
+							<li class="fieldcontain">
+								<span id="specifyWorkUnion-label" class="property-label"><g:message code="labour.specifyWorkUnion.label" default="Specify Work Union" /></span>
+								
+									<span class="property-value" aria-labelledby="specifyWorkUnion-label"><g:fieldValue bean="${labourInstance}" field="specifyWorkUnion"/></span>
+								
+							</li>
+							</g:if>
+						
 							<g:if test="${labourInstance?.dateCreated}">
 							<li class="fieldcontain">
 								<span id="dateCreated-label" class="property-label"><g:message code="labour.dateCreated.label" default="Date Created" /></span>
@@ -248,15 +257,6 @@
 								<span id="lastUpdated-label" class="property-label"><g:message code="labour.lastUpdated.label" default="Last Updated" /></span>
 								
 									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${labourInstance?.lastUpdated}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${labourInstance?.thiscase}">
-							<li class="fieldcontain">
-								<span id="thiscase-label" class="property-label"><g:message code="labour.thiscase.label" default="Thiscase" /></span>
-								
-									<span class="property-value" aria-labelledby="thiscase-label"><g:link controller="case" action="show" id="${labourInstance?.thiscase?.id}">${labourInstance?.thiscase?.encodeAsHTML()}</g:link></span>
 								
 							</li>
 							</g:if>

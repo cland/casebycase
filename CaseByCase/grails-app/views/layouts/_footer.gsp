@@ -17,5 +17,5 @@
 <g:link controller="logout" action="index" >Logout</g:link>
 </sec:ifLoggedIn>
 <br/>
-<div class="copyright"><g:meta name="app.name"/> version: <g:meta name="app.version"/> | <g:copyright startYear="2013">Autumn Leaf</g:copyright></div>
+<div class="copyright"><g:meta name="app.name"/> version: <g:meta name="app.version"/> | <g:copyright startYear="2013"></g:copyright></div>
 </div>

@@ -19,6 +19,7 @@ class Labour {
 	String specifyMembership
 	String employerDetail
 	String unionAtWork
+	String specifyWorkUnion
 	String memberOfWorkUnion
 	ProblemType wages
 	ProblemType leaveProblem
@@ -33,8 +34,6 @@ class Labour {
 	Integer hoursWorkedValue
 	String earnings
 	String earningsValue
-
-	static belongsTo = [thiscase:Case]
 	 
 	static constraints = {
 		lastUpdatedBy nullable:true
@@ -58,6 +57,9 @@ class Labour {
 		healthAndSafety nullable:true, blank:true
 		dismisal nullable:true, blank:true
 		uif nullable:true, blank:true
+		allowAmount nullable:true, blank:true
+		allowBenefit nullable:true, blank:true
+		specifyWorkUnion nullable:true, blank:true
 	}
 	String toString(){
 		"${id}"

@@ -291,7 +291,7 @@ fieldset {border:solid 1px #999;margin-bottom:1em;}
 }
 
 .fieldcontain .property-value {
-	display: block;
+	/*display: block;*/
 	margin-left: 27%;
 }
 
@@ -878,7 +878,7 @@ p {
 .clear{clear:both;}
 .photo-display{margin:5px;padding:5px;border:1px solid #ccc;text-align:center;}
 .attachments {margin-bottom:5px;}
-form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;padding:5px;}
+fieldset legend, form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;padding:5px;}
 .tab a:link, .tab a:visited{color:#48802C;}
 .tab a:hover,.datepicker-reset:hover {color:#EB8F2A ;text-decoration:none;}
 .datepicker-reset, .action-link, .action-link a {cursor:pointer;color:#48802C;font-size:0.9em;font-weight:bold;}

@@ -55,10 +55,10 @@
 						<g:render template="form_tab2"/>
 					</div>
 					<div id="tab-labour">
-						<g:render template="form_labour"/>
+						<g:render template="form_labour"  model="[mode:'edit']"/>
 					</div>
 					<div id="tab-evictions">
-						<g:render template="form_evictions"/>
+						<g:render template="form_evictions"  model="[mode:'edit']"/>
 					</div>
 					<div id="tab-3">
 						<g:render template="form_tab3"/>

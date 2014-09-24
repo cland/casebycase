@@ -45,6 +45,7 @@
 			$("#resultsDiv").show()
 			$("#resultsDiv").html(data.message)
 			$("#formid").hide()
+			$(window).scrollTop()
 		}
 		function onFailure(data){
 			alert("Failed to save")

@@ -49,7 +49,13 @@
 	</label>
 	<g:textField name="faxNumber" pattern="${officeInstance.constraints.faxNumber.matches}" value="${officeInstance?.faxNumber}"/>
 </div>
-
+<div class="fieldcontain ${hasErrors(bean: officeInstance, field: 'email', 'error')} ">
+	<label for="email">
+		<g:message code="office.email.label" default="Email" />
+		
+	</label>
+	<g:field type="email" name="email" value="${userInstance?.email}"/>
+</div>
 <div class="fieldcontain ${hasErrors(bean: officeInstance, field: 'affiliates', 'error')} ">
 	<label for="affiliates">
 		<g:message code="office.affiliates.label" default="Affiliated To" />

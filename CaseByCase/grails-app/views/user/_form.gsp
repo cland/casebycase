@@ -41,9 +41,7 @@
 				</label>
 				<g:field type="email" name="email" required="" value="${userInstance?.email}"/>
 			</div>
-			
-			
-			
+				
 			<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'enabled', 'error')} ">
 				<label for="enabled">
 					<g:message code="user.enabled.label" default="Enabled" />

@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					Event: ${ }
+					Event Type: ${eventTypeInstance?.name}
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -39,49 +39,11 @@
 							<li class="fieldcontain">
 								<span id="name-label" class="property-label"><g:message code="eventType.name.label" default="Name" /></span>
 								
-									<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${eventTypeInstance}" field="name"/></span>
+								<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${eventTypeInstance}" field="name"/></span>
 								
 							</li>
-							</g:if>
-							<g:if test="${eventTypeInstance?.lastUpdatedBy}">
-							<li class="fieldcontain">
-								<span id="lastUpdatedBy-label" class="property-label"><g:message code="eventType.lastUpdatedBy.label" default="Last Updated By" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${eventTypeInstance}" field="lastUpdatedBy"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${eventTypeInstance?.createdBy}">
-							<li class="fieldcontain">
-								<span id="createdBy-label" class="property-label"><g:message code="eventType.createdBy.label" default="Created By" /></span>
-								
-									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${eventTypeInstance}" field="createdBy"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${eventTypeInstance?.dateCreated}">
-							<li class="fieldcontain">
-								<span id="dateCreated-label" class="property-label"><g:message code="eventType.dateCreated.label" default="Date Created" /></span>
-								
-									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${eventTypeInstance?.dateCreated}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${eventTypeInstance?.lastUpdated}">
-							<li class="fieldcontain">
-								<span id="lastUpdated-label" class="property-label"><g:message code="eventType.lastUpdated.label" default="Last Updated" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${eventTypeInstance?.lastUpdated}" /></span>
-								
-							</li>
-							</g:if>
-						
-							
-						
-						</ol>
+						</g:if>
+					</ol>
 				</div>
 				
 				<div id="tab-2">

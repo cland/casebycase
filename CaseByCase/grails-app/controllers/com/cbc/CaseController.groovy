@@ -53,6 +53,7 @@ class CaseController {
 			//render(view: "create", model: [caseInstance: caseInstance,params:params])
 			//return
 		}
+		
         caseInstance.save flush:true
 		println(">> Uploading files...")
 		attachUploadedFilesTo(caseInstance)
@@ -81,9 +82,84 @@ class CaseController {
             return
         }
 		
-        caseInstance.save flush:true
+		//save evictions and labour
+		try{
+			Labour labour = saveLabour(params)
+//			if(labour){
+//				caseInstance.labour = labour
+//				caseInstance = caseInstance.merge()
+//			}
+		}catch(Exception e){
+			println(">> "+ e)
+			flash.message = "Error: Failed to save form due to an errors on some fields."
+			
+			//render(view: "create", model: [caseInstance: caseInstance,params:params])
+			//return
+		}
+		
+//		//Work hours
+//		def workhours = WorkHours.get(params?.labour?.workhours?.id)
+//		if(!workhours){
+//			workhours = new WorkHours(params?.labour.workhours).save()
+//			if(workhours?.hasErrors()){
+//				println(workhours?.errors)
+//			}else{
+//				def labour = caseInstance?.labour
+//				if(labour) {
+//					labour.workhours = workhours
+//					labour.save()
+//				}
+//			}
+//		}
+//		
+//		//Leave days
+//		def leavedays = LeaveDays.get(params?.labour?.leavedays?.id)
+//		if(!leavedays){
+//			leavedays = new LeaveDays(params?.labour.leavedays).save()
+//			if(leavedays?.hasErrors()){
+//				println(leavedays?.errors)
+//			}else{
+//				def labour = caseInstance?.labour
+//				if(labour) {
+//					labour.leavedays = leavedays
+//					labour.save()
+//				}
+//			}
+//		}
+//		
+//		//Allowance
+//		def allowamt = AllowanceAmount.get(params?.labour?.allowAmount?.id)
+//		if(!allowamt){
+//			allowamt = new AllowanceAmount(params?.labour?.allowAmount).save()
+//			if(allowamt?.hasErrors()){
+//				println(allowamt?.errors)
+//			}else{
+//				def labour = caseInstance?.labour
+//				if(labour) {
+//					labour.allowAmount = allowamt
+//					labour.save()
+//				}
+//			}
+//		}
+//		//Benefits
+//		def allowBenefit = BenefitsAmount.get(params?.labour?.allowBenefit?.id)
+//		if(!allowBenefit){
+//			allowBenefit = new BenefitsAmount(params?.labour.allowBenefit).save()
+//			if(allowBenefit?.hasErrors()){
+//				println(allowBenefit?.errors)
+//			}else{
+//				def labour = caseInstance?.labour
+//				if(labour) {
+//					labour.allowBenefit = allowBenefit
+//					labour.save()
+//				}
+//			}
+//		}
+		
+		caseInstance.save flush:true
 		
 		attachUploadedFilesTo(caseInstance)
+		
         request.withFormat {
             form multipartForm {				
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Case.label', default: 'Case'), caseInstance.toString()])
@@ -165,18 +241,58 @@ class CaseController {
 		render clients as JSON
 	}
 	private Labour saveLabour(params) throws Exception{
-		def labour = null
-		if(!params?.labour?.id){
-			if(params?.labour?.id == ""){
-				println(">>> " + params?.labour)
-				labour = new Labour(params?.labour).save()
-				println(">>> Labour..." + labour)
-				if(labour?.hasErrors() || !labour){
-					println "Errors: " + labour?.errors
-					throw new Exception("Failed to save new labour details... "  + labour?.errors)
-				}
+		def labour = Labour.get(params?.labour?.id)
+		if(!labour){
+			labour = new Labour(params?.labour).save()
+			if(labour?.hasErrors() || !labour){
+				println "Errors: " + labour?.errors
+				throw new Exception("Failed to save new labour details... "  + labour?.errors)
+			}
+			
+		}
+		//Work hours
+		def workhours = WorkHours.get(params?.labour?.workhours?.id)
+		if(!workhours){
+			workhours = new WorkHours(params?.labour?.workhours).save()
+			if(workhours?.hasErrors()){
+				println(workhours?.errors)
+			}else{
+				labour.workhours = workhours
 			}
 		}
+		
+		//Leave days
+		def leavedays = LeaveDays.get(params?.labour?.leavedays?.id)
+		if(!leavedays){
+			leavedays = new LeaveDays(params?.labour?.leavedays).save()
+			if(leavedays?.hasErrors()){
+				println(leavedays?.errors)
+			}else{
+				labour.leavedays = leavedays
+			}
+		}
+		
+		//Allowance
+		def allowamt = AllowanceAmount.get(params?.labour?.allowAmount?.id)
+		if(!allowamt){
+			allowamt = new AllowanceAmount(params?.labour?.allowAmount).save()
+			if(allowamt?.hasErrors()){
+				println(allowamt?.errors)
+			}else{
+				labour.allowAmount = allowamt	
+			}
+		}
+		//Benefits
+		def allowBenefit = BenefitsAmount.get(params?.labour?.allowBenefit?.id)
+		if(!allowBenefit){
+			allowBenefit = new BenefitsAmount(params?.labour?.allowBenefit).save()
+			if(allowBenefit?.hasErrors()){
+				println(allowBenefit?.errors)
+			}else{
+				labour.allowBenefit = allowBenefit
+			}
+		}
+		labour?.save()
 		return labour
 	}
 	private Eviction saveEvictions(params) throws Exception{

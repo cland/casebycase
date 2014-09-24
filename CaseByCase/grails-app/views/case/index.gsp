@@ -1,4 +1,4 @@
-
+<g:set var="cbcApiService" bean="cbcApiService"/>
 <%@ page import="com.cbc.Case" %>
 <!DOCTYPE html>
 <html>
@@ -38,16 +38,20 @@
 						<g:sortableColumn property="caseNumber" title="${message(code: 'case.caseNumber.label', default: 'Case No.')}" />															
 						<g:sortableColumn property="status" title="${message(code: 'case.status.label', default: 'Status')}" />					
 						<g:sortableColumn property="priority" title="${message(code: 'case.priority.label', default: 'Priority')}" />					
+						<g:sortableColumn property="categories" title="${message(code: 'case.category.label', default: 'Main Category')}" />
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${caseInstanceList}" status="i" var="caseInstance">
+					<g:set var="categoryInstance" value="${caseInstance?.categories?.find{true} }"/>
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						<td><g:link action="show" id="${caseInstance.id}"><g:formatDate  date="${caseInstance?.dateOpen}"/></g:link></td>
 						<td><g:link action="show" id="${caseInstance.id}">${fieldValue(bean: caseInstance, field: "subject")}</g:link></td>	
 						<td><g:link action="show" id="${caseInstance.id}">${fieldValue(bean: caseInstance, field: "caseNumber")}</g:link></td>										
 						<td>${fieldValue(bean: caseInstance, field: "status")}</td>					
-						<td>${fieldValue(bean: caseInstance, field: "priority")}</td>									
+						<td>${fieldValue(bean: caseInstance, field: "priority")}</td>
+						<td>${categoryInstance?.getRootParentName(categoryInstance)}</td>
+															
 					</tr>
 				</g:each>
 				</tbody>
