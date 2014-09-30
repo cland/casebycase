@@ -102,7 +102,7 @@ class Eviction {
 		evictionMethod nullable: true, blank: true, inList: ["Sherrif Present", "Police Present", "Police Assisted"]
 		status nullable: true, blank: true, inList: ["Evicted", "Notice Served"]
 		hasShelter nullable: true, blank: true, inList: ["Yes", "No"]
-		evictionDocs nullable: true, blank: true, inList: ["Non Doxuments", "Court Order"]
+		evictionDocs nullable: true, blank: true
 		threatType nullable: true, blank: true, inList: ["Verbal", "Physical"]
 		threatIssuer nullable: true, blank: true, inList: ["Person in charge", "Owner"]
 		chargesLaid nullable: true, blank: true, inList: ["Yes", "No"]
