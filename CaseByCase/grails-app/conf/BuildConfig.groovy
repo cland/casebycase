@@ -86,5 +86,7 @@ grails.project.dependency.resolution = {
 	//	compile ":weceem:1.2-M1"					//simply needs more testing - could not get it run-app
 	//	compile ":weceem-spring-security:1.2-M1"	//simply needs more testing - could not get it run-app
 		compile ":ckeditor:3.6.6.1.1"
+		compile ":csv:0.3.1"
+		compile ":joda-time:1.5"
     }
 }

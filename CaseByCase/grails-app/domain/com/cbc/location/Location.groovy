@@ -10,9 +10,13 @@ class Location {
 	Suburb suburb
 	String township
 	String description
+	String longitude
+	String latitude
     static constraints = {
 		township blank:true, nullable:true
 		description blank:true,nullable:true
+		longitude blank:true, nullable:true
+		latitude blank:true, nullable:true
 	}
 	String toString(){
 		"Country:${country},Region:${region},District:${district},Municipality:${municipality},MainPlace:${mainplace},Suburb:${suburb}"
