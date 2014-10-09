@@ -1,11 +1,8 @@
-package com.cbc
+package com.cbc.lookup
 
 
 
 import static org.springframework.http.HttpStatus.*
-
-import com.cbc.lookup.Keywords;
-
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)

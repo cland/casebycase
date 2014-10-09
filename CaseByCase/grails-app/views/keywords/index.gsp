@@ -30,37 +30,20 @@
 			<table>
 			<thead>
 					<tr>
-					
-						<g:sortableColumn property="name" title="${message(code: 'keywords.name.label', default: 'Name')}" />
-					
-						<g:sortableColumn property="category" title="${message(code: 'keywords.category.label', default: 'Category')}" />
-					
-						<g:sortableColumn property="description" title="${message(code: 'keywords.description.label', default: 'Description')}" />
-					
-						<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'keywords.lastUpdatedBy.label', default: 'Last Updated By')}" />
-					
-						<g:sortableColumn property="createdBy" title="${message(code: 'keywords.createdBy.label', default: 'Created By')}" />
-					
-						<g:sortableColumn property="dateCreated" title="${message(code: 'keywords.dateCreated.label', default: 'Date Created')}" />
-					
+						<g:sortableColumn property="name" title="${message(code: 'problemType.name.label', default: 'Name')}" />
+						<th><g:message code="keywords.label" default="Values" /></th>
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${keywordsInstanceList}" status="i" var="keywordsInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
 						<td><g:link action="show" id="${keywordsInstance.id}">${fieldValue(bean: keywordsInstance, field: "name")}</g:link></td>
-					
-						<td>${fieldValue(bean: keywordsInstance, field: "category")}</td>
-					
-						<td>${fieldValue(bean: keywordsInstance, field: "description")}</td>
-					
-						<td>${fieldValue(bean: keywordsInstance, field: "lastUpdatedBy")}</td>
-					
-						<td>${fieldValue(bean: keywordsInstance, field: "createdBy")}</td>
-					
-						<td><g:formatDate date="${keywordsInstance.dateCreated}" /></td>
-					
+						<td><g:each in="${keywordsInstance.values}" var="p">
+							<span class="property-value" aria-labelledby="keywords-label">
+							<span class="r-arrow"></span> ${p?.encodeAsHTML()}<br/>
+							</span>
+							</g:each>
+						</td>	
 					</tr>
 				</g:each>
 				</tbody>

@@ -1,4 +1,4 @@
-package com.cbc
+package com.cbc.lookup
 
 import java.util.Date;
 
@@ -7,17 +7,19 @@ import javax.management.modelmbean.RequiredModelMBean;
 class Keywords {
 	transient cbcApiService
 	String name
+	String label
 	String category
 	String description
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
-	static hasMany = [values:String]
+	static hasMany = [values:Keywords]
 	static constraints = {
 		name(unique:true)
 		category(nullable:true)
 		description(nullable:true) 
+		label blank:true,nullable:true		
 		lastUpdatedBy nullable:true, editable:false
 		createdBy nullable:true, editable:false
 	}
@@ -35,6 +37,6 @@ class Keywords {
 	}
 
 	String toString(){
-		 "${name}"
+		(label?label:name)
 	}
 } //end class

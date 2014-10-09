@@ -1,4 +1,4 @@
-<%@ page import="com.cbc.Keywords" %>
+<%@ page import="com.cbc.lookup.Keywords" %>
 
 
 
@@ -26,6 +26,14 @@
 	<g:textField name="description" value="${keywordsInstance?.description}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: keywordsInstance, field: 'label', 'error')} ">
+	<label for="label">
+		<g:message code="keywords.label.label" default="Label" />
+		
+	</label>
+	<g:textField name="label" value="${keywordsInstance?.label}"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: keywordsInstance, field: 'lastUpdatedBy', 'error')} required">
 	<label for="lastUpdatedBy">
 		<g:message code="keywords.lastUpdatedBy.label" default="Last Updated By" />
@@ -47,6 +55,6 @@
 		<g:message code="keywords.values.label" default="Values" />
 		
 	</label>
-	
+	<g:select name="values" from="${com.cbc.lookup.Keywords.list()}" multiple="multiple" optionKey="id" size="5" value="${keywordsInstance?.values*.id}" class="many-to-many"/>
 </div>
 

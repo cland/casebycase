@@ -1,8 +1,6 @@
-package com.cbc
+package com.cbc.lookup
 
 
-
-import com.cbc.lookup.Keywords;
 
 import grails.test.mixin.*
 import spock.lang.*
