@@ -382,8 +382,10 @@
 							<li class="fieldcontain">
 								<span id="evictionDocs-label" class="property-label"><g:message code="eviction.evictionDocs.label" default="Eviction Docs" /></span>
 								
-									<span class="property-value" aria-labelledby="evictionDocs-label"><g:fieldValue bean="${evictionInstance}" field="evictionDocs"/></span>
-								
+									<%--span class="property-value" aria-labelledby="evictionDocs-label"><g:fieldValue bean="${evictionInstance}" field="evictionDocs"/></span--%>
+								<g:each in="${evictionInstance?.evictionDocs}" var="p">
+ <li>${p}</li>
+</g:each>
 							</li>
 							</g:if>
 						

@@ -98,6 +98,24 @@
 				<g:else><span class="property-value">${locationInstance?.description }</span></g:else>
 			</div>
 		</div>
+		<div class="row">
+			<div class="cell"><label>Longitude:</label></div>
+			<div class="cell">
+				<g:if test="${isEditMode }">
+					<g:textArea name="location.longitude"></g:textArea>				
+				</g:if>
+				<g:else><span class="property-value">${locationInstance?.longitude }</span></g:else>
+			</div>
+		</div>
+		<div class="row">
+			<div class="cell"><label>Latitude:</label></div>
+			<div class="cell">
+				<g:if test="${isEditMode }">
+					<g:textArea name="location.latitude"></g:textArea>				
+				</g:if>
+				<g:else><span class="property-value">${locationInstance?.latitude }</span></g:else>
+			</div>
+		</div>
 </div>
 
 <g:if test="${isEditMode }">

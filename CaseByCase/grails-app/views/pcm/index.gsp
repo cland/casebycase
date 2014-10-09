@@ -1,4 +1,4 @@
-
+<%@ page import="com.cbc.SystemRoles" %>
 <%@ page import="com.cbc.Pcm" %>
 <!DOCTYPE html>
 <html>
@@ -28,6 +28,11 @@
 				<g:message code="default.list.label" args="['Please Call Me']" />
 				<div class="action-div" ><g:link controller="pcm" action="create" >New PCM</g:link></div>
 			</div>
+			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+				<fieldset><legend>UPLOAD PCM LIST</legend>
+				
+				</fieldset><br/>
+			</sec:ifAnyGranted>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>
