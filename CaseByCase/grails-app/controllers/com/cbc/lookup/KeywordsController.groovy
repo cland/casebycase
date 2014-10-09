@@ -12,7 +12,11 @@ class KeywordsController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Keywords.list(params), model:[keywordsInstanceCount: Keywords.count()]
+		def results = Keywords.createCriteria().list(params) {
+			//isNotEmpty("values")
+			isNull("keyword")
+		}
+		respond results, model:[keywordsInstanceCount: results.totalCount]
     }
 
     def show(Keywords keywordsInstance) {

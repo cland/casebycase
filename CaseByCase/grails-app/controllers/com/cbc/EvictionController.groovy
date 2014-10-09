@@ -35,6 +35,10 @@ class EvictionController {
             return
         }
 
+		//Deal the checkbox
+	//	params.remove "_evictionBy"
+	//	bindData evictionInstance, params
+		
         evictionInstance.save flush:true
 
         request.withFormat {

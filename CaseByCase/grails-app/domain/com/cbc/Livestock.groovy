@@ -1,39 +1,39 @@
 
 package com.cbc
 
-class Eviction {
+class Livestock {
 	transient cbcApiService
-	static attachmentable = true
 
+	Integer cow
+	Integer chicken
+	Integer sheep
+	Integer goat
+	Integer dog
+	Integer cat
+	Integer horse
+	Integer other
+	
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
-	
-	/*** Environment Section ** */
-	//-Type of dwelling
-	Keywords dwellingType  //dropdown
-	//-Number of livestock:
-	Livestock livestock		//fields
-	
-	//- Consent to live on land:
-	Keywords landConsentType	//dropdown
-	
-	/*** Actual Eviction Section ** */
-
-	
-	static hasMany = [evictionBy:Keywords]
 	static transients = ["createdByName","lastUpdatedByName"]
-	static constraints = {
+    static constraints = {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
-		
-	   	livestock nullable:true 
-		dwellingType nullable:true
-		landConsentType nullable:true
+	}
+	static mapping = {
+		cow defaultValue : 0
+		chicken defaultValue : 0
+		sheep defaultValue : 0
+		goat defaultValue : 0
+		dog defaultValue : 0
+		cat defaultValue : 0
+		horse defaultValue : 0
+		other defaultValue : 0
 	}
 	String toString(){
-		""
+		"Cows:${cow}, Chickens:${chicken}, Sheep:${sheep}, Goats:${goat}, Dogs:${dog}, Cat:${cat}, Horses:${horse}, Other:${other}"
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
@@ -53,15 +53,7 @@ class Eviction {
 	def onLoad = {
 		// your code goes here
 	}
-	/**
-	 * To ensure that all attachments are removed when the "owner" domain is deleted.
-	 */
-	transient def beforeDelete = {
-		withNewSession{
-			removeAttachments()
-		}
-	}
-
+	
+	
 } //end class
-import com.cbc.lookup.Keywords
 import java.util.Date

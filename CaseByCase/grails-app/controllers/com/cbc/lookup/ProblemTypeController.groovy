@@ -14,7 +14,8 @@ class ProblemTypeController {
         params.max = Math.min(max ?: 10, 100)
 		
 		def results = ProblemType.createCriteria().list(params) {
-		    isNotEmpty("problemTypes")
+		    //isNotEmpty("problemTypes")
+			isNull("problemType")
 		}
         respond results, model:[problemTypeInstanceCount: results.totalCount]
     }

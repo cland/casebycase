@@ -1,16 +1,16 @@
 
-<%@ page import="com.cbc.Eviction" %>
+<%@ page import="com.cbc.Livestock" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'eviction.label', default: 'Eviction')}" />
+		<g:set var="entityName" value="${message(code: 'livestock.label', default: 'Livestock')}" />
 		<title><g:appTitle title=""><g:message code="default.list.label" args="[entityName]" /></g:appTitle></title>
 		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_ADMIN}" />
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
 	</head>
 	<body>
-		<a href="#list-eviction" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<a href="#list-livestock" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="bread-crump">
 				<span class="r-arrow"></span>
 				<g:link controller="home" action="cbc">Home</g:link>
@@ -22,7 +22,7 @@
 		<div id="status1" class="leftbar" role="complementary">
 			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
-		<div id="list-eviction" class="content scaffold-list" role="main">
+		<div id="list-livestock" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
@@ -31,42 +31,42 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'eviction.lastUpdatedBy.label', default: 'Last Updated By')}" />
+						<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'livestock.lastUpdatedBy.label', default: 'Last Updated By')}" />
 					
-						<g:sortableColumn property="createdBy" title="${message(code: 'eviction.createdBy.label', default: 'Created By')}" />
+						<g:sortableColumn property="createdBy" title="${message(code: 'livestock.createdBy.label', default: 'Created By')}" />
 					
-						<th><g:message code="eviction.livestock.label" default="Livestock" /></th>
+						<g:sortableColumn property="cat" title="${message(code: 'livestock.cat.label', default: 'Cat')}" />
 					
-						<th><g:message code="eviction.dwellingType.label" default="Dwelling Type" /></th>
+						<g:sortableColumn property="chicken" title="${message(code: 'livestock.chicken.label', default: 'Chicken')}" />
 					
-						<th><g:message code="eviction.landConsentType.label" default="Land Consent Type" /></th>
+						<g:sortableColumn property="cow" title="${message(code: 'livestock.cow.label', default: 'Cow')}" />
 					
-						<g:sortableColumn property="dateCreated" title="${message(code: 'eviction.dateCreated.label', default: 'Date Created')}" />
+						<g:sortableColumn property="dateCreated" title="${message(code: 'livestock.dateCreated.label', default: 'Date Created')}" />
 					
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${evictionInstanceList}" status="i" var="evictionInstance">
+				<g:each in="${livestockInstanceList}" status="i" var="livestockInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${evictionInstance.id}">${fieldValue(bean: evictionInstance, field: "lastUpdatedBy")}</g:link></td>
+						<td><g:link action="show" id="${livestockInstance.id}">${fieldValue(bean: livestockInstance, field: "lastUpdatedBy")}</g:link></td>
 					
-						<td>${fieldValue(bean: evictionInstance, field: "createdBy")}</td>
+						<td>${fieldValue(bean: livestockInstance, field: "createdBy")}</td>
 					
-						<td>${fieldValue(bean: evictionInstance, field: "livestock")}</td>
+						<td>${fieldValue(bean: livestockInstance, field: "cat")}</td>
 					
-						<td>${fieldValue(bean: evictionInstance, field: "dwellingType")}</td>
+						<td>${fieldValue(bean: livestockInstance, field: "chicken")}</td>
 					
-						<td>${fieldValue(bean: evictionInstance, field: "landConsentType")}</td>
+						<td>${fieldValue(bean: livestockInstance, field: "cow")}</td>
 					
-						<td><g:formatDate date="${evictionInstance.dateCreated}" /></td>
+						<td><g:formatDate date="${livestockInstance.dateCreated}" /></td>
 					
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate total="${evictionInstanceCount ?: 0}" />
+				<g:paginate total="${livestockInstanceCount ?: 0}" />
 			</div>
 		</div>
 		<script>

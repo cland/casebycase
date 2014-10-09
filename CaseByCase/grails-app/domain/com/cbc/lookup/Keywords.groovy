@@ -14,6 +14,8 @@ class Keywords {
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
+	Keywords keyword
+	static belongsTo = [Keywords]
 	static hasMany = [values:Keywords]
 	static constraints = {
 		name(unique:true)
@@ -25,9 +27,11 @@ class Keywords {
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
+		if(label == "" | label == null) label = name
 	}
 	def beforeUpdate = {
 		lastUpdatedBy = cbcApiService.getCurrentUserId()
+		if(!label) label = name
 	}
 	def beforeDelete = {
 		// your code goes here

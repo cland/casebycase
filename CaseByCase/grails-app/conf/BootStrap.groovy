@@ -1,5 +1,6 @@
 import com.cbc.*
 import com.cbc.location.*
+import com.cbc.lookup.*
 
 import grails.util.*
 
@@ -267,7 +268,7 @@ def groupManagerService
 		new Race(name:"Other").save()
 		
 		//keywords for location
-		def keyword = new Keywords(name:"system_areas",category:"system_locations")
+		def keyword = new Keywords(name:"system_areas",label:"System Areas",category:"system_locations")
 		keyword.addToValues("one")
 		keyword.addToValues("two")
 		keyword.addToValues("three")

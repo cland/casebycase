@@ -15,8 +15,10 @@
 				<span class="r-arrow"></span>
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
+				<g:link controller="keywords" action="index" >Keywords</g:link>
+				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					Keywords: ${keywordsInstance}
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -44,7 +46,14 @@
 								
 							</li>
 							</g:if>
-						
+							<g:if test="${keywordsInstance?.label}">
+							<li class="fieldcontain">
+								<span id="label-label" class="property-label"><g:message code="keywords.label.label" default="Label" /></span>
+								
+									<span class="property-value" aria-labelledby="label-label"><g:fieldValue bean="${keywordsInstance}" field="label"/></span>
+								
+							</li>
+							</g:if>
 							<g:if test="${keywordsInstance?.category}">
 							<li class="fieldcontain">
 								<span id="category-label" class="property-label"><g:message code="keywords.category.label" default="Category" /></span>
@@ -62,64 +71,30 @@
 								
 							</li>
 							</g:if>
-						
-							<g:if test="${keywordsInstance?.label}">
-							<li class="fieldcontain">
-								<span id="label-label" class="property-label"><g:message code="keywords.label.label" default="Label" /></span>
+						<li class="fieldcontain">
+								<span id="keyword-label" class="property-label"><g:message code="keyword.keywords.label" default="Parent Keyword" /></span>
 								
-									<span class="property-value" aria-labelledby="label-label"><g:fieldValue bean="${keywordsInstance}" field="label"/></span>
+									<span class="property-value" aria-labelledby="keyword-label"><g:link controller="keywords" action="show" id="${keywordsInstance?.keyword?.id}">${keywordsInstance?.keyword?.encodeAsHTML()}</g:link></span>
 								
 							</li>
-							</g:if>
-						
-							<g:if test="${keywordsInstance?.lastUpdatedBy}">
-							<li class="fieldcontain">
-								<span id="lastUpdatedBy-label" class="property-label"><g:message code="keywords.lastUpdatedBy.label" default="Last Updated By" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${keywordsInstance}" field="lastUpdatedBy"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${keywordsInstance?.createdBy}">
-							<li class="fieldcontain">
-								<span id="createdBy-label" class="property-label"><g:message code="keywords.createdBy.label" default="Created By" /></span>
-								
-									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${keywordsInstance}" field="createdBy"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${keywordsInstance?.dateCreated}">
-							<li class="fieldcontain">
-								<span id="dateCreated-label" class="property-label"><g:message code="keywords.dateCreated.label" default="Date Created" /></span>
-								
-									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${keywordsInstance?.dateCreated}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${keywordsInstance?.lastUpdated}">
-							<li class="fieldcontain">
-								<span id="lastUpdated-label" class="property-label"><g:message code="keywords.lastUpdated.label" default="Last Updated" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${keywordsInstance?.lastUpdated}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${keywordsInstance?.values}">
+							
 							<li class="fieldcontain">
 								<span id="values-label" class="property-label"><g:message code="keywords.values.label" default="Values" /></span>
-								
-									<g:each in="${keywordsInstance.values}" var="v">
-									<span class="property-value" aria-labelledby="values-label"><g:link controller="keywords" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></span>
+								<span class="property-value" aria-labelledby="values-label">
+								<br/>
+									<g:each in="${keywordsInstance?.values?.sort{it.name}}" var="v">									
+										<span class="r-arrow"></span> <g:link controller="keywords" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link><br/>
 									</g:each>
+									</span>
+									
 								
 							</li>
-							</g:if>
+							
 						
 						</ol>
+							<div class="add">
+								<g:link controller="keywords" action="create" params="['keyword.id': keywordsInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'keywords.label', default: 'Keywork Value')])}</g:link>
+							</div>
 				</div>
 				
 				<div id="tab-2">
