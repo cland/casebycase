@@ -4,7 +4,7 @@ class User {
 
 	transient cbcApiService
 	transient springSecurityService
-
+	def groupManagerService
 	/** Tab1: Login Details **/
 	//**Fieldset basic details
 	String username
@@ -70,6 +70,15 @@ class User {
 	}
 	String getFullname(){
 		return person?.toString()
+	}
+	String getRoles(){
+		Set<RoleGroup> grps = getAuthorities() //getUserGroups(user)
+		List<Role>rolelist = []
+		grps.each{grp ->
+			Set<Role> roles = grp.getAuthorities() //RoleGroupRole.findAllByRoleGroup(grp)
+			rolelist.addAll(roles.toList())
+		}
+		return rolelist?.unique()?.join(",")
 	}
 	String toString(){	
 		return username 

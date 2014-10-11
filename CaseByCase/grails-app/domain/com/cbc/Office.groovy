@@ -80,4 +80,5 @@ class Office {
 	List<RoleGroup> getOfficeGroups(){
 		return groupManagerService.getOfficeGroups(this)
 	}
+
 } //end class

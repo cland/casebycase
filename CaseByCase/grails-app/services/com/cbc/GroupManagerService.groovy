@@ -118,19 +118,20 @@ class GroupManagerService {
 			if(rolegroup) UserRoleGroup.create userInstance, rolegroup
 		}
 	}
-	def getUserGroups(User user){
-		return UserRoleGroup.findByUser(user)
-	}
-	def getUserRoles(User user){
-		List<RoleGroup> grps = getUserGroups(user)
-		List<Role>rolelist = []
-		grps.each{grp ->
-			List<Role> roles = RoleGroupRole.findAllByRoleGroup(grp)
-			rolelist.addAll(roles)
-		}
-		
-		return rolelist
-	}
+//	def getUserGroups(User user){
+//		return user?.getAuthorieties() //returns a set //UserRoleGroup.findAllByUser(user)
+//	}
+//	def getUserRoles(User user){
+////		Set<RoleGroup> grps = user.getAuthorities() //getUserGroups(user)
+////		Set<Role>rolelist = []
+////		grps.each{grp ->
+////			Set<Role> roles = grp.getAuthorities() //RoleGroupRole.findAllByRoleGroup(grp)
+////			rolelist.addAll(roles)
+////		}
+////		println(rolelist)
+//		
+//		return user?.getRoles()
+//	}
 	def generateRoles(){
 		println "... Generating ROLES..."
 	//	def adminRole = new Role(authority:"ROLE_ADMIN22",description:"").save(flush:true)

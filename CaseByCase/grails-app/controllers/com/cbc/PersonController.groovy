@@ -63,6 +63,7 @@ class PersonController {
 				personInstance.location = location
 				personInstance = personInstance.merge()		
 			}		
+			println(personInstance)
 		}catch(Exception e){
 			println("Failed to save new location..."  + e)
 			flash.message = "Error: Failed to save form due to an error saving location details."

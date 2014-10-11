@@ -239,13 +239,17 @@
 			</div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:select id="office" name="office.id" from="${cbcApiService?.getUserAllowedOffices()}" optionKey="id" required="" value="${cbcApiService?.getUserPrimaryOffice()?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
+					<g:hiddenField id="office" name="office.id" value="${(caseInstance?.office?caseInstance?.office?.id : cbcApiService?.getUserPrimaryOffice()?.id)}" />
+					<span>
+						${(caseInstance?.office ? caseInstance?.office : cbcApiService?.getUserPrimaryOffice())}
+					</span>
+<%--					<g:select id="office" name="office.id" from="${cbcApiService?.getUserAllowedOffices()}" optionKey="id" required="" value="${(caseInstance?.office?.id:caseInstance?.assignedTo?.id ? cbcApiService?.getUserPrimaryOffice()?.id)}" class="many-to-one" noSelection="['null': '-select one-']"/>--%>
 				</span>
 			</div>
 			<div class="cell"><label id="">Case worker</label></div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:select id="assignedTo" name="assignedTo.id" from="${com.cbc.User.list()*.person}" optionKey="id" required="" value="${caseInstance?.assignedTo?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
+					<g:select id="assignedTo" name="assignedTo.id" from="${cbcApiService?.getStaffForOffice(caseInstance?.office,params)}" optionKey="id" required="" value="${caseInstance?.assignedTo?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
 				</span>
 			</div>
 		</div>

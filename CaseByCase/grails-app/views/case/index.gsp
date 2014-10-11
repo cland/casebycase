@@ -33,6 +33,7 @@
 			<table class="dataTable">
 			<thead>
 					<tr>
+						<g:sortableColumn property="office.name" title="${message(code: 'office.name.label', default: 'Office')}" />
 						<g:sortableColumn property="date" title="${message(code: 'case.dateopen.label', default: 'Date Opened')}" />
 						<g:sortableColumn property="subject" title="${message(code: 'case.subject.label', default: 'Case')}" />
 						<g:sortableColumn property="caseNumber" title="${message(code: 'case.caseNumber.label', default: 'Case No.')}" />															
@@ -45,6 +46,7 @@
 				<g:each in="${caseInstanceList}" status="i" var="caseInstance">
 					<g:set var="categoryInstance" value="${caseInstance?.categories?.find{true} }"/>
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+						<td>${fieldValue(bean: caseInstance, field: "office.name")}</td>	
 						<td><g:link action="show" id="${caseInstance.id}"><g:formatDate  date="${caseInstance?.dateOpen}"/></g:link></td>
 						<td><g:link action="show" id="${caseInstance.id}">${fieldValue(bean: caseInstance, field: "subject")}</g:link></td>	
 						<td><g:link action="show" id="${caseInstance.id}">${fieldValue(bean: caseInstance, field: "caseNumber")}</g:link></td>										

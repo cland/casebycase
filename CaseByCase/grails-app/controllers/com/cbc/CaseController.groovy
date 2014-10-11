@@ -15,20 +15,30 @@ class CaseController {
 	def autoCompleteService
     def index(Integer max) {
         params.max = Math.min(max ?: 30, 100)
-        respond Case.list(params), model:[caseInstanceCount: Case.count()]
+		def results = cbcApiService.getCases(params)
+		respond results, model:[caseInstanceCount: results.totalCount]
+       // respond Case.list(params), model:[caseInstanceCount: Case.count()]
     }
 
     def show(Case caseInstance) {
+		if(!cbcApiService.canView(caseInstance)){
+			//redirect to access denied
+			redirect action: 'index', params: params
+		}
+		
         respond caseInstance
     }
 
-    def create() {
+    def create() {	
         respond new Case(params)
     }
 
     @Transactional
     def save(Case caseInstance) {
-		println(params)
+		if(!cbcApiService.canEdit(caseInstance)){
+			//redirect to access denied
+			redirect action: 'index'
+		}
         if (caseInstance == null) {
             notFound()
             return
@@ -67,11 +77,20 @@ class CaseController {
     }
 
     def edit(Case caseInstance) {
+		if(!cbcApiService.canEdit(caseInstance)){
+			//redirect to access denied
+			redirect action: 'show', params: params
+		}
         respond caseInstance
     }
 
     @Transactional
     def update(Case caseInstance) {
+		if(!cbcApiService.canEdit(caseInstance)){
+			//redirect to access denied
+			redirect action: 'index'
+		}
+		println("Assigned to: " + params?.assignedTo?.id)
         if (caseInstance == null) {
             notFound()
             return
@@ -92,72 +111,14 @@ class CaseController {
 		}catch(Exception e){
 			println(">> "+ e)
 			flash.message = "Error: Failed to save form due to an errors on some fields."
-			
-			//render(view: "create", model: [caseInstance: caseInstance,params:params])
-			//return
 		}
 		
-//		//Work hours
-//		def workhours = WorkHours.get(params?.labour?.workhours?.id)
-//		if(!workhours){
-//			workhours = new WorkHours(params?.labour.workhours).save()
-//			if(workhours?.hasErrors()){
-//				println(workhours?.errors)
-//			}else{
-//				def labour = caseInstance?.labour
-//				if(labour) {
-//					labour.workhours = workhours
-//					labour.save()
-//				}
-//			}
-//		}
-//		
-//		//Leave days
-//		def leavedays = LeaveDays.get(params?.labour?.leavedays?.id)
-//		if(!leavedays){
-//			leavedays = new LeaveDays(params?.labour.leavedays).save()
-//			if(leavedays?.hasErrors()){
-//				println(leavedays?.errors)
-//			}else{
-//				def labour = caseInstance?.labour
-//				if(labour) {
-//					labour.leavedays = leavedays
-//					labour.save()
-//				}
-//			}
-//		}
-//		
-//		//Allowance
-//		def allowamt = AllowanceAmount.get(params?.labour?.allowAmount?.id)
-//		if(!allowamt){
-//			allowamt = new AllowanceAmount(params?.labour?.allowAmount).save()
-//			if(allowamt?.hasErrors()){
-//				println(allowamt?.errors)
-//			}else{
-//				def labour = caseInstance?.labour
-//				if(labour) {
-//					labour.allowAmount = allowamt
-//					labour.save()
-//				}
-//			}
-//		}
-//		//Benefits
-//		def allowBenefit = BenefitsAmount.get(params?.labour?.allowBenefit?.id)
-//		if(!allowBenefit){
-//			allowBenefit = new BenefitsAmount(params?.labour.allowBenefit).save()
-//			if(allowBenefit?.hasErrors()){
-//				println(allowBenefit?.errors)
-//			}else{
-//				def labour = caseInstance?.labour
-//				if(labour) {
-//					labour.allowBenefit = allowBenefit
-//					labour.save()
-//				}
-//			}
-//		}
 		
 		caseInstance.save flush:true
-		
+		if(caseInstance?.hasErrors()){
+			println(caseInstance.errors)
+		}
+		println("Assigned To: " + caseInstance?.assignedTo?.id)
 		attachUploadedFilesTo(caseInstance)
 		
         request.withFormat {

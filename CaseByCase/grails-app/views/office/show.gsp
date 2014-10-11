@@ -33,7 +33,7 @@
 			<div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Staff Members</a></li>		
+					<li><a href="#tab-2">Staff</a></li>		
 					<li><a href="#tab-3">Cases</a></li>
 					<li><a href="#tab-4">Access Rights</a></li>
 					<li><a href="#tab-5">Supporting Documents</a></li>

@@ -20,6 +20,8 @@
 				<span class="r-arrow"></span>
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
+					<g:link controller="case" action="index">Cases</g:link>
+				<span class="r-arrow"></span> 
 				<span class="current-crump">
 					Case: ${caseInstance?.subject } (${caseInstance?.caseNumber }) 
 				</span>
@@ -215,7 +217,7 @@
 								</div>
 								<div class="cell">
 									<span class="property-value" aria-labelledby="office-label">
-										<g:if test="${caseInstance?.assignedTo}"><g:link controller="user" action="show" id="${caseInstance?.assignedTo?.id}">${caseInstance?.assignedTo?.encodeAsHTML()}</g:link></g:if>
+										<g:if test="${caseInstance?.assignedTo}"><g:link controller="user" action="show" id="${caseInstance?.assignedTo?.id}">${caseInstance?.assignedTo?.person?.toString()?.encodeAsHTML()}</g:link></g:if>
 									</span>
 								</div>
 							</div>

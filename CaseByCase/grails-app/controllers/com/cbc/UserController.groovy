@@ -29,7 +29,6 @@ class UserController {
 
     @Transactional
     def save(User userInstance) {
-		println(params)
         if (userInstance == null) {
             notFound()
             return

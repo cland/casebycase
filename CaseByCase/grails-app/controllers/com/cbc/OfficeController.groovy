@@ -152,8 +152,8 @@ class OfficeController {
 			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'office.label', default: 'Office'), params.id])}"
 			redirect(action: "show",params:params)
 		}
+		def all_staff = cbcApiService.getStaffForOffice(officeInstance,params) //officeInstance.staff.sort(false){[it.firstLastName]}
 		
-		def all_staff = officeInstance.staff.sort(false){[it.firstLastName]}
 		int total = all_staff?.size()
 		if(total < 1){
 			def t =[records:0,page:0]
@@ -169,10 +169,12 @@ class OfficeController {
 		int upperLimit = cbcApiService.findUpperIndex(offset, max, total)
 
 		List resultList = all_staff.getAt(offset..upperLimit)
+		
+		println(resultList)
 		def jsonCells =	resultList.collect {
-			[cell: [it.firstLastName,
-					it.gender,
-					it.dateOfBirth,
+			[cell: [it.getFullname(),
+					it.getRoles(),
+					it.username,
 				], id: it.id] 
 		}
 		
