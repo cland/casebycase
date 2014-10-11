@@ -14,6 +14,8 @@
 		<div class="bread-crump">
 				<span class="r-arrow"></span>
 				<g:link controller="home" action="cbc">Home</g:link>
+				<span class="r-arrow"></span>
+					<g:link controller="organisation" action="index" >Organisation List</g:link> 
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
 					${organisationInstance?.name }

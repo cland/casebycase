@@ -36,6 +36,7 @@
 					<li><a href="#tab-2">Staff Members</a></li>		
 					<li><a href="#tab-3">Cases</a></li>
 					<li><a href="#tab-4">Access Rights</a></li>
+					<li><a href="#tab-5">Supporting Documents</a></li>
 					<li><a href="#tab-admin">Admin</a></li>
 				</ul>
 				<div id="tab-1">
@@ -85,7 +86,7 @@
 						</div>
 					</fieldset>
 										
-					<fieldset><legend>Geographical Location</legend>
+					<fieldset><legend>GEOGRAPHICAL LOCATION</legend>
 							<g:render template="../layouts/location" bean="${officeInstance?.location}" var="locationInstance" model="[mode:'read']"></g:render>
 					</fieldset>
 				</div>
@@ -132,6 +133,24 @@
 						</g:each>
 						</tbody>
 						</table>
+					</div>
+				</div>
+				<div id="tab-5">
+					<!-- Supporting documents -->
+					<div id="attachments" class="attachments">
+						<attachments:each bean="${officeInstance}" status="i">	
+						<div class="photo-display float-left">
+						<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+							<img src="${resource(dir:'images/icons',file:'attach.png',plugin:'famfamfam')}" />			
+							<attachments:downloadLink attachment="${attachment}" inline="false" withContentType="false" />
+							${attachment.niceLength}
+							<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
+								returnPageURI="${createLink(action:'show', id:officeInstance.id,absolute:true)}" />
+						</div>	
+							<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
+						
+						</attachments:each>
+						<div style="clear:both"></div>
 					</div>
 				</div>
 				<div id="tab-admin">

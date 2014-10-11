@@ -14,9 +14,11 @@
 		<div class="bread-crump">
 				<span class="r-arrow"></span>
 				<g:link controller="home" action="cbc">Home</g:link>
+				<span class="r-arrow"></span>
+					<g:link controller="person" action="index" >Person List</g:link> 
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					${personInstance }
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">

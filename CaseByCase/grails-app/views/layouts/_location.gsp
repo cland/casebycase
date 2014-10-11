@@ -102,7 +102,7 @@
 			<div class="cell"><label>Longitude:</label></div>
 			<div class="cell">
 				<g:if test="${isEditMode }">
-					<g:textArea name="location.longitude"></g:textArea>				
+					<g:textField name="location.longitude" value="${locationInstance?.longitude }"/>				
 				</g:if>
 				<g:else><span class="property-value">${locationInstance?.longitude }</span></g:else>
 			</div>
@@ -111,7 +111,7 @@
 			<div class="cell"><label>Latitude:</label></div>
 			<div class="cell">
 				<g:if test="${isEditMode }">
-					<g:textArea name="location.latitude"></g:textArea>				
+					<g:textField name="location.latitude" value="${locationInstance?.latitude }"/>			
 				</g:if>
 				<g:else><span class="property-value">${locationInstance?.latitude }</span></g:else>
 			</div>

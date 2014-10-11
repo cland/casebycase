@@ -13,8 +13,8 @@
 		<a href="#list-organisation" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="bread-crump">
 				<span class="r-arrow"></span>
-				<g:link controller="home" action="cbc">Home</g:link>
-				<span class="r-arrow"></span> 
+				<g:link controller="home" action="cbc">Home</g:link>				
+				<span class="r-arrow"></span>
 				<span class="current-crump">
 					Organisation List
 				</span>
@@ -23,7 +23,10 @@
 			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="list-organisation" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
+			<div class="page-header">
+				<g:message code="default.list.label" args="[entityName]" />
+				<div class="action-div" ><g:link controller="organisation" action="create" >New Organisation</g:link></div>
+			</div>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
 			</g:if>

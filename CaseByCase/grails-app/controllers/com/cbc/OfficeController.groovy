@@ -1,7 +1,7 @@
 package com.cbc
 
 
-
+import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 import static org.springframework.http.HttpStatus.*
 import com.cbc.location.Location
 import grails.transaction.Transactional
@@ -59,6 +59,8 @@ class OfficeController {
         officeInstance.save flush:true
 		//generate groups
 		groupManagerService.generateOfficeGroups(officeInstance)
+		println(">> Uploading files...")
+		attachUploadedFilesTo(officeInstance)
         request.withFormat {
             form {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'officeInstance.label', default: 'Office'), officeInstance.toString()])
@@ -97,7 +99,8 @@ class OfficeController {
         officeInstance.save flush:true
 		
 		//groupManagerService.assignOfficeGroupRoles(officeInstance)
-
+		println(">> Uploading files...")
+		attachUploadedFilesTo(officeInstance)
         request.withFormat {
             form {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Office.label', default: 'Office'), officeInstance.toString()])
