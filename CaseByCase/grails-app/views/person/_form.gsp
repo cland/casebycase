@@ -36,10 +36,10 @@
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'dateOfBirth', 'error')} ">
 	<label for="dateOfBirth">
-		<g:message code="person.dateOfBirth.label" default="Date Of Birth" />
+		<g:message code="person.dateOfBirth.label" default="Date Of Birth"  />
 		
 	</label>
-	<g:datePicker name="dateOfBirth" precision="day"  value="${personInstance?.dateOfBirth}" default="none" noSelection="['': '']" />
+	<g:datePicker required="" name="dateOfBirth" precision="day"  value="${personInstance?.dateOfBirth}" default="none" relativeYears="[-80..-2]" noSelection="['': '-choose-']" />
 </div>
 
 <g:if test="${params.action!='create' & params.action!='dialogcreate' }">

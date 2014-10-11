@@ -27,7 +27,7 @@ class User {
 	Date lastUpdated
 	String history
 	/** *END FIELDS* **/
-	static transients = ['springSecurityService','authorities',"createdByName","lastUpdatedByName"]
+	static transients = ['springSecurityService','authorities',"createdByName","lastUpdatedByName","fullname"]
 
 	static constraints = {
 		username blank: false, unique: true

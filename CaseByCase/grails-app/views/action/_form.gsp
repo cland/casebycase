@@ -29,7 +29,8 @@
 		<g:message code="action.description.label" default="Description" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="description" required="" value="${actionInstance?.description}"/>
+	<g:textArea name="description" required="">${actionInstance?.description}</g:textArea>
+	
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'followUpStatus', 'error')} required">
@@ -37,7 +38,7 @@
 		<g:message code="action.followUpStatus.label" default="Follow Up Status" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="followUpStatus" from="${actionInstance.constraints.followUpStatus.inList}" required="" value="${actionInstance?.followUpStatus}" valueMessagePrefix="action.followUpStatus"/>
+	<g:select name="followUpStatus" from="${actionInstance.constraints.followUpStatus.inList}" required="" value="${actionInstance?.followUpStatus}" valueMessagePrefix="action.followUpStatus" noSelection="['':'-select one-']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'isPrivate', 'error')} ">
@@ -53,7 +54,7 @@
 		<g:message code="action.actionOwner.label" default="Action Owner" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="actionOwner" name="actionOwner.id" from="${com.cbc.User.list()}" optionKey="id" required="" value="${actionInstance?.actionOwner?.id}" class="many-to-one"/>
+	<g:select optionValue="fullname" id="actionOwner" name="actionOwner.id" from="${cbcApiService?.getStaffForOffice(actionInstance?.thiscase?.office,params)}" optionKey="id" required="" value="${actionInstance?.actionOwner?.id}" class="many-to-one" noSelection="['':'-select one-']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'actionType', 'error')} required">
@@ -61,7 +62,7 @@
 		<g:message code="action.actionType.label" default="Action Type" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="actionType" name="actionType.id" from="${com.cbc.ActionType.list()}" optionKey="id" required="" value="${actionInstance?.actionType?.id}" class="many-to-one"/>
+	<g:select id="actionType" name="actionType.id" from="${com.cbc.ActionType.list()}" optionKey="id" required="" value="${actionInstance?.actionType?.id}" class="many-to-one" noSelection="['':'-select one-']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'followUpDate', 'error')} required">
@@ -69,7 +70,7 @@
 		<g:message code="action.followUpDate.label" default="Follow Up Date" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="followUpDate" precision="day"  value="${actionInstance?.followUpDate}"  />
+	<g:datePicker name="followUpDate" precision="day"  value="${actionInstance?.followUpDate}"  relativeYears="[0..3]"/>
 </div>
 <div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'disbursementAmount', 'error')} required">
 	<label for="disbursementAmount">
@@ -83,6 +84,10 @@
 		<g:message code="action.thiscase.label" default="Case" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="thiscase" name="thiscase.id" from="${com.cbc.Case.list()}" optionKey="id" required="" value="${actionInstance?.thiscase?.id}" class="many-to-one"/>
+	<g:hiddenField name="thiscase.id" value="${actionInstance?.thiscase?.id}"/>
+	<span>
+		${(actionInstance?.thiscase ? actionInstance?.thiscase : 'No Case Selected')}
+	</span>
+<%--	<g:select id="thiscase" name="thiscase.id" from="${com.cbc.Case.list()}" optionKey="id" required="" value="${actionInstance?.thiscase?.id}" class="many-to-one"/>--%>
 </div>
 

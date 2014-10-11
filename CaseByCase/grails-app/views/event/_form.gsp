@@ -85,7 +85,7 @@
 		<g:message code="event.eventParticipants.label" default="Event Participants" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="eventParticipants" name="eventParticipants.id" from="${com.cbc.EventParticipant.list()}" optionKey="id" required="" value="${eventInstance?.eventParticipants?.id}" class="many-to-one"/>
+	<g:select id="eventParticipants" name="eventParticipants.id" from="${com.cbc.EventParticipant.list()}" optionKey="id" required="" value="${eventInstance?.eventParticipants?.id}" class="many-to-one" noSelection="['':'-select one-']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'eventType', 'error')} required">
@@ -93,7 +93,7 @@
 		<g:message code="event.eventType.label" default="Event Type" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="eventType" name="eventType.id" from="${com.cbc.EventType.list()}" optionKey="id" required="" value="${eventInstance?.eventType?.id}" class="many-to-one"/>
+	<g:select id="eventType" name="eventType.id" from="${com.cbc.EventType.list()}" optionKey="id" required="" value="${eventInstance?.eventType?.id}" class="many-to-one" noSelection="['':'-select one-']"/>
 </div>
 
 
@@ -103,14 +103,20 @@
 		<g:message code="event.focusAreas.label" default="Focus Areas" />
 		
 	</label>
-	<g:select name="focusAreas" from="${com.cbc.EventFocusArea.list()}" multiple="multiple" optionKey="id" size="5" value="${eventInstance?.focusAreas*.id}" class="many-to-many"/>
+	<div class="property-value">
+	<g:each in="${com.cbc.EventFocusArea.list()}" var="u" status="index">
+		<g:checkBox name="focusAreas" value="${u.id }" checked="${ eventInstance?.focusAreas?.contains(u)}" />
+		<span>${u }</span><br>
+	</g:each>
+	</div>
+<%--	<g:select name="focusAreas" from="${com.cbc.EventFocusArea.list()}" multiple="multiple" optionKey="id" size="5" value="${eventInstance?.focusAreas*.id}" class="many-to-many"/>--%>
 </div>
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'outcome', 'error')} required">
 	<label for="outcome">
 		<g:message code="event.outcome.label" default="Outcome" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="outcome" name="outcome.id" from="${com.cbc.EventOutcome.list()}" optionKey="id" required="" value="${eventInstance?.outcome?.id}" class="many-to-one"/>
+	<g:select id="outcome" name="outcome.id" from="${com.cbc.EventOutcome.list()}" optionKey="id" required="" value="${eventInstance?.outcome?.id}" class="many-to-one" noSelection="['':'-select one-']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'office', 'error')} required">
@@ -118,7 +124,11 @@
 		<g:message code="event.office.label" default="Office" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="office" name="office.id" from="${com.cbc.Office.list()}" optionKey="id" required="" value="${eventInstance?.office?.id}" class="many-to-one"/>
+	<g:hiddenField id="office" name="office.id" value="${(eventInstance?.office?eventInstance?.office?.id : cbcApiService?.getUserPrimaryOffice()?.id)}" />
+	<span>
+		${(eventInstance?.office ? eventInstance?.office : cbcApiService?.getUserPrimaryOffice())}
+	</span>
+<%--	<g:select id="office" name="office.id" from="${com.cbc.Office.list()}" optionKey="id" required="" value="${eventInstance?.office?.id}" class="many-to-one"/>--%>
 </div>
 
 
@@ -128,13 +138,18 @@
 		<g:message code="event.user.label" default="Event caseworker" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="user" name="user.id" from="${com.cbc.User.list()}" optionKey="id" required="" value="${eventInstance?.user?.id}" class="many-to-one"/>
+	<g:select optionValue="fullname" id="user" name="user.id" from="${cbcApiService?.getStaffForOffice(eventInstance?.office,params)}" optionKey="id" required="" value="${eventInstance?.user?.id}" class="many-to-one" noSelection="['':'-select one-']"/>
 </div>
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'followers', 'error')} ">
 	<label for="followers">
-		<g:message code="event.followers.label" default="Other workers" />
-		
+		<g:message code="event.followers.label" default="Other workers" />	
 	</label>
-	<g:select name="followers" from="${com.cbc.User.list()}" multiple="multiple" optionKey="id" size="5" value="${eventInstance?.followers*.id}" class="many-to-many"/>
+	<div class="property-value">
+	<g:each in="${cbcApiService?.getStaffForOffice(eventInstance?.office,params)}" var="u" status="index">
+		<g:checkBox name="followers" value="${u.id }" checked="${ eventInstance?.followers?.contains(u)}" />
+		<span>${u?.getFullname() }</span><br>
+	</g:each>
+	</div>
+<%--	<g:select name="followers" from="${cbcApiService?.getStaffForOffice(eventInstance?.office,params)}" multiple="multiple" optionKey="id" size="5" value="${eventInstance?.followers*.id}" class="many-to-many"/>--%>
 </div>
 

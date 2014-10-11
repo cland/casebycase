@@ -65,6 +65,7 @@ $(document).ready(function() {
 		  	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')           
                         .load(_link)
                         .dialog({
+                            modal:true,
                             autoOpen: false,
                             width:850,
                             beforeClose: function(event,ui){

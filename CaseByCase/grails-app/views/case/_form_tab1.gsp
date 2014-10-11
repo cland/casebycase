@@ -122,7 +122,7 @@
 			</div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:datePicker name="dateOpen" precision="day"  value="${caseInstance?.dateOpen}"  />
+					<g:datePicker name="dateOpen" precision="day"  value="${caseInstance?.dateOpen}"  relativeYears="[-10..0]"/>
 				</span>
 			</div>
 		</div>
@@ -135,7 +135,7 @@
 			</div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:datePicker name="problemStart" precision="day"  value="${caseInstance?.problemStart}"  />
+					<g:datePicker name="problemStart" precision="day"  value="${caseInstance?.problemStart}" relativeYears="[-10..0]"/>
 				</span>
 			</div>
 		</div>
@@ -249,7 +249,7 @@
 			<div class="cell"><label id="">Case worker</label></div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:select id="assignedTo" name="assignedTo.id" from="${cbcApiService?.getStaffForOffice(caseInstance?.office,params)}" optionKey="id" required="" value="${caseInstance?.assignedTo?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
+					<g:select optionValue="fullname" id="assignedTo" name="assignedTo.id" from="${cbcApiService?.getStaffForOffice(caseInstance?.office,params)}" optionKey="id" required="" value="${caseInstance?.assignedTo?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
 				</span>
 			</div>
 		</div>
@@ -280,6 +280,7 @@ function addPersonClient(_id){
                 .load('${g.createLink(controller: 'person', action: 'dialogcreate',params:[caseid:_id])}')
                 
                 .dialog({
+                	modal:true,
                     autoOpen: false,
                     dialogClass: 'no-close',
                     width:800,
@@ -311,6 +312,7 @@ function addPersonClient(_id){
 	  	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')             
 	                .load(_link)     
 	                .dialog({
+	                	modal:true,
 	                    autoOpen: false,
 	                    dialogClass: 'no-close',
 	                    width:800,
@@ -342,6 +344,7 @@ function addPersonClient(_id){
 		  	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')             
 		                .load(_link)     
 		                .dialog({
+		                	modal:true,
 		                    autoOpen: false,
 		                    dialogClass: 'no-close',
 		                    width:800,

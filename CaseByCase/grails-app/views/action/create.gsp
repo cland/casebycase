@@ -1,3 +1,4 @@
+<g:set var="cbcApiService" bean="cbcApiService"/>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -13,8 +14,10 @@
 				<span class="r-arrow"></span>
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
+				<g:link controller="case" action="show" id="${actionInstance?.thiscase?.id }">Case: ${actionInstance?.thiscase} </g:link>
+				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					New Action
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
