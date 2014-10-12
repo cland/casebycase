@@ -28,13 +28,19 @@ class Pcm {
 	Date lastUpdated
 	static transients = ["createdByName","lastUpdatedByName"]
     static constraints = {
-		lastUpdatedBy nullable:true
-		createdBy nullable:true
-		location nullable:true
-		receiver nullable:true
+		lastUpdatedBy nullable:true,blank:true
+		createdBy nullable:true,blank:true
+		receiver nullable:true,blank:true
+		name nullable:true,blank:true
+		agegroup nullable:true,blank:true
+		location nullable:true,blank:true
+		description nullable:true,blank:true
+		referredBy nullable:true,blank:true
+		referredTo nullable:true,blank:true
+		
 	}
 	String toString(){
-		"${name} ${sender}"
+	 "${sender} ${pcmDate?.format("dd MMM yyyy")} ${name}"
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()

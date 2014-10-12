@@ -30,7 +30,10 @@
 			</div>
 			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 				<fieldset><legend>UPLOAD PCM LIST</legend>
-				
+					<g:uploadForm action="upload">
+					    <input type="file" name="filecsv" />
+					    <input type="submit" />
+					</g:uploadForm>
 				</fieldset><br/>
 			</sec:ifAnyGranted>
 			<g:if test="${flash.message}">

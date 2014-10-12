@@ -1,4 +1,5 @@
 <g:set var="isEditMode" value="${mode == "edit" }"/>
+<g:set var="hideList" value="${hideList }"/>
 <div class="table">
 	<g:hiddenField name="location.id" value="${locationInstance?.id }"/>
 	<div class="row">
@@ -69,26 +70,31 @@
 				<g:else><span class="property-value">${locationInstance?.mainplace?.name }</span></g:else>
 			</div>
 		</div>
-		<div class="row">
-			<div class="cell"><label>Suburb/Village:</label></div>
-			<div class="cell">
-				<g:if test="${isEditMode }">
-				<select name="location.suburb.id" id="suburb_options">
-					<option value="">--</option>
-				</select>
-				</g:if>
-				<g:else><span class="property-value">${locationInstance?.suburb?.name }</span></g:else>
+		<g:if test="${!hideList?.contains('suburb') }">
+			<div class="row">
+				<div class="cell"><label>Suburb/Village:</label></div>
+				<div class="cell">
+					<g:if test="${isEditMode }">
+					<select name="location.suburb.id" id="suburb_options">
+						<option value="">--</option>
+					</select>
+					</g:if>
+					<g:else><span class="property-value">${locationInstance?.suburb?.name }</span></g:else>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="cell"><label>Township:</label></div>
-			<div class="cell">
-				<g:if test="${isEditMode }">
-					<g:textField name="location.township" value="${locationsInstance?.township }"/>				
-				</g:if>
-				<g:else><span class="property-value">${locationInstance?.township }</span></g:else>
+		</g:if>
+		<g:if test="${!hideList?.contains('township') }">
+			<div class="row">
+				<div class="cell"><label>Township:</label></div>
+				<div class="cell">
+					<g:if test="${isEditMode }">
+						<g:textField name="location.township" value="${locationsInstance?.township }"/>				
+					</g:if>
+					<g:else><span class="property-value">${locationInstance?.township }</span></g:else>
+				</div>
 			</div>
-		</div>
+		</g:if>
+		<g:if test="${!hideList?.contains('description') }">
 		<div class="row">
 			<div class="cell"><label>Location description:</label></div>
 			<div class="cell">
@@ -98,24 +104,27 @@
 				<g:else><span class="property-value">${locationInstance?.description }</span></g:else>
 			</div>
 		</div>
-		<div class="row">
-			<div class="cell"><label>Longitude:</label></div>
-			<div class="cell">
-				<g:if test="${isEditMode }">
-					<g:textField name="location.longitude" value="${locationInstance?.longitude }"/>				
-				</g:if>
-				<g:else><span class="property-value">${locationInstance?.longitude }</span></g:else>
+		</g:if>
+		<g:if test="${!hideList?.contains('longlat') }">
+			<div class="row">
+				<div class="cell"><label>Longitude:</label></div>
+				<div class="cell">
+					<g:if test="${isEditMode }">
+						<g:textField name="location.longitude" value="${locationInstance?.longitude }"/>				
+					</g:if>
+					<g:else><span class="property-value">${locationInstance?.longitude }</span></g:else>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="cell"><label>Latitude:</label></div>
-			<div class="cell">
-				<g:if test="${isEditMode }">
-					<g:textField name="location.latitude" value="${locationInstance?.latitude }"/>			
-				</g:if>
-				<g:else><span class="property-value">${locationInstance?.latitude }</span></g:else>
+			<div class="row">
+				<div class="cell"><label>Latitude: </label></div>
+				<div class="cell">
+					<g:if test="${isEditMode }">
+						<g:textField name="location.latitude" value="${locationInstance?.latitude }"/>			
+					</g:if>
+					<g:else><span class="property-value">${locationInstance?.latitude }</span></g:else>
+				</div>
 			</div>
-		</div>
+		</g:if>
 </div>
 
 <g:if test="${isEditMode }">

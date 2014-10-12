@@ -20,7 +20,7 @@
 	<label for="content">
 		<g:message code="pcm.content.label" default="Content" />		
 	</label>
-	<g:textField name="content" value="${pcmInstance?.content}"/>
+	<g:textArea name="content" >${pcmInstance?.content}</g:textArea>
 </div>
 <div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'receiver', 'error')} ">
 	<label for="receiver">
@@ -45,9 +45,12 @@
 		<g:message code="pcm.agegroup.label" default="Age Group" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="agegroup" name="agegroup.id" from="${com.cbc.AgeGroup.list()}" optionKey="id" required="" value="${pcmInstance?.agegroup?.id}" class="many-to-one"/>
+	<g:select id="agegroup" name="agegroup.id" from="${com.cbc.AgeGroup.list()}" optionKey="id" required="" value="${pcmInstance?.agegroup?.id}" class="many-to-one" noSelection="['null':'-select one-']"/>
 </div>
-<g:render template="../layouts/location" bean="${officeInstance?.location}" var="locationInstance" model="[mode:'edit']"></g:render>
+</fieldset>
+<br/>
+<fieldset><legend>LOCATION</legend>
+	<g:render template="../layouts/location" bean="${officeInstance?.location}" var="locationInstance" model="[mode:'edit',hideList:['suburb','township','description','longlat']]"></g:render>
 </fieldset>
 <br/>
 
