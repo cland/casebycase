@@ -40,14 +40,14 @@
 					<li><a href="#tab-2">Other</a></li>		
 				</ul>
 				<div id="tab-1">
-					<g:form url="[resource:officeInstance, action:'save']" >
+					<g:uploadForm url="[resource:officeInstance, action:'save']" >
 						<fieldset class="form">
 							<g:render template="form"/>
 						</fieldset>
 						<fieldset class="buttons">
 							<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 						</fieldset>
-					</g:form>
+					</g:uploadForm>
 				</div>
 				
 				<div id="tab-2">

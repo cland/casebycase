@@ -15,7 +15,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					New Event
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -40,14 +40,14 @@
 					<li><a href="#tab-2">Other</a></li>		
 				</ul>
 				<div id="tab-1">
-					<g:form url="[resource:eventInstance, action:'save']" >
+					<g:uploadForm url="[resource:eventInstance, action:'save']" >
 						<fieldset class="form">
 							<g:render template="form"/>
 						</fieldset>
 						<fieldset class="buttons">
 							<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 						</fieldset>
-					</g:form>
+					</g:uploadForm>
 				</div>
 				
 				<div id="tab-2">

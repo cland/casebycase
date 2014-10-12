@@ -109,7 +109,7 @@
 					</div>
 				</div>
 				<div id="tab-4">
-					<br/><h2>Groups</h2>
+					<br/><h1>Groups</h1>
 					<div>
 						<table>
 						<thead>
@@ -137,21 +137,21 @@
 				</div>
 				<div id="tab-5">
 					<!-- Supporting documents -->
-					<div id="attachments" class="attachments">
-						<attachments:each bean="${officeInstance}" status="i">	
-						<div class="photo-display float-left">
-						<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
-							<img src="${resource(dir:'images/icons',file:'attach.png',plugin:'famfamfam')}" />			
-							<attachments:downloadLink attachment="${attachment}" inline="false" withContentType="false" />
-							${attachment.niceLength}
-							<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
-								returnPageURI="${createLink(action:'show', id:officeInstance.id,absolute:true)}" />
-						</div>	
-							<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
-						
-						</attachments:each>
-						<div style="clear:both"></div>
-					</div>
+						<div id="attachments" class="attachments">
+							<attachments:each bean="${officeInstance}" status="i">	
+							<div class="photo-display float-left">
+							<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+								<img src="${resource(dir:'images/icons',file:'attach.png',plugin:'famfamfam')}" />			
+								<attachments:downloadLink attachment="${attachment}" inline="false" withContentType="false" />
+								${attachment.niceLength}
+								<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
+									returnPageURI="${createLink(action:'show', id:officeInstance.id,absolute:true)}" />
+							</div>	
+								<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
+							
+							</attachments:each>
+							<div style="clear:both"></div>
+						</div>
 				</div>
 				<div id="tab-admin">
 					<%--Admin Tracking Info--%>
@@ -203,19 +203,20 @@
 		                };		             
   
               //initialize the staffgrid 
-			  jQuery("#" + cbc_params.staff_maingrid_id).jqGrid({
+			jQuery("#" + cbc_params.staff_maingrid_id).jqGrid({
 			      url:cbc_params.staff_list_url,
 			      editurl:cbc_params.staff_edit_url,
 			      autowidth: true,
+			     
 			      height:"100%",
 			      datatype: "json",
 			      colNames:['Name','Role(s)','Login Name','id','<input style="display:none" class="edit" type="button" name="Add_Staff" onClick="return false;addStaffRow(\''+cbc_params.thisId+'\',\''+cbc_params.staff_maingrid_id+'\');" id="staff_add" value=""/>'],
 			      colModel:[
 			        {name:'fullname', editable:false},						        
-			        {name:'roles', editable:false},
+			        {name:'roles', editable:false,  width:300},
 			        {name:'username', editable:false},					             
 			        {name:'id',hidden:true},
-			        {name:'act',index:'act', width:100,sortable:false,search:false}
+			        {name:'act',index:'act', width:150,sortable:false,search:false}
 			       // {name:'modid',index:'modid',editable:true, hidden:true,sortable:false,search:false,editoptions:{defaultValue:cbc_params.thisId}}
 			     ],
 			     rowNum:20,
@@ -251,6 +252,9 @@
 			        );
 			  //  $("#" + cbc_params.staff_maingrid_id).jqGrid('filterToolbar',{autosearch:true});            
 			});  
+
+		
+			
 			/** helper functions **/
 			 
 			  function afterSubmitEvent(response, postdata) {  

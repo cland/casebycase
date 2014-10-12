@@ -1,7 +1,7 @@
 package com.cbc
 
 
-
+import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 import static org.springframework.http.HttpStatus.*
 import grails.converters.JSON
 import grails.transaction.Transactional
@@ -9,7 +9,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class ActionController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 30, 100)
@@ -37,9 +37,9 @@ class ActionController {
         }
 
         actionInstance.save flush:true
-
+		attachUploadedFilesTo(actionInstance)
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.created.message', args: [message(code: 'actionInstance.label', default: 'Action'), actionInstance.toString()])
                 redirect actionInstance
             }
@@ -69,9 +69,9 @@ class ActionController {
         }
 
         actionInstance.save flush:true
-
+		attachUploadedFilesTo(actionInstance)
         request.withFormat {
-            form {
+            form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Action.label', default: 'Action'), actionInstance.toString()])
                 redirect actionInstance
             }

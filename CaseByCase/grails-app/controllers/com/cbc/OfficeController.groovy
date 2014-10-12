@@ -10,7 +10,7 @@ import grails.converters.JSON
 class OfficeController {
 	def cbcApiService
 	def groupManagerService
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 50, 100)
@@ -62,7 +62,7 @@ class OfficeController {
 		println(">> Uploading files...")
 		attachUploadedFilesTo(officeInstance)
         request.withFormat {
-            form {
+            form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'officeInstance.label', default: 'Office'), officeInstance.toString()])
                 redirect officeInstance
             }
@@ -102,7 +102,7 @@ class OfficeController {
 		println(">> Uploading files...")
 		attachUploadedFilesTo(officeInstance)
         request.withFormat {
-            form {
+            form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Office.label', default: 'Office'), officeInstance.toString()])
                 redirect officeInstance
             }
@@ -169,8 +169,7 @@ class OfficeController {
 		int upperLimit = cbcApiService.findUpperIndex(offset, max, total)
 
 		List resultList = all_staff.getAt(offset..upperLimit)
-		
-		println(resultList)
+
 		def jsonCells =	resultList.collect {
 			[cell: [it.getFullname(),
 					it.getRoles(),
@@ -208,9 +207,9 @@ class OfficeController {
 		int upperLimit = cbcApiService.findUpperIndex(offset, max, total)
 
 		List resultList = all_results.getAt(offset..upperLimit)
-		def jsonCells =	resultList.collect {
+		def jsonCells =	resultList.sort{it.dateOpen}.collect {
 			[cell: [it.caseNumber,
-					it.dateOpen,
+					it.dateOpen.format("dd-MMM-yyyy"),
 					it.subject,
 				], id: it.id]
 		}

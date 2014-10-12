@@ -1,14 +1,14 @@
 package com.cbc
 
 
-
+import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class EventController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -36,9 +36,9 @@ class EventController {
         }
 
         eventInstance.save flush:true
-
+		attachUploadedFilesTo(eventInstance)
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.created.message', args: [message(code: 'eventInstance.label', default: 'Event'), eventInstance.toString()])
                 redirect eventInstance
             }
@@ -63,9 +63,9 @@ class EventController {
         }
 
         eventInstance.save flush:true
-
+		attachUploadedFilesTo(eventInstance)
         request.withFormat {
-            form {
+            form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Event.label', default: 'Event'), eventInstance.toString()])
                 redirect eventInstance
             }

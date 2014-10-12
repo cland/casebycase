@@ -33,7 +33,7 @@
 			<div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Other</a></li>		
+					<li><a href="#tab-2">Supporting Documents</a></li>		
 				</ul>
 				<div id="tab-1">
 					<ol class="property-list action">
@@ -100,25 +100,7 @@
 								
 							</li>
 							</g:if>
-						
-							<g:if test="${actionInstance?.lastUpdatedBy}">
-							<li class="fieldcontain">
-								<span id="lastUpdatedBy-label" class="property-label"><g:message code="action.lastUpdatedBy.label" default="Last Updated By" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${actionInstance}" field="lastUpdatedBy"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${actionInstance?.createdBy}">
-							<li class="fieldcontain">
-								<span id="createdBy-label" class="property-label"><g:message code="action.createdBy.label" default="Created By" /></span>
-								
-									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${actionInstance}" field="createdBy"/></span>
-								
-							</li>
-							</g:if>
-						
+	
 							<g:if test="${actionInstance?.actionOwner}">
 							<li class="fieldcontain">
 								<span id="actionOwner-label" class="property-label"><g:message code="action.actionOwner.label" default="Action Owner" /></span>
@@ -132,20 +114,12 @@
 							<li class="fieldcontain">
 								<span id="actionType-label" class="property-label"><g:message code="action.actionType.label" default="Action Type" /></span>
 								
-									<span class="property-value" aria-labelledby="actionType-label"><g:link controller="actionType" action="show" id="${actionInstance?.actionType?.id}">${actionInstance?.actionType?.encodeAsHTML()}</g:link></span>
+									<span class="property-value" aria-labelledby="actionType-label">${actionInstance?.actionType?.encodeAsHTML()}</span>
 								
 							</li>
 							</g:if>
 						
-							<g:if test="${actionInstance?.dateCreated}">
-							<li class="fieldcontain">
-								<span id="dateCreated-label" class="property-label"><g:message code="action.dateCreated.label" default="Date Created" /></span>
-								
-									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${actionInstance?.dateCreated}" /></span>
-								
-							</li>
-							</g:if>
-						
+							
 							<g:if test="${actionInstance?.followUpDate}">
 							<li class="fieldcontain">
 								<span id="followUpDate-label" class="property-label"><g:message code="action.followUpDate.label" default="Follow Up Date" /></span>
@@ -166,14 +140,7 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${actionInstance?.lastUpdated}">
-							<li class="fieldcontain">
-								<span id="lastUpdated-label" class="property-label"><g:message code="action.lastUpdated.label" default="Last Updated" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${actionInstance?.lastUpdated}" /></span>
-								
-							</li>
-							</g:if>
+							
 						
 							<g:if test="${actionInstance?.thiscase}">
 							<li class="fieldcontain">
@@ -188,7 +155,22 @@
 				</div>
 				
 				<div id="tab-2">
-					
+						<!-- Supporting documents -->
+						<div id="attachments" class="attachments">
+							<attachments:each bean="${actionInstance}" status="i">	
+							<div class="photo-display float-left">
+							<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+								<img src="${resource(dir:'images/icons',file:'attach.png',plugin:'famfamfam')}" />			
+								<attachments:downloadLink attachment="${attachment}" inline="false" withContentType="false" />
+								${attachment.niceLength}
+								<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
+									returnPageURI="${createLink(action:'show', id:actionInstance.id,absolute:true)}" />
+							</div>	
+								<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
+							
+							</attachments:each>
+							<div style="clear:both"></div>
+						</div>
 				</div>
 			</div>
 			<!--  *** END TABS *** -->

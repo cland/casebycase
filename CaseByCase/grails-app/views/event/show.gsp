@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					here edit...
+					${eventInstance?.topic}
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -31,7 +31,7 @@
 			<div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Other</a></li>		
+					<li><a href="#tab-2">Supporting Documents</a></li>	
 				</ul>
 				<div id="tab-1">
 					<ol class="property-list event">
@@ -47,7 +47,7 @@
 						
 							<g:if test="${eventInstance?.refno}">
 							<li class="fieldcontain">
-								<span id="refno-label" class="property-label"><g:message code="event.refno.label" default="Refno" /></span>
+								<span id="refno-label" class="property-label"><g:message code="event.refno.label" default="Reference No." /></span>
 								
 									<span class="property-value" aria-labelledby="refno-label"><g:fieldValue bean="${eventInstance}" field="refno"/></span>
 								
@@ -107,39 +107,13 @@
 								
 							</li>
 							</g:if>
-						
-							<g:if test="${eventInstance?.lastUpdatedBy}">
-							<li class="fieldcontain">
-								<span id="lastUpdatedBy-label" class="property-label"><g:message code="event.lastUpdatedBy.label" default="Last Updated By" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${eventInstance}" field="lastUpdatedBy"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${eventInstance?.createdBy}">
-							<li class="fieldcontain">
-								<span id="createdBy-label" class="property-label"><g:message code="event.createdBy.label" default="Created By" /></span>
-								
-									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${eventInstance}" field="createdBy"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${eventInstance?.dateCreated}">
-							<li class="fieldcontain">
-								<span id="dateCreated-label" class="property-label"><g:message code="event.dateCreated.label" default="Date Created" /></span>
-								
-									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${eventInstance?.dateCreated}" /></span>
-								
-							</li>
-							</g:if>
-						
+													
 							<g:if test="${eventInstance?.eventParticipants}">
 							<li class="fieldcontain">
 								<span id="eventParticipants-label" class="property-label"><g:message code="event.eventParticipants.label" default="Event Participants" /></span>
 								
-									<span class="property-value" aria-labelledby="eventParticipants-label"><g:link controller="eventParticipant" action="show" id="${eventInstance?.eventParticipants?.id}">${eventInstance?.eventParticipants?.encodeAsHTML()}</g:link></span>
+									<span class="property-value" aria-labelledby="eventParticipants-label">
+									${eventInstance?.eventParticipants?.encodeAsHTML()}</span>
 								
 							</li>
 							</g:if>
@@ -148,7 +122,7 @@
 							<li class="fieldcontain">
 								<span id="eventType-label" class="property-label"><g:message code="event.eventType.label" default="Event Type" /></span>
 								
-									<span class="property-value" aria-labelledby="eventType-label"><g:link controller="eventType" action="show" id="${eventInstance?.eventType?.id}">${eventInstance?.eventType?.encodeAsHTML()}</g:link></span>
+									<span class="property-value" aria-labelledby="eventType-label">${eventInstance?.eventType?.encodeAsHTML()}</span>
 								
 							</li>
 							</g:if>
@@ -165,10 +139,12 @@
 							<g:if test="${eventInstance?.focusAreas}">
 							<li class="fieldcontain">
 								<span id="focusAreas-label" class="property-label"><g:message code="event.focusAreas.label" default="Focus Areas" /></span>
-								
+								<div class="property-value" aria-labelledby="focusAreas-label">
 									<g:each in="${eventInstance.focusAreas}" var="f">
-									<span class="property-value" aria-labelledby="focusAreas-label"><g:link controller="eventFocusArea" action="show" id="${f.id}">${f?.encodeAsHTML()}</g:link></span>
+									<span class="r-arrow"></span>
+									${f?.encodeAsHTML()}<br/>
 									</g:each>
+								</div>
 								
 							</li>
 							</g:if>
@@ -193,16 +169,7 @@
 									</g:each>
 								
 							</li>
-							</g:if>
-						
-							<g:if test="${eventInstance?.lastUpdated}">
-							<li class="fieldcontain">
-								<span id="lastUpdated-label" class="property-label"><g:message code="event.lastUpdated.label" default="Last Updated" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${eventInstance?.lastUpdated}" /></span>
-								
-							</li>
-							</g:if>
+							</g:if>	
 						
 							<g:if test="${eventInstance?.maleYouth}">
 							<li class="fieldcontain">
@@ -226,14 +193,15 @@
 							<li class="fieldcontain">
 								<span id="outcome-label" class="property-label"><g:message code="event.outcome.label" default="Outcome" /></span>
 								
-									<span class="property-value" aria-labelledby="outcome-label"><g:link controller="eventOutcome" action="show" id="${eventInstance?.outcome?.id}">${eventInstance?.outcome?.encodeAsHTML()}</g:link></span>
+									<span class="property-value" aria-labelledby="outcome-label">
+									${eventInstance?.outcome?.encodeAsHTML()}</span>
 								
 							</li>
 							</g:if>
 						
 							<g:if test="${eventInstance?.user}">
 							<li class="fieldcontain">
-								<span id="user-label" class="property-label"><g:message code="event.user.label" default="User" /></span>
+								<span id="user-label" class="property-label"><g:message code="event.user.label" default="Case worker" /></span>
 								
 									<span class="property-value" aria-labelledby="user-label"><g:link controller="user" action="show" id="${eventInstance?.user?.id}">${eventInstance?.user?.encodeAsHTML()}</g:link></span>
 								
@@ -244,7 +212,22 @@
 				</div>
 				
 				<div id="tab-2">
-					
+						<!-- Supporting documents -->
+						<div id="attachments" class="attachments">
+							<attachments:each bean="${eventInstance}" status="i">	
+							<div class="photo-display float-left">
+							<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+								<img src="${resource(dir:'images/icons',file:'attach.png',plugin:'famfamfam')}" />			
+								<attachments:downloadLink attachment="${attachment}" inline="false" withContentType="false" />
+								${attachment.niceLength}
+								<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
+									returnPageURI="${createLink(action:'show', id:eventInstance.id,absolute:true)}" />
+							</div>	
+								<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
+							
+							</attachments:each>
+							<div style="clear:both"></div>
+						</div>
 				</div>
 			</div>
 			<!--  *** END TABS *** -->
