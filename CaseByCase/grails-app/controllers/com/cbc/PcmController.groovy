@@ -38,9 +38,10 @@ class PcmController {
             return
         }
 		try{
-			Location location = cbcApiService.saveLocation(params)
-			pcmInstance.location = location
-			pcmInstance = pcmInstance.merge()
+			if(location){
+				pcmInstance.location = location
+				pcmInstance = officeInstance.merge()
+			}
 		}catch(Exception e){
 			println("Failed to save new location... "  + e)
 			flash.message = "Error: Failed to save form due to an error saving location details."
@@ -74,7 +75,17 @@ class PcmController {
             respond pcmInstance.errors, view:'edit'
             return
         }
-
+		//Save location information
+		try{
+			Location location = cbcApiService.saveLocation(params)
+			if(location) pcmInstance.location = location
+		}catch(Exception e){
+			println("Failed to save new location..."  + e)
+			flash.message = "Error: Failed to update form due to an error saving location details."
+			
+			render(view: "create", model: [pcmInstance: pcmInstance])
+			return
+		}
         pcmInstance.save flush:true
 
         request.withFormat {

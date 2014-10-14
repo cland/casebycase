@@ -15,6 +15,8 @@
 				<span class="r-arrow"></span>
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
+				<g:link controller="pcm" action="index">PCM List</g:link>
+				<span class="r-arrow"></span> 
 				<span class="current-crump">
 					PCM: ${pcmInstance?.sender } - ${pcmInstance?.name }
 				</span>
@@ -125,8 +127,10 @@
 			
 			<g:form url="[resource:pcmInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
+				<sec:ifAnyGranted roles="${SystemRoles.ROLE_PCM },${SystemRoles.ROLE_ADMIN }">
 					<g:link class="edit" action="edit" resource="${pcmInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+				</sec:ifAnyGranted>
 				</fieldset>
 			</g:form>
 		</div>
@@ -153,6 +157,6 @@
 						});		                
 			});  
 		</script>	
-</script>		
+		
 	</body>
 </html>

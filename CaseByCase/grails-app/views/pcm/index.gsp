@@ -47,7 +47,8 @@
 						<g:sortableColumn property="name" title="${message(code: 'pcm.name.label', default: 'Name')}" />						
 						<g:sortableColumn property="agegroup" title="${message(code: 'pcm.agegroup.label', default: 'Age Group')}" />
 						<th><g:message code="pcm.referredTo.label" default="Referred To" /></th>
-						<g:sortableColumn property="referredBy" title="${message(code: 'pcm.referredBy.label', default: 'Referred By')}" />					
+						<g:sortableColumn property="referredBy" title="${message(code: 'pcm.referredBy.label', default: 'Referred By')}" />
+						<th></th>					
 					</tr>
 				</thead>
 				<tbody>
@@ -59,6 +60,13 @@
 						<td>${fieldValue(bean: pcmInstance, field: "agegroup")}</td>
 						<td>${fieldValue(bean: pcmInstance, field: "referredTo")}</td>
 						<td>${fieldValue(bean: pcmInstance, field: "referredBy")}</td>
+						<td class="action-column">
+						<sec:ifAnyGranted roles="${SystemRoles.ROLE_PCM },${SystemRoles.ROLE_ADMIN }">
+							<g:link action="edit" id="${pcmInstance.id}">
+							<img src='${resource(dir: 'images/icons', file: 'page_edit.png', plugin: 'famfamfam')}'/>
+							</g:link>
+						</sec:ifAnyGranted>
+						</td>
 					</tr>
 				</g:each>
 				</tbody>

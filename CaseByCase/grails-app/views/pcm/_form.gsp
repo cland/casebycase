@@ -50,7 +50,7 @@
 </fieldset>
 <br/>
 <fieldset><legend>LOCATION</legend>
-	<g:render template="../layouts/location" bean="${officeInstance?.location}" var="locationInstance" model="[mode:'edit',hideList:['suburb','township','description','longlat']]"></g:render>
+	<g:render template="../layouts/location" bean="${pcmInstance?.location}" var="locationInstance" model="[mode:'edit',hideList:['suburb','township','description','longlat']]"></g:render>
 </fieldset>
 <br/>
 

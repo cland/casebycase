@@ -28,9 +28,10 @@ class cbcApiService {
 				location = new Location(params?.location).save()			
 				if(location.hasErrors()){
 					throw new Exception("Failed to save new location... "  + location?.errors)
-				}
+				}			
 			}
 		}
+		
 		return location
 	}
 	

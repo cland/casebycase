@@ -999,3 +999,11 @@ ul.menu_list_items li a{
 .ui-accordion .ui-accordion-content {
 	padding:1em !important;
 }
+.action-column, td.action-column {
+	text-align:center;
+	width:2.5em;
+}
+.action-column a:hover, td.action-column a:hover{
+	background:#FFF;
+	border:solid 2px #000;
+}
