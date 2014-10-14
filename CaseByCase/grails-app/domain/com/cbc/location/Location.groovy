@@ -33,7 +33,19 @@ class Location {
 		
 	}
 
-	
+	def toMap(){
+		return [id:id,
+			country:country?.name,
+			region:region?.name,
+			district:district?.name,
+			municipality:municipality?.name,
+			mainplace:mainplace?.name,
+			suburb:suburb?.name,
+			township:township,
+			description:description,
+			longitude:longitude,
+			latitude:latitude]
+	}
 	def onLoad = {
 		// your code goes here
 	}

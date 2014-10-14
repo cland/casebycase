@@ -1,5 +1,7 @@
 <g:set var="isEditMode" value="${mode == "edit" }"/>
 <g:set var="hideList" value="${hideList }"/>
+<g:set var="jsCallbackFn" value="${jsCallback }"/>
+
 <div class="table">
 	<g:hiddenField name="location.id" value="${locationInstance?.id }"/>
 	<div class="row">
@@ -36,6 +38,7 @@
 				<g:else><span class="property-value">${locationInstance?.region?.name }</span></g:else>
 			</div>					
 		</div>
+		<g:if test="${!hideList?.contains('district') }">
 		<div class="row">
 		<div class="cell"><label>District:</label></div>
 			<div class="cell">
@@ -48,6 +51,8 @@
 				
 			</div>					
 		</div>
+		</g:if>
+		<g:if test="${!hideList?.contains('municipality') }">
 		<div class="row">
 			<div class="cell"><label>Municipality:</label></div>
 			<div class="cell">
@@ -59,6 +64,8 @@
 				<g:else><span class="property-value">${locationInstance?.municipality?.name }</span></g:else>
 			</div>
 		</div>
+		</g:if>
+		<g:if test="${!hideList?.contains('mainplace') }">
 		<div class="row">
 			<div class="cell"><label>Main Place:</label></div>
 			<div class="cell">
@@ -70,6 +77,7 @@
 				<g:else><span class="property-value">${locationInstance?.mainplace?.name }</span></g:else>
 			</div>
 		</div>
+		</g:if>
 		<g:if test="${!hideList?.contains('suburb') }">
 			<div class="row">
 				<div class="cell"><label>Suburb/Village:</label></div>
@@ -138,11 +146,12 @@
 		cbc_location.current.municipality = "${locationInstance?.municipality?.id}";
 		cbc_location.current.mainplace = "${locationInstance?.mainplace?.id}";
 		cbc_location.current.suburb = "${locationInstance?.suburb?.id}";
-		
-		if(cbc_location.current.region != "") load_options(cbc_location.current.region,"country","getDistricts","district_options","",cbc_location.current.district);
-		if(cbc_location.current.municipality != "") load_options(cbc_location.current.district,"country","getMunicipalities","muni_options","",cbc_location.current.municipality);
-		if(cbc_location.current.mainplace != "") load_options(cbc_location.current.municipality,"country","getMainPlaces","mainplace_options","",cbc_location.current.mainplace);
-		if(cbc_location.current.suburb != "") load_options(cbc_location.current.mainplace,"country","getSuburbs","suburb_options","",cbc_location.current.suburb);
+		var jsCallbackFn = "${jsCallbackFn}";
+		if(jsCallbackFn == "") jsCallbackFn = null;
+		if(cbc_location.current.region != "") load_options(cbc_location.current.region,"country","getDistricts","district_options","",cbc_location.current.district,jsCallbackFn);
+		if(cbc_location.current.municipality != "") load_options(cbc_location.current.district,"country","getMunicipalities","muni_options","",cbc_location.current.municipality,jsCallbackFn);
+		if(cbc_location.current.mainplace != "") load_options(cbc_location.current.municipality,"country","getMainPlaces","mainplace_options","",cbc_location.current.mainplace,jsCallbackFn);
+		if(cbc_location.current.suburb != "") load_options(cbc_location.current.mainplace,"country","getSuburbs","suburb_options","",cbc_location.current.suburb,jsCallbackFn);
 			
 	});
 	function load_options(_id,controller_name,action_name,field_id,subfields,defaultValue){
@@ -153,7 +162,9 @@
 			dataType: "json",
 			data : 'id=' + _id,
 			success : function(data) {
-				cbc_location.combobox_options(data,field_id,"--select one--","",true,subfields,defaultValue);
+				var jsCallbackFn = "${jsCallbackFn}";
+				if(jsCallbackFn=="") jsCallbackFn = null;
+				cbc_location.combobox_options(data,field_id,"--select one--","",true,subfields,defaultValue,jsCallbackFn);
 			},
 			error : function() { // handle server errors
 				alert("Unable to retrieve items");

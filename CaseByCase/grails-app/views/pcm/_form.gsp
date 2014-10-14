@@ -50,7 +50,7 @@
 </fieldset>
 <br/>
 <fieldset><legend>LOCATION</legend>
-	<g:render template="../layouts/location" bean="${pcmInstance?.location}" var="locationInstance" model="[mode:'edit',hideList:['suburb','township','description','longlat']]"></g:render>
+	<g:render template="../layouts/location" bean="${pcmInstance?.location}" var="locationInstance" model="[mode:'edit',hideList:['mainplace','suburb','township','description','longlat'],jsCallback:'onChangeLoadOffices']"></g:render>
 </fieldset>
 <br/>
 
@@ -71,12 +71,94 @@
 	</label>
 	<g:textField name="referredBy" value="${pcmInstance?.referredBy}"/>
 </div>
-<div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'referredTo', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: pcmInstance, field: 'referredTo', 'error')} ">
 	<label for="referredTo">
-		<g:message code="pcm.referredTo.label" default="Referred To" />
-		<span class="required-indicator">*</span>
+		<g:message code="pcm.referredTo.label" default="Currently Referred To" />		
 	</label>
-	<g:select id="referredTo" name="referredTo.id" from="${com.cbc.Office.list()}" optionKey="id" required="" value="${pcmInstance?.referredTo?.id}" class="many-to-one"/>
+	<span class="properties-value" id='current-referto-office'>${pcmInstance?.referredTo}</span>
+	<span class="properties-value" id='selected-referto-office'></span>
 </div>
+	<h1>Refer To: </h1>
+	<g:hiddenField name="referredTo" id="office" value="${pcmInstance?.referredTo?.id}"/>
+	<table class="dataTable" id="office-list">
+		<thead><tr><th></th><th>Office</th><th>Province</th><th>Main Place</th><th>Village</th><th>Contact Details</th></tr></thead>
+		<tbody id="officebody">
+		
+		</tbody>
+	</table>
+
 </fieldset>
 
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$("#office-list").on("click","input[name='offices']:radio",function() {
+		var _fieldEl = $("#office");
+		_oldvalue = _fieldEl.prop("value");
+		var value = $("input[name='offices']:radio:checked").val();
+		_fieldEl.prop("value",value);
+		if(value != _oldvalue){
+			var officename = $("#office-name-" + value).text()
+			$("#current-referto-office").css("text-decoration","line-through")
+			$("#selected-referto-office").html("<span class='r-arrow'></span> " + officename)
+		}
+	}); 
+})
+function loadOffices(actionUrl, params, dspEl){
+	wait(true)
+	 $.ajax({  
+			   type: "post",  
+				  url: actionUrl,
+				  data: params,
+				  timeout: 120000,  //20 sec
+			   // callback handler that will be called on error
+		        error: function(jqXHR, textStatus, errorThrown){
+	            // log the error to the console	 		            		           
+      			// console.log("The following error occured: "+ textStatus, errorThrown);
+      			wait(false)
+				 if(textStatus=="timeout") dspEl.html("Timeout: please try again."); else dspEl.html(textStatus + ": " + errorThrown);
+				 		
+    				},		
+			   success: function(result) {  
+			   		var rows = ""
+				   	$.each(result, function(i,o){
+					   	//!$.isEmptyObject(result)
+				   		//console.log("i = " + i + " : > office name:  " + o.name);	
+				   		rows += "<tr>"
+						rows += "<td><input type='radio' name='offices' value='" + o.id + "'/></td>"
+						rows += "<td id='office-name-" + o.id + "' >" + o.name + "</td>"
+						rows += "<td>" + o.location.region + "</td>"
+						rows += "<td>" + o.location.mainplace + "</td>"
+						rows += "<td>" + o.location.suburb + "</td>"
+						rows += "<td>&raquo; Tel: " + o.contact_number + "<br/>&raquo; Email: " + o.email + " <br/>&raquo; Cell: " + o.cell_number +"</td>"
+						rows += "</tr>"
+					});
+					dspEl.html(rows)
+			 		wait(false)
+					},
+				// callback handler that will be called on completion
+			        // which means, either on success or error
+		        complete: function(){
+   				
+			    }
+
+		 });  
+}
+
+function onChangeLoadOffices(data,combobox_id,refresh,subfields,defaultValue){
+	//only start searching when the options for municipality or mainplace have been returned 
+	if(combobox_id == "mainplace_options" || combobox_id=="muni_options"){
+		var params = "country=" + $("#country").val() 
+			+ "&region=" +  $("#region").val() 
+			+ "&district=" +  $("#district_options").val() 
+			+ "&municipality=" +  $("#muni_options").val() 
+			//+ "&mainplace=" +  $("#mainplace_options").val()
+		var _link = "${g.createLink(controller: 'office', action: 'search')}";
+		loadOffices(_link,params,$("#officebody"))
+	}
+}
+function setDivValue(id,value){
+	if($(id)) $(id).html(value)
+}
+function wait(flag) { var el = $(".wait"); if (flag) el.show(); else el.hide(); }
+</script>

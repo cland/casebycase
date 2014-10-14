@@ -183,10 +183,10 @@ var cbc_datepickers = {
 } //end cland_datepicker
 
 var cbc_location = {
-		load_districts: function comboboxDistricts(data,field_id,subfields,defaultValue){			
-			this.combobox_options(data,field_id,"--select district--","",true,subfields,defaultValue)			
+		load_districts: function comboboxDistricts(data,field_id,subfields,defaultValue,callback){			
+			this.combobox_options(data,field_id,"--select district--","",true,subfields,defaultValue,callback)			
 		},		
-		combobox_options: function c_options(data,combobox_id,select0name,select0value,refresh,subfields,defaultValue){			
+		combobox_options: function c_options(data,combobox_id,select0name,select0value,refresh,subfields,defaultValue, callback){			
 			var _el = $("#" + combobox_id);
 			if(refresh) _el.empty();			
 			if(!$.isEmptyObject(data)){
@@ -200,6 +200,10 @@ var cbc_location = {
 				_el.append("<option value=''>-- No options found --</option>");
 				//set reset all sub options
 				this.reset_options(subfields)
+			}
+			 var func = (typeof callback == 'function') ?  callback : eval(callback);
+			if(callback != null & callback != "") {
+				func(data,combobox_id,select0name,select0value,refresh,subfields,defaultValue)
 			}
 		},
 		reset_options: function r_options(subfields){	

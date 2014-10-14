@@ -219,4 +219,46 @@ class OfficeController {
 		render jsonData as JSON
 		
 	} //end jq_list_cases
+	
+	/**
+	 * Search By Location action
+	 * PARAMS EXAMPLE: country:1,region:8, district:1,municipality:1,mainplace:1,suburb:1  
+	 * Start search from the lower entry i.e. suburb and work upwards
+	 */
+	def doSearch(property,value,params){
+		return Office.createCriteria().list(params){
+			createAlias("location","location")
+			eq(property,value)
+		}
+	}
+	def search(params){
+		def result = []
+		
+		//search suburb
+		if(params?.suburb != null & params?.suburb != ""){
+			result = doSearch("location.suburb.id",params?.suburb?.toLong(),params)
+		}
+		//search for mainplace if necessary
+		if(result.size()<1 & params?.mainplace != null & params?.mainplace != ""){
+			result = doSearch("location.mainplace.id",params?.mainplace?.toLong(),params)
+		}
+		//search for municipality if necessary
+		if(result.size()<1 & params?.municipality != null & params?.municipality != ""){
+			result = doSearch("location.municipality.id",params?.municipality?.toLong(),params)
+		}
+		
+		//search for district if necessary
+		if(result.size()<1 & params?.district  != null & params?.district != ""){
+			result = doSearch("location.district.id",params?.district?.toLong(),params)
+		}
+		//search for region if necessary
+		if(result.size()<1 & params?.region  != null & params?.region != ""){
+			result = doSearch("location.region.id",params?.region?.toLong(),params)
+		}
+		//search for country if necessary
+		if(result.size()<1 & params?.country != null & params?.country != ""){
+			//result =  doSearch("location.country.id",params?.country?.toLong(),params)
+		}
+		render result*.toMap() as JSON
+	}
 } //end class

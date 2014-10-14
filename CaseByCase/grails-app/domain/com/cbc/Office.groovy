@@ -70,6 +70,17 @@ class Office {
 	String toString(){
 		return name + " (" + code + ")"
 	}
+	def toMap(){
+		return [id:id,
+			name:name,
+			code:code,
+			status:status,
+			email:email,
+			contact_number:contactNumber,
+			cell_number:cellphoneNumber,
+			fax_number:faxNumber,			
+			location:location?.toMap()]
+	}
 	def toAutoCompleteMap(){
 		return [id:id,
 		label:name + " (" + Status + ") | " + contactNumber + " | " + email,

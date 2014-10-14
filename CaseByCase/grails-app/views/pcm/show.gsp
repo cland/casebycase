@@ -1,4 +1,4 @@
-
+<%@ page import="com.cbc.SystemRoles" %>
 <%@ page import="com.cbc.Pcm" %>
 <!DOCTYPE html>
 <html>
@@ -39,7 +39,7 @@
 					<ol class="property-list pcm">
 						<g:if test="${pcmInstance?.pcmDate}">
 							<li class="fieldcontain">
-								<span id="pcmDate-label" class="property-label"><g:message code="pcm.pcmDate.label" default="Pcm Date" /></span>
+								<span id="pcmDate-label" class="property-label"><g:message code="pcm.pcmDate.label" default="PCM Date" /></span>
 								
 									<span class="property-value" aria-labelledby="pcmDate-label"><g:formatDate date="${pcmInstance?.pcmDate}" /></span>
 								
@@ -87,7 +87,7 @@
 								
 							</li>
 							</g:if>
-							<g:render template="../layouts/location" bean="${pcmInstance?.location}" var="locationInstance" model="[mode:'read']"></g:render>
+							<g:render template="../layouts/location" bean="${pcmInstance?.location}" var="locationInstance" model="[mode:'read',hideList:['mainplace','suburb','township','description','longlat'],jsCallback:'onChangeLoadOffices']"></g:render>
 							<g:if test="${pcmInstance?.description}">
 							<li class="fieldcontain">
 								<span id="description-label" class="property-label"><g:message code="pcm.description.label" default="Description" /></span>
