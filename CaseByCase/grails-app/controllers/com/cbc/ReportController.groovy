@@ -5,6 +5,14 @@ import com.cbc.reports.OfficeSummaryStats
 import com.cbc.reports.StatsData;
 import grails.converters.JSON
 
+
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import org.joda.time.DateTime
+import org.springframework.dao.DataIntegrityViolationException
+import pl.touk.excel.export.WebXlsxExporter
+
+
 class ReportController {
 	def cbcApiService
     def index() { }
@@ -39,4 +47,41 @@ class ReportController {
 		render ostats as JSON
 	} //end function
 
+	def export(params){
+		def startdate_caseopen = params?.startDate_open
+		def enddate_caseopen = params?.endDate_open
+		
+		if(startdate_caseopen != null & startdate_caseopen != "") startdate_caseopen = parseDate(startdate_caseopen) else startdate_caseopen = new DateTime().minusMonths(24).toDate()
+		if(enddate_caseopen != null  & startdate_caseopen != "") enddate_caseopen = parseDate(enddate_caseopen) else enddate_caseopen = (new Date())
+		
+		def caseList = Case.createCriteria().list(params){
+			if(startdate_caseopen != null & enddate_caseopen != null){
+				between('dateOpen', startdate_caseopen, enddate_caseopen)
+			}
+		}
+			
+		def headers = ['Case Title',
+			'Case No',
+			'Date Opened',			
+			'System Id']
+		
+		def withProperties = ['subject',
+			'caseNumber',	
+			'dateOpen',		
+			'id'
+			]
+		new WebXlsxExporter().with {
+			setResponseHeaders(response)
+			sheet('Cases').with {
+				fillHeader(headers)
+				add(caseList, withProperties)
+			}
+			save(response.outputStream)
+		}
+	} //
+	
+	private parseDate(date) {
+		SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+		return (!date) ? new Date() : df.parse(date)
+   }
 } //end class

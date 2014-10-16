@@ -88,5 +88,6 @@ grails.project.dependency.resolution = {
 		compile ":ckeditor:3.6.6.1.1"
 		compile ":csv:0.3.1"
 		compile ":joda-time:1.5"
+		compile ":excel-export:0.2.1"
     }
 }

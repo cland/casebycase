@@ -42,4 +42,8 @@ modules = {
 		resource url:'js/chosen/chosen.jquery.js'
 		resource url:'js/chosen/chosen.css'
 	}
+	jqueryfiledownload{
+		dependsOn 'application'
+		resource url: 'js/jquery.fileDownload.js', disposition: 'head'
+	}
 }

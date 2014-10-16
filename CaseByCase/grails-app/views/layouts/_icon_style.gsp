@@ -9,5 +9,11 @@
 	}
 	.buttons .export {
 		background-image: url('${fam.icon(name: 'page_excel')}');			
-	}		
+	}
+	.export {
+		background-position: 0.7em center;
+		background-repeat: no-repeat;
+		text-indent: 25px;
+		background-image: url('${fam.icon(name: 'page_excel')}');			
+	}				
 </style>
