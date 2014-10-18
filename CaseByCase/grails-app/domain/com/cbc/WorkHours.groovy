@@ -21,7 +21,14 @@ class WorkHours {
 		weekend nullable:true
 		holiday nullable:true 
 	}
-	
+	def toMap(params=null){
+		return [id:id,
+			overtime:overtime,
+			daily:daily,
+			weekend:weekend,
+			holiday:holiday,
+			params:params]
+	}
 	String toString(){
 		"Overtime: ${overtime}, Daily: ${daily}"
 	}
@@ -40,6 +47,7 @@ class WorkHours {
 		User user = User.get(lastUpdatedBy)
 		return (user==null?"unknown":user?.person.toString())
 	}
+
 	def onLoad = {
 		// your code goes here
 	}

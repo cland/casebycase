@@ -60,7 +60,9 @@ class Person {
 		'primaryOffice',
 		'loginDetails',
 		'authorities',
-		'caseList' ]
+		'caseList'
+		//,"createdByName","lastUpdatedByName" 
+		]
 
 	static mapping = {
 		phones cascade:"all-delete-orphan"
@@ -83,6 +85,16 @@ class Person {
 		citizenship nullable:true 
 		location nullable:true
     }
+	def toMap(params = null){
+		return [id:id,
+			firstname:firstName,
+			lastname:lastName,
+			datecreated:dateCreated?.format("dd-MMM-yyyy"),
+			datelastupdated:lastUpdated?.format("dd-MMM-yyyy"),
+			//createdby:getCreatedByName(),			
+			//lastupdatedby:getLastUpdatedByName(),
+			params:params]
+	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
 		if(idNumber == null || idNumber?.equals("")){
@@ -184,4 +196,12 @@ class Person {
 		if(!u) return []
 		return u.authorities
 	}
+//	String getCreatedByName(){
+//		User user = User.get(createdBy)
+//		return (user==null?"unknown":user?.person.toString())
+//	}
+//	String getLastUpdatedByName(){
+//		User user = User.get(lastUpdatedBy)
+//		return (user==null?"unknown":user?.person.toString())
+//	}
 } //end class

@@ -62,6 +62,12 @@ class Category {
 	boolean hasChildren(){
 		return (categories?.size() > 0)
 	}
+	def toMap(params=null){
+		return [id:id,
+			fullname:getFullCategoryName(this),
+			level:getLevel(this),
+			params:params]
+	}
 	def toTreeMap(){
 		return [id:id,
 			title:name,

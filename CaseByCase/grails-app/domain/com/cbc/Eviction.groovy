@@ -32,8 +32,12 @@ class Eviction {
 		dwellingType nullable:true
 		landConsentType nullable:true
 	}
+	def toMap(){
+		return [id:id,
+			datecreated:dateCreated?.format("dd-MMM-yyyy")]
+	}
 	String toString(){
-		""
+		id
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()

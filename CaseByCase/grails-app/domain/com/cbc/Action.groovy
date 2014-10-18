@@ -26,7 +26,26 @@ class Action {
 	Date lastUpdated
 	
 	/** 	*END FIELDS* 		**/
-	
+	def toMap(params = null){
+		return [id:id,
+			caseid:thiscase?.id,
+			actiondate:date?.format("dd-MMM-yyyy"),
+			subject:subject,
+			description:description,
+			actiontype:actionType,
+			caseworker:actionOwner.getFullname(),
+			status:followUpStatus,
+			followupdate: followUpDate?.format("dd-MMM-yyyy"),
+			disbursement:disbursementAmount,
+			isprivate:isPrivate,
+			datecreated:dateCreated?.format("dd-MMM-yyyy"),
+			createdby:getCreatedByName(),
+			datelastupdated:lastUpdated?.format("dd-MMM-yyyy"),
+			lastupdatedby:getLastUpdatedByName(),
+			params:params
+			]
+	}
+	static transients = ["createdByName","lastUpdatedByName"]
 	static belongsTo = [thiscase:Case]
 	static hasMany = [followers:User]
     static constraints = {
@@ -40,11 +59,20 @@ class Action {
 		lastUpdatedBy nullable:true, editable:false
 		createdBy nullable:true, editable:false
     }
+	
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
 	}
 	def beforeUpdate = {
 		lastUpdatedBy = cbcApiService.getCurrentUserId()
+	}
+	String getCreatedByName(){
+		User user = User.get(createdBy)
+		return (user==null?"unknown":user?.person.toString())
+	}
+	String getLastUpdatedByName(){
+		User user = User.get(lastUpdatedBy)
+		return (user==null?"unknown":user?.person.toString())
 	}
 	/**
 	 * To ensure that all attachments are removed when the "owner" domain is deleted.

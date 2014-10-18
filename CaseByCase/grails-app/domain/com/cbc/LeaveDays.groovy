@@ -18,6 +18,14 @@ class LeaveDays {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
 	}
+	def toMap(params=null){
+		return [id:id,
+			annual:annual,
+			sick:sick,
+			maternity:maternity,
+			family:family,
+			params:params]
+	}
 	String toString(){
 		"Annual: ${annual}"
 	}

@@ -83,4 +83,15 @@ class User {
 	String toString(){	
 		return username 
 	}
+	def toMap(params=null){
+		return [id:id,
+			username:username,
+			fullname:getFullname(),
+			email:email,
+			datecreated:dateCreated?.format("dd-MMM-yyyy"),
+			createdby:getCreatedByName(),
+			datelastupdated:lastUpdated?.format("dd-MMM-yyyy"),
+			lastupdatedby:getLastUpdatedByName(),
+			params:params]
+	}
 } //end class
