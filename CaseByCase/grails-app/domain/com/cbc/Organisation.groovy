@@ -16,7 +16,7 @@ class Organisation {
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
-	static transients = ['adviceOfficeList','caseList']
+	static transients = ['adviceOfficeList','caseList',"createdByName","lastUpdatedByName"]
 	static hasMany = [staff:Person]
 	
     static constraints = {
@@ -48,6 +48,14 @@ class Organisation {
 	String toString(){
 		return name 
 	}
+	def toMap(params=null){
+		return [id:id,
+			datecreated:dateCreated?.format("dd-MMM-yyyy"),
+			createdby:getCreatedByName(),
+			datelastupdated:lastUpdated?.format("dd-MMM-yyyy"),
+			lastupdatedby:getLastUpdatedByName(),
+			params:params]
+	}
 	def toAutoCompleteMap(){
 		return [id:id,
 		label:name + " | " + phoneNo + " | " + email + " | " + status, 
@@ -72,5 +80,12 @@ class Organisation {
 		}
 		return list
 	}
-
+	String getCreatedByName(){
+		User user = User.get(createdBy)
+		return (user==null?"unknown":user?.person.toString())
+	}
+	String getLastUpdatedByName(){
+		User user = User.get(lastUpdatedBy)
+		return (user==null?"unknown":user?.person.toString())
+	}
 } //end class

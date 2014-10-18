@@ -47,6 +47,7 @@ class Case {
 	/** 	*END FIELDS* 		**/
 	
 	//static hasOne=[labour:Labour,eviction:Eviction]
+	static transients = ["createdByName","lastUpdatedByName"]
 	static belongsTo = [office:Office]
 	static hasMany = [clients: Person,orgclients:Organisation,actions:Action,categories:Category]
     static constraints = {		
@@ -80,6 +81,14 @@ class Case {
 	def beforeUpdate = {
 		lastUpdatedBy = cbcApiService.getCurrentUserId()
 	}
+	String getCreatedByName(){
+		User user = User.get(createdBy)
+		return (user==null?"unknown":user?.person.toString())
+	}
+	String getLastUpdatedByName(){
+		User user = User.get(lastUpdatedBy)
+		return (user==null?"unknown":user?.person.toString())
+	}
 	/**
 	 * To ensure that all attachments are removed when the "owner" domain is deleted.
 	 */
@@ -95,6 +104,36 @@ class Case {
 		return caseNumber
 	}
 	
+	def toMap(params=null){
+		return [id:id,
+			casenumber:caseNumber,
+			subject:subject,
+			dateopen:dateOpen?.format("dd-MMM-yyyy"),
+			dateproblemstart:problemStart?.format("dd-MMM-yyyy"),
+			description:description,
+			totalmale:totalMale,
+			totalfemale:totalFemale,
+			totalunknown:totalUnknown,
+			caseworker:assignedTo?.getFullname(),
+			respondent:respondent,
+			priority:priority,
+			status:status,
+			event:thisevent,
+			specialcase:specialCase,
+			outcome:outcome,
+			dateclosed:dateClosed?.format("dd-MMM-yyyy"),
+			amountrecovered:amtRecovered,
+			bestpractice:bestPractice,
+			datecreated:dateCreated?.format("dd-MMM-yyyy"),
+			createdby:getCreatedByName(),
+			datelastupdated:lastUpdated?.format("dd-MMM-yyyy"),
+			lastupdatedby:getLastUpdatedByName(),
+			labour:(labour?labour?.toMap():null),
+			eviction:(eviction?eviction?.toMap():null),
+			category:categories?.collect{it.getFullCategoryName(it)}?.join(","),
+			params:params 
+			]
+	}
 	def toAutoCompleteMap(){
 		return [id:id,
 		label:caseNumber + " (" + Status + ")",
@@ -102,4 +141,5 @@ class Case {
 		thiscase:this,
 		category:office?.name]
 	}
+
 } //

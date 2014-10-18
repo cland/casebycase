@@ -59,22 +59,150 @@ class ReportController {
 				between('dateOpen', startdate_caseopen, enddate_caseopen)
 			}
 		}
-			
-		def headers = ['Case Title',
-			'Case No',
-			'Date Opened',			
-			'System Id']
 		
-		def withProperties = ['subject',
-			'caseNumber',	
-			'dateOpen',		
+		def actionList = []
+		def clientList = []
+		def orgclientList = []
+		caseList?.each {thiscase ->
+			def tmplist = thiscase?.actions?.collect{
+				[it*.toMap([caseid:thiscase?.id])]
+			}
+			actionList.add(tmplist)
+			
+			tmplist = thiscase?.clients?.collect{
+				[it*.toMap([caseid:thiscase?.id])]
+			}
+			clientList.add(tmplist)
+			tmplist = thiscase?.orgclients?.collect{
+				[it*.toMap([caseid:thiscase?.id])]
+			}
+			clientList.add(tmplist)
+		}
+
+
+		def caseHeaders = ['Case Number',
+			'subject',
+			'Date Opened',
+			'Problem Started',
+			'Description',
+			'Total Male',
+			'Total Female',
+			'Total Unknown',
+			'Case Worker',
+			'Respondent',
+			'Priority',
+			'Status',
+			'Special Case',
+			'Outcome',
+			'Date Closed',
+			'Amt Recovered',
+			'Best Practice',
+			'Date Created',
+			'Created By',
+			'Date Last Updated',
+			'Last Updated By',
+			'Categories',
+			'Labour: Work Hours - Overtime',
+			'Labour: Work Hours - Daily',
+			'Labour: Work Hours - Weekend',
+			'Labour: Work Hours - Holiday',
+			'Labour: Leave Days - Annual',
+			'Labour: Leave Days - Sick ',
+			'Labour: Leave Days - Maternity',
+			'Labour: Leave Days - Family',
+			'Labour: Allowance Amount',
+			'Labour: Allowance Benefit',
+			'Labour: Trade Union Member',
+			'Labour: Trade Union Member Other',
+			'Labour: Work Union',
+			'Labour: Work Union Other',
+			'Labour: Member of Work Union',
+			'Labour: Wages',
+			'Labour: Leave',
+			'Labour: Allowance',
+			'Labour: Benefits',
+			'Labour: Health and Safety',
+			'Labour: Dismisal',
+			'Labour: UIF',
+			'Labour: Hours Worked',
+			'Labour: Earnings',
+			'Event',			
+			'Item Id']
+		
+		
+		def withCaseProperties = ['casenumber',
+			'subject',	
+			'dateopen',
+			'dateproblemstart',
+			'description',
+			'totalmale',
+			'totalfemale',
+			'totalunknown',
+			'caseworker',
+			'respondent',
+			'priority',
+			'status',
+			'specialcase',
+			'outcome',
+			'dateclosed',
+			'amountrecovered',
+			'bestpractice',
+			'datecreated',
+			'createdby',
+			'datelastupdated',
+			'lastupdatedby',
+			'category',
+			'labour.workhours.overtime',
+			'labour.workhours.daily',
+			'labour.workhours.weekend',
+			'labour.workhours.holiday',
+			'labour.leavedays.annual',
+			'labour.leavedays.sick',
+			'labour.leavedays.maternity',
+			'labour.leavedays.family',
+			'labour.allowamount',
+			'labour.allowbenefits',
+			'labour.tradeunionmember',
+			'labour.specifymembership',
+			'labour.workunion',
+			'labour.specifyworkunion',
+			'labour.workunionmember',
+			'labour.wages',
+			'labour.leave',
+			'labour.allowance',
+			'labour.benefits',
+			'labour.health',
+			'labour.dismisal',
+			'labour.uif',
+			'labour.hoursworked',
+			'labour.earnings',
+			'event',
 			'id'
 			]
+		def actionHeaders = ['Date Created','Item Id','Case Id']
+		def withActionProperties = ['datecreated','id','params.caseid']
+		def clientHeaders = ['Date Created','Item Id','Case Id']
+		def withClientProperties = ['datecreated','id','params.caseid']
+		def orgclientHeaders = ['Date Created','Item Id','Case Id']
+		def withOrgClientProperties = ['datecreated','id','params.caseid']
+		
 		new WebXlsxExporter().with {
 			setResponseHeaders(response)
 			sheet('Cases').with {
-				fillHeader(headers)
-				add(caseList, withProperties)
+				fillHeader(caseHeaders)
+				add(caseList*.toMap(), withCaseProperties)
+			}
+			sheet('Actions').with{
+				fillHeader(actionHeaders)
+				add(actionList,withActionProperties)
+			}
+			sheet('People Clients').with{
+				fillHeader(clientHeaders)
+				add(clientList,withClientProperties)
+			}
+			sheet('Organisation Clients').with{
+				fillHeader(orgclientHeaders)
+				add(clientList,withOrgClientProperties)
 			}
 			save(response.outputStream)
 		}

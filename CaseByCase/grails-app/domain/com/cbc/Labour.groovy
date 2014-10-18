@@ -61,6 +61,32 @@ class Labour {
 		allowBenefit nullable:true, blank:true
 		specifyWorkUnion nullable:true, blank:true
 	}
+	def toMap(params=null){
+		return [id:id,
+			workhours:workhours?.toMap(),
+			leavedays:leavedays?.toMap(),
+			allowamount:allowAmount,
+			allowbenefits:allowBenefit,
+			tradeunionmember:tradeUnionMember,
+			specifymembership:specifyMembership,
+			workunion:unionAtWork,
+			specifyworkunion:specifyWorkUnion,
+			workunionmember:memberOfWorkUnion,
+			wages:wages,
+			leave:leaveProblem,
+			allowance:allowProblem,
+			benefits:benefitsProblem,
+			health:healthAndSafety,
+			dismisal:dismisal,
+			uif:uif,
+			hoursworked: "${hoursWorked} ${hoursWorkedValue}",
+			earnings: "${earningsValue} ${earnings}",
+			datecreated:dateCreated?.format("dd-MMM-yyyy"),
+			createdby:getCreatedByName(),
+			datelastupdated:lastUpdated?.format("dd-MMM-yyyy"),
+			lastupdatedby:getLastUpdatedByName(),
+			params:params]
+	}
 	String toString(){
 		"${id}"
 	}

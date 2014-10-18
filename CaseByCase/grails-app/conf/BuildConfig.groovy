@@ -80,7 +80,7 @@ grails.project.dependency.resolution = {
 		compile ":attachmentable:0.3.0"
 		compile ":audit-logging:0.5.5.3"
 		//compile ":searchable:0.6.4"  	//v: 0.6.4+ for grails version: 2.2+
-		compile ":searchable:0.6.5"  //v: 0.6.5+ for grails version: 2.3+ (0.6.6 was problematic)
+		compile ":searchable:0.6.9"  //v: 0.6.5+ for grails version: 2.3+ (0.6.6 was problematic)
 		//compile ":rendering:0.4.4"
 		compile ":export:1.5"
 	//	compile ":weceem:1.2-M1"					//simply needs more testing - could not get it run-app
