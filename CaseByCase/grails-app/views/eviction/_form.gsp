@@ -235,7 +235,6 @@
 		
 	</label>
 	<g:select name="chargesAgainstOccupiers" from="${evictionInstance?.constraints.chargesAgainstOccupiers.inList}" />	
-</div>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'specifyOccupierCharge', 'error')} ">
 	<label for="specifyOccupierCharge">
 		<g:message code="eviction.specifyOccupierCharge.label" default="If yes, case number and details:" />

@@ -91,7 +91,7 @@ class Eviction {
 		tradPracs nullable:true, blank: true 
 		waterAccess nullable:true, blank: true, inList: ["Yes", "No"]
 		electricityAccess nullable:true, blank: true, inList: ["Yes", "No"]
-		landConsentType nullable:true
+		landConsentType nullable:true 
 		currentStatus nullable:true, blank: true , inList: ["Evicted", "Not Served"]
 		shelter nullable:true, blank: true, inList: ["Yes", "No"] 
 		chargesAgainstOccupiers nullable:true, blank: true, inList: ["Yes", "No"]
