@@ -88,7 +88,7 @@ class Eviction {
 		primarySchools nullable:true, blank: true
 		highSchools nullable:true, blank: true  
 		clinics nullable:true, blank: true
-		tradPracs nullable:true, blank: true
+		tradPracs nullable:true, blank: true 
 		waterAccess nullable:true, blank: true, inList: ["Yes", "No"]
 		electricityAccess nullable:true, blank: true, inList: ["Yes", "No"]
 		landConsentType nullable:true
