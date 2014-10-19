@@ -61,12 +61,15 @@ class Eviction {
 	String earnings
 
 	
-	static hasMany = [evictionBy:Keywords]
+	static hasMany = [evictionBy:Keywords, evictionMethod: Keywords, documents: Keywords, threatType: Keywords, threatBy: Keywords]
 	static transients = ["createdByName","lastUpdatedByName"]
 	static constraints = {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
-		
+		evictionMethod nullable: true
+		documents nullable: true
+		threatType nullable: true
+		threatBy nullable: true
 		years nullable:true, blank: true
 		networkMember nullable:true, blank: true, inList: ["Yes", "No"]
 		specifyNetwork nullable:true, blank: true
@@ -99,8 +102,8 @@ class Eviction {
 		chargesAgainstEvictors nullable:true, blank: true, inList: ["Yes", "No"]
 		specifyEvictorCharge  nullable:true, blank: true
 		designatedOutcome nullable:true, blank: true
-		labour nullable:true, blank: true
-		cCMA nullable:true, blank: true
+		labour nullable:true, blank: true, inList: ["Yes", "No"]
+		cCMA nullable:true, blank: true, inList: ["Yes", "No"]
 		workHours nullable:true, blank: true
 		earnings nullable:true, blank: true
 		

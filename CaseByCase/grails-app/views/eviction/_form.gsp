@@ -42,6 +42,7 @@
 	</label>
 	<g:textField name="dwellingsNum" value="${evictionInstance?.dwellingsNum}"/>	
 </div>
+<fieldset><legend>Environment</legend>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'dwellingsPayer', 'error')} ">
 	<label for="eviction.dwellingsPayer">
 		<g:message code="eviction.dwellingsPayer.label" default="Who paid for the dwelling?" />
@@ -156,6 +157,8 @@
 	</label>
 	<g:textField name="waterSource" value="${evictionInstance?.waterSource}"/>	
 </div>
+</fieldset>
+<fieldset><legend>Social Issues</legend>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'graveAccess', 'error')} ">
 	<label for="eviction.graveAccess">
 		<g:message code="eviction.graveAccess.label" default="Access to graves:" />
@@ -191,6 +194,8 @@
 	</label>
 	<g:textArea name="tradPracs" value="${evictionInstance?.tradPracs}"/>	
 </div>
+</fieldset>
+<fieldset><legend>Constitutional Rights</legend>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'waterAccess', 'error')} ">
 	<label for="eviction.waterAccess">
 		<g:message code="eviction.waterAccess.label" default="Access to water:" />
@@ -205,6 +210,7 @@
 	</label>
 	<g:select name="electricityAccess" from="${evictionInstance?.constraints.electricityAccess.inList}" />	
 </div>
+</fieldset>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'landConsentType', 'error')} ">
 	<label for="landConsentType">
 		<g:message code="eviction.landConsentType.label" default="Land Consent Type" />	
@@ -215,6 +221,41 @@
 		class="many-to-one" 
 		noSelection="['null':'-select-']"/>
 </div>
+<fieldset><legend>Actual Eviction</legend>
+<div class="table">
+	<div class="row">
+		<div class="cell" style="width:200px;">
+		<label for="evictionBy">
+			<g:message code="eviction.evictionBy.label" default="Eviction By" />
+			<span class="required-indicator">*</span>
+		</label>
+		</div>
+		<div class="cell">
+		<g:each in="${com.cbc.lookup.Keywords.findByName("EvictionBy")?.values}" var="keyword" status="index">
+			<g:checkBox name="evictionBy" value="${keyword.id }" checked="${ evictionInstance?.evictionBy?.contains(keyword)}" />
+			<label for="evictionBy">${keyword }</label><br>
+		</g:each>
+		</div>
+	</div>
+</div>
+<hr>
+<div class="table">
+	<div class="row">
+		<div class="cell" style="width:200px;">
+		<label for="evictionMethod">
+			<g:message code="eviction.evictionMethod.label" default="Method of Eviction" />
+			<span class="required-indicator">*</span>
+		</label>
+		</div>
+		<div class="cell">
+		<g:each in="${com.cbc.lookup.Keywords.findByName("EvictionMethod")?.values}" var="keyword" status="index">
+			<g:checkBox name="evictionMethod" value="${keyword.id }" checked="${ evictionInstance?.evictionBy?.contains(keyword)}" />
+			<label for="evictionMethod">${keyword }</label><br>
+		</g:each>
+		</div>
+	</div>
+</div>
+<hr>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'currentStatus', 'error')} ">
 	<label for="eviction.currentStatus">
 		<g:message code="eviction.currentStatus.label" default="Current Status:" />
@@ -229,6 +270,60 @@
 	</label>
 	<g:select name="shelter" from="${evictionInstance?.constraints.shelter.inList}" />	
 </div>
+<br />
+<hr>
+<div class="table">
+	<div class="row">
+		<div class="cell" style="width:200px;">
+		<label for="documents">
+			<g:message code="eviction.documents.label" default="Documents Issued:" />
+			<span class="required-indicator">*</span>
+		</label>
+		</div>
+		<div class="cell">
+		<g:each in="${com.cbc.lookup.Keywords.findByName("Documents")?.values}" var="keyword" status="index">
+			<g:checkBox name="documents" value="${keyword.id }" checked="${ evictionInstance?.documents?.contains(keyword)}" />
+			<label for="documents">${keyword }</label><br>
+		</g:each>
+		</div>
+	</div>
+</div>
+<hr>
+<div class="table">
+	<div class="row">
+		<div class="cell" style="width:200px;">
+		<label for="threatType">
+			<g:message code="eviction.threatType.label" default="Type of threat:" />
+			<span class="required-indicator">*</span>
+		</label>
+		</div>
+		<div class="cell">
+		<g:each in="${com.cbc.lookup.Keywords.findByName("ThreatType")?.values}" var="keyword" status="index">
+			<g:checkBox name="threatType" value="${keyword.id }" checked="${ evictionInstance?.threatType?.contains(keyword)}" />
+			<label for="threatType">${keyword }</label><br>
+		</g:each>
+		</div>
+	</div>
+</div>
+<hr>
+<div class="table">
+	<div class="row">
+		<div class="cell" style="width:200px;">
+		<label for="threatType">
+			<g:message code="eviction.threatType.label" default="Threat issued by:" />
+			<span class="required-indicator">*</span>
+		</label>
+		</div>
+		<div class="cell">
+		<g:each in="${com.cbc.lookup.Keywords.findByName("ThreatBy")?.values}" var="keyword" status="index">
+			<g:checkBox name="threatBy" value="${keyword.id }" checked="${ evictionInstance?.threatBy?.contains(keyword)}" />
+			<label for="threatBy">${keyword }</label><br>
+		</g:each>
+		</div>
+	</div>
+</div>
+</fieldset>
+<fieldset><legend>Criminal/Civil Charges</legend>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'chargesAgainstOccupiers', 'error')} ">
 	<label for="eviction.chargesAgainstOccupiers">
 		<g:message code="eviction.chargesAgainstOccupiers.label" default="Has the charges been laid against the Occupriers in relation to the land?" />
@@ -262,6 +357,7 @@
 	</label>
 	<g:textArea name="designatedOutcome" value="${evictionInstance?.designatedOutcome}"/>	
 </div>
+</fieldset>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'labour', 'error')} ">
 	<label for="eviction.labour">
 		<g:message code="eviction.labour.label" default="Is there an associated labour dispute?" />
@@ -274,7 +370,7 @@
 		<g:message code="eviction.cCMA.label" default="Has case been referred to the CCMA?" />
 		
 	</label>
-	<g:select name="cCMA" from="${evictionInstance?.constraints.workHours.inList}" />	
+	<g:select name="cCMA" from="${evictionInstance?.constraints.cCMA.inList}" />	
 </div>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'workHours', 'error')} ">
 	<label for="eviction.workHours">
@@ -291,20 +387,5 @@
 	</label>
 	<g:textField name="earnings" value="${evictionInstance?.earnings}"/>	
 </div>
-<div class="table">
-	<div class="row">
-		<div class="cell">
-		<label for="evictionBy">
-			<g:message code="eviction.evictionBy.label" default="Eviction By" />
-			<span class="required-indicator">*</span>
-		</label>
-		</div>
-		<div class="cell">
-		<g:each in="${com.cbc.lookup.Keywords.findByName("EvictionBy")?.values}" var="keyword" status="index">
-			<g:checkBox name="evictionBy" value="${keyword.id }" checked="${ evictionInstance?.evictionBy?.contains(keyword)}" />
-			<label for="evictionBy">${keyword }</label><br>
-		</g:each>
-		</div>
-	</div>
-</div>
+
 
