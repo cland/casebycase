@@ -87,7 +87,7 @@ class Eviction {
 		cropsVal nullable:true, blank: true
 		elecSource nullable:true, blank: true
 		waterSource nullable:true, blank: true
-		graveAccess nullable:true, blank: true
+		graveAccess nullable:true, blank: true, inList: ["Yes", "No"]
 		primarySchools nullable:true, blank: true
 		highSchools nullable:true, blank: true  
 		clinics nullable:true, blank: true
