@@ -133,47 +133,66 @@ class PcmController {
 			String content
 			String receiver
 		 */
+		int existingCount = 0
+		boolean hasErrors = false
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd MMM yyyy HH:mm:ss");
+		DateTimeFormatter formatter1 = DateTimeFormat.forPattern("dd-MM-yyyy HH:mm");
 		def f = request.getFile( 'filecsv' )
 		if (f.empty) {
 			flash.message = 'file cannot be empty'
 			render(view: 'index')
 			return
 		}
-		
-		println (">> getting input stream...")
+
 		f.inputStream.splitEachLine(',') { row ->
 		  
-			def _date =  row[0]?.trim()?.replaceAll("\"", "")
-			def _sender = row[1]?.trim()?.replaceAll("\"", "")
-			def _content = row[2]?.trim()?.replaceAll("\"", "")
-			
-			
-		//	println(">> Processing fields: " + row + " - date: " + _date )
-			try{
-				DateTime dt = formatter.parseDateTime(_date);
-				println "Pcm date: " + dt.toDate().toString()
-				if(dt){
-					
-					def pcm = new Pcm( pcmDate: dt.toDate(), sender: _sender,content: _content)	
-					pcm.save()
-					if (pcm.hasErrors()) {
-						println(pcm?.errors)
-						log.error("Could not import domainObject  ${pcm.errors}")
-					}else{
-						log.debug("Importing domainObject  ${pcm.toString()}")
-					}
-				}
-			}catch(Exception e){
-				println("Error processing: " + _date)
-			}
+			if(existingCount < 20){
+				def _date =  row[0]?.trim()?.replaceAll("\"", "")
+				def _sender = row[1]?.trim()?.replaceAll("\"", "")
+				def _content = row[2]?.trim()?.replaceAll("\"", "")
 	
-		}
+				try{			
+					DateTime dt = null
+					try{
+						dt = formatter.parseDateTime(_date);
+					}catch(Exception e){	}
+					if(dt == null) dt = formatter1.parseDateTime(_date);
+	
+					if(dt){		
+	
+						def pcm = Pcm.findByPcmDateAndSender(dt.toDate(),_sender)					
+						if(!pcm){
+						//	println("Creating new item")
+							pcm = new Pcm( pcmDate: dt.toDate(), sender: _sender,content: _content)
+							pcm.save()
+							if (pcm.hasErrors()) {
+								println(pcm?.errors)
+								log.error("Could not import domainObject  ${pcm.errors}")
+							}else{
+								log.debug("Importing domainObject  ${pcm.toString()}")
+							}
+						}else{
+							//println("PCM already exists!! " + pcm)
+							existingCount = existingCount + 1											
+						}
+					}
+				}catch(Exception e){
+					if(_date != "Date Received"){
+						println("Error processing: '" + _date + "'")
+						//e.printStackTrace()
+						hasErrors = true
+					}
+				} //end catch
+			} //end if exitingCount < 
+			
+		} //end spliteachline
 		//response.sendError(200, 'Done')
 		println("Done!!")
-		flash.message = "File uploaded!"
+		flash.message = "Finished processing file! "
+		if(hasErrors) flash.message += " There where errors processing the date format of some or all of the entries in the file!"
         redirect action: "index", method: "GET"
 		
 	} //end upload 
 	
+
 } //end class

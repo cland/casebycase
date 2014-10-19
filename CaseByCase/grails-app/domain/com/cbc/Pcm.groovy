@@ -39,6 +39,9 @@ class Pcm {
 		referredTo nullable:true,blank:true
 		
 	}
+	static mapping = {
+		sort pcmDate: "desc"
+	}
 	String toString(){
 	 "${sender} ${pcmDate?.format("dd MMM yyyy")} ${name}"
 	}

@@ -15,7 +15,7 @@ class AgeGroup {
 	Date lastUpdated
 	static transients = ["createdByName","lastUpdatedByName"]
     static constraints = {
-		lowerAge min:0, max:55
+		lowerAge min:0, max:70
 		upperAge min:1, max: 150
 		gender inList: Gender.list()
 		lastUpdatedBy nullable:true
@@ -23,6 +23,9 @@ class AgeGroup {
 	}
 	String toString(){
 		"${name}"
+	}
+	static mapping = {
+		sort name: "asc"
 	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()

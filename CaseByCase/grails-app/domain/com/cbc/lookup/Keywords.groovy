@@ -25,6 +25,9 @@ class Keywords {
 		lastUpdatedBy nullable:true, editable:false
 		createdBy nullable:true, editable:false
 	}
+	static mapping = {
+		sort name: "asc"
+	}
 	def beforeInsert = {
 		createdBy = cbcApiService.getCurrentUserId()
 		if(label == "" | label == null) label = name

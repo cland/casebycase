@@ -20,6 +20,9 @@ class ProblemType {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
 	}
+	static mapping = {
+		sort name: "asc"
+	}
 	String toString(){
 		(label?label:name)
 	}
