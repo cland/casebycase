@@ -5,7 +5,7 @@
 		<g:message code="eviction.years.label" default="How long have they lived there?" />
 		
 	</label>
-	<g:textArea name="years">${evictionInstance?.years}</g:textArea>	
+	<g:textField name="years" value="${evictionInstance?.years}" />	
 </div>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'networkMember', 'error')} ">
 	<label for="eviction.years">
@@ -146,19 +146,19 @@
 	<label for="elecSource">
 		<g:message code="eviction.elecSource.label" default="Source of electricity:" />
 		
-	</label>R
+	</label>
 	<g:textField name="elecSource" value="${evictionInstance?.elecSource}"/>	
 </div>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'waterSource', 'error')} ">
 	<label for="waterSource">
 		<g:message code="eviction.waterSource.label" default="Source of water:" />
 		
-	</label>R
+	</label>
 	<g:textField name="waterSource" value="${evictionInstance?.waterSource}"/>	
 </div>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'graveAccess', 'error')} ">
 	<label for="eviction.graveAccess">
-		<g:message code="eviction.graveAccess.label" default="Access to graves``:" />
+		<g:message code="eviction.graveAccess.label" default="Access to graves:" />
 		
 	</label>
 	<g:select name="graveAccess" from="${evictionInstance?.constraints.graveAccess.inList}" />	
@@ -203,7 +203,7 @@
 		<g:message code="eviction.electricityAccess.label" default="Access to Electricity:" />
 		
 	</label>
-	<g:select name="electricityAccess" from="${evictionInstance?.constraints.waterAccess.inList}" />	
+	<g:select name="electricityAccess" from="${evictionInstance?.constraints.electricityAccess.inList}" />	
 </div>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'landConsentType', 'error')} ">
 	<label for="landConsentType">
@@ -234,13 +234,62 @@
 		<g:message code="eviction.chargesAgainstOccupiers.label" default="Has the charges been laid against the Occupriers in relation to the land?" />
 		
 	</label>
-	<g:select name="chargesAgainstOccupiers" from="${evictionInstance?.constraints.chargesAgainstOccupiers.inList}" />	
+	<g:select name="chargesAgainstOccupiers" from="${evictionInstance?.constraints.chargesAgainstOccupiers.inList}" />
+	</div>	
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'specifyOccupierCharge', 'error')} ">
 	<label for="specifyOccupierCharge">
 		<g:message code="eviction.specifyOccupierCharge.label" default="If yes, case number and details:" />
 		
 	</label>
-	<g:textArea name="tradPracs" value="${evictionInstance?.specifyOccupierCharge}"/>	
+</div>
+<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'chargesAgainstEvictors', 'error')} ">
+	<label for="eviction.chargesAgainstEvictors">
+		<g:message code="eviction.chargesAgainstEvictors.label" default="Has the charges been laid against the Evictors in relation to the land?" />
+		
+	</label>
+	<g:select name="chargesAgainstEvictors" from="${evictionInstance?.constraints.chargesAgainstEvictors.inList}" />
+	</div>
+	<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'specifyEvictorCharge', 'error')} ">
+	<label for="eviction.specifyEvictorCharge">
+		<g:message code="eviction.specifyEvictorCharge.label" default="If yes, case number and details:" />
+		
+	</label>
+</div>
+<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'designatedOutcome', 'error')} ">
+	<label for="eviction.designatedOutcome">
+		<g:message code="eviction.designatedOutcome.label" default="Client's designed outcome:" />
+		
+	</label>
+	<g:textArea name="designatedOutcome" value="${evictionInstance?.designatedOutcome}"/>	
+</div>
+<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'labour', 'error')} ">
+	<label for="eviction.labour">
+		<g:message code="eviction.labour.label" default="Is there an associated labour dispute?" />
+		
+	</label>
+	<g:select name="labour" from="${evictionInstance?.constraints.labour.inList}" />	
+</div>
+<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'cCMA', 'error')} ">
+	<label for="eviction.cCMA">
+		<g:message code="eviction.cCMA.label" default="Has case been referred to the CCMA?" />
+		
+	</label>
+	<g:select name="cCMA" from="${evictionInstance?.constraints.workHours.inList}" />	
+</div>
+<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'workHours', 'error')} ">
+	<label for="eviction.workHours">
+		<g:message code="eviction.workHours.label" default="Hours worked:" />
+		
+	</label>
+	<g:textField name="workHours" value="${evictionInstance?.workHours}"/>	
+</div>
+<div class="fieldcontain ${hasErrors(bean: evictionInstance, field:
+	 'earnings', 'error')} ">
+	<label for="eviction.earnings">
+		<g:message code="eviction.earnings.label" default="Earnings:" />
+		
+	</label>
+	<g:textField name="earnings" value="${evictionInstance?.earnings}"/>	
 </div>
 <div class="table">
 	<div class="row">
