@@ -2,10 +2,10 @@
 <div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'tradeUnionMember', 'error')} ">
 	<label for="labour.tradeUnionMember">
 		<g:message code="labour.tradeUnionMember.label" default="Trade Union Member" />
-		
+		 
 	</label>
 	<g:select name="tradeUnionMember" from="${com.cbc.Labour.constraints.tradeUnionMember.inList}" value="${labourInstance?.tradeUnionMember}" valueMessagePrefix="labour.tradeUnionMember" noSelection="['': '']"/>
-	<label for="labour.specifyMembership">
+	<label for="labour.specifyMembership"> 
 		<g:message code="labour.specifyMembership.label" default="Specify, if yes:" />	
 	</label>
 	<g:textField name="specifyMembership" value="${labourInstance?.specifyMembership}"/>
