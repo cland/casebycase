@@ -50,11 +50,11 @@
 	<g:checkBox name="isMember" value="${organisationInstance?.isMember}" />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: organisationInstance, field: 'staff', 'error')} ">
-	<label for="staff">
-		<g:message code="organisation.staff.label" default="Staff" />
-		
-	</label>
-	<g:select name="staff" from="${com.cbc.Person.list()}" multiple="multiple" optionKey="id" size="5" value="${organisationInstance?.staff*.id}" class="many-to-many"/>
-</div>
+<%--<div class="fieldcontain ${hasErrors(bean: organisationInstance, field: 'staff', 'error')} ">--%>
+<%--	<label for="staff">--%>
+<%--		<g:message code="organisation.staff.label" default="Staff" />--%>
+<%--		--%>
+<%--	</label>--%>
+<%--	<g:select name="staff" from="${com.cbc.Person.list()}" multiple="multiple" optionKey="id" size="5" value="${organisationInstance?.staff*.id}" class="many-to-many"/>--%>
+<%--</div>--%>
 

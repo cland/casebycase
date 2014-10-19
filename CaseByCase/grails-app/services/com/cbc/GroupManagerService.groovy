@@ -195,6 +195,15 @@ class GroupManagerService {
 		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_OCO?.getKey()))		
 		return isMember(roleGroup)
 	}
+	boolean isOfficeAdmin(Office office, User user){
+		if(!office || !user) return false
+		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_OCO?.getKey()))
+		List<RoleGroup> grps = user.getAuthorities() as List
+		
+		if(grps.contains(roleGroup)) return true
+		
+		return false
+	}
 	/**
 	 * Can create/edit cases and actions only
 	 * @param office
@@ -203,6 +212,15 @@ class GroupManagerService {
 	boolean isOfficeWorker(Office office){
 		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_CWO?.getKey()))		
 		return isMember(roleGroup)
+	}
+	boolean isOfficeCaseWorker(Office office, User user){
+		if(!office || !user) return false
+		RoleGroup roleGroup = RoleGroup.findByName(_GroupName(office,SystemRoles.ROLE_CWO?.getKey()))
+		List<RoleGroup> grps = user.getAuthorities() as List
+		
+		if(grps.contains(roleGroup)) return true
+		
+		return false
 	}
 	/**
 	 * Can read and edit certain cases that are marked as private

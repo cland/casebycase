@@ -44,7 +44,7 @@ class cbcApiService {
 		if(user == null){
 			user = springSecurityService.getCurrentUser()
 		}
-		return user?.person?.getPrimaryOffice()
+		return user?.person?.office //getPrimaryOffice()
 	} //end function
 	
 	def getUserAllowedOffices(User user = null){
@@ -60,17 +60,19 @@ class cbcApiService {
 	}
 	
 	boolean canView(Object obj){
-		
+		List allowedOffices = getUserAllowedOffices() //for currently logged in user
 		if(obj.instanceOf(Person)){
 			Person p = obj
-			
+			if(allowedOffices?.contains(p?.office)) return true
 		}else if(obj.instanceOf(Office)){
+			if(groupManagerService.isAdmin()) return true
 			Office o = obj
+			if(allowedOffices?.contains(o)) return true
+			
 		}else if(obj.instanceOf(Case)){
 			if(groupManagerService.isAdmin()) return true
-			List allowedOffices = getUserAllowedOffices()  //for currently logged in user
 			Case thiscase = (Case)obj
-			if(!allowedOffices?.contains(thiscase?.office)) return true 
+			if(allowedOffices?.contains(thiscase?.office)) return true 
 		}
 		return false
 	} //end can view
@@ -85,7 +87,7 @@ class cbcApiService {
 			if(groupManagerService.isAdmin()) return true
 			List allowedOffices = getUserAllowedOffices()  //for currently logged in user
 			Case thiscase = (Case)obj
-			if(!allowedOffices?.contains(thiscase?.office) && 
+			if(allowedOffices?.contains(thiscase?.office) && 
 				(groupManagerService.isOfficeAdmin(thiscase?.office) || 
 					groupManagerService.isOfficeWorker(thiscase?.office) ||
 					groupManagerService.isOfficeSpecialWorker(thiscase?.office))) return true
@@ -127,14 +129,17 @@ class cbcApiService {
 		}
 		return max
 	} //end helper method findUpperIndex
-	
-	def getStaffForOffice(Office office=null,params){
-		if(!office) office = getUserPrimaryOffice()
-		if(!groupManagerService.isAdmin()){
-			//validate if this user is allowed to view this office information
-			List allowedOffices = getUserAllowedOffices()  //for currently logged in user
-			if(!allowedOffices?.contains(office)) office = getUserPrimaryOffice()
+	def getOfficesForUser(User user = null, params){
+		if(user == null){
+			user = springSecurityService.getCurrentUser()
 		}
+		def results = Office.createCriteria().list(params){
+			createAlias('staff',"s")
+			eq('s.id',user?.person?.id)
+		}
+	}
+	def getStaffForOffice(Office office=null,params){
+		office = validateOfficeRights(office)
 
 		def results = User.createCriteria().list(params) {
 				person {
@@ -146,17 +151,53 @@ class cbcApiService {
 		return results
 //		def tmp = office?.staff*.getLoginDetails()
 //		tmp.removeAll([null])
-//		return tmp // office?.staff*.getLoginDetails()
-		
-	}
+//		return tmp // office?.staff*.getLoginDetails()		
+	} //end getStaffForOffice
 	
-	def getCasesForOffice(Office office = null, params)	{
-		if(!office) office = getUserPrimaryOffice()
-		if(!groupManagerService.isAdmin()){
-			//validate if this user is allowed to view this office information
-			List allowedOffices = getUserAllowedOffices()  //for currently logged in user
-			if(!allowedOffices?.contains(office)) office = getUserPrimaryOffice()
+	def getCaseWorkers(Office office, params){
+		office = validateOfficeRights(office)
+		//Set<RoleGroup> grps = getAuthorities()
+		def results = User.createCriteria().list(params) {
+				person {
+					eq('office.id',office?.id)
+				}
+				
+			//order('office.name','asc')
 		}
+		return results?.findAll{groupManagerService.isOfficeCaseWorker(office, it) == true}
+	}//
+	
+	def getClientsForOffice(Office office = null, params){
+		office = validateOfficeRights(office)
+	
+		def results = Person.createCriteria().list(params) {
+			eq('office.id',office?.id)			
+			//order('office.name','asc')
+		}
+		return results
+		
+	} //
+	def getEventsForOffice(Office office = null, params){
+		office = validateOfficeRights(office)
+		
+		def results = Event.createCriteria().list(params) {			
+			eq('office.id',office?.id)
+			//order('office.name','asc')
+		}
+		return results
+	}
+	def getActionsForOffice(Office office = null, params){
+		office = validateOfficeRights(office)
+	
+		def results = Action.createCriteria().list(params) {
+			createAlias("thiscase","thiscase")
+			eq('thiscase.office.id',office?.id)			
+			//order('office.name','asc')
+		}
+		return results
+	}
+	def getCasesForOffice(Office office = null, params)	{
+		office = validateOfficeRights(office)
 	
 		def results = Case.createCriteria().list(params) {
 			eq('office.id',office?.id)
@@ -173,7 +214,47 @@ class cbcApiService {
 		Office office = getUserPrimaryOffice()
 		return getCasesForOffice(office, params) //results 
 	}
+	def getActions(params){
+		if(groupManagerService.isAdmin()){
+			return Action.createCriteria().list(params) {}  //this is an admin function to return all cases
+		}
+		//Otherwise we check for office related cases only
+		Office office = getUserPrimaryOffice()
+		return getActionsForOffice(office, params)
+	}
+	def getClients(params){
+		if(groupManagerService.isAdmin()){
+			return Person.createCriteria().list(params) {}  //this is an admin function to return all cases
+		}
+		//Otherwise we check for office related cases only
+		Office office = getUserPrimaryOffice()
+		return getClientsForOffice(office, params)
+	}
+	def getOffices(params){
+		if(groupManagerService.isAdmin()){
+			return Office.createCriteria().list(params) {}  //this is an admin function to return all cases
+		}
+		return getOfficesForUser(springSecurityService.getCurrentUser(), params)
+	}
 	
+	def getEvents(params){
+		if(groupManagerService.isAdmin()){
+			return Event.createCriteria().list(params) {}  //this is an admin function to return all cases
+		}
+		//Otherwise we check for office related cases only
+		Office office = getUserPrimaryOffice()
+		return getEventsForOffice(office, params)
+	}
+
+	def validateOfficeRights(Office office = null){
+		if(!office) office = getUserPrimaryOffice()
+		if(!groupManagerService.isAdmin()){
+			//validate if this user is allowed to view this office information
+			List allowedOffices = getUserAllowedOffices()  //for currently logged in user
+			if(!allowedOffices?.contains(office)) office = getUserPrimaryOffice()
+		}
+		return office
+	}
 	@Deprecated
 	/**
 	 * is the function isAdmin() in GroupManagerService instead
@@ -229,4 +310,5 @@ class cbcApiService {
 		}
 		return alldata?.unique()
 	} //
+	
 }//end class

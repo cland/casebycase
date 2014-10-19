@@ -66,6 +66,8 @@ class Person {
 
 	static mapping = {
 		phones cascade:"all-delete-orphan"
+		office lazy: false
+		
 	}
     static constraints = {
 		firstName blank:false,nullable:true
@@ -159,12 +161,12 @@ class Person {
 	}
 	public Office getPrimaryOffice(){
 		//The office that this person belongs to
-		def list = Office.createCriteria().list(){
-			createAlias('staff',"s")
-			eq('s.id',id)
-		}
-		
-		if(list.size() > 0) office = list.get(0) 
+//		def list = Office.createCriteria().list(){
+//			createAlias('staff',"s")
+//			eq('s.id',id)
+//		}
+//		
+//		if(list.size() > 0) office = list.get(0) 
 		return office
 	}
 

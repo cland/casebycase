@@ -1,5 +1,5 @@
 
-<%@ page import="com.cbc.Keywords" %>
+<%@ page import="com.cbc.lookup.Keywords" %>
 <!DOCTYPE html>
 <html>
 	<head>

@@ -249,7 +249,7 @@
 			<div class="cell"><label id="">Case worker</label></div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:select optionValue="fullname" id="assignedTo" name="assignedTo.id" from="${cbcApiService?.getStaffForOffice(caseInstance?.office,params)}" optionKey="id" required="" value="${caseInstance?.assignedTo?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
+					<g:select optionValue="fullname" id="assignedTo" name="assignedTo.id" from="${cbcApiService?.getCaseWorkers(caseInstance?.office,params)}" optionKey="id" required="" value="${caseInstance?.assignedTo?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
 				</span>
 			</div>
 		</div>

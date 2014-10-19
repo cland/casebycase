@@ -1,3 +1,4 @@
+<g:set var="cbcApiService" bean="cbcApiService"/>
 <%@ page import="com.cbc.Organisation" %>
 <!DOCTYPE html>
 <html>

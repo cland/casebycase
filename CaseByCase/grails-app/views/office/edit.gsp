@@ -37,7 +37,7 @@
 			<div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Staff Members</a></li>		
+							
 				</ul>
 				<div id="tab-1">
 					<g:uploadForm url="[resource:officeInstance, action:'update']" method="PUT" >
@@ -51,9 +51,7 @@
 					</g:uploadForm>
 				</div>
 				
-				<div id="tab-2">
-					
-				</div>
+				
 			</div>
 			<!--  *** END TABS *** -->
 			

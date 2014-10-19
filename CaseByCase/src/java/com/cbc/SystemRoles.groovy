@@ -9,7 +9,7 @@ public enum SystemRoles {
 	ROLE_NCO("ROLE_NCO","National Co-Ordinator - Statistical Information Only"),
 	
 	//REGIONAL LEVEL
-	ROLE_PCO("ROLE_PCO","Provincial Co-Ordinator -Statistical Information Only for a given region"),
+	ROLE_PCO("ROLE_PCO","Provincial Co-Ordinator - Statistical Information Only for a given region"),
 	
 	//OFFICE LEVEL
 	ROLE_OCO("ROLE_OCO","Office Co-Ordinator"),	

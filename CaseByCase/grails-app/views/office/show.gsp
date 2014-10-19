@@ -98,6 +98,8 @@
 						<!-- pager will hold our paginator -->
 						<div id="staff_list_pager" class="scroll" style="text-align: center;"></div>
 					</div>
+					
+					
 				</div>
 				<div id="tab-3">
 					<%-- Cases --%>

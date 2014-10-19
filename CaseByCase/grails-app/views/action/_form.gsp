@@ -54,7 +54,7 @@
 		<g:message code="action.actionOwner.label" default="Action Owner" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select optionValue="fullname" id="actionOwner" name="actionOwner.id" from="${cbcApiService?.getStaffForOffice(actionInstance?.thiscase?.office,params)}" optionKey="id" required="" value="${actionInstance?.actionOwner?.id}" class="many-to-one" noSelection="['':'-select one-']"/>
+	<g:select optionValue="fullname" id="actionOwner" name="actionOwner.id" from="${cbcApiService?.getCaseWorkers(actionInstance?.thiscase?.office,params)}" optionKey="id" required="" value="${actionInstance?.actionOwner?.id}" class="many-to-one" noSelection="['':'-select one-']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: actionInstance, field: 'actionType', 'error')} required">

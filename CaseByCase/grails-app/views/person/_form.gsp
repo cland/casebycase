@@ -102,7 +102,7 @@
 		<g:message code="person.citizenship.label" default="Citizenship" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="citizenship" name="citizenship.id" from="${com.cbc.Citizenship.list()}" optionKey="id" required="" value="${personInstance?.citizenship?.id}" class="many-to-one"/>
+	<g:select id="citizenship" name="citizenship.id" from="${com.cbc.Citizenship.list()}" optionKey="id" required="" value="${personInstance?.citizenship?.id}" class="many-to-one" noSelection="['':'-select one-']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'office', 'error')} required">
@@ -110,7 +110,10 @@
 		<g:message code="person.office.label" default="Office" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="office" name="office.id" from="${com.cbc.Office.list()}" optionKey="id" required="" value="${personInstance?.office?.id}" class="many-to-one"/>
+	<g:hiddenField id="office" name="office.id" value="${(personInstance?.office?personInstance?.office?.id : cbcApiService?.getUserPrimaryOffice()?.id)}" />
+	<span class="properties-value">
+		${(personInstance?.office ? personInstance?.office : cbcApiService?.getUserPrimaryOffice())}
+	</span>
 </div>
 <fieldset><legend>Geographical Location</legend>
 	<g:render template="../layouts/location" bean="${locationInstance}" var="locationInstance" model="[mode:'edit']"></g:render>

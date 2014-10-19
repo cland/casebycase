@@ -20,7 +20,7 @@
 			</li>
 			<li><a class="clients-link" href="${createLink(uri: '/person/index')}"><g:message code="default.clients.label" default="Clients"/></a>
 				<ul>
-					<li><a class="newperson-link" href="${createLink(uri: '/person/create')}"><g:message code="default.aboutus.label" default="New Person" /></a></li>	
+					<li><a class="newperson-link" href="${createLink(uri: '/person/create')}"><g:message code="default.aboutus.label" default="New Person" /></a></li>					
 					<li><a class="neworg-link" href="${createLink(uri: '/organisation/create')}"><g:message code="default.aboutus.label" default="New Organisation" /></a></li>	
 					<li><a class="persons-link" href="${createLink(uri: '/person/index')}"><g:message code="default.persons.label" default="Persons"/></a></li>					
 					<li><a class="orglist-link" href="${createLink(uri: '/organisation/index')}"><g:message code="default.organisations.label" default="Organisations"/></a></li>				

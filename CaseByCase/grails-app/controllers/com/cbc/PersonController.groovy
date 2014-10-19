@@ -15,7 +15,8 @@ class PersonController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 30, 100)
-        respond Person.list(params), model:[personInstanceCount: Person.count()]
+		def results = cbcApiService.getClients(params)
+        respond results, model:[personInstanceCount: results.totalCount]
     }
 
     def show(Person personInstance) {

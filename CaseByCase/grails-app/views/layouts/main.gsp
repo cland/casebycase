@@ -1,4 +1,5 @@
 <%@ page import="com.cbc.SystemRoles" %>
+<g:set var="cbcApiService" bean="cbcApiService"/>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -104,8 +105,15 @@
 			</sec:ifAnyGranted>
 			<div id="current-user"> <label><span class="r-arrow"></span></label>
 				<sec:ifLoggedIn>
-					<sec:loggedInUserInfo field="username" />
-				</sec:ifLoggedIn> <sec:ifNotLoggedIn>Anonymous</sec:ifNotLoggedIn>
+					Logged in as: <sec:loggedInUserInfo field="username" />
+					<br>
+					<label><span class="r-arrow"></span></label>
+					Office: 
+					<g:set var="primaryOffice" value="${cbcApiService?.getUserPrimaryOffice()}"/>
+					<g:link controller="office" action="show" id="${primaryOffice?.id}" >${primaryOffice }</g:link> 
+					
+				</sec:ifLoggedIn> 
+				<sec:ifNotLoggedIn>Anonymous</sec:ifNotLoggedIn>
 			</div>
 		</div>	
 			<g:link controller="home" action="cbc" class="cbc">

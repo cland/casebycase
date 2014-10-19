@@ -19,7 +19,8 @@ class OfficeController {
 		//Office mo = Office.findByName("Main Office")
 		//println ">> Is Athlone reviewer: " + groupManagerService.isOfficeReviewer(o)
 		//println ">> Is Main Office OCO: " + groupManagerService.isOfficeAdmin(mo)
-        respond Office.list(params), model:[officeInstanceCount: Office.count()]
+		def results = cbcApiService.getOffices(params)
+        respond results, model:[officeInstanceCount: results?.totalCount]
     }
 
     def show(Office officeInstance) {
@@ -152,8 +153,12 @@ class OfficeController {
 			flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'office.label', default: 'Office'), params.id])}"
 			redirect(action: "show",params:params)
 		}
-		def all_staff = cbcApiService.getStaffForOffice(officeInstance,params) //officeInstance.staff.sort(false){[it.firstLastName]}
-		
+		def all_staff = []
+		println(officeInstance)
+		if(cbcApiService.canView(officeInstance)){
+			all_staff = cbcApiService.getStaffForOffice(officeInstance,params) //
+		}
+				
 		int total = all_staff?.size()
 		if(total < 1){
 			def t =[records:0,page:0]

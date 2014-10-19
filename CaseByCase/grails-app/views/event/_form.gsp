@@ -138,7 +138,7 @@
 		<g:message code="event.user.label" default="Event caseworker" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select optionValue="fullname" id="user" name="user.id" from="${cbcApiService?.getStaffForOffice(eventInstance?.office,params)}" optionKey="id" required="" value="${eventInstance?.user?.id}" class="many-to-one" noSelection="['':'-select one-']"/>
+	<g:select optionValue="fullname" id="user" name="user.id" from="${cbcApiService?.getCaseWorkers(eventInstance?.office,params)}" optionKey="id" required="" value="${eventInstance?.user?.id}" class="many-to-one" noSelection="['':'-select one-']"/>
 </div>
 <div class="fieldcontain ${hasErrors(bean: eventInstance, field: 'followers', 'error')} ">
 	<label for="followers">

@@ -8,12 +8,14 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class ActionController {
-
+	def autoCompleteService
+	def cbcApiService
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 30, 100)
-        respond Action.list(params), model:[actionInstanceCount: Action.count()]
+		def results = cbcApiService.getActions(params)
+        respond results, model:[actionInstanceCount:results.totalCount]
     }
 
     def show(Action actionInstance) {
