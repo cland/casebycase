@@ -8,7 +8,7 @@ class Funder {
 	String name
 	String workNumber
 	String cellphone
-	double amount
+	BigDecimal amount
 	Date periodFrom
 	Date periodTo	
 	String funderType
@@ -22,7 +22,7 @@ class Funder {
     static constraints = {
 		workNumber nullable:true, matches: "[0-9]*"
 		cellphone nullable:true, matches: "[0-9]*"
-		amount nullable:true
+		amount nullable:true, min:0.0
 		periodFrom nullable:true
 		periodTo nullable:true
 		funderType nullable:false, blank:false

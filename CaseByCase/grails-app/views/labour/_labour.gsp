@@ -200,7 +200,7 @@
 	</label>
 	<g:hiddenField name="labour.allowAmount.id" value="${labourInstance?.allowAmount?.id }"/>
 	<g:if test="${isEditMode }">
-		<g:field type="number" name="labour.allowAmount.nightWork" value="${labourInstance?.allowAmount?.nightWork}"/>
+		<g:field type="number" name="labour.allowAmount.nightWork" value="${labourInstance?.allowAmount?.nightWork}" step="0.01"/>
 	</g:if>
 	<g:else><span class="property-value"><g:formatNumber number="${labourInstance?.allowAmount?.nightWork}" type="currency" currencyCode="ZAR" currencySymbol="R" /></span></g:else>
 </fieldset>
@@ -210,7 +210,7 @@
 	</label>
 	<g:if test="${isEditMode }">
 		<g:hiddenField name="labour.allowBenefit.id" value="${labourInstance?.allowBenefit?.id }"/>
-		<g:field type="number" name="labour.allowBenefit.pensionFund" value="${labourInstance?.allowBenefit?.pensionFund}"/>
+		<g:field type="number" name="labour.allowBenefit.pensionFund" value="${labourInstance?.allowBenefit?.pensionFund}" step="0.01"/>
 	</g:if>
 	<g:else><span class="property-value"><g:formatNumber number="${labourInstance?.allowBenefit?.pensionFund }" type="currency" currencyCode="ZAR" currencySymbol="R"/></span></g:else>
 </fieldset>

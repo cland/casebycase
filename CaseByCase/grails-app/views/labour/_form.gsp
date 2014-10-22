@@ -147,14 +147,14 @@
 		<g:message code="allowamount.nightwork.label" default="Night Work" />	
 	</label>
 	<g:hiddenField name="allowAmount.id" value="${labourInstance?.allowAmount?.id }"/>
-	<g:field type="number" name="allowAmount.nightWork" value="${labourInstance?.allowAmount?.nightWork}"/>
+	<g:field type="number" name="allowAmount.nightWork" value="${labourInstance?.allowAmount?.nightWork}" step="0.01"/>
 </fieldset>
 <fieldset><legend>Benefits Amount</legend>
 	<label for="labour.allowBenefit.pensionFund">
 		<g:message code="allowbenefit.pensionfund.label" default="Provident/Pension Fund" />	
 	</label>
 	<g:hiddenField name="allowBenefit.id" value="${labourInstance?.allowBenefit?.id }"/>
-	<g:field type="number" name="allowBenefit.pensionFund" value="${labourInstance?.allowBenefit?.pensionFund}"/>
+	<g:field type="number" name="allowBenefit.pensionFund" value="${labourInstance?.allowBenefit?.pensionFund} " step="0.01"/>
 </fieldset>
 <fieldset><legend>Leave Days</legend>
 <g:hiddenField name="leavedays.id" value="${labourInstance?.leavedays?.id }"/>

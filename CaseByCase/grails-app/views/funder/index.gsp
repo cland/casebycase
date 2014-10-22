@@ -1,28 +1,28 @@
 
-<%@ page import="com.cbc.Eviction" %>
+<%@ page import="com.cbc.Funder" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'eviction.label', default: 'Eviction')}" />
+		<g:set var="entityName" value="${message(code: 'funder.label', default: 'Funder')}" />
 		<title><g:appTitle title=""><g:message code="default.list.label" args="[entityName]" /></g:appTitle></title>
 		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_ADMIN}" />
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
 	</head>
 	<body>
-		<a href="#list-eviction" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<a href="#list-funder" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="bread-crump">
 				<span class="r-arrow"></span>
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					Evictions
+					here edit...
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
 			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
-		<div id="list-eviction" class="content scaffold-list" role="main">
+		<div id="list-funder" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>
@@ -31,42 +31,42 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'eviction.lastUpdatedBy.label', default: 'Last Updated By')}" />
+						<g:sortableColumn property="workNumber" title="${message(code: 'funder.workNumber.label', default: 'Work Number')}" />
 					
-						<g:sortableColumn property="createdBy" title="${message(code: 'eviction.createdBy.label', default: 'Created By')}" />
+						<g:sortableColumn property="cellphone" title="${message(code: 'funder.cellphone.label', default: 'Cellphone')}" />
 					
-						<th><g:message code="eviction.livestock.label" default="Livestock" /></th>
+						<g:sortableColumn property="amount" title="${message(code: 'funder.amount.label', default: 'Amount')}" />
 					
-						<th><g:message code="eviction.dwellingType.label" default="Dwelling Type" /></th>
+						<g:sortableColumn property="periodFrom" title="${message(code: 'funder.periodFrom.label', default: 'Period From')}" />
 					
-						<th><g:message code="eviction.landConsentType.label" default="Land Consent Type" /></th>
+						<g:sortableColumn property="periodTo" title="${message(code: 'funder.periodTo.label', default: 'Period To')}" />
 					
-						<g:sortableColumn property="dateCreated" title="${message(code: 'eviction.dateCreated.label', default: 'Date Created')}" />
+						<g:sortableColumn property="funderType" title="${message(code: 'funder.funderType.label', default: 'Funder Type')}" />
 					
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${evictionInstanceList}" status="i" var="evictionInstance">
+				<g:each in="${funderInstanceList}" status="i" var="funderInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${evictionInstance.id}">${fieldValue(bean: evictionInstance, field: "lastUpdatedBy")}</g:link></td>
+						<td><g:link action="show" id="${funderInstance.id}">${fieldValue(bean: funderInstance, field: "workNumber")}</g:link></td>
 					
-						<td>${fieldValue(bean: evictionInstance, field: "createdBy")}</td>
+						<td>${fieldValue(bean: funderInstance, field: "cellphone")}</td>
 					
-						<td>${fieldValue(bean: evictionInstance, field: "livestock")}</td>
+						<td>${fieldValue(bean: funderInstance, field: "amount")}</td>
 					
-						<td>${fieldValue(bean: evictionInstance, field: "dwellingType")}</td>
+						<td><g:formatDate date="${funderInstance.periodFrom}" /></td>
 					
-						<td>${fieldValue(bean: evictionInstance, field: "landConsentType")}</td>
+						<td><g:formatDate date="${funderInstance.periodTo}" /></td>
 					
-						<td><g:formatDate date="${evictionInstance.dateCreated}" /></td>
+						<td>${fieldValue(bean: funderInstance, field: "funderType")}</td>
 					
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate total="${evictionInstanceCount ?: 0}" />
+				<g:paginate total="${funderInstanceCount ?: 0}" />
 			</div>
 		</div>
 		<script>

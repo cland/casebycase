@@ -9,7 +9,7 @@ class Eviction {
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
-	Integer years
+	Integer stayPeriod
 	String networkMember
 	String specifyNetwork
 	String landRights
@@ -20,15 +20,15 @@ class Eviction {
 	Integer dwellingsNum
 	String dwellingsPayer
 	String dwellingsImproved
-	Double improvementCost
+	BigDecimal improvementCost
 	//-Type of dwelling
 	Keywords dwellingType  //dropdown
 	//-Number of livestock:
 	Livestock livestock		//fields
 	String crops
 	String grazing
-	Double livestockVal
-	Double cropsVal
+	BigDecimal livestockVal
+	BigDecimal cropsVal
 	String elecSource
 	String waterSource
 	
@@ -47,30 +47,28 @@ class Eviction {
 	Keywords landConsentType	//dropdown
 	
 	/*** Actual Eviction Section ** */
-	String currentStatus
+	Keywords currentStatus
 	String shelter
 	//String threatIssuedBy checkBox list
 	String chargesAgainstOccupiers
 	String specifyOccupierCharge
 	String chargesAgainstEvictors
 	String specifyEvictorCharge
-	String designatedOutcome
-	String labour
-	String cCMA
-	String workHours
+	String desiredOutcome
+	String labourDispute
+	String cCMAReferred
+	String hoursWorked
+	Integer hoursWorkedValue
 	String earnings
+	String earningsValue
 
 	
-	static hasMany = [evictionBy:Keywords, evictionMethod: Keywords, documents: Keywords, threatType: Keywords, threatBy: Keywords]
+	static hasMany = [evictionBy:Keywords, evictionMethod: Keywords, evictionDocuments: Keywords, threatType: Keywords, threatBy: Keywords]
 	static transients = ["createdByName","lastUpdatedByName"]
 	static constraints = {
 		lastUpdatedBy nullable:true
-		createdBy nullable:true
-		evictionMethod nullable: true
-		documents nullable: true
-		threatType nullable: true
-		threatBy nullable: true
-		years nullable:true, blank: true
+		createdBy nullable:true		
+		stayPeriod nullable:true, blank: true
 		networkMember nullable:true, blank: true, inList: ["Yes", "No"]
 		specifyNetwork nullable:true, blank: true
 		councillorRole nullable:true, blank: true
@@ -95,18 +93,19 @@ class Eviction {
 		waterAccess nullable:true, blank: true, inList: ["Yes", "No"]
 		electricityAccess nullable:true, blank: true, inList: ["Yes", "No"]
 		landConsentType nullable:true 
-		currentStatus nullable:true, blank: true , inList: ["Evicted", "Not Served"]
+		currentStatus nullable:true
 		shelter nullable:true, blank: true, inList: ["Yes", "No"] 
 		chargesAgainstOccupiers nullable:true, blank: true, inList: ["Yes", "No"]
 		specifyOccupierCharge nullable:true, blank: true
 		chargesAgainstEvictors nullable:true, blank: true, inList: ["Yes", "No"]
 		specifyEvictorCharge  nullable:true, blank: true
-		designatedOutcome nullable:true, blank: true
-		labour nullable:true, blank: true, inList: ["Yes", "No"]
-		cCMA nullable:true, blank: true, inList: ["Yes", "No"]
-		workHours nullable:true, blank: true
-		earnings nullable:true, blank: true
-		
+		desiredOutcome nullable:true, blank: true
+		labourDispute nullable:true, blank: true, inList: ["Yes", "No"]		
+		cCMAReferred nullable:true, blank: true, inList: ["Yes", "No"]
+		hoursWorked nullable: true, blank: true, inList: ["Weekly", "Fortnightly", "Monthly"]
+		earnings nullable: true, blank: true, inList: ["Weekly", "Fortnightly", "Monthly"]
+		earningsValue nullable:true, blank:true
+		hoursWorkedValue nullable:true, blank:true
 	}
 	def toMap(){
 		return [id:id,

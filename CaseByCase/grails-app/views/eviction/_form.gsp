@@ -5,25 +5,24 @@
 		<g:message code="eviction.years.label" default="How long have they lived there?" />
 		
 	</label>
-	<g:textField name="years" value="${evictionInstance?.years}" />	
+	<g:field type="number" name="stayPeriod" value="${fieldValue(bean: evictionInstance, field: 'improvementCost')}"/> years
 </div>
 <br />
 <hr>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'networkMember', 'error')} ">
-	<label for="eviction.years">
-		<g:message code="eviction.years.label" default="How long have they lived there?" />
+	<label for="eviction.networkMember">
+		<g:message code="eviction.years.label" default="Member of a network?" />
 		
 	</label>
 	<g:select name="networkMember" from="${evictionInstance?.constraints.networkMember.inList}" />	
 </div>
 <br />
-<hr>
-<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'years', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'specifyNetwork', 'error')} ">
 	<label for="eviction.specifyNetwork">
 		<g:message code="eviction.specifyNetwork.label" default="Specify network, if yes:" />
 		
 	</label>
-	<g:textArea name="specifyNetwork">${evictionInstance?.landRights}</g:textArea>	
+	<g:textField name="specifyNetwork" value="${evictionInstance?.specifyNetwork}"/>	
 </div>
 <br />
 <hr>
@@ -44,17 +43,17 @@
 	<g:textArea name="councillorRole">${evictionInstance?.councillorRole}</g:textArea>	
 </div>
 <br />
+
 <hr>
+<fieldset><legend>Environment</legend>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'dwellingsNum', 'error')} ">
 	<label for="eviction.dwellingsNum">
 		<g:message code="eviction.dwellingsNum.label" default="Number of dwellings" />
 		
 	</label>
-	<g:textField name="dwellingsNum" value="${evictionInstance?.dwellingsNum}"/>	
+	<g:field type="number" name="dwellingsNum" value="${evictionInstance?.dwellingsNum}"/>	
 </div>
 <br />
-<hr>
-<fieldset><legend>Environment</legend>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'dwellingsPayer', 'error')} ">
 	<label for="eviction.dwellingsPayer">
 		<g:message code="eviction.dwellingsPayer.label" default="Who paid for the dwelling?" />
@@ -75,7 +74,8 @@
 		<g:message code="eviction.improvementCost.label" default="If yes, at what cost?" />
 		
 	</label>
-	<g:textField name="improvementCost" value="${evictionInstance?.improvementCost}"/>	
+	
+	<g:field type="number" name="improvementCost" value="${fieldValue(bean: evictionInstance, field: 'improvementCost')} " step="0.01"/>
 </div>
 <br />
 <hr>
@@ -100,27 +100,27 @@
 	<div class="table">
 		<div class="row">
 			<div class="cell">Cows</div>
-			<div class="cell"><g:textField name="livestock.cow" value="${evictionInstance?.livestock?.cow}"/></div>		
+			<div class="cell"><g:field type="number" name="livestock.cow" value="${evictionInstance?.livestock?.cow}"/></div>		
 			<div class="cell">Chickens</div>
-			<div class="cell"><g:textField name="livestock.chicken" value="${evictionInstance?.livestock?.chicken}"/></div>
+			<div class="cell"><g:field type="number" name="livestock.chicken" value="${evictionInstance?.livestock?.chicken}"/></div>
 		</div>
 		<div class="row">
 			<div class="cell">Sheep</div>
-			<div class="cell"><g:textField name="livestock.sheep" value="${evictionInstance?.livestock?.sheep}"/></div>
+			<div class="cell"><g:field type="number" name="livestock.sheep" value="${evictionInstance?.livestock?.sheep}"/></div>
 			<div class="cell">Goats</div>
-			<div class="cell"><g:textField name="livestock.goat" value="${evictionInstance?.livestock?.goat}"/></div>
+			<div class="cell"><g:field type="number" name="livestock.goat" value="${evictionInstance?.livestock?.goat}"/></div>
 		</div>
 		<div class="row">	
 			<div class="cell">Dogs</div>
-			<div class="cell"><g:textField name="livestock.dog" value="${evictionInstance?.livestock?.dog}"/></div>
+			<div class="cell"><g:field type="number" name="livestock.dog" value="${evictionInstance?.livestock?.dog}"/></div>
 			<div class="cell">Cats</div>
-			<div class="cell"><g:textField name="livestock.cat" value="${evictionInstance?.livestock?.cat}"/></div>
+			<div class="cell"><g:field type="number" name="livestock.cat" value="${evictionInstance?.livestock?.cat}"/></div>
 		</div>
 		<div class="row">	
 			<div class="cell">Horses</div>
-			<div class="cell"><g:textField name="livestock.horse" value="${evictionInstance?.livestock?.horse}"/></div>
+			<div class="cell"><g:field type="number" name="livestock.horse" value="${evictionInstance?.livestock?.horse}"/></div>
 			<div class="cell">Other</div>
-			<div class="cell"><g:textField name="livestock.other" value="${evictionInstance?.livestock?.other}"/></div>
+			<div class="cell"><g:field type="number" name="livestock.other" value="${evictionInstance?.livestock?.other}"/></div>
 		</div>
 	</div>
 		
@@ -149,8 +149,8 @@
 	<label for="eviction.livestockVal">
 		<g:message code="eviction.livestockVal.label" default="Value of Livestock:" />
 		
-	</label>R
-	<g:textField name="livestockVal" value="${evictionInstance?.livestockVal}"/>	
+	</label>R	
+	<g:field type="number" name="livestockVal" value="${fieldValue(bean: evictionInstance, field: 'livestockVal')}" step="0.01"/>
 </div>
 <br />
 <hr>
@@ -158,8 +158,8 @@
 	<label for="cropsVal">
 		<g:message code="eviction.cropsVal.label" default="Value of crops:" />
 		
-	</label>R
-	<g:textField name="livestockVal" value="${evictionInstance?.cropsVal}"/>	
+	</label>R	
+	<g:field type="number" name="cropsVal" value="${fieldValue(bean: evictionInstance, field: 'cropsVal')}" step="0.01"/>
 </div>
 <br />
 <hr>
@@ -199,7 +199,7 @@
 </div>
 <br />
 <hr>
-<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'primarySchools', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'highSchools', 'error')} ">
 	<label for="highSchools">
 		<g:message code="eviction.highSchools.label" default="Distance to High Schools and Name of School:" />
 		
@@ -243,9 +243,11 @@
 	<g:select name="electricityAccess" from="${evictionInstance?.constraints.electricityAccess.inList}" />	
 </div>
 </fieldset>
+
+<fieldset><legend>Actual Eviction</legend>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'landConsentType', 'error')} ">
 	<label for="landConsentType">
-		<g:message code="eviction.landConsentType.label" default="Land Consent Type" />	
+		<g:message code="eviction.landConsentType.label" default="Consent to live on land:" />	
 	</label>	
 	<g:select id="landConsentType" name="landConsentType.id" 
 		from="${com.cbc.lookup.Keywords.findByName("EvictionLandConsentType")?.values}" 
@@ -253,12 +255,12 @@
 		class="many-to-one" 
 		noSelection="['null':'-select-']"/>
 </div>
-<fieldset><legend>Actual Eviction</legend>
+<hr>
 <div class="table">
 	<div class="row">
 		<div class="cell" style="width:200px;">
 		<label for="evictionBy">
-			<g:message code="eviction.evictionBy.label" default="Eviction By" />
+			<g:message code="eviction.evictionBy.label" default="Who carried out the eviction:" />
 			<span class="required-indicator">*</span>
 		</label>
 		</div>
@@ -282,7 +284,7 @@
 		</div>
 		<div class="cell">
 		<g:each in="${com.cbc.lookup.Keywords.findByName("EvictionMethod")?.values}" var="keyword" status="index">
-			<g:checkBox name="evictionMethod" value="${keyword.id }" checked="${ evictionInstance?.evictionBy?.contains(keyword)}" />
+			<g:checkBox name="evictionMethod" value="${keyword.id }" checked="${ evictionInstance?.evictionMethod?.contains(keyword)}" />
 			<label for="evictionMethod">${keyword }</label><br>
 		</g:each>
 		</div>
@@ -290,12 +292,21 @@
 </div>
 <br />
 <hr>
-<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'currentStatus', 'error')} ">
-	<label for="eviction.currentStatus">
-		<g:message code="eviction.currentStatus.label" default="Current Status:" />
-		
-	</label>
-	<g:select name="currentStatus" from="${evictionInstance?.constraints.currentStatus.inList}" />	
+<div class="table">
+	<div class="row">
+		<div class="cell" style="width:200px;">
+		<label for="currentStatus">
+			<g:message code="eviction.currentStatus.label" default="Current status:" />
+			<span class="required-indicator">*</span>
+		</label>
+		</div>
+		<div class="cell">
+		<g:each in="${com.cbc.lookup.Keywords.findByName("EvictionCurrentStatus")?.values}" var="keyword" status="index">
+			<g:checkBox name="currentStatus" value="${keyword.id }" checked="${ evictionInstance?.currentStatus?.contains(keyword)}" />
+			<label for="currentStatus">${keyword }</label><br>
+		</g:each>
+		</div>
+	</div>
 </div>
 <br />
 <hr>
@@ -317,9 +328,9 @@
 		</label>
 		</div>
 		<div class="cell">
-		<g:each in="${com.cbc.lookup.Keywords.findByName("Documents")?.values}" var="keyword" status="index">
-			<g:checkBox name="documents" value="${keyword.id }" checked="${ evictionInstance?.documents?.contains(keyword)}" />
-			<label for="documents">${keyword }</label><br>
+		<g:each in="${com.cbc.lookup.Keywords.findByName("EvictionDocuments")?.values}" var="keyword" status="index">
+			<g:checkBox name="evictionDocuments" value="${keyword.id }" checked="${ evictionInstance?.evictionDocuments?.contains(keyword)}" />
+			<label for="evictionDocuments">${keyword }</label><br>
 		</g:each>
 		</div>
 	</div>
@@ -335,7 +346,7 @@
 		</label>
 		</div>
 		<div class="cell">
-		<g:each in="${com.cbc.lookup.Keywords.findByName("ThreatType")?.values}" var="keyword" status="index">
+		<g:each in="${com.cbc.lookup.Keywords.findByName("EvictionThreatType")?.values}" var="keyword" status="index">
 			<g:checkBox name="threatType" value="${keyword.id }" checked="${ evictionInstance?.threatType?.contains(keyword)}" />
 			<label for="threatType">${keyword }</label><br>
 		</g:each>
@@ -353,7 +364,7 @@
 		</label>
 		</div>
 		<div class="cell">
-		<g:each in="${com.cbc.lookup.Keywords.findByName("ThreatBy")?.values}" var="keyword" status="index">
+		<g:each in="${com.cbc.lookup.Keywords.findByName("EvictionThreatBy")?.values}" var="keyword" status="index">
 			<g:checkBox name="threatBy" value="${keyword.id }" checked="${ evictionInstance?.threatBy?.contains(keyword)}" />
 			<label for="threatBy">${keyword }</label><br>
 		</g:each>
@@ -364,7 +375,7 @@
 <fieldset><legend>Criminal/Civil Charges</legend>
 <div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'chargesAgainstOccupiers', 'error')} ">
 	<label for="eviction.chargesAgainstOccupiers">
-		<g:message code="eviction.chargesAgainstOccupiers.label" default="Has the charges been laid against the Occupriers in relation to the land?" />
+		<g:message code="eviction.chargesAgainstOccupiers.label" default="Has the charges been laid against the Occupiers in relation to the land?" />
 		
 	</label>
 	<g:select name="chargesAgainstOccupiers" from="${evictionInstance?.constraints.chargesAgainstOccupiers.inList}" />
@@ -390,46 +401,44 @@
 </div>
 <br />
 <hr>
-<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'designatedOutcome', 'error')} ">
-	<label for="eviction.designatedOutcome">
-		<g:message code="eviction.designatedOutcome.label" default="Client's designed outcome:" />
+<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'desiredOutcome', 'error')} ">
+	<label for="desiredOutcome">
+		<g:message code="eviction.desiredOutcome.label" default="Client's desired outcome:" />
 		
 	</label>
-	<g:textArea name="designatedOutcome" value="${evictionInstance?.designatedOutcome}"/>	
+	<g:textArea name="desiredOutcome" value="${evictionInstance?.desiredOutcome}"/>	
 </div>
 </fieldset>
-<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'labour', 'error')} ">
-	<label for="eviction.labour">
-		<g:message code="eviction.labour.label" default="Is there an associated labour dispute?" />
+<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'labourDispute', 'error')} ">
+	<label for="labourDispute">
+		<g:message code="eviction.labourDispute.label" default="Is there an associated labour dispute?" />
 		
 	</label>
-	<g:select name="labour" from="${evictionInstance?.constraints.labour.inList}" />	
+	<g:select name="labourDispute" from="${evictionInstance?.constraints.labourDispute.inList}" />	
 </div>
 <br />
 <hr>
-<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'cCMA', 'error')} ">
-	<label for="eviction.cCMA">
-		<g:message code="eviction.cCMA.label" default="Has case been referred to the CCMA?" />
+<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'cCMAReferred', 'error')} ">
+	<label for="CCMAReferred">
+		<g:message code="eviction.cCMAReferred.label" default="Has case been referred to the CCMA?" />
 		
 	</label>
-	<g:select name="cCMA" from="${evictionInstance?.constraints.cCMA.inList}" />	
+	<g:select name="cCMAReferred" from="${evictionInstance?.constraints.cCMAReferred.inList}" />	
 </div>
 <br />
 <hr>
-<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'workHours', 'error')} ">
-	<label for="eviction.workHours">
-		<g:message code="eviction.workHours.label" default="Hours worked:" />
-		
+<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'hoursWorked', 'error')} ">
+	<label for="labour.hoursWorked">
+		<g:message code="labour.hoursWorked.label" default="Hours Worked" />
 	</label>
-	<g:textField name="workHours" value="${evictionInstance?.workHours}"/>	
+	<g:field type="number" name="hoursWorkedValue" value="${evictionInstance?.hoursWorkedValue}"/>
+	<g:select name="hoursWorked" from="${com.cbc.Labour.constraints.hoursWorked.inList}" value="${evictionInstance?.hoursWorked}" valueMessagePrefix="labour.hoursWorked" noSelection="['': '']"/>
 </div>
-<br />
-<hr>
-<div class="fieldcontain ${hasErrors(bean: evictionInstance, field:
-	 'earnings', 'error')} ">
-	<label for="eviction.earnings">
-		<g:message code="eviction.earnings.label" default="Earnings:" />
-		
+
+<div class="fieldcontain ${hasErrors(bean: evictionInstance, field: 'earnings', 'error')} ">
+	<label for="labour.earnings">
+		<g:message code="labour.earnings.label" default="Earnings" />
 	</label>
-	<g:textField name="earnings" value="${evictionInstance?.earnings}"/>	
+	<g:field type="number" name="earningsValue" value="${evictionInstance?.earningsValue}"/>
+	<g:select name="earnings" from="${com.cbc.Labour.constraints.earnings.inList}" value="${evictionInstance?.earnings}" valueMessagePrefix="labour.earnings" noSelection="['': '']"/>
 </div>
