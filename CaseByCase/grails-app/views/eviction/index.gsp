@@ -16,7 +16,7 @@
 				<g:link controller="home" action="cbc">Home</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					Evictions
+					here edit...
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -35,13 +35,13 @@
 					
 						<g:sortableColumn property="createdBy" title="${message(code: 'eviction.createdBy.label', default: 'Created By')}" />
 					
-						<th><g:message code="eviction.livestock.label" default="Livestock" /></th>
+						<g:sortableColumn property="stayPeriod" title="${message(code: 'eviction.stayPeriod.label', default: 'Stay Period')}" />
 					
-						<th><g:message code="eviction.dwellingType.label" default="Dwelling Type" /></th>
+						<g:sortableColumn property="networkMember" title="${message(code: 'eviction.networkMember.label', default: 'Network Member')}" />
 					
-						<th><g:message code="eviction.landConsentType.label" default="Land Consent Type" /></th>
+						<g:sortableColumn property="specifyNetwork" title="${message(code: 'eviction.specifyNetwork.label', default: 'Specify Network')}" />
 					
-						<g:sortableColumn property="dateCreated" title="${message(code: 'eviction.dateCreated.label', default: 'Date Created')}" />
+						<g:sortableColumn property="councillorRole" title="${message(code: 'eviction.councillorRole.label', default: 'Councillor Role')}" />
 					
 					</tr>
 				</thead>
@@ -53,13 +53,13 @@
 					
 						<td>${fieldValue(bean: evictionInstance, field: "createdBy")}</td>
 					
-						<td>${fieldValue(bean: evictionInstance, field: "livestock")}</td>
+						<td>${fieldValue(bean: evictionInstance, field: "stayPeriod")}</td>
 					
-						<td>${fieldValue(bean: evictionInstance, field: "dwellingType")}</td>
+						<td>${fieldValue(bean: evictionInstance, field: "networkMember")}</td>
 					
-						<td>${fieldValue(bean: evictionInstance, field: "landConsentType")}</td>
+						<td>${fieldValue(bean: evictionInstance, field: "specifyNetwork")}</td>
 					
-						<td><g:formatDate date="${evictionInstance.dateCreated}" /></td>
+						<td>${fieldValue(bean: evictionInstance, field: "councillorRole")}</td>
 					
 					</tr>
 				</g:each>

@@ -53,66 +53,82 @@
 								
 							</li>
 							</g:if>
-							<g:if test="${evictionInstance?.years}">
+						
+							<g:if test="${evictionInstance?.stayPeriod}">
 							<li class="fieldcontain">
-								<span id="years-label" class="property-label"><g:message code="eviction.years.label" default="How long have they lived there?" /></span>
+								<span id="stayPeriod-label" class="property-label"><g:message code="eviction.stayPeriod.label" default="Stay Period" /></span>
 								
-									<span class="property-value" aria-labelledby="years-label"><g:fieldValue bean="${evictionInstance}" field="years"/></span>
+									<span class="property-value" aria-labelledby="stayPeriod-label"><g:fieldValue bean="${evictionInstance}" field="stayPeriod"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.networkMember}">
 							<li class="fieldcontain">
-								<span id="networkMember-label" class="property-label"><g:message code="eviction.networkMember.label" default="Member of a network?" /></span>
+								<span id="networkMember-label" class="property-label"><g:message code="eviction.networkMember.label" default="Network Member" /></span>
 								
 									<span class="property-value" aria-labelledby="networkMember-label"><g:fieldValue bean="${evictionInstance}" field="networkMember"/></span>
-									</li><li class="fieldcontain"><span id="networkMember-label" class="property-label"><g:message code="eviction.networkMember.label" default="Specify network, if yes:" /></span>
-									<span class="property-value" aria-labelledby="specifyNetwork-label"><g:fieldValue bean="${evictionInstance}" field="specifyNetwork"/></span>
-								</li>
+								
+							</li>
 							</g:if>
-							
+						
+							<g:if test="${evictionInstance?.specifyNetwork}">
+							<li class="fieldcontain">
+								<span id="specifyNetwork-label" class="property-label"><g:message code="eviction.specifyNetwork.label" default="Specify Network" /></span>
+								
+									<span class="property-value" aria-labelledby="specifyNetwork-label"><g:fieldValue bean="${evictionInstance}" field="specifyNetwork"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.councillorRole}">
+							<li class="fieldcontain">
+								<span id="councillorRole-label" class="property-label"><g:message code="eviction.councillorRole.label" default="Councillor Role" /></span>
+								
+									<span class="property-value" aria-labelledby="councillorRole-label"><g:fieldValue bean="${evictionInstance}" field="councillorRole"/></span>
+								
+							</li>
+							</g:if>
+						
 							<g:if test="${evictionInstance?.landRights}">
 							<li class="fieldcontain">
-								<span id="landRights-label" class="property-label"><g:message code="eviction.landRights.label" default="Client has knowledge of land rights:" /></span>
+								<span id="landRights-label" class="property-label"><g:message code="eviction.landRights.label" default="Land Rights" /></span>
 								
 									<span class="property-value" aria-labelledby="landRights-label"><g:fieldValue bean="${evictionInstance}" field="landRights"/></span>
 								
 							</li>
 							</g:if>
-							<g:if test="${evictionInstance?.councillorRole}">
-							<li class="fieldcontain">
-								<span id="councillorRole-label" class="property-label"><g:message code="eviction.councillorRole.label" default="Descibe Role of Councillor:" /></span>
-								
-									<span class="property-value" aria-labelledby="councillorRole-label"><g:fieldValue bean="${evictionInstance}" field="landRights"/></span>
-								
-							</li>
-							</g:if>
-							
+						
 							<g:if test="${evictionInstance?.dwellingsNum}">
 							<li class="fieldcontain">
-								<span id="dwellingsNum-label" class="property-label"><g:message code="eviction.dwellingsNum.label" default="Number of dwellings:" /></span>
+								<span id="dwellingsNum-label" class="property-label"><g:message code="eviction.dwellingsNum.label" default="Dwellings Num" /></span>
 								
 									<span class="property-value" aria-labelledby="dwellingsNum-label"><g:fieldValue bean="${evictionInstance}" field="dwellingsNum"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.dwellingsPayer}">
 							<li class="fieldcontain">
-								<span id="dwellingsPayer-label" class="property-label"><g:message code="eviction.dwellingsPayer.label" default="Who payed for the dwellings?" /></span>
+								<span id="dwellingsPayer-label" class="property-label"><g:message code="eviction.dwellingsPayer.label" default="Dwellings Payer" /></span>
 								
 									<span class="property-value" aria-labelledby="dwellingsPayer-label"><g:fieldValue bean="${evictionInstance}" field="dwellingsPayer"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.dwellingsImproved}">
 							<li class="fieldcontain">
-								<span id="dwellingsImproved-label" class="property-label"><g:message code="eviction.dwellingsImproved.label" default="Have the dwellings been improved?" /></span>
+								<span id="dwellingsImproved-label" class="property-label"><g:message code="eviction.dwellingsImproved.label" default="Dwellings Improved" /></span>
 								
 									<span class="property-value" aria-labelledby="dwellingsImproved-label"><g:fieldValue bean="${evictionInstance}" field="dwellingsImproved"/></span>
 								
 							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.improvementCost}">
 							<li class="fieldcontain">
-								<span id="improvementCost-label" class="property-label"><g:message code="eviction.improvementCost.label" default="If yes, at what cost? R" /></span>
+								<span id="improvementCost-label" class="property-label"><g:message code="eviction.improvementCost.label" default="Improvement Cost" /></span>
 								
 									<span class="property-value" aria-labelledby="improvementCost-label"><g:fieldValue bean="${evictionInstance}" field="improvementCost"/></span>
 								
@@ -136,105 +152,118 @@
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.crops}">
 							<li class="fieldcontain">
-								<span id="crops-label" class="property-label"><g:message code="eviction.crops.label" default="Crop: " /></span>
+								<span id="crops-label" class="property-label"><g:message code="eviction.crops.label" default="Crops" /></span>
 								
 									<span class="property-value" aria-labelledby="crops-label"><g:fieldValue bean="${evictionInstance}" field="crops"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.grazing}">
 							<li class="fieldcontain">
-								<span id="grazing-label" class="property-label"><g:message code="eviction.crops.label" default="Grazing" /></span>
+								<span id="grazing-label" class="property-label"><g:message code="eviction.grazing.label" default="Grazing" /></span>
 								
 									<span class="property-value" aria-labelledby="grazing-label"><g:fieldValue bean="${evictionInstance}" field="grazing"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.livestockVal}">
 							<li class="fieldcontain">
-								<span id="livestockVal-label" class="property-label"><g:message code="eviction.livestockVal.label" default="Value of Livestock:" /></span>
+								<span id="livestockVal-label" class="property-label"><g:message code="eviction.livestockVal.label" default="Livestock Val" /></span>
 								
 									<span class="property-value" aria-labelledby="livestockVal-label"><g:fieldValue bean="${evictionInstance}" field="livestockVal"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.cropsVal}">
 							<li class="fieldcontain">
-								<span id="cropsVal-label" class="property-label"><g:message code="eviction.cropsVal.label" default="Value of Crops:" /></span>
+								<span id="cropsVal-label" class="property-label"><g:message code="eviction.cropsVal.label" default="Crops Val" /></span>
 								
 									<span class="property-value" aria-labelledby="cropsVal-label"><g:fieldValue bean="${evictionInstance}" field="cropsVal"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.elecSource}">
 							<li class="fieldcontain">
-								<span id="elecSource-label" class="property-label"><g:message code="eviction.elecSource.label" default="Electricity Source: " /></span>
+								<span id="elecSource-label" class="property-label"><g:message code="eviction.elecSource.label" default="Elec Source" /></span>
 								
 									<span class="property-value" aria-labelledby="elecSource-label"><g:fieldValue bean="${evictionInstance}" field="elecSource"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.waterSource}">
 							<li class="fieldcontain">
-								<span id="waterSource-label" class="property-label"><g:message code="eviction.waterSource.label" default="Water Source: " /></span>
+								<span id="waterSource-label" class="property-label"><g:message code="eviction.waterSource.label" default="Water Source" /></span>
 								
 									<span class="property-value" aria-labelledby="waterSource-label"><g:fieldValue bean="${evictionInstance}" field="waterSource"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.graveAccess}">
 							<li class="fieldcontain">
-								<span id="graveAccess-label" class="property-label"><g:message code="eviction.graveAccess.label" default="Access to graves? " /></span>
+								<span id="graveAccess-label" class="property-label"><g:message code="eviction.graveAccess.label" default="Grave Access" /></span>
 								
 									<span class="property-value" aria-labelledby="graveAccess-label"><g:fieldValue bean="${evictionInstance}" field="graveAccess"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.primarySchools}">
 							<li class="fieldcontain">
-								<span id="primarySchools-label" class="property-label"><g:message code="eviction.primarySchools.label" default="Distance to Primary Schools and Name of School: " /></span>
+								<span id="primarySchools-label" class="property-label"><g:message code="eviction.primarySchools.label" default="Primary Schools" /></span>
 								
 									<span class="property-value" aria-labelledby="primarySchools-label"><g:fieldValue bean="${evictionInstance}" field="primarySchools"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.highSchools}">
 							<li class="fieldcontain">
-								<span id="highSchools-label" class="property-label"><g:message code="eviction.highSchools.label" default="Distance to High Schools and Name of School: " /></span>
+								<span id="highSchools-label" class="property-label"><g:message code="eviction.highSchools.label" default="High Schools" /></span>
 								
 									<span class="property-value" aria-labelledby="highSchools-label"><g:fieldValue bean="${evictionInstance}" field="highSchools"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.clinics}">
 							<li class="fieldcontain">
-								<span id="clinics-label" class="property-label"><g:message code="eviction.highSchools.label" default="Distance to Clinic and Name of Clinic: " /></span>
+								<span id="clinics-label" class="property-label"><g:message code="eviction.clinics.label" default="Clinics" /></span>
 								
 									<span class="property-value" aria-labelledby="clinics-label"><g:fieldValue bean="${evictionInstance}" field="clinics"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.tradPracs}">
 							<li class="fieldcontain">
-								<span id="tradPracs-label" class="property-label"><g:message code="eviction.tradPracs.label" default="Traditional Practices carried out on land: " /></span>
+								<span id="tradPracs-label" class="property-label"><g:message code="eviction.tradPracs.label" default="Trad Pracs" /></span>
 								
 									<span class="property-value" aria-labelledby="tradPracs-label"><g:fieldValue bean="${evictionInstance}" field="tradPracs"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.waterAccess}">
 							<li class="fieldcontain">
-								<span id="waterAccess-label" class="property-label"><g:message code="eviction.waterAccess.label" default="Access to Water resctricted? " /></span>
+								<span id="waterAccess-label" class="property-label"><g:message code="eviction.waterAccess.label" default="Water Access" /></span>
 								
 									<span class="property-value" aria-labelledby="waterAccess-label"><g:fieldValue bean="${evictionInstance}" field="waterAccess"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.electricityAccess}">
 							<li class="fieldcontain">
-								<span id="electricityAccess-label" class="property-label"><g:message code="eviction.waterAccess.label" default="Access to Electricity resctricted? " /></span>
+								<span id="electricityAccess-label" class="property-label"><g:message code="eviction.electricityAccess.label" default="Electricity Access" /></span>
 								
 									<span class="property-value" aria-labelledby="electricityAccess-label"><g:fieldValue bean="${evictionInstance}" field="electricityAccess"/></span>
 								
@@ -249,50 +278,120 @@
 								
 							</li>
 							</g:if>
-							<%-- Missing fields --%>
-							
+						
 							<g:if test="${evictionInstance?.currentStatus}">
 							<li class="fieldcontain">
-								<span id="currentStatus-label" class="property-label"><g:message code="eviction.currentStatus.label" default="Current Status: " /></span>
+								<span id="currentStatus-label" class="property-label"><g:message code="eviction.currentStatus.label" default="Current Status" /></span>
 								
-									<span class="property-value" aria-labelledby="currentStatus-label"><g:fieldValue bean="${evictionInstance}" field="currentStatus"/></span>
+									<span class="property-value" aria-labelledby="currentStatus-label"><g:link controller="keywords" action="show" id="${evictionInstance?.currentStatus?.id}">${evictionInstance?.currentStatus?.encodeAsHTML()}</g:link></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.shelter}">
 							<li class="fieldcontain">
-								<span id="shelter-label" class="property-label"><g:message code="eviction.shelter.label" default="Has Shelter? " /></span>
+								<span id="shelter-label" class="property-label"><g:message code="eviction.shelter.label" default="Shelter" /></span>
 								
 									<span class="property-value" aria-labelledby="shelter-label"><g:fieldValue bean="${evictionInstance}" field="shelter"/></span>
 								
 							</li>
 							</g:if>
+						
 							<g:if test="${evictionInstance?.chargesAgainstOccupiers}">
 							<li class="fieldcontain">
-								<span id="chargesAgainstOccupiers-label" class="property-label"><g:message code="eviction.chargesAgainstOccupiers.label" default="Has charges been laid against Occupiers in relation to the land? " /></span>
+								<span id="chargesAgainstOccupiers-label" class="property-label"><g:message code="eviction.chargesAgainstOccupiers.label" default="Charges Against Occupiers" /></span>
 								
 									<span class="property-value" aria-labelledby="chargesAgainstOccupiers-label"><g:fieldValue bean="${evictionInstance}" field="chargesAgainstOccupiers"/></span>
 								
 							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.specifyOccupierCharge}">
 							<li class="fieldcontain">
-								<span id="specifyOccupierCharge-label" class="property-label"><g:message code="eviction.specifyOccupierCharge.label" default="If yes, case number and details: " /></span>
+								<span id="specifyOccupierCharge-label" class="property-label"><g:message code="eviction.specifyOccupierCharge.label" default="Specify Occupier Charge" /></span>
 								
 									<span class="property-value" aria-labelledby="specifyOccupierCharge-label"><g:fieldValue bean="${evictionInstance}" field="specifyOccupierCharge"/></span>
 								
 							</li>
 							</g:if>
-							
+						
 							<g:if test="${evictionInstance?.chargesAgainstEvictors}">
 							<li class="fieldcontain">
-								<span id="chargesAgainstEvictors-label" class="property-label"><g:message code="eviction.chargesAgainstEvictors.label" default="Has charges been laid against Evictor in relation to the land? " /></span>
+								<span id="chargesAgainstEvictors-label" class="property-label"><g:message code="eviction.chargesAgainstEvictors.label" default="Charges Against Evictors" /></span>
 								
 									<span class="property-value" aria-labelledby="chargesAgainstEvictors-label"><g:fieldValue bean="${evictionInstance}" field="chargesAgainstEvictors"/></span>
 								
 							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.specifyEvictorCharge}">
 							<li class="fieldcontain">
-								<span id="specifyEvictorCharge-label" class="property-label"><g:message code="eviction.specifyEvictorCharge.label" default="If yes, case number and details: " /></span>
+								<span id="specifyEvictorCharge-label" class="property-label"><g:message code="eviction.specifyEvictorCharge.label" default="Specify Evictor Charge" /></span>
 								
 									<span class="property-value" aria-labelledby="specifyEvictorCharge-label"><g:fieldValue bean="${evictionInstance}" field="specifyEvictorCharge"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.desiredOutcome}">
+							<li class="fieldcontain">
+								<span id="desiredOutcome-label" class="property-label"><g:message code="eviction.desiredOutcome.label" default="Desired Outcome" /></span>
+								
+									<span class="property-value" aria-labelledby="desiredOutcome-label"><g:fieldValue bean="${evictionInstance}" field="desiredOutcome"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.labourDispute}">
+							<li class="fieldcontain">
+								<span id="labourDispute-label" class="property-label"><g:message code="eviction.labourDispute.label" default="Labour Dispute" /></span>
+								
+									<span class="property-value" aria-labelledby="labourDispute-label"><g:fieldValue bean="${evictionInstance}" field="labourDispute"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.cCMAReferred}">
+							<li class="fieldcontain">
+								<span id="cCMAReferred-label" class="property-label"><g:message code="eviction.cCMAReferred.label" default="CCMAR eferred" /></span>
+								
+									<span class="property-value" aria-labelledby="cCMAReferred-label"><g:fieldValue bean="${evictionInstance}" field="cCMAReferred"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.hoursWorked}">
+							<li class="fieldcontain">
+								<span id="hoursWorked-label" class="property-label"><g:message code="eviction.hoursWorked.label" default="Hours Worked" /></span>
+								
+									<span class="property-value" aria-labelledby="hoursWorked-label"><g:fieldValue bean="${evictionInstance}" field="hoursWorked"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.earnings}">
+							<li class="fieldcontain">
+								<span id="earnings-label" class="property-label"><g:message code="eviction.earnings.label" default="Earnings" /></span>
+								
+									<span class="property-value" aria-labelledby="earnings-label"><g:fieldValue bean="${evictionInstance}" field="earnings"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.earningsValue}">
+							<li class="fieldcontain">
+								<span id="earningsValue-label" class="property-label"><g:message code="eviction.earningsValue.label" default="Earnings Value" /></span>
+								
+									<span class="property-value" aria-labelledby="earningsValue-label"><g:fieldValue bean="${evictionInstance}" field="earningsValue"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.hoursWorkedValue}">
+							<li class="fieldcontain">
+								<span id="hoursWorkedValue-label" class="property-label"><g:message code="eviction.hoursWorkedValue.label" default="Hours Worked Value" /></span>
+								
+									<span class="property-value" aria-labelledby="hoursWorkedValue-label"><g:fieldValue bean="${evictionInstance}" field="hoursWorkedValue"/></span>
 								
 							</li>
 							</g:if>
@@ -310,7 +409,31 @@
 							<li class="fieldcontain">
 								<span id="evictionBy-label" class="property-label"><g:message code="eviction.evictionBy.label" default="Eviction By" /></span>
 								
-									<span class="property-value" aria-labelledby="evictionBy-label"><g:link controller="keywords" action="show" id="${evictionInstance?.evictionBy?.id}">${evictionInstance?.evictionBy?.encodeAsHTML()}</g:link></span>
+									<g:each in="${evictionInstance.evictionBy}" var="e">
+									<span class="property-value" aria-labelledby="evictionBy-label"><g:link controller="keywords" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></span>
+									</g:each>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.evictionDocuments}">
+							<li class="fieldcontain">
+								<span id="evictionDocuments-label" class="property-label"><g:message code="eviction.evictionDocuments.label" default="Eviction Documents" /></span>
+								
+									<g:each in="${evictionInstance.evictionDocuments}" var="e">
+									<span class="property-value" aria-labelledby="evictionDocuments-label"><g:link controller="keywords" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></span>
+									</g:each>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.evictionMethod}">
+							<li class="fieldcontain">
+								<span id="evictionMethod-label" class="property-label"><g:message code="eviction.evictionMethod.label" default="Eviction Method" /></span>
+								
+									<g:each in="${evictionInstance.evictionMethod}" var="e">
+									<span class="property-value" aria-labelledby="evictionMethod-label"><g:link controller="keywords" action="show" id="${e.id}">${e?.encodeAsHTML()}</g:link></span>
+									</g:each>
 								
 							</li>
 							</g:if>
@@ -320,6 +443,28 @@
 								<span id="lastUpdated-label" class="property-label"><g:message code="eviction.lastUpdated.label" default="Last Updated" /></span>
 								
 									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${evictionInstance?.lastUpdated}" /></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.threatBy}">
+							<li class="fieldcontain">
+								<span id="threatBy-label" class="property-label"><g:message code="eviction.threatBy.label" default="Threat By" /></span>
+								
+									<g:each in="${evictionInstance.threatBy}" var="t">
+									<span class="property-value" aria-labelledby="threatBy-label"><g:link controller="keywords" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
+									</g:each>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${evictionInstance?.threatType}">
+							<li class="fieldcontain">
+								<span id="threatType-label" class="property-label"><g:message code="eviction.threatType.label" default="Threat Type" /></span>
+								
+									<g:each in="${evictionInstance.threatType}" var="t">
+									<span class="property-value" aria-labelledby="threatType-label"><g:link controller="keywords" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
+									</g:each>
 								
 							</li>
 							</g:if>

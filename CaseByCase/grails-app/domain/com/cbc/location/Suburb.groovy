@@ -10,7 +10,9 @@ class Suburb {
 		name unique:true, blank:false
 		code unique:true, blank:false
     }
-	
+	static mapping = {
+		sort name: "asc"
+	}
 	String toString(){
 		return name
 	}

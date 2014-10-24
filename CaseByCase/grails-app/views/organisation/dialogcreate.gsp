@@ -1,3 +1,4 @@
+<g:set var="cbcApiService" bean="cbcApiService"/>
 <!DOCTYPE html>
 <html>
 	<head>

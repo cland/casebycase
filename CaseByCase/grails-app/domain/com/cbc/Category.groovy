@@ -32,7 +32,9 @@ class Category {
 		lastUpdatedBy nullable:true, editable:false
 		createdBy nullable:true, editable:false
 	}
-
+	static mapping = {
+		sort name: "asc"
+	}
 	int getLevel(Category cat){
 		if(!cat || cat?.id == 1) return 0
 		return getLevel(cat?.parent) + 1

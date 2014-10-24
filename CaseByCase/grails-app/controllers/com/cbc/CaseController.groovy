@@ -257,14 +257,13 @@ class CaseController {
 		return labour
 	}
 	private Eviction saveEvictions(params) throws Exception{
-		def eviction = null
-		if(!params?.eviction?.id){
-			if(params?.eviction?.id == ""){
-				eviction = new Eviction(params?.eviction).save()
-				if(eviction.hasErrors()){
-					throw new Exception("Failed to save new eviction details... "  + eviction?.errors)
-				}
-			}
+		def eviction = Eviction.get(params?.eviction?.id)
+		if(!eviction){
+			eviction = new Eviction(params?.eviction).save()
+			if(eviction?.hasErrors() || !eviction){
+				println "Errors: " + eviction?.errors
+				throw new Exception("Failed to save new eviction details... "  + eviction?.errors)
+			}			
 		}
 		return eviction
 	}

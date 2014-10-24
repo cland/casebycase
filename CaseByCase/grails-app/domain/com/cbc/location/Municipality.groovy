@@ -9,6 +9,9 @@ class Municipality {
 		name blank:false, unique:true
 		code blank:false, unique:true
     }
+	static mapping = {
+		sort name: "asc"
+	}
 	String toString(){
 		"${name}"
 	}

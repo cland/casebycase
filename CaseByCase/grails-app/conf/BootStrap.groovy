@@ -275,9 +275,7 @@ def groupManagerService
 		
 		//keywords for location
 		def keyword = new Keywords(name:"system_areas",label:"System Areas",category:"system_locations")
-		keyword.addToValues("one")
-		keyword.addToValues("two")
-		keyword.addToValues("three")
+		keyword.addToValues(new Keywords(name:"one",label:"This One",category:"System")	)
 		keyword.save()
 		if(keyword.hasErrors()){
 		println keyword.errors
