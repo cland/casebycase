@@ -51,11 +51,19 @@ class CaseController {
 
 		//save evictions and labour
 		try{
-			Labour labour = saveLabour(params)
-			if(labour){
-				caseInstance.labour = labour
-				caseInstance = caseInstance.merge()
+			def categoryInstance = caseInstance?.categories?.find{true}
+			def rootCategory = categoryInstance?.getRootParentName(categoryInstance)
+			if (rootCategory == "Labour"){
+				Labour labour = saveLabour(params)
+				if(labour){
+					caseInstance.labour = labour
+					caseInstance = caseInstance.merge()
+				}
+			}else if(rootCategory == "Evictions"){
+				Eviction eviction = saveEviction(params, caseInstance)				
 			}
+			
+			
 		}catch(Exception e){
 			println(">> "+ e)
 			flash.message = "Error: Failed to save form due to an errors on some fields."
@@ -90,7 +98,7 @@ class CaseController {
 			//redirect to access denied
 			redirect action: 'index'
 		}
-		println("Assigned to: " + params?.assignedTo?.id)
+	
         if (caseInstance == null) {
             notFound()
             return
@@ -103,11 +111,14 @@ class CaseController {
 		
 		//save evictions and labour
 		try{
-			Labour labour = saveLabour(params)
-//			if(labour){
-//				caseInstance.labour = labour
-//				caseInstance = caseInstance.merge()
-//			}
+			def categoryInstance = caseInstance?.categories?.find{true} 
+			def rootCategory = categoryInstance?.getRootParentName(categoryInstance)
+			println(">> " + rootCategory)
+			if (rootCategory == "Labour"){
+				Labour labour = saveLabour(params)
+			}else if(rootCategory == "Evictions"){
+				Eviction eviction = saveEviction(params, caseInstance)
+			}
 		}catch(Exception e){
 			println(">> "+ e)
 			flash.message = "Error: Failed to save form due to an errors on some fields."
@@ -118,7 +129,7 @@ class CaseController {
 		if(caseInstance?.hasErrors()){
 			println(caseInstance.errors)
 		}
-		println("Assigned To: " + caseInstance?.assignedTo?.id)
+		
 		attachUploadedFilesTo(caseInstance)
 		
         request.withFormat {
@@ -211,6 +222,7 @@ class CaseController {
 			}
 			
 		}
+		
 		//Work hours
 		def workhours = WorkHours.get(params?.labour?.workhours?.id)
 		if(!workhours){
@@ -256,14 +268,34 @@ class CaseController {
 		labour?.save()
 		return labour
 	}
-	private Eviction saveEvictions(params) throws Exception{
+	private Eviction saveEviction(params, caseInstance) throws Exception{
 		def eviction = Eviction.get(params?.eviction?.id)
+		boolean isNew = false
 		if(!eviction){
 			eviction = new Eviction(params?.eviction).save()
 			if(eviction?.hasErrors() || !eviction){
 				println "Errors: " + eviction?.errors
 				throw new Exception("Failed to save new eviction details... "  + eviction?.errors)
-			}			
+			}	
+			
+			isNew = true
+		}
+		
+		//Livestock
+		def livestock = Livestock.get(params?.eviction?.livestock?.id)
+		if(!livestock){
+			livestock = new Livestock(params?.eviction?.livestock).save()
+			if(livestock?.hasErrors()){
+				println(livestock?.errors)
+			}else{
+				eviction.livestock = livestock
+			}
+		}
+		
+		
+		if(isNew){
+			caseInstance.eviction = eviction
+			caseInstance = caseInstance.merge()
 		}
 		return eviction
 	}

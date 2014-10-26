@@ -1000,3 +1000,7 @@ ul.menu_list_items li a{
 	background:#FFF;
 	border:solid 2px #000;
 }
+.lookup-admin-key{
+	display:none;
+	font-size:6pt;
+}

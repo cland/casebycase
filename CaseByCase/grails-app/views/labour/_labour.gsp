@@ -107,6 +107,7 @@
 		
 	</label>
 	<g:if test="${isEditMode }">
+		<span class="hide">Lookup: [ProblemType:Leave]</span>
 		<g:select id="leaveProblem" name="labour.leaveProblem.id" from="${com.cbc.lookup.ProblemType.findByName("Leave")?.problemTypes}" optionKey="id"  value="${labourInstance?.leaveProblem?.id}" class="many-to-one" noSelection="['':'-select-']"/>
 	</g:if>
 	<g:else><span class="property-value">${labourInstance?.leaveProblem }</span></g:else>

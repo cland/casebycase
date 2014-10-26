@@ -23,7 +23,7 @@
 					<g:link controller="case" action="index">Cases</g:link>
 				<span class="r-arrow"></span> 
 				<span class="current-crump">
-					Case: ${caseInstance?.subject } (${caseInstance?.caseNumber }) 
+					Case: ${caseInstance?.subject } (${caseInstance?.caseNumber }) - Category: ${rootCategory}
 				</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
@@ -41,7 +41,7 @@
 					<g:if test="${rootCategory == "Labour"}">
 						<li><a href="#tab-labour">Labour</a></li>
 					</g:if>
-					<g:if test="${rootCategory == "Eviction"}">
+					<g:if test="${rootCategory == "Evictions"}">
 						<li><a href="#tab-evictions">Evictions</a></li>
 					</g:if>
 					<g:if test="${outcomeTabOn == true }">
@@ -253,8 +253,9 @@
 						<g:render template="form_labour" model="[mode:'read']"/>
 					</div>
 				</g:if>
-				<g:if test="${rootCategory == "Eviction"}">
+				<g:if test="${rootCategory == "Evictions"}">
 					<div id="tab-evictions">
+						<g:render template="form_evictions" model="[mode:'read']"/>
 					</div>
 				</g:if>
 				
