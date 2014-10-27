@@ -6,6 +6,9 @@
 		<title><g:appTitle title=""><g:message code="default.create.label" args="[entityName]" /></g:appTitle></title>
 		<g:set var="page_sidenav" value="sidenav-admin"/>
 		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
+		<style>
+#appLogo, .sf-menu, .footer, .bread-crump {display:none;}
+</style>
 	</head>
 	<body>
 		<a href="#create-category" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -17,10 +20,10 @@
 					New Category
 				</span>
 		</div>
-		<div id="status1" class="leftbar" role="complementary">
+		<div id="status1" class="leftbar" role="complementary" style="display:none;">
 			<g:sideMenu default="${page_sidenav }"></g:sideMenu> 
 		</div>
-		<div id="create-category" class="content scaffold-create" role="main">
+		<div id="create-category" class="content scaffold-create" role="main" style="width:100%">
 			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>

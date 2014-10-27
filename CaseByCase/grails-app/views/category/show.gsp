@@ -11,6 +11,9 @@
 	</g:appTitle></title>
 <g:set var="page_sidenav" value="sidenav-admin" />
 <g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
+<style>
+#appLogo, .sf-menu, .footer, .bread-crump {display:none;}
+</style>
 </head>
 <body>
 	<a href="#show-category" class="skip" tabindex="-1"><g:message
@@ -22,10 +25,8 @@
 		<g:link controller="category" action="index">Categories</g:link>
 		<span class="r-arrow"></span> <span class="current-crump"> ${ categoryInstance?.name}</span>
 	</div>
-	<div id="status1" class="leftbar" role="complementary">
-		<g:sideMenu default="${page_sidenav }"></g:sideMenu>
-	</div>
-	<div id="show-category" class="content scaffold-show" role="main">
+
+	<div id="show-category" class="content scaffold-show" role="main" style="width:100%">
 		<h1>
 			<g:message code="default.show.label" args="[entityName]" />
 		</h1>

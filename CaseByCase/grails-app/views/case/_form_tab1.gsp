@@ -409,7 +409,7 @@ function addPersonClient(_id){
 					}
 				});
 			},
-			minLength : 2, // triggered only after minimum 2 characters have been entered.
+			minLength : 1, // triggered only after minimum 2 characters have been entered.
 			select : function(event, ui) { // event handler when user selects a company from the list.
 				var _id = ui.item.id;
 				var _img = '${resource(dir: 'images/skin', file: 'icon_delete.png')}';
@@ -436,7 +436,7 @@ function addPersonClient(_id){
 					}
 				});
 			},
-			minLength : 2, // triggered only after minimum 2 characters have been entered.
+			minLength : 1, // triggered only after minimum 2 characters have been entered.
 			select : function(event, ui) { // event handler when user selects a company from the list.
 				var _id = ui.item.id;
 				var _img = '${resource(dir: 'images/skin', file: 'icon_delete.png')}';

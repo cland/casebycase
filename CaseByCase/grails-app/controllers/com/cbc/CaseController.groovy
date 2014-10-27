@@ -45,7 +45,7 @@ class CaseController {
         }
 
         if (caseInstance.hasErrors()) {
-            respond caseInstance.errors, view:'create'
+            respond caseInstance.errors, view:'create', params:params
             return
         }
 
@@ -60,10 +60,8 @@ class CaseController {
 					caseInstance = caseInstance.merge()
 				}
 			}else if(rootCategory == "Evictions"){
-				Eviction eviction = saveEviction(params, caseInstance)				
+				caseInstance = saveEviction(params, caseInstance)				
 			}
-			
-			
 		}catch(Exception e){
 			println(">> "+ e)
 			flash.message = "Error: Failed to save form due to an errors on some fields."
@@ -71,14 +69,16 @@ class CaseController {
 			//render(view: "create", model: [caseInstance: caseInstance,params:params])
 			//return
 		}
-		
-        caseInstance.save flush:true
-		println(">> Uploading files...")
-		attachUploadedFilesTo(caseInstance)
+		caseInstance.save flush:true
+        if(caseInstance?.hasErrors()){
+			println(caseInstance.errors)
+		}else{			
+			attachUploadedFilesTo(caseInstance)
+		}
         request.withFormat {
             form multipartForm{				
                 flash.message = message(code: 'default.created.message', args: [message(code: 'caseInstance.label', default: 'Case'), caseInstance.toString()])
-                redirect caseInstance
+                redirect redirect caseInstance //action:"show", id:caseInstance?.id
             }
             '*' { respond caseInstance, [status: CREATED] }
         }
@@ -117,7 +117,7 @@ class CaseController {
 			if (rootCategory == "Labour"){
 				Labour labour = saveLabour(params)
 			}else if(rootCategory == "Evictions"){
-				Eviction eviction = saveEviction(params, caseInstance)
+				caseInstance = saveEviction(params, caseInstance)
 			}
 		}catch(Exception e){
 			println(">> "+ e)
@@ -268,7 +268,7 @@ class CaseController {
 		labour?.save()
 		return labour
 	}
-	private Eviction saveEviction(params, caseInstance) throws Exception{
+	private Case saveEviction(params, caseInstance) throws Exception{
 		def eviction = Eviction.get(params?.eviction?.id)
 		boolean isNew = false
 		if(!eviction){
@@ -277,7 +277,6 @@ class CaseController {
 				println "Errors: " + eviction?.errors
 				throw new Exception("Failed to save new eviction details... "  + eviction?.errors)
 			}	
-			
 			isNew = true
 		}
 		
@@ -297,6 +296,6 @@ class CaseController {
 			caseInstance.eviction = eviction
 			caseInstance = caseInstance.merge()
 		}
-		return eviction
+		return caseInstance
 	}
 } //end class

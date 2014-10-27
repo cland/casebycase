@@ -4,8 +4,9 @@ import grails.transaction.Transactional
 
 @Transactional
 class AutoCompleteService {
-
+	def cbcApiService
 	def searchPeople(params){
+		Office office = cbcApiService.getUserPrimaryOffice()
 		def term = params?.term + "%"
 		def query = {
 			or {
@@ -13,6 +14,7 @@ class AutoCompleteService {
 				ilike("lastName", term)
 				ilike("idNumber","%" + term)
 			}
+			eq('office.id',office?.id)
 		}
 		def clist = Person.createCriteria().list(query)
 		def selectList = []
@@ -23,6 +25,7 @@ class AutoCompleteService {
 	} //end searchPeople
 	
 	def searchOrgs(params){
+		Office office = cbcApiService.getUserPrimaryOffice()
 		def term = params?.term + "%"
 
 		def query = {
@@ -30,6 +33,7 @@ class AutoCompleteService {
 				ilike("name", term )
 				ilike("email", term)
 			}
+			eq('office.id',office?.id)
 		}
 		def clist = Organisation.createCriteria().list(query)
 		def selectList = []

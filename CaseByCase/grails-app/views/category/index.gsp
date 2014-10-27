@@ -40,26 +40,14 @@
 <%--		<div id="hierarchyStructure" class="hierarchyStructure"></div>--%>
 		
 		
-		<fieldset><legend>jsTree Test</legend>
-		  <div id="jstree">
-			    <!-- in this example the tree is populated from inline HTML -->
-			    <ul>
-			      <li>Root node 1
-			        <ul>
-			          <li id="child_node_1">Child node 1</li>
-			          <li>Child node 2</li>
-			        </ul>
-			      </li>
-			      <li>Root node 2</li>
-			    </ul>
-			  </div>
-			<button>demo button</button>
+		<fieldset><legend>Manage</legend>
+		  	<div id="jstree">
+			    
+			</div>
+
 		
 		</fieldset>
-		
-		<fieldset><legend>TREESELECT TEST</legend>		
-			<div class="chosentree"></div>
-		</fieldset>
+
 		
 	</div>
 
@@ -108,7 +96,9 @@
 			});
 		    // 7 bind to events triggered on the tree
 		    $('#jstree').on("changed.jstree", function (e, data) {
-		      console.log(data.selected);
+		      console.log(data.selected[0]);
+		      var _id = data.selected[0]
+		      manageCategory(_id)
 		      
 		    });
 		    // 8 interact with the tree - either way is OK
@@ -162,7 +152,37 @@
 	 			}
 	 		});
 		 };
-	     
+		 function manageCategory(_id){
+			 var _link = "${resource()}/category/show/" + _id;
+		  	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')             
+		                .load(_link)		                
+		                .dialog({
+		                	modal:true,
+		                    autoOpen: false,
+		                    dialogClass: 'no-close',
+		                    width:800,
+		                    beforeClose: function(event,ui){
+		                    	
+		                    },
+		                    buttons:{
+		                        "DONE":function(){
+		                      	 // location.reload();
+		                         	 $(this).dialog('close')
+		                            },
+		                         "CANCEL":function(){
+		                      	   $(this).dialog('close')
+		                             }
+		                       },
+		                    close: function(event,ui){
+		                  	  $(this).dialog('destroy').remove()
+		                  	  //location.reload();
+		                    },
+		                    position: {my:"top",at:"top",of:window},
+		                    title: 'Manage Category'                         
+		                });    
+		                $dialog.dialog('open');
+		                
+		  } //end function     
 	</script>
 </body>
 </html>
