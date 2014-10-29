@@ -60,37 +60,52 @@ class cbcApiService {
 	}
 	
 	boolean canView(Object obj){
-		List allowedOffices = getUserAllowedOffices() //for currently logged in user
-		if(obj.instanceOf(Person)){
+		List <Office> allowedOffices = getUserAllowedOffices() //for currently logged in user
+		if(obj?.instanceOf(Person)){
 			Person p = obj
 			if(allowedOffices?.contains(p?.office)) return true
-		}else if(obj.instanceOf(Office)){
+		}else if(obj?.instanceOf(Office)){
 			if(groupManagerService.isAdmin()) return true
 			Office o = obj
 			if(allowedOffices?.contains(o)) return true
 			
-		}else if(obj.instanceOf(Case)){
+		}else if(obj?.instanceOf(Case)){
 			if(groupManagerService.isAdmin()) return true
 			Case thiscase = (Case)obj
-			if(allowedOffices?.contains(thiscase?.office)) return true 
+			Office o =thiscase?.office
+			List tmp = allowedOffices?.collect{it.id}			
+			if(tmp?.contains(o.id)) return true 
+		}else if(obj?.instanceOf(Action)){
+			//for now		
+			Action action = (Action)obj	
+			return canView(action?.thiscase)
 		}
+		
 		return false
 	} //end can view
 	boolean canEdit(Object obj){
 		
-		if(obj.instanceOf(Person)){
+		if(obj?.instanceOf(Person)){
 			Person p = obj
 			
-		}else if(obj.instanceOf(Office)){
+		}else if(obj?.instanceOf(Office)){
 			Office o = obj
-		}else if(obj.instanceOf(Case)){
+		}else if(obj?.instanceOf(Case)){
 			if(groupManagerService.isAdmin()) return true
 			List allowedOffices = getUserAllowedOffices()  //for currently logged in user
 			Case thiscase = (Case)obj
-			if(allowedOffices?.contains(thiscase?.office) && 
+			List tmp = allowedOffices?.collect{it.id}
+			println((groupManagerService.isOfficeAdmin(thiscase?.office) || 
+					groupManagerService.isOfficeWorker(thiscase?.office) ||
+					groupManagerService.isOfficeSpecialWorker(thiscase?.office)))
+			if(tmp?.contains(thiscase?.office?.id) && 
 				(groupManagerService.isOfficeAdmin(thiscase?.office) || 
 					groupManagerService.isOfficeWorker(thiscase?.office) ||
 					groupManagerService.isOfficeSpecialWorker(thiscase?.office))) return true
+		}else if(obj?.instanceOf(Action)){
+			//for now		
+			Action action = (Action)obj
+			return canEdit(action?.thiscase)
 		}
 		return false
 	} //end canEdit

@@ -78,7 +78,7 @@ class CaseController {
         request.withFormat {
             form multipartForm{				
                 flash.message = message(code: 'default.created.message', args: [message(code: 'caseInstance.label', default: 'Case'), caseInstance.toString()])
-                redirect redirect caseInstance //action:"show", id:caseInstance?.id
+                redirect caseInstance //action:"show", id:caseInstance?.id
             }
             '*' { respond caseInstance, [status: CREATED] }
         }

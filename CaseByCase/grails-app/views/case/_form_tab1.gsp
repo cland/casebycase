@@ -96,7 +96,7 @@
 			</div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:textField name="subject" value="${caseInstance?.subject}"/>
+					<g:textField name="subject" required="" value="${caseInstance?.subject}"/>
 				</span>
 			</div>
 		</div>
@@ -108,7 +108,7 @@
 			</div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:textField name="caseNumber" value="${caseInstance?.caseNumber}"/>
+					<g:textField name="caseNumber" value="${caseInstance?.caseNumber}" required=""/>
 				</span>
 			</div>
 		</div>
@@ -148,7 +148,7 @@
 			</div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:textArea name="description" value="${caseInstance?.description}" rows="5" cols="40"/>
+					<g:textArea name="description" value="${caseInstance?.description}" required="" rows="5" cols="40"/>
 				</span>
 			</div>
 		</div>
@@ -162,7 +162,7 @@
 			</div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:select id="priority" name="priority.id" from="${com.cbc.CasePriority.list()}" optionKey="id" required="" value="${caseInstance?.priority?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
+					<g:select id="priority" name="priority.id" from="${com.cbc.CasePriority.list()}" optionKey="id" required="" value="${caseInstance?.priority?.id}" class="many-to-one" noSelection="['': '-select one-']"/>
 				</span>
 			</div>
 		</div>
@@ -220,7 +220,7 @@
 			</div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:select id="status" name="status.id" from="${com.cbc.CaseStatus.list()}" optionKey="id" required="" value="${caseInstance?.status?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
+					<g:select id="status" name="status.id" from="${com.cbc.CaseStatus.list()}" optionKey="id" required="" value="${caseInstance?.status?.id}" class="many-to-one" noSelection="['': '-select one-']"/>
 				</span>
 			</div>
 		</div>
@@ -249,7 +249,7 @@
 			<div class="cell"><label id="">Case worker</label></div>
 			<div class="cell">
 				<span class="property-value" aria-labelledby="office-label">
-					<g:select optionValue="fullname" id="assignedTo" name="assignedTo.id" from="${cbcApiService?.getCaseWorkers(caseInstance?.office,params)}" optionKey="id" required="" value="${caseInstance?.assignedTo?.id}" class="many-to-one" noSelection="['null': '-select one-']"/>
+					<g:select optionValue="fullname" id="assignedTo" name="assignedTo.id" from="${cbcApiService?.getCaseWorkers(caseInstance?.office,params)}" optionKey="id" required="" value="${caseInstance?.assignedTo?.id}" class="many-to-one" noSelection="['': '-select one-']"/>
 				</span>
 			</div>
 		</div>

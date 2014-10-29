@@ -5,7 +5,7 @@
 	<head>
 		<g:set var="entityName" value="${message(code: 'action.label', default: 'Action')}" />
 		<title><g:appTitle title=""><g:message code="default.edit.label" args="[entityName]" /></g:appTitle></title>
-		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
+		<g:render template="head" var="thisInstance" bean="${actionInstance }" model="[sidenav:page_sidenav]"></g:render>
 	</head>
 	<body>
 		<div id="resultsDiv" style="display:none;"></div>

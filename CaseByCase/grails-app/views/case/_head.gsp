@@ -1,3 +1,5 @@
+<g:set var="cbcApiService" bean="cbcApiService"/>
+
 <script type="text/javascript">
 //<![CDATA[
 var cbc_params = {
@@ -5,7 +7,8 @@ var cbc_params = {
 		active_sidebar : function(){ if (${params.sidebar==null}) return 0; else return ${params.sidebar};},
 		active_sidenav : "../layouts/${sidenav}",
 		thisId : '${params?.id}',
-		canEdit :${grails.plugin.springsecurity.SpringSecurityUtils.ifAnyGranted("ROLE_ADMIN")},
+		canEdit :${cbcApiService.canEdit(thisInstance)},
+		canView :${cbcApiService.canView(thisInstance)},
 		actions : {
 			edit_url : "../jq_remove_action", 
 			maingrid_id		: "action_list",

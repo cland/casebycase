@@ -6,7 +6,7 @@
 		<g:set var="entityName" value="${message(code: 'action.label', default: 'Action')}" />
 		<title><g:appTitle title=""><g:message code="default.create.label" args="[entityName]" /></g:appTitle></title>
 		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
-		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
+		<g:render template="head" var="thisInstance" bean="${actionInstance }" model="[sidenav:page_sidenav]"></g:render>
 	</head>
 	<body>
 		<a href="#create-action" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

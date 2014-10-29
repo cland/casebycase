@@ -33,7 +33,6 @@ class AutoCompleteService {
 				ilike("name", term )
 				ilike("email", term)
 			}
-			eq('office.id',office?.id)
 		}
 		def clist = Organisation.createCriteria().list(query)
 		def selectList = []

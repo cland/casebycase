@@ -7,7 +7,7 @@
 		<g:set var="entityName" value="${message(code: 'person.label', default: 'Person')}" />
 		<title><g:appTitle title=""><g:message code="default.show.label" args="[entityName]" /></g:appTitle></title>
 		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
-		<g:render template="head" var="viewbag" model="[sidenav:page_sidenav]"></g:render>
+		<g:render template="head" var="thisInstance" bean="${personInstance }" model="[sidenav:page_sidenav]"></g:render>
 	</head>
 	<body>
 		<a href="#show-person" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
