@@ -76,7 +76,7 @@ class Person {
 		knownAs nullable:true
 		dateOfBirth blank:true, nullable:true
 		gender inList: Gender.list() ,nullable:true
-		idNumber  blank:true, unique:true ,nullable:true
+		idNumber  blank:true, unique:'office' ,nullable:true
 		race blank:true, nullable:true	
 		empHowJobFound nullable:true
 		empHowJobFoundDesc nullable:true,widget:'textarea'		

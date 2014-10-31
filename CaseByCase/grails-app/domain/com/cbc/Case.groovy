@@ -67,7 +67,7 @@ class Case {
 		amtRecovered nullable:true
 		assignedTo nullable:true
 		respondent nullable:true
-		caseNumber unique:true
+		caseNumber unique:'office'
     }
 	static mapping = {
 		table 'issue'  //def tableName = GrailsDomainBinder.getMapping(Case).table.name 

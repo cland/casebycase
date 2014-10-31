@@ -72,6 +72,7 @@ class cbcApiService {
 		}else if(obj?.instanceOf(Case)){
 			if(groupManagerService.isAdmin()) return true
 			Case thiscase = (Case)obj
+			if(!thiscase?.office) return false;
 			Office o =thiscase?.office
 			List tmp = allowedOffices?.collect{it.id}			
 			if(tmp?.contains(o.id)) return true 
@@ -84,7 +85,6 @@ class cbcApiService {
 		return false
 	} //end can view
 	boolean canEdit(Object obj){
-		
 		if(obj?.instanceOf(Person)){
 			Person p = obj
 			
@@ -94,10 +94,11 @@ class cbcApiService {
 			if(groupManagerService.isAdmin()) return true
 			List allowedOffices = getUserAllowedOffices()  //for currently logged in user
 			Case thiscase = (Case)obj
+			if(!thiscase?.office) return false;
 			List tmp = allowedOffices?.collect{it.id}
-			println((groupManagerService.isOfficeAdmin(thiscase?.office) || 
-					groupManagerService.isOfficeWorker(thiscase?.office) ||
-					groupManagerService.isOfficeSpecialWorker(thiscase?.office)))
+//			println((groupManagerService.isOfficeAdmin(thiscase?.office) || 
+//					groupManagerService.isOfficeWorker(thiscase?.office) ||
+//					groupManagerService.isOfficeSpecialWorker(thiscase?.office)))
 			if(tmp?.contains(thiscase?.office?.id) && 
 				(groupManagerService.isOfficeAdmin(thiscase?.office) || 
 					groupManagerService.isOfficeWorker(thiscase?.office) ||

@@ -39,7 +39,8 @@
 		<g:message code="person.dateOfBirth.label" default="Date Of Birth"  />
 		
 	</label>
-	<g:datePicker required="" name="dateOfBirth" precision="day"  value="${personInstance?.dateOfBirth}" default="none" relativeYears="[-80..-2]" noSelection="['': '-choose-']" />
+<%--	<g:datePicker required="" name="dateOfBirth" precision="day"  value="${personInstance?.dateOfBirth}" default="none" relativeYears="[-80..-2]" noSelection="['': '-choose-']" />--%>
+	<g:textField name="dateOfBirth" id="birth-date" class="datepick_single_past" value="${personInstance?.dateOfBirth?.format('dd-MMM-yyyy')}"/>
 </div>
 
 <g:if test="${params.action!='create' & params.action!='dialogcreate' }">
@@ -116,7 +117,7 @@
 	</span>
 </div>
 <fieldset><legend>Geographical Location</legend>
-	<g:render template="../layouts/location" bean="${locationInstance}" var="locationInstance" model="[mode:'edit']"></g:render>
+	<g:render template="../layouts/location" bean="${personInstance?.location}" var="locationInstance" model="[mode:'edit',hideList:['longlat']]"></g:render>
 </fieldset>
 <g:if test="${params.action != 'dialogcreate' }">
 	<g:render template="form_attach" model="[thisInstance:personInstance]"/>

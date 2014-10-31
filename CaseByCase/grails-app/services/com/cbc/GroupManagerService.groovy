@@ -48,11 +48,11 @@ class GroupManagerService {
 		return grplist
 	}
 	private String getGroupNamePrefix(Object obj){
-		if(obj.instanceOf(Office)){
+		if(obj?.instanceOf(Office)){
 			Office office = (Office)obj
 			return "GROUP_" + office?.code?.toString()?.toUpperCase()?.replace(" ","_")
 		}
-		if(obj.instanceOf(Region)){
+		if(obj?.instanceOf(Region)){
 			Region region = (Region)obj
 			return "GROUP_REGION_" + region?.name?.toString()?.toUpperCase()?.replace(" ","_")
 		}

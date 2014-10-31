@@ -95,16 +95,19 @@ class PersonController {
 
     @Transactional
     def update(Person personInstance) {
+		bindData(personInstance, params, [exclude: 'dateOfBirth'])
+		bindData(personInstance, ['dateOfBirth': params.date('dateOfBirth', ['dd-MMM-yyyy'])], [include: 'dateOfBirth'])
+		
         if (personInstance == null) {
             notFound()
             return
-        }
+        } 
 
         if (personInstance.hasErrors()) {
             respond personInstance.errors, view:'edit'
             return
         }
-
+		
 		//Update the phone list
 		personInstance.phones.clear()
 		int index = 0
@@ -137,6 +140,7 @@ class PersonController {
 			render(view: "create", model: [personInstance: personInstance])
 			return
 		}
+	//	personInstance.properties = ['dateOfBirth': params.date('dateOfBirth', ['dd-MMM-yyyy'])]
         personInstance.save flush:true
 		if(personInstance.hasErrors()){
 			println(personInstance.errors)
