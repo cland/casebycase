@@ -39,14 +39,13 @@
 			
 		</div>
 		<script>
-		function afterSubmit(){
-
-		}
+		function afterSubmit(){}
 		function onSuccess(data){
 			$("#resultsDiv").show()
 			$("#resultsDiv").html(data.message)
 			$("#formid").hide()
 			$(window).scrollTop()
+			$(document).scrollTop()
 		}
 		function onFailure(data){
 			alert("Failed to save")
@@ -56,8 +55,15 @@
 			alert("completed!")
 		}
 			$(document).ready(function() {		
-				                
-			});  
+				$( "#birth-date" ).datepicker({
+					dateFormat: "dd-M-yy",
+					altFormat: "yy-mm-dd",
+					defaultDate : "-18y",					
+					maxDate:"-2y",
+					minDate:"-90y"
+					});		                
+			}); 
+			 
 		</script>
 <!-- Render the phone template (_phone.gsp) hidden so we can clone it -->
 <g:render template='phone' model="['phone':null,'i':'_clone','hidden':true]"/>

@@ -61,13 +61,7 @@
 		</div>
 		<script>
 			$(document).ready(function() {	
-				$( "#birth-date" ).datepicker({
-					dateFormat: "dd-M-yy",
-					altFormat: "yy-mm-dd",
-					defaultDate : "-18y",					
-					maxDate:"-2y",
-					minDate:"-90y"
-					});	
+				
 				$("#accordion" ).accordion({ active: cbc_params.active_sidebar() });
 			
 				$("#tabs").tabs(

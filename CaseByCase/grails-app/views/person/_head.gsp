@@ -10,4 +10,13 @@ var cbc_params = {
 		canView :${cbcApiService.canView(thisInstance)}
 	}
 //]]>
+$(document).ready(function() {		
+	$( "#birth-date" ).datepicker({
+		dateFormat: "dd-M-yy",
+		altFormat: "yy-mm-dd",
+		defaultDate : "-18y",					
+		maxDate:"-2y",
+		minDate:"-90y"
+		});		                
+}); 
 </script>

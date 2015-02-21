@@ -29,7 +29,8 @@ class PersonController {
 
     @Transactional
     def save(Person personInstance) {
-
+		bindData(personInstance, params, [exclude: 'dateOfBirth'])
+		bindData(personInstance, ['dateOfBirth': params.date('dateOfBirth', ['dd-MMM-yyyy'])], [include: 'dateOfBirth'])
         if (personInstance == null) {
             notFound()
             return
@@ -195,6 +196,8 @@ class PersonController {
 	}
 	@Transactional
 	def dialogsave(Person personInstance) {
+		bindData(personInstance, params, [exclude: 'dateOfBirth'])
+		bindData(personInstance, ['dateOfBirth': params.date('dateOfBirth', ['dd-MMM-yyyy'])], [include: 'dateOfBirth'])
 		if (personInstance == null) {
 			def response = [message: "Error: Person not found!", id:id]
 			render response as JSON
@@ -227,6 +230,8 @@ class PersonController {
 		render response as JSON
 	}
 	def dialogupdate = {
+		bindData(personInstance, params, [exclude: 'dateOfBirth'])
+		bindData(personInstance, ['dateOfBirth': params.date('dateOfBirth', ['dd-MMM-yyyy'])], [include: 'dateOfBirth'])
 		Long id = params?.long("id")
 		Long version = params?.long("version")
 		def personInstance = Person.get(id)
