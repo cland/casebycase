@@ -10,7 +10,7 @@
 				<g:if test="${isEditMode }">
 				<g:select id="country" name="location.country.id" from="${com.cbc.location.Country.list()}" 
 					optionKey="id" required="" 
-					value="${locationInstance?.country?.id}" class="many-to-one"/>
+					value="${locationInstance?.country?.id}" class="many-to-one" noSelection="['': '-select one-']"/>
 					<g:if test="${params?.action=='edit' }">
 					<span class="r-arrow"></span><span><a href="#" onclick="resetLocations();return false;">Reset Options</a></span>
 					</g:if>	

@@ -8,13 +8,11 @@
 	<g:textField name="name" required="" value="${categoryInstance?.name}" />
 </div>
 
-<g:hiddenField name="parent.id" id="parent" value="${categoryInstance?.parent?.id?categoryInstance.parent.id:1}" />
+<g:hiddenField name="parent.id" id="parent" value="${categoryInstance?.parent?.id?categoryInstance.parent.id:params.parent.id}" />
 
 <div
 	class="fieldcontain ${hasErrors(bean: categoryInstance, field: 'categories', 'error')} ">
-	<label for="categories"> <g:message
-			code="category.categories.label" default="Categories" />
-
+	<label for="categories"> <g:message code="category.categories.label" default="Categories" />
 	</label>
 
 	<ul class="one-to-many">

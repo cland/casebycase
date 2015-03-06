@@ -58,6 +58,40 @@
 		OR
 	http://www.jeasyui.com/demo/main/index.php?plugin=ComboTree&theme=default&dir=ltr&pitem=
 	*/
+
+	function manageCategory(_id){
+		 var _link = "${resource()}/category/show/" + _id;
+	  	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')             
+	                .load(_link)		                
+	                .dialog({
+	                	modal:true,
+	                    autoOpen: false,
+	                    dialogClass: 'no-close',
+	                    width:800,
+	                    beforeClose: function(event,ui){
+	                    	
+	                    },
+	                    buttons:{
+	                        "DONE":function(){
+	                      	 // location.reload();
+	                         	// $(".ui-dialog-content").dialog().dialog('close')
+	                            },
+	                         "CANCEL":function(){
+	                        	 var myDialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>').closest('div.ui-dialog-content');
+	                        	 myDialog.dialog('close')
+	                             }
+	                       },
+	                    close: function(event,ui){
+	                  	  $(this).dialog('destroy').remove()
+	                  	  //location.reload();
+	                    },
+	                    position: {my:"top",at:"top",of:window},
+	                    title: 'Manage Category'                         
+	                });    
+	                $dialog.dialog('open');
+	                
+	  } //end function 
+	
 		$(document).ready(function() {
 			$("#accordion").accordion({
 				active : cbc_params.active_sidebar()
@@ -92,13 +126,17 @@
 			    	      		return { 'id' : node.id };
 			    	 		}
 			  		}
-				}
+				},
+				"plugins" : [
+				             "contextmenu"
+				            // , "dnd", "search","state", "types", "wholerow"
+				           ]
 			});
 		    // 7 bind to events triggered on the tree
-		    $('#jstree').on("changed.jstree", function (e, data) {
-		      console.log(data.selected[0]);
+		    $('#jstree').on("changed.jstree", function (e, data) {		     
 		      var _id = data.selected[0]
-		      manageCategory(_id)
+		      alert(_id);
+		     // manageCategory(_id)
 		      
 		    });
 		    // 8 interact with the tree - either way is OK
@@ -109,6 +147,17 @@
 		      $.jstree.reference('#jstree').select_node('16'); //** Option 3
 		    });
 
+		    $('#jstree').on("create_node.jstree", function (e, data) {
+			    alert("Creating new node!");
+				//		$.get('?operation=create_node', { 'type' : data.node.type, 'id' : data.node.parent, 'text' : data.node.text })
+				//		.done(function (d) {
+				//			data.instance.set_id(data.node, d.id);
+				//		})
+				//		.fail(function () {
+				//			data.instance.refresh();
+				//		});
+						
+			})
 			
 <%--			$('div.chosentree').chosentree({--%>
 <%--			      width: 400,--%>
@@ -152,37 +201,7 @@
 	 			}
 	 		});
 		 };
-		 function manageCategory(_id){
-			 var _link = "${resource()}/category/show/" + _id;
-		  	 var $dialog = $('<div><div id="wait" style="font-weight:bold;text-align:center;">Loading...</div></div>')             
-		                .load(_link)		                
-		                .dialog({
-		                	modal:true,
-		                    autoOpen: false,
-		                    dialogClass: 'no-close',
-		                    width:800,
-		                    beforeClose: function(event,ui){
-		                    	
-		                    },
-		                    buttons:{
-		                        "DONE":function(){
-		                      	 // location.reload();
-		                         	 $(this).dialog('close')
-		                            },
-		                         "CANCEL":function(){
-		                      	   $(this).dialog('close')
-		                             }
-		                       },
-		                    close: function(event,ui){
-		                  	  $(this).dialog('destroy').remove()
-		                  	  //location.reload();
-		                    },
-		                    position: {my:"top",at:"top",of:window},
-		                    title: 'Manage Category'                         
-		                });    
-		                $dialog.dialog('open');
-		                
-		  } //end function     
+		     
 	</script>
 </body>
 </html>

@@ -80,7 +80,14 @@
 											.html("Couldn't load this tab. We'll try to fix this as soon as possible. ");
 										});
 									}
-						});		                
+						});	
+				$( "#birth-date" ).datepicker({
+					dateFormat: "dd-M-yy",
+					altFormat: "yy-mm-dd",
+					defaultDate : "-18y",					
+					maxDate:"-2y",
+					minDate:"-90y"
+					});		                
 			});  
 		</script>
 <!-- Render the phone template (_phone.gsp) hidden so we can clone it -->

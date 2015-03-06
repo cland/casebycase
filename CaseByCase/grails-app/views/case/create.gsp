@@ -40,7 +40,7 @@
 					<ul>
 						<li><a href="#tab-1">Details</a></li>
 						<li><a href="#tab-labour">Labour</a></li>
-						<li><a href="#tab-evictions">Evictions</a></li>
+						<li><a href="#tab-evictions" style="display:none">Evictions</a></li>
 						<li><a href="#tab-2">Outcome & Metrics</a></li>	
 						<li><a href="#tab-3">Attachments</a></li>		
 					</ul>
@@ -83,7 +83,7 @@
 									$( "#tabs" ).tabs( "option", "disabled", [1, 2, 3 ] );
 									//get the tab divs and disable the fields inside
 									disableInputs("#tab-labour", true);
-									disableInputs("#tab-evictions", true);
+									disableInputs("#tab-evictions", true);								
 									disableInputs("#tab-2",true)									
 								},
 								show: function(event,ui){

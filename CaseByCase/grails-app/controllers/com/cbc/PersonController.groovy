@@ -67,7 +67,7 @@ class PersonController {
 			}		
 			println(personInstance)
 		}catch(Exception e){
-			println("Failed to save new location..."  + e)
+			println("Error saving new location..."  + e)
 			flash.message = "Error: Failed to save form due to an error saving location details."
 			
 			render(view: "create", model: [personInstance: personInstance])

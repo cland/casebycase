@@ -2,7 +2,9 @@ package com.cbc
 import org.apache.commons.collections.list.LazyList;
 import org.apache.commons.collections.FactoryUtils;
 
+import com.cbc.location.Country
 import com.cbc.location.Location
+import com.cbc.lookup.Keywords
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -26,15 +28,20 @@ class Person {
 	Citizenship citizenship
 	Date dateOfBirth
 	String idNumber
+	Keywords maritalStatus
 	//Office office
 	/** Tab2: Person Profile **/
 	String gender
 	Race race
-	
+	Country countryOfOrgin
 	/** Tab3: Contact Details **/
 	List phones // = new ArrayList()
 	Location location
 	/** Tab4: Employment Profile **/
+	Keywords workStatus
+	Keywords education
+	Keywords incomePersonal
+	Keywords incomeHouse
 	String empHowJobFound
 	String empHowJobFoundDesc
 	
@@ -50,7 +57,7 @@ class Person {
 	/** 	*END FIELDS* 		**/
 	
 	static belongsTo = [office:Office]
-	static hasMany = [phones:Phone]
+	static hasMany = [phones:Phone, worksector:Keywords,incomeSource:Keywords]
 	static transients = [ 'mediumDetails',
 		'shortDetails',
 		'firstLastName',
@@ -86,6 +93,12 @@ class Person {
 		email nullable:true,email:true
 		citizenship nullable:true 
 		location nullable:true
+		maritalStatus nullable:true
+		workStatus nullable:true
+		education nullable:true
+		incomePersonal nullable:true
+		incomeHouse nullable:true
+		countryOfOrgin nullable:true
     }
 	def toMap(params = null){
 		return [id:id,
