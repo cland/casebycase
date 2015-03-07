@@ -95,7 +95,7 @@
 		<g:message code="person.maritalStatus.label" default="Marital Status" />	
 		<span class='lookup-admin-key'>MaritalStatus</span>
 	</label>
-	<g:select id="workStatus" name="workStatus.id" 
+	<g:select id="maritalStatus" name="maritalStatus.id" 
 		from="${com.cbc.lookup.Keywords.findByName("MaritalStatus")?.values}" 
 		optionKey="id"  value="${personInstance?.maritalStatus?.id}" 
 		class="many-to-one" 
@@ -152,7 +152,7 @@
 	</label>
 	<g:textArea name="empHowJobFoundDesc" cols="40" rows="5" value="${personInstance?.empHowJobFoundDesc}"/>
 </div>
-
+<%-- 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'education', 'error')} ">
 	<label for="education">
 		<g:message code="person.education.label" default="Education" />	
@@ -192,7 +192,7 @@
 <div class="table">
 	<div class="row">
 		<div class="cell" style="width:200px;">
-		<label for="worksector.id">
+		<label for="worksector">
 			<g:message code="person.worksector.label" default="Work sector:" />
 			<span class="required-indicator">*</span>
 			<span class='lookup-admin-key'>WorkSector</span>
@@ -200,7 +200,7 @@
 		</div>
 		<div class="cell">
 		<g:each in="${com.cbc.lookup.Keywords.findByName("WorkSector")?.values}" var="keyword" status="index">
-			<g:checkBox name="worksector.id" value="${keyword.id }" checked="${ personInstance?.worksector?.contains(keyword)}" />
+			<g:checkBox name="worksector" value="${keyword.id }" checked="${ personInstance?.worksector?.contains(keyword)}" />
 			<label for="worksector">${keyword }</label><br>
 		</g:each>
 		</div>
@@ -210,7 +210,7 @@
 <div class="table">
 	<div class="row">
 		<div class="cell" style="width:200px;">
-		<label for="incomeSource.id">
+		<label for="incomeSource">
 			<g:message code="person.incomeSource.label" default="Source of Income:" />
 			<span class="required-indicator">*</span>
 			<span class='lookup-admin-key'>IncomeSource</span>
@@ -218,11 +218,11 @@
 		</div>
 		<div class="cell">
 		<g:each in="${com.cbc.lookup.Keywords.findByName("IncomeSource")?.values}" var="keyword" status="index">
-			<g:checkBox name="incomeSource.id" value="${keyword.id }" checked="${ personInstance?.incomeSource?.contains(keyword)}" />
+			<g:checkBox name="incomeSource" value="${keyword.id }" checked="${ personInstance?.incomeSource?.contains(keyword)}" />
 			<label for="incomeSource">${keyword }</label><br>
 		</g:each>
 		</div>
 	</div>
 </div>
-
+--%>
 </fieldset>

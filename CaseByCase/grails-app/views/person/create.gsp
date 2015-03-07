@@ -80,7 +80,8 @@
 						});	
 				$( "#birth-date" ).datepicker({
 					dateFormat: "dd-M-yy",
-					altFormat: "yy-mm-dd",
+					//altFormat: "yy-mm-dd",
+					altFormat: "dd-M-yy",
 					defaultDate : "-18y",					
 					maxDate:"-2y",
 					minDate:"-90y"

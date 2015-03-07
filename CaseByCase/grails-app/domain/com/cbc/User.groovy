@@ -40,6 +40,7 @@ class User {
 
 	static mapping = {
 		password column: '`password`'
+		person lazy:false
 	}
 	String getCreatedByName(){
 		User user = User.get(createdBy)

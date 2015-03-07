@@ -29,18 +29,21 @@ class PersonController {
 
     @Transactional
     def save(Person personInstance) {
-		bindData(personInstance, params, [exclude: 'dateOfBirth'])
-		bindData(personInstance, ['dateOfBirth': params.date('dateOfBirth', ['dd-MMM-yyyy'])], [include: 'dateOfBirth'])
+		println("=====> RUNNING........ " + personInstance)
+		println(params)
         if (personInstance == null) {
             notFound()
             return
         }	
-	
+		bindData(personInstance, params, [exclude: 'dateOfBirth'])
+		bindData(personInstance, ['dateOfBirth': params.date('dateOfBirth', ['dd-MMM-yyyy'])], [include: 'dateOfBirth'])
+		
 		//** Adding phones to personInstance
 		int index = 0
 		int cnt = 0
 		List phones = []
 		def pEntry = params.get('phones[' + index + ']')
+		println("=====> PHONES........ ")
 		while(pEntry != null){			
 			Phone p = new Phone(pEntry)	
 			boolean isDeleted = pEntry.boolean("deleted")
@@ -59,12 +62,13 @@ class PersonController {
 			pEntry = params.get('phones[' + index + ']')
 		}
 		
+		println("=====> Adding LOCATION........ " + personInstance)
 		try{
-			Location location = cbcApiService.saveLocation(params)
-			if(location){
-				personInstance.location = location
-				personInstance = personInstance.merge()		
-			}		
+//			Location location = cbcApiService.saveLocation(params)
+//			if(location){
+//				personInstance.location = location
+//				personInstance = personInstance.merge()		
+//			}		
 			println(personInstance)
 		}catch(Exception e){
 			println("Error saving new location..."  + e)
@@ -73,7 +77,18 @@ class PersonController {
 			render(view: "create", model: [personInstance: personInstance])
 			return
 		}
-				
+		
+		
+		def workstatus = com.cbc.lookup.Keywords.get(params?.workStatus?.id)
+		if(!workstatus){
+			personInstance.workStatus = workstatus
+		}
+		def maritalstatus = com.cbc.lookup.Keywords.get(params?.maritalStatus?.id)
+		if(!maritalstatus){
+			personInstance.maritalStatus = maritalstatus
+		}
+		personInstance = personInstance.merge()
+		println("=====> SAVING. ........ ")
         personInstance.save flush:true
 		if (personInstance.hasErrors()) {
 			println("Person has errors: " + personInstance.errors)
@@ -82,7 +97,7 @@ class PersonController {
 		}
 		attachUploadedFilesTo(personInstance)
         request.withFormat {
-            form {
+            form multipartForm{
                 flash.message = message(code: 'default.created.message', args: [message(code: 'personInstance.label', default: 'Person'), personInstance.toString()])
                 redirect personInstance
             }
@@ -96,14 +111,14 @@ class PersonController {
 
     @Transactional
     def update(Person personInstance) {
-		bindData(personInstance, params, [exclude: 'dateOfBirth'])
-		bindData(personInstance, ['dateOfBirth': params.date('dateOfBirth', ['dd-MMM-yyyy'])], [include: 'dateOfBirth'])
 		
         if (personInstance == null) {
             notFound()
             return
         } 
-
+		bindData(personInstance, params, [exclude: 'dateOfBirth'])
+		bindData(personInstance, ['dateOfBirth': params.date('dateOfBirth', ['dd-MMM-yyyy'])], [include: 'dateOfBirth'])
+		
         if (personInstance.hasErrors()) {
             respond personInstance.errors, view:'edit'
             return
