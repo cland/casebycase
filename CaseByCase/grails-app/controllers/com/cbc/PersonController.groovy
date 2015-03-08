@@ -78,15 +78,23 @@ class PersonController {
 			return
 		}
 		
-		
+		// WORK DETAILS OBJECTS
 		def workstatus = com.cbc.lookup.Keywords.get(params?.workStatus?.id)
-		if(!workstatus){
-			personInstance.workStatus = workstatus
-		}
+		if(!workstatus) personInstance.workStatus = workstatus
+		
 		def maritalstatus = com.cbc.lookup.Keywords.get(params?.maritalStatus?.id)
-		if(!maritalstatus){
-			personInstance.maritalStatus = maritalstatus
-		}
+		if(!maritalstatus) personInstance.maritalStatus = maritalstatus
+		
+		def education = com.cbc.lookup.Keywords.get(params?.education?.id)
+		if(!education) personInstance.education = education
+	
+		def incomepersonal = com.cbc.lookup.Keywords.get(params?.incomePersonal?.id)
+		if(!incomepersonal) personInstance.incomePersonal = incomepersonal
+		
+		def incomeHouse = com.cbc.lookup.Keywords.get(params?.incomeHouse?.id)
+		if(!incomeHouse) personInstance.incomeHouse = incomeHouse
+		
+		//Finally merge all 
 		personInstance = personInstance.merge()
 		println("=====> SAVING. ........ ")
         personInstance.save flush:true

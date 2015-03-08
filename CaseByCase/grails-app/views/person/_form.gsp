@@ -152,7 +152,7 @@
 	</label>
 	<g:textArea name="empHowJobFoundDesc" cols="40" rows="5" value="${personInstance?.empHowJobFoundDesc}"/>
 </div>
-<%-- 
+ 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'education', 'error')} ">
 	<label for="education">
 		<g:message code="person.education.label" default="Education" />	
@@ -188,7 +188,7 @@
 		class="many-to-one" 
 		noSelection="['null':'-select-']"/>
 </div>
-
+<%--
 <div class="table">
 	<div class="row">
 		<div class="cell" style="width:200px;">
