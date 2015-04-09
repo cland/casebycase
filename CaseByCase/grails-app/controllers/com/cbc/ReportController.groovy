@@ -20,7 +20,7 @@ class ReportController {
 //	public Date enddate = null
 //	public String office_name=""
 //	public String office_id=0
-//	public Office offic
+//	public Office office
 //	public StatsData statsdata
 	def officeSummaryStats(){
 		
