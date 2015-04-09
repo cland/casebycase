@@ -24,28 +24,40 @@ class ReportController {
 //	public StatsData statsdata
 	def officeSummaryStats(){
 		
-		def c = Case.where{
+		def open = Case.where{
 			status.name == "Open"
 		}
 		def openCases = new ArrayList()
+		def closedCases = new ArrayList()
 		def dt = new Date()
 		Calendar cal = Calendar.getInstance()
 		cal.setTime(dt)
-		cal.set(Calendar.MONTH, dt.getMonth() -1)
 		Date date = cal.getTime()
 		def currDate1 = date.format("MM/YY")
-		println currDate1 + " ====================> " + date
-		c.each{
-			println it.lastUpdated
+		open.each{
 			def currMonth = (it.lastUpdated).format("MM/YY")
-			
-			println currDate1+ " ====================> " + currMonth
 			if(currDate1.equals(currMonth)){
 				openCases.add(it)
 			}
 			
 		}
-		println openCases.size()
+		def closed = Case.where{
+			status.name == "Closed"
+		}
+		closed.each{
+			def currMonth = (it.lastUpdated).format("MM/YY")
+			if(currDate1.equals(currMonth)){
+				closedCases.add(it)
+			}
+		}
+		def activeCases = new ArrayList()
+		def active =  Case.list()
+		active.each{
+			if((it.lastUpdated).format("MM/YY").equals(currDate1)){
+				println "Match Found....adding to the list"
+				activeCases.add(it)
+			}
+		}
 		
 		Office o = cbcApiService.getUserPrimaryOffice()
 		OfficeSummaryStats ostats = new OfficeSummaryStats()
@@ -57,12 +69,12 @@ class ReportController {
 //		StatsData statsdata = new StatsData()
 		ostats.statsdata.ave_days_taken = 2
 		ostats.statsdata.num_actions = 2
-		ostats.statsdata.num_cases = 51
+		ostats.statsdata.num_cases = activeCases.size()
 		ostats.statsdata.num_cases_referred = 1
 		ostats.statsdata.num_clients = 3
-		ostats.statsdata.num_closed_cases =openCases.size()
+		ostats.statsdata.num_closed_cases =closedCases.size()
 		ostats.statsdata.num_events = 10
-		ostats.statsdata.num_new_cases = 21
+		ostats.statsdata.num_new_cases = closedCases.size()
 		ostats.statsdata.num_ref_clients = 2
 		ostats.statsdata.num_new_clients = 15
 		
