@@ -23,6 +23,30 @@ class ReportController {
 //	public Office office
 //	public StatsData statsdata
 	def officeSummaryStats(){
+		
+		def c = Case.where{
+			status.name == "Open"
+		}
+		def openCases = new ArrayList()
+		def dt = new Date()
+		Calendar cal = Calendar.getInstance()
+		cal.setTime(dt)
+		cal.set(Calendar.MONTH, dt.getMonth() -1)
+		Date date = cal.getTime()
+		def currDate1 = date.format("MM/YY")
+		println currDate1 + " ====================> " + date
+		c.each{
+			println it.lastUpdated
+			def currMonth = (it.lastUpdated).format("MM/YY")
+			
+			println currDate1+ " ====================> " + currMonth
+			if(currDate1.equals(currMonth)){
+				openCases.add(it)
+			}
+			
+		}
+		println openCases.size()
+		
 		Office o = cbcApiService.getUserPrimaryOffice()
 		OfficeSummaryStats ostats = new OfficeSummaryStats()
 		ostats.startdate=new Date()
@@ -36,11 +60,12 @@ class ReportController {
 		ostats.statsdata.num_cases = 51
 		ostats.statsdata.num_cases_referred = 1
 		ostats.statsdata.num_clients = 3
-		ostats.statsdata.num_closed_cases =15
+		ostats.statsdata.num_closed_cases =openCases.size()
 		ostats.statsdata.num_events = 10
 		ostats.statsdata.num_new_cases = 21
 		ostats.statsdata.num_ref_clients = 2
 		ostats.statsdata.num_new_clients = 15
+		
 		
 
 		
