@@ -12,7 +12,7 @@ class City {
 	
 	static belongsTo=[region:Region]
 	static constraints = {
-		name(blank:false)
+		name(blank:false, unique:['region'])
 		lastUpdatedBy nullable:true, editable:false
 		createdBy nullable:true, editable:false
 	}

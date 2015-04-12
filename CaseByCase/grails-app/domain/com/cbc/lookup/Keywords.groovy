@@ -18,7 +18,7 @@ class Keywords {
 	static belongsTo = [Keywords]
 	static hasMany = [values:Keywords]
 	static constraints = {
-		name(unique:true)
+		name(unique:['keyword'])
 		category(nullable:true)
 		description(nullable:true) 
 		label blank:true,nullable:true		

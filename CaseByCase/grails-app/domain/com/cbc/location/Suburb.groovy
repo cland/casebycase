@@ -7,7 +7,7 @@ class Suburb {
 	
 	static belongsTo = [mainplace:MainPlace]
     static constraints = {
-		name unique:true, blank:false
+		name blank:false, unique:['mainplace']
 		code unique:true, blank:false
     }
 	static mapping = {

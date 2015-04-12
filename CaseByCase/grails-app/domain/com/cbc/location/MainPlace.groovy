@@ -6,7 +6,7 @@ class MainPlace {
 	static hasMany = [suburbs:Suburb]
 	static belongsTo = [municipality:Municipality]
 	static constraints = {
-		name blank:false, unique:true
+		name blank:false, unique:['municipality']
 		code blank:false, unique:true
 	}
 	static mapping = {

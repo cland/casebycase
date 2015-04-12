@@ -18,7 +18,7 @@ class Region {
 	static hasMany = [cities:City,districts:District]
 	static transients = ["regionGroups"]
 	static constraints = {
-		name(blank:false,unique:true)
+		name(blank:false,unique:['country'])
 		code blank:false,unique:true
 		lastUpdatedBy nullable:true, editable:false
 		createdBy nullable:true, editable:false

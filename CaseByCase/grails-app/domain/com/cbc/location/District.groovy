@@ -7,7 +7,7 @@ class District {
 	static hasMany = [municipalities:Municipality]
 	static belongsTo = [region:Region]
     static constraints = {
-		name blank:false, unique:true
+		name blank:false, unique:['region']
 		code blank:false, unique:true
     }
 	static mapping = {

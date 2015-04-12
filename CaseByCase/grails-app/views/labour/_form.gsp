@@ -41,7 +41,7 @@
 <fieldset><legend>TYPE OF PROBLEM</legend>
 <div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'allowProblem', 'error')} ">
 	<label for="labour.allowProblem">
-		<g:message code="labour.allowProblem.label" default="Allow Problem" />
+		<g:message code="labour.allowProblem.label" default="Allowance" />
 		
 	</label>
 	<g:select id="allowProblem" name="allowProblem.id" from="${com.cbc.lookup.ProblemType.findByName("Allowance")?.problemTypes}" optionKey="id"  value="${labourInstance?.allowProblem?.id}" class="many-to-one" noSelection="['':'-select-']"/>
@@ -49,7 +49,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: labourInstance, field: 'benefitsProblem', 'error')} ">
 	<label for="labour.benefitsProblem">
-		<g:message code="labour.benefitsProblem.label" default="Benefits Problem" />
+		<g:message code="labour.benefitsProblem.label" default="Benefits" />
 		
 	</label>
 	<g:select id="benefitsProblem" name="benefitsProblem.id" from="${com.cbc.lookup.ProblemType.findByName("Benefits")?.problemTypes}" optionKey="id"  value="${labourInstance?.benefitsProblem?.id}" class="many-to-one" noSelection="['':'-select-']"/>
