@@ -135,7 +135,7 @@
 		    // 7 bind to events triggered on the tree
 		    $('#jstree').on("changed.jstree", function (e, data) {		     
 		      var _id = data.selected[0]
-		      alert(_id);
+		     
 		     // manageCategory(_id)
 		      
 		    });

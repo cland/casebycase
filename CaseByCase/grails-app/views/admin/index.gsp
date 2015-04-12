@@ -18,7 +18,18 @@
 		
 		<div id="page-body" class="content scaffold-show" role="main">
 			<h1>Admin Panel</h1>
-			
+			<sec:ifAnyGranted roles="ROLE_ADMIN">
+				<fieldset><legend>UPLOAD Clients Data</legend>
+				<br/>
+				<h2>Update Learner Information</h2>
+					<g:uploadForm action="uploadClientData">
+					    <input type="file" name="clientdatacsv" />
+					    <input type="text" name="delimeter" value=";"/>
+					    <input type="submit" />
+					</g:uploadForm>
+				
+				</fieldset><br/>
+			</sec:ifAnyGranted>
 		</div>
 <script type="text/javascript">
 // when the page has finished loading.. execute the follow
