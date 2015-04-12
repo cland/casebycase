@@ -58,6 +58,39 @@ class ReportController {
 				activeCases.add(it)
 			}
 		}
+		def newClients = 0
+		def activeClients = 0
+		def ref = new ArrayList()
+		def clientList = Case.list()
+		
+		clientList.each{Case c->
+			if((c.dateCreated).format("MM/YY").equals(currDate1)){
+				if(c.totalFemale){
+					newClients += c.totalFemale
+				}
+				if(c.totalMale){
+					newClients += c.totalMale
+				}
+				if(c.totalUnknown){
+					newClients += c.totalUnknown
+				}
+			}
+			if((c.lastUpdated).format("MM/YY").equals(currDate1)){
+				println c.lastUpdated
+				if(c.totalFemale){
+					activeClients += c.totalFemale
+				}
+				if(c.totalMale){
+					activeClients += c.totalMale
+				}
+				if(c.totalUnknown){
+					activeClients += c.totalUnknown
+				}
+				if(c.status.name.contains("Referred")){
+					ref.add(c)
+				}
+			}
+		}
 		
 		Office o = cbcApiService.getUserPrimaryOffice()
 		OfficeSummaryStats ostats = new OfficeSummaryStats()
@@ -71,12 +104,12 @@ class ReportController {
 		ostats.statsdata.num_actions = 2
 		ostats.statsdata.num_cases = activeCases.size()
 		ostats.statsdata.num_cases_referred = 1
-		ostats.statsdata.num_clients = 3
+		ostats.statsdata.num_clients = activeClients
 		ostats.statsdata.num_closed_cases =closedCases.size()
 		ostats.statsdata.num_events = 10
 		ostats.statsdata.num_new_cases = closedCases.size()
-		ostats.statsdata.num_ref_clients = 2
-		ostats.statsdata.num_new_clients = 15
+		ostats.statsdata.num_ref_clients = ref.size()
+		ostats.statsdata.num_new_clients = newClients
 		
 		
 
