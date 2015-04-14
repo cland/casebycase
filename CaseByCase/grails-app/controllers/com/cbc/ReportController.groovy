@@ -9,6 +9,7 @@ import grails.converters.JSON
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import org.joda.time.DateTime
+import org.joda.time.Period
 import org.springframework.dao.DataIntegrityViolationException
 import pl.touk.excel.export.WebXlsxExporter
 
@@ -41,20 +42,62 @@ class ReportController {
 			}
 			
 		}
+		def referred = Case.where{
+			status.name == "Referred - Still Open"
+		}
+		def referredCases = new ArrayList()
+		referred.each{
+			def currMonth = (it.lastUpdated).format("MM/YY")
+			if(currDate1.equals(currMonth)){
+				referredCases.add(it)
+			}
+		}
+		
+		def events = Event.list()
+		
+		def activeEvents = new ArrayList()
+		events.each{
+			def currMonth = (it.lastUpdated).format("MM/YY")
+			if(currDate1.equals(currMonth)){
+				activeEvents.add(it)
+			}
+		}
+		def actions = Action.list()
+		
+		def activeActions = new ArrayList()
+		actions.each{
+			def currMonth = (it.lastUpdated).format("MM/YY")
+			if(currDate1.equals(currMonth)){
+				activeActions.add(it)
+			}
+		}
+		
 		def closed = Case.where{
 			status.name == "Closed"
 		}
+		int days
 		closed.each{
 			def currMonth = (it.lastUpdated).format("MM/YY")
+			
 			if(currDate1.equals(currMonth)){
 				closedCases.add(it)
+				DateTime date2 = new DateTime(it.lastUpdated);
+				DateTime date1 = new DateTime(it.dateCreated);
+				println date1
+				println date2
+				Period p = new Period(date1, date2);
+			    days = p.getDays()
+				println "This is the duration: " + days
 			}
 		}
+		int ave = days / closedCases.size()
+		println "This is the ave: " + ave
+		
+		
 		def activeCases = new ArrayList()
 		def active =  Case.list()
 		active.each{
 			if((it.lastUpdated).format("MM/YY").equals(currDate1)){
-				println "Match Found....adding to the list"
 				activeCases.add(it)
 			}
 		}
@@ -76,7 +119,6 @@ class ReportController {
 				}
 			}
 			if((c.lastUpdated).format("MM/YY").equals(currDate1)){
-				println c.lastUpdated
 				if(c.totalFemale){
 					activeClients += c.totalFemale
 				}
@@ -100,19 +142,16 @@ class ReportController {
 		ostats.office_id = o?.id
 		//ostats.office = o
 //		StatsData statsdata = new StatsData()
-		ostats.statsdata.ave_days_taken = 2
-		ostats.statsdata.num_actions = 2
+		ostats.statsdata.ave_days_taken = ave
+		ostats.statsdata.num_actions = activeActions.size()
 		ostats.statsdata.num_cases = activeCases.size()
-		ostats.statsdata.num_cases_referred = 1
+		ostats.statsdata.num_cases_referred = referredCases.size()
 		ostats.statsdata.num_clients = activeClients
 		ostats.statsdata.num_closed_cases =closedCases.size()
-		ostats.statsdata.num_events = 10
-		ostats.statsdata.num_new_cases = closedCases.size()
+		ostats.statsdata.num_events = activeEvents.size()
+		ostats.statsdata.num_new_cases = openCases.size()
 		ostats.statsdata.num_ref_clients = ref.size()
 		ostats.statsdata.num_new_clients = newClients
-		
-		
-
 		
 		render ostats as JSON
 	} //end function
