@@ -75,7 +75,7 @@ class ReportController {
 		def closed = Case.where{
 			status.name == "Closed"
 		}
-		int days
+		int days = 0
 		closed.each{
 			def currMonth = (it.lastUpdated).format("MM/YY")
 			
@@ -86,12 +86,13 @@ class ReportController {
 				println date1
 				println date2
 				Period p = new Period(date1, date2);
-			    days = p.getDays()
-				println "This is the duration: " + days
+			    days += p.getDays()
 			}
 		}
-		int ave = days / closedCases.size()
-		println "This is the ave: " + ave
+		int ave = 0
+		if(closedCases.size() > 0){
+		  ave = (days / closedCases.size()).toInteger()
+		}
 		
 		
 		def activeCases = new ArrayList()
