@@ -1,8 +1,9 @@
+<%@ page import="com.cbc.SystemRoles" %>
 <g:set var="cbcApiService" bean="cbcApiService"/>
 <%@ page import="com.cbc.Case" %>
 <g:set var="categoryInstance" value="${caseInstance?.categories?.find{true} }"/>
 <g:set var="rootCategory" value="${categoryInstance?.getRootParentName(categoryInstance) }"/>
-<g:set var="outcomeTabOn" value="${(caseInstance?.status?.name == 'Case Closed - Intimidation'  )}"/>
+<g:set var="outcomeTabOn" value="${(caseInstance?.status?.name == 'Case Closed - Intimidation' | caseInstance?.status?.name == 'Closed' )}"/>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -49,7 +50,9 @@
 					</g:if>
 					<li><a href="#tab-3">Attachments</a></li>
 					<li><a href="#tab-4">Actions</a></li>
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 					<li><a href="#tab-admin">Admin</a></li>
+					</sec:ifAnyGranted>
 				</ul>
 				<div id="tab-1"> 
 				
@@ -263,6 +266,7 @@
 				<g:if test="${outcomeTabOn == true }">
 					<div id="tab-2">
 						<!-- Outcome -->
+						<fieldset><legend>OUTCOME</legend>
 						<ol class="property-list case">
 								<g:if test="${caseInstance?.dateClosed}">
 								<li class="fieldcontain">
@@ -295,7 +299,73 @@
 									
 								</li>
 								</g:if>
-						</ol>					
+						</ol>	
+						</fieldset>	
+						<fieldset><legend>CASE METRICS</legend>
+							<div class="table">
+								<div class="row">
+									<div class="cell">
+										<label for="TimeLapsed">
+											<g:message code="case.timelapsed.label" default="Time lapsed since case opened" />											
+										</label>
+									</div>
+									<div class="cell">
+										-- day(s)
+									</div>
+								</div>
+							
+								<div class="row">
+									<div class="cell">
+										<label for="TimeToResolve">
+											<g:message code="case.timetoresolve.label" default="Time to resolve" />											
+										</label>
+									</div>
+									<div class="cell">
+										-- day(s)
+									</div>
+								</div>
+								<div class="row">
+									<div class="cell">
+										<label for="ProblemLasted">
+											<g:message code="case.problemlasted.label" default="Problem lasted" />											
+										</label>
+									</div>
+									<div class="cell">
+										-- day(s) before reporting
+									</div>
+								</div>
+								<div class="row">
+									<div class="cell">
+										<label for="ClientsAffected">
+											<g:message code="case.clientsaffected.label" default="Number of clients affected" />											
+										</label>
+									</div>
+									<div class="cell">
+										--
+									</div>
+								</div>
+								<div class="row">
+									<div class="cell">
+										<label for="TotalActions">
+											<g:message code="case.totalactions.label" default="Total actions" />											
+										</label>
+									</div>
+									<div class="cell">
+										--
+									</div>
+								</div>
+								<div class="row">
+									<div class="cell">
+										<label for="Total Consultations">
+											<g:message code="case.totalconsultations.label" default="Total consultations" />											
+										</label>
+									</div>
+									<div class="cell">
+										--
+									</div>
+								</div>
+							</div>
+						</fieldset>			
 					</div>
 				</g:if>
 				<div id="tab-3">
@@ -325,10 +395,11 @@
 						<div id="action_list_pager" class="scroll" style="text-align: center;"></div>
 					</div>
 				</div>
-				
-				<div id="tab-admin" class="">
-					--history, created,update by etc --
-				</div>
+				<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+					<div id="tab-admin" class="">
+						--history, created,update by etc --
+					</div>
+				</sec:ifAnyGranted>
 			</div>
 			<!--  *** END TABS *** -->
 			

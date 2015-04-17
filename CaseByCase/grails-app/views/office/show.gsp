@@ -1,4 +1,4 @@
-
+<%@ page import="com.cbc.SystemRoles" %>
 <%@ page import="com.cbc.Office" %>
 <!DOCTYPE html>
 <html>
@@ -37,7 +37,9 @@
 					<li><a href="#tab-3">Cases</a></li>
 					<li><a href="#tab-4">Access Rights</a></li>
 					<li><a href="#tab-5">Supporting Documents</a></li>
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 					<li><a href="#tab-admin">Admin</a></li>
+					</sec:ifAnyGranted>
 				</ul>
 				<div id="tab-1">
 					<fieldset><legend>OFFICE SETUP</legend>

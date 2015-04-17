@@ -252,7 +252,12 @@ class cbcApiService {
 		}
 		return getOfficesForUser(springSecurityService.getCurrentUser(), params)
 	}
-	
+	def getUsers(params){
+		if(groupManagerService.isAdmin()){
+			return User.createCriteria().list(params) {}
+		}
+		return getStaffForOffice(getUserPrimaryOffice(), params)
+	}
 	def getEvents(params){
 		if(groupManagerService.isAdmin()){
 			return Event.createCriteria().list(params) {}  //this is an admin function to return all cases

@@ -5,6 +5,7 @@ import grails.transaction.Transactional
 @Transactional
 class AutoCompleteService {
 	def cbcApiService
+	def groupManagerService
 	def searchPeople(params){
 		Office office = cbcApiService.getUserPrimaryOffice()
 		def term = params?.term + "%"
@@ -14,9 +15,12 @@ class AutoCompleteService {
 				ilike("lastName", term)
 				ilike("idNumber","%" + term)
 			}
-			eq('office.id',office?.id)
+			if(!groupManagerService.isAdmin()){
+				eq('office.id',office?.id)
+			}
 		}
 		def clist = Person.createCriteria().list(query)
+		
 		def selectList = []
 		clist.each {
 			selectList.add(it.toAutoCompleteMap()) 

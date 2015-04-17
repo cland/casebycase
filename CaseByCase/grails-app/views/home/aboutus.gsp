@@ -6,6 +6,7 @@
 	<head>
 		<meta name="layout" content="main"/>
 		<title>CWAO: About us</title>
+		<g:set var="page_sidenav" value="${com.cbc.SideNav.MENU_STANDARD}" />
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
@@ -101,7 +102,7 @@
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		
 		<div id="status1" class="leftbar" role="complementary">
-			<g:render template="../layouts/sidenav-public"/>
+			<g:sideMenu default="${page_sidenav}"></g:sideMenu> 
 		</div>
 		<div id="page-body" role="main">
 			

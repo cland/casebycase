@@ -47,7 +47,13 @@ class Case {
 	/** 	*END FIELDS* 		**/
 	
 	//static hasOne=[labour:Labour,eviction:Eviction]
-	static transients = ["createdByName","lastUpdatedByName"]
+	static transients = ["createdByName","lastUpdatedByName",
+		"timeLapsed",
+		"timeToResolve",		
+		"totalActions",
+		"totalConsultations",
+		"totalClientsAffected",
+		"problemLasted"]
 	static belongsTo = [office:Office]
 	static hasMany = [clients: Person,orgclients:Organisation,actions:Action,categories:Category]
     static constraints = {		
@@ -81,6 +87,31 @@ class Case {
 	def beforeUpdate = {
 		lastUpdatedBy = cbcApiService.getCurrentUserId()
 	}
+	
+	/** Case Matrics **/
+	def getTimeLapsed(){
+		return 0  //Days
+	}
+	def getTimeToResolve(){
+		return 0  //days	
+	}
+	def getTotalActions(){
+		return actions.size()
+	}
+	def getTotalConsultations(){
+		return actions.findAll {
+			actionType{
+				eq("name","Consultations")
+			}
+		}
+	}
+	def getClientsAffected(){
+		def total = totalFemale + totalMale + totalUnknown
+		return total
+	}
+	/** END Case Matrics **/
+	
+	
 	String getCreatedByName(){
 		User user = User.get(createdBy)
 		return (user==null?"unknown":user?.person.toString())

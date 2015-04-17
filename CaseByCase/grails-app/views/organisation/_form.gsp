@@ -1,5 +1,5 @@
 <%@ page import="com.cbc.Organisation" %>
-
+<%@ page import="com.cbc.SystemRoles" %>
 
 
 <div class="fieldcontain ${hasErrors(bean: organisationInstance, field: 'name', 'error')} required">
@@ -33,7 +33,7 @@
 	</label>
 	<g:field type="email" name="email" value="${organisationInstance?.email}"/>
 </div>
-
+<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 <div class="fieldcontain ${hasErrors(bean: organisationInstance, field: 'isHost', 'error')} ">
 	<label for="isHost">
 		<g:message code="organisation.isHost.label" default="Is Host" />
@@ -49,7 +49,7 @@
 	</label>
 	<g:checkBox name="isMember" value="${organisationInstance?.isMember}" />
 </div>
-
+</sec:ifAnyGranted>
 <%--<div class="fieldcontain ${hasErrors(bean: organisationInstance, field: 'staff', 'error')} ">--%>
 <%--	<label for="staff">--%>
 <%--		<g:message code="organisation.staff.label" default="Staff" />--%>

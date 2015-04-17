@@ -1,4 +1,4 @@
-
+<%@ page import="com.cbc.SystemRoles" %>
 <%@ page import="com.cbc.Office" %>
 <!DOCTYPE html>
 <html>
@@ -25,7 +25,9 @@
 		<div id="list-office" class="content scaffold-list" role="main">
 			<div class="page-header">
 				<g:message code="default.list.label" args="[entityName]" />
+				<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 				<div class="action-div" ><g:link controller="office" action="create" >New Office</g:link></div>
+				</sec:ifAnyGranted>
 			</div>
 			<g:if test="${flash.message}">
 				<div class="message" role="status">${flash.message}</div>

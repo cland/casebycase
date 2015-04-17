@@ -14,7 +14,8 @@ class UserController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond User.list(params), model:[userInstanceCount: User.count()]
+		def results = cbcApiService.getUsers(params)
+        respond results, model:[userInstanceCount: results.totalCount]
     }
 
     def show(User userInstance) {

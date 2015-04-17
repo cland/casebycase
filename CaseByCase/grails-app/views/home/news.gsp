@@ -97,14 +97,10 @@
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div id="page-body" role="main">
-			<g:if test="${params?.agencylinked == '0' }">
-				<div class="errors">You are not linked to any agency. Please contact the administrator.</div>
-			</g:if>
-			<g:if test="${params?.clientlinked == '0' }">
-				<div class="errors">You are not linked to any agency. Please contact the administrator.</div>
-			</g:if>
+			
 			<div class="content float-left">
 			${com.cbc.Document.findByName('$news')?.content?.decodeHTML() }
 			</div>
+		</div>
 	</body>
 </html>

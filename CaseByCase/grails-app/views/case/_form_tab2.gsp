@@ -57,5 +57,20 @@
 
 <fieldset><legend>CASE METRICS</legend>
 	<!-- CASE METRICS -->
+	<div class="table">
+		<div class="row">
+			<div class="cell">
+				<label for="TimeLapsed">
+					<g:message code="case.timelapsed.label" default="Time lapsed since case opened" />											
+				</label>
+			</div>
+			<div class="cell">
+				36 day(s)
+			</div>
+		</div>
+	</div>
+	<p><br/>Other Case Metrics will be computed as soon as the Case is marked as Closed and the Case is Saved.</p><br/>
+	
+	
 	
 </fieldset>

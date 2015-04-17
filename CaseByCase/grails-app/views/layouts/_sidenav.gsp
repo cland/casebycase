@@ -14,8 +14,11 @@
 	<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_OCO }">
 		<g:render template="${layoutPath}/menu_reports"/>
 	</sec:ifAnyGranted>
+	<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_OCO }">
+		<g:render template="${layoutPath}/menu_nab"/>	
+	</sec:ifAnyGranted>
 	<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
-		<g:render template="${layoutPath}/menu_nab"/>
+		
 		<g:render template="${layoutPath}/menu_locations"/>
 		<g:render template="${layoutPath}/menu_lookups"/>	
 	</sec:ifAnyGranted>
