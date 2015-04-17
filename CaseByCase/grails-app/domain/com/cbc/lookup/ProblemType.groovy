@@ -15,6 +15,7 @@ class ProblemType {
 	static hasMany = [problemTypes:ProblemType]
 	static belongsTo = [ProblemType]
     static constraints = {
+		name unique:['problemType']
 		problemType blank:true, nullable:true
 		label blank:true,nullable:true
 		lastUpdatedBy nullable:true
