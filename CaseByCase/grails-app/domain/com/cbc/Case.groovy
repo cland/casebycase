@@ -95,17 +95,20 @@ class Case {
 	def getTimeToResolve(){
 		return 0  //days	
 	}
+	def getProblemLasted(){
+		return 0  //days 
+	}
 	def getTotalActions(){
-		return actions.size()
+		return actions?.size()
 	}
 	def getTotalConsultations(){
-		return actions.findAll {
-			actionType{
-				eq("name","Consultations")
-			}
-		}
+		return actions?.findAll { true
+		//	actionType{
+		//		eq("name","Consultations")
+		//	}
+		}?.size()
 	}
-	def getClientsAffected(){
+	def getTotalClientsAffected(){
 		def total = totalFemale + totalMale + totalUnknown
 		return total
 	}

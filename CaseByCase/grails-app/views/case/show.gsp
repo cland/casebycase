@@ -3,7 +3,7 @@
 <%@ page import="com.cbc.Case" %>
 <g:set var="categoryInstance" value="${caseInstance?.categories?.find{true} }"/>
 <g:set var="rootCategory" value="${categoryInstance?.getRootParentName(categoryInstance) }"/>
-<g:set var="outcomeTabOn" value="${(caseInstance?.status?.name == 'Case Closed - Intimidation' | caseInstance?.status?.name == 'Closed' )}"/>
+<g:set var="outcomeTabOn" value="${(true)}"/>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -310,10 +310,10 @@
 										</label>
 									</div>
 									<div class="cell">
-										-- day(s)
+										${caseInstance?.timeLapsed} day(s)
 									</div>
 								</div>
-							
+							<g:if test="${caseInstance?.status?.name == 'Case Closed - Intimidation' | caseInstance?.status?.name == 'Closed'  }">
 								<div class="row">
 									<div class="cell">
 										<label for="TimeToResolve">
@@ -321,7 +321,7 @@
 										</label>
 									</div>
 									<div class="cell">
-										-- day(s)
+										${caseInstance?.timeToResolve} day(s)
 									</div>
 								</div>
 								<div class="row">
@@ -331,7 +331,7 @@
 										</label>
 									</div>
 									<div class="cell">
-										-- day(s) before reporting
+										${caseInstance?.problemLasted} day(s) before reporting
 									</div>
 								</div>
 								<div class="row">
@@ -341,7 +341,7 @@
 										</label>
 									</div>
 									<div class="cell">
-										--
+										${caseInstance?.totalClientsAffected}
 									</div>
 								</div>
 								<div class="row">
@@ -351,7 +351,7 @@
 										</label>
 									</div>
 									<div class="cell">
-										--
+										${caseInstance?.totalActions}
 									</div>
 								</div>
 								<div class="row">
@@ -361,9 +361,13 @@
 										</label>
 									</div>
 									<div class="cell">
-										--
+										${caseInstance?.totalConsultations}
 									</div>
 								</div>
+								</g:if>
+								<g:else>
+									<p><br/>Other Case Metrics will be computed as soon as the Case is marked as Closed and the Case is Saved.</p><br/>
+								</g:else>
 							</div>
 						</fieldset>			
 					</div>

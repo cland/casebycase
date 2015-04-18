@@ -7,7 +7,7 @@
 		<g:message code="requestmap.url.label" default="Url" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="url" required="" value="${requestmapInstance?.url}"/>
+	<g:textField name="url" required="" value="${requestmapInstance?.url}" style="width:400px"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: requestmapInstance, field: 'configAttribute', 'error')} required">
@@ -15,7 +15,7 @@
 		<g:message code="requestmap.configAttribute.label" default="Config Attribute" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="configAttribute" required="" value="${requestmapInstance?.configAttribute}"/>
+	<g:textField name="configAttribute" required="" value="${requestmapInstance?.configAttribute}" style="width:400px"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: requestmapInstance, field: 'httpMethod', 'error')} ">

@@ -65,7 +65,7 @@
 				</label>
 			</div>
 			<div class="cell">
-				36 day(s)
+				${caseInstance?.timeLapsed} day(s)
 			</div>
 		</div>
 	</div>
