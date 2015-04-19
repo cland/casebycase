@@ -81,12 +81,12 @@ class ReportController {
 			
 			if(currDate1.equals(currMonth)){
 				closedCases.add(it)
-				DateTime date2 = new DateTime(it.lastUpdated);
-				DateTime date1 = new DateTime(it.dateCreated);
-				println date1
-				println date2
-				Period p = new Period(date1, date2);
-			    days += p.getDays()
+		//		DateTime date2 = new DateTime(it.lastUpdated);
+		//		DateTime date1 = new DateTime(it.dateCreated);				
+		//		Period p = new Period(date1, date2);
+				
+				//Have defined key functions in the Case Domain itself. We use it here like so
+			    days += it.getProblemLasted() //p.getDays()
 			}
 		}
 		int ave = 0

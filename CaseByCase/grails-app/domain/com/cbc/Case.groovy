@@ -1,7 +1,9 @@
 package com.cbc
 
 import java.util.Date;
-
+import org.joda.time.DateTime
+import org.joda.time.Days
+import org.joda.time.Period
 class Case {
 	transient cbcApiService
 	static attachmentable = true
@@ -90,22 +92,73 @@ class Case {
 	
 	/** Case Matrics **/
 	def getTimeLapsed(){
-		return 0  //Days
+		//today - date case opened
+		def days = 0
+		
+		try{
+			def startdate = dateOpen
+			if(!startdate) startdate = dateCreated			
+			DateTime tmp = new DateTime(startdate)
+			
+			def today = new DateTime()
+			Days result = Days.daysBetween(tmp, today);
+			days = result.days
+			if(days < 0) days = 0
+			
+		}catch(Exception e){
+			days = -1
+		}
+		return days  //Days
 	}
 	def getTimeToResolve(){
-		return 0  //days	
+		//dateclosed - dateOpen
+		def days = 0
+		
+		try{
+			def todate = dateClosed
+			if(!todate) todate = lastUpdated
+			def frmdate = dateOpen
+			if(!frmdate) frmdate = dateCreated
+			DateTime to = new DateTime(todate)
+			DateTime frm = new DateTime(frmdate)	
+			println(frm.toDate().toString() + " - " + to.toDate().toString())		
+			Days result = Days.daysBetween(frm, to);
+			days = result.days
+			if(days < 0) days = 0
+		}catch(Exception e){
+			days = -1
+		}
+		return days  //Days	
 	}
 	def getProblemLasted(){
+		//casedate - casedatestarted
+		def days = 0
+		
+		try{
+			def todate = dateOpen
+			if(!todate) todate = dateCreated
+			def frmdate = problemStart
+			if(!frmdate) frmdate = dateOpen
+			
+			DateTime to = new DateTime(todate)
+			DateTime frm = new DateTime(frmdate)
+			Days result = Days.daysBetween(frm, to);
+			days = result.days
+			if(days < 0) days = 0
+		}catch(Exception e){
+			days = -1
+		}
+		return days  //Days
 		return 0  //days 
 	}
 	def getTotalActions(){
 		return actions?.size()
 	}
 	def getTotalConsultations(){
-		return actions?.findAll { true
-		//	actionType{
-		//		eq("name","Consultations")
-		//	}
+		ActionType t = ActionType.findByName("Consultation")
+		return actions?.findAll { 				
+			it.actionType?.id == t?.id
+		
 		}?.size()
 	}
 	def getTotalClientsAffected(){
