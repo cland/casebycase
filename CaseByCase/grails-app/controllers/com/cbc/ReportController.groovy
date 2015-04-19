@@ -24,9 +24,10 @@ class ReportController {
 //	public Office offic
 //	public StatsData statsdata
 	def officeSummaryStats(){
-		
+		Office o = cbcApiService.getUserPrimaryOffice()
 		def open = Case.where{
-			status.name == "Open"
+			status.name == "Open" &&
+			office.id == o.id
 		}
 		def openCases = new ArrayList()
 		def closedCases = new ArrayList()
@@ -43,7 +44,8 @@ class ReportController {
 			
 		}
 		def referred = Case.where{
-			status.name == "Referred - Still Open"
+			status.name == "Referred - Still Open" &&
+			office.id == o.id
 		}
 		def referredCases = new ArrayList()
 		referred.each{
@@ -53,7 +55,9 @@ class ReportController {
 			}
 		}
 		
-		def events = Event.list()
+		def events = Event.where{
+			office.id == o.id
+		} //.list()
 		
 		def activeEvents = new ArrayList()
 		events.each{
@@ -62,7 +66,9 @@ class ReportController {
 				activeEvents.add(it)
 			}
 		}
-		def actions = Action.list()
+		def actions = Action.where{
+			thiscase?.office?.id == o.id
+		}//.list()
 		
 		def activeActions = new ArrayList()
 		actions.each{
@@ -73,7 +79,8 @@ class ReportController {
 		}
 		
 		def closed = Case.where{
-			status.name == "Closed"
+			status.name == "Closed" &&
+			office.id == o.id
 		}
 		int days = 0
 		closed.each{
@@ -96,7 +103,9 @@ class ReportController {
 		
 		
 		def activeCases = new ArrayList()
-		def active =  Case.list()
+		def active =  Case.where{
+			office.id == o.id
+		} //.list()
 		active.each{
 			if((it.lastUpdated).format("MM/YY").equals(currDate1)){
 				activeCases.add(it)
@@ -105,7 +114,9 @@ class ReportController {
 		def newClients = 0
 		def activeClients = 0
 		def ref = new ArrayList()
-		def clientList = Case.list()
+		def clientList = Case.where{
+			office.id == o.id
+		} //.list()
 		
 		clientList.each{Case c->
 			if((c.dateCreated).format("MM/YY").equals(currDate1)){
@@ -135,7 +146,7 @@ class ReportController {
 			}
 		}
 		
-		Office o = cbcApiService.getUserPrimaryOffice()
+		
 		OfficeSummaryStats ostats = new OfficeSummaryStats()
 		ostats.startdate=new Date()
 		ostats.enddate = new Date()
