@@ -70,6 +70,13 @@ class Category {
 			level:getLevel(this),
 			params:params]
 	}
+	private boolean isOpened(){
+		if(getLevel(this) == 1) return true; else return false;
+	}
+	private boolean isDisabled(){
+		if(getLevel(this) == 1) return true; else return false;
+	}
+	
 	def toTreeMap(){
 		return [id:id,
 			title:name,
@@ -78,7 +85,7 @@ class Category {
 			children:getNodeChildren(),
 			value:id,
 			text:name,
-			state:[opened:false,disabled:false,selected:false],
+			state:[opened:isOpened(),disabled:isDisabled(),selected:false],
 			root_parent_id:getRootParentId(this),
 			root_parent_name: getRootParentName(this)			
 			]

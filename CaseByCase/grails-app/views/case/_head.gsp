@@ -35,7 +35,7 @@ function disableTab(tab_selector,panel_selector,tabnum,disabled){
 	}
 }
 function disableInputs(selector, _disabled){
-	console.log(">> disableInputs(" + _disabled + ") - panel: " + selector)
+	//console.log(">> disableInputs(" + _disabled + ") - panel: " + selector)
 	//get the tab divs and disable the fields inside
 	var _state = (_disabled?"disabled":null);
 	var inputs = $(selector + " :input" );			

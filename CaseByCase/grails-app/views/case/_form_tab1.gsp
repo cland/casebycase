@@ -451,6 +451,7 @@ function addPersonClient(_id){
 			"core" : {
 		    	"multiple" : false,
 		    	"animation" : 0,
+		    	"plugins" : [ "checkbox" ],
 		    	'data' : {
 		    	    'url' :"${resource()}/category/ajaxNodeChildren?parentid=1",
 		    	    'data' : function (node) {
@@ -461,6 +462,7 @@ function addPersonClient(_id){
 		});
 	    // bind to events triggered on the tree
 	    $('#category_tree').on("changed.jstree", function (e, data) {
+	   
 	    	  _id = data.selected;
 	    	  _node = data.instance.get_node(data.selected[0])
 	    	  _text = _node.text

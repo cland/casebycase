@@ -40,15 +40,18 @@
 <%--		<div id="hierarchyStructure" class="hierarchyStructure"></div>--%>
 		
 		
+
+		<div style="width:50%" class="float-left">
 		<fieldset><legend>Manage</legend>
-		  	<div id="jstree">
-			    
-			</div>
-
-		
+		  	<div id="jstree"></div>
 		</fieldset>
-
+		</div>
 		
+		<div style="width:40%;margin-right:20px;" class="float-right">
+		<fieldset><legend>SELECTED</legend>
+			<div id="categories"></div>
+		</fieldset>
+		</div>
 	</div>
 
 	<script>	
@@ -118,7 +121,7 @@
 
 			$('#jstree').jstree({
 				"core" : {
-			    	"multiple" : false,
+			    	"multiple" : true,
 			    	"animation" : 0,
 			    	'data' : {
 			    	    'url' :"${resource()}/category/ajaxNodeChildren?parentid=1",
@@ -127,8 +130,11 @@
 			    	 		}
 			  		}
 				},
+				"checkbox" : {
+				    "three_state" : true
+				  },
 				"plugins" : [
-				             "contextmenu"
+				             "contextmenu", "checkbox","sort"
 				            // , "dnd", "search","state", "types", "wholerow"
 				           ]
 			});
@@ -136,6 +142,20 @@
 		    $('#jstree').on("changed.jstree", function (e, data) {		     
 		      var _id = data.selected[0]
 		     
+		  	    var i, j, r = [];
+		      $("#categories").html("");
+		      for(i = 0, j = data.selected.length; i < j; i++) {			      	
+		        	//r.push(data.instance.get_node(data.selected[i]).text);
+
+			      	_id = data.selected[i];
+			    	_node = data.instance.get_node(data.selected[i])
+			    	_text = _node.text
+			    	_root_parent_name = _node.original.root_parent_name;
+				    $("#categories").append(" &raquo; " + _text + "<span class='hide'> <input class='hide' name='categories' type='checkbox' id='category-" + _id + "' checked='true' value='" + _id + "'>" + _text + "</input></span><br/>")
+				    console.log("Id " + i + " - " + _id + " : Name - " + _text)
+				    
+		      }
+		    
 		     // manageCategory(_id)
 		      
 		    });
