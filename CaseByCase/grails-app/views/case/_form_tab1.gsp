@@ -170,20 +170,7 @@
 </fieldset>
 
 <fieldset><legend>CATEGORISATION</legend>
-	<div class="table">
-		<div class="row">
-			<div class="cell"><label id="">Categorise:</label></div>
-			<div class="cell">
-				
-				<select id="categories" multiple="multiple" name="categories" class="hide">
-					<g:each var="c" in="${caseInstance?.categories }" status="i">
-						<option id="category-${c.id }" selected='selected' value="${c.id }"></option>
-					</g:each>
-				</select>
-				
-				<div id="category_tree"></div>
-			</div>
-		</div>
+	<div class="table">		
 		
 		<div class="row">
 			<div class="cell">
@@ -222,6 +209,30 @@
 				<span class="property-value" aria-labelledby="office-label">
 					<g:select id="status" name="status.id" from="${com.cbc.CaseStatus.list()}" optionKey="id" required="" value="${caseInstance?.status?.id}" class="many-to-one" noSelection="['': '-select one-']"/>
 				</span>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<div class="table">
+		<div class="row">
+			<div class="cell"><h3>Category Options</h3></div>
+			<div class="cell" style="text-align:center"><h3>Selected Categories</h3></div>
+		</div>
+		<div class="row">
+			<div class="cell">		
+					
+					<div id="category_tree" style="border-right:solid 1px #000;padding-right:15px;"></div>
+			</div>
+			
+			<div class="cell">
+												
+				<div id="categories" style="padding-right:15px;padding-left:15px;">
+				 <g:if test="${caseInstance?.categories?.size() < 1 }"><p>No Selection Made Yet!</p></g:if>
+					<g:each var="c" in="${caseInstance?.categories }" status="i">
+						&raquo; ${c.name }
+						<span class="hide"><input name="categories" checked="checked" id="category-${c.id }" value="${c.id }"></input></span><br/>
+					</g:each>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -449,32 +460,42 @@ function addPersonClient(_id){
 		//Categories jsTree
 		$('#category_tree').jstree({
 			"core" : {
-		    	"multiple" : false,
-		    	"animation" : 0,
-		    	"plugins" : [ "checkbox" ],
+		    	"multiple" : true,
+		    	"animation" : 0,		    	
 		    	'data' : {
 		    	    'url' :"${resource()}/category/ajaxNodeChildren?parentid=1",
 		    	    'data' : function (node) {
 		    	      		return { 'id' : node.id };
 		    	 		}
 		  		}
-			}
+			},
+				"plugins" : ["checkbox","sort"]
 		});
 	    // bind to events triggered on the tree
 	    $('#category_tree').on("changed.jstree", function (e, data) {
-	   
-	    	  _id = data.selected;
-	    	  _node = data.instance.get_node(data.selected[0])
-	    	  _text = _node.text
-	    	  _root_parent_name = _node.original.root_parent_name;
-		      $("#categories").html("<option id='category-" + _id + "' selected='selected' value='" + _id + "'></option>")
+	   		  var holder = $("#categories");
+		      holder.html("");
+		      var _count = data.selected.length;
+		      if(_count < 1){
+		      	holder.html("<br/><p>No Selection Made Yet!</p>")
+		      }
+		      for(i = 0, j = _count; i < j; i++) {
+			      	_id = data.selected[i];
+			    	_node = data.instance.get_node(data.selected[i])
+			    	_text = _node.text
+			    	_root_parent_name = _node.original.root_parent_name;
+				    holder.append(" &raquo; " + _text + "<span class='hide'> <input class='hide' name='categories' type='checkbox' id='category-" + _id + "' checked='true' value='" + _id + "'>" + _text + "</input></span><br/>")
+				    console.log("Id " + i + " - " + _id + " : Name - " + _text)
+				    
+		      }
 		      //open any related tabs
 		      _root_parent_name = _node.original.root_parent_name;
 		      onSelectCategory(_root_parent_name)
 	    });
 	    $('#category_tree').on("loaded.jstree", function (e, data) {
+	    	//loop thru the selected cateories checkboxes and set the jstree node
 	    	var _tree = $('#category_tree')
-	    	 _tree.jstree('close_all')
+	    	// _tree.jstree('close_all')
 	    	 _tree.jstree('select_node', '${categoryInstance?.id}');
 	    	 _root_parent_name = '${categoryInstance?.getRootParentName()}';
 		      onSelectCategory(_root_parent_name)
