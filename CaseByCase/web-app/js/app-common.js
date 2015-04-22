@@ -1,3 +1,20 @@
+function getCheckedValues(fieldname, vtype,hidden){
+	
+	if(hidden == undefined) hidden = "";
+    var values = [ ]
+    $("input" + hidden + "[name='" + fieldname + "']:checked").each(function() {
+    	
+        var el = $(this);
+        if(vtype=="text" || vtype == "t"){
+        	values.push(el[0].nextSibling.nodeValue);                                              
+        }else{
+        	values.push($(this).val());
+        }
+     });
+	
+     return values;
+} //end func
+
 function setAllRadio(group,value,checked){
 	$(group).each(function() {
 		var el = $(this)        

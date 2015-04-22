@@ -157,14 +157,7 @@
 				<br/>
 				<fieldset><legend>CATEGORISATION</legend>
 					<div class="table">
-							<div class="row">
-								<div class="cell"><label id="">Category:</label></div>
-								<div class="cell">
-									<span class="property-value" aria-labelledby="office-label">
-										${categoryInstance?.getFullCategoryName(categoryInstance)}
-									</span>
-								</div>
-							</div>
+							
 							
 							<div class="row">
 								<div class="cell">
@@ -200,6 +193,17 @@
 										<g:fieldValue bean="${caseInstance }" field="status"/>	
 									
 									</span>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="cell"><label id="">Category:</label></div>
+								<div class="cell">
+									<g:if test="${caseInstance?.categories?.size() < 1 }"><p>No Category Selected!</p></g:if>
+									<g:each var="c" in="${caseInstance?.categories }" status="i">
+										&raquo; <span class="property-value" aria-labelledby="office-label">${c.name }</span><br/>
+									</g:each>
+									
 								</div>
 							</div>
 						</div>

@@ -108,12 +108,15 @@ class CaseController {
             respond caseInstance.errors, view:'edit'
             return
         }
-		
+		caseInstance?.categories?.clear()  //= []
+		params?.categories.each {
+			def _category = Category.get(it)
+			caseInstance?.categories?.add(_category)
+		}		
 		//save evictions and labour
 		try{
 			def categoryInstance = caseInstance?.categories?.find{true} 
 			def rootCategory = categoryInstance?.getRootParentName(categoryInstance)
-			println(">> " + rootCategory)
 			if (rootCategory == "Labour"){
 				Labour labour = saveLabour(params)
 			}else if(rootCategory == "Evictions"){

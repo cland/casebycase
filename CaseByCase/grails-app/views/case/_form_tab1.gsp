@@ -484,9 +484,7 @@ function addPersonClient(_id){
 			    	_node = data.instance.get_node(data.selected[i])
 			    	_text = _node.text
 			    	_root_parent_name = _node.original.root_parent_name;
-				    holder.append(" &raquo; " + _text + "<span class='hide'> <input class='hide' name='categories' type='checkbox' id='category-" + _id + "' checked='true' value='" + _id + "'>" + _text + "</input></span><br/>")
-				    console.log("Id " + i + " - " + _id + " : Name - " + _text)
-				    
+				    holder.append(" &raquo; " + _text + "<span class='hide'> <input class='hide' name='categories' type='checkbox' id='category-" + _id + "' checked='true' value='" + _id + "'>" + _text + "</input></span><br/>")				    
 		      }
 		      //open any related tabs
 		      _root_parent_name = _node.original.root_parent_name;
@@ -496,9 +494,15 @@ function addPersonClient(_id){
 	    	//loop thru the selected cateories checkboxes and set the jstree node
 	    	var _tree = $('#category_tree')
 	    	// _tree.jstree('close_all')
-	    	 _tree.jstree('select_node', '${categoryInstance?.id}');
+	    	var values = getCheckedValues("categories", "v",":hidden")
+	    	var _id = "";
+
+	    	for(var i=0;i<values.length;i++){
+	    		_id = values[i];
+	    	 	_tree.jstree('select_node', _id);
+	    	}
 	    	 _root_parent_name = '${categoryInstance?.getRootParentName()}';
-		      onSelectCategory(_root_parent_name)
+		    //  onSelectCategory(_root_parent_name)
 		      onCaseStatusChange("#tabs","#tab-2", 3)		      
 	    });
 	    
