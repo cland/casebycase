@@ -5,6 +5,7 @@ import grails.converters.JSON
 import grails.transaction.Transactional
 
 import com.cbc.location.Location
+import com.cbc.lookup.Keywords
 import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 
 @Transactional(readOnly = true)
@@ -153,6 +154,18 @@ class PersonController {
 			index++
 			pEntry = params.get('phones[' + index + ']')
 		}
+		
+//		personInstance?.worksector?.clear()
+//		params?.worksector.each{
+//			def _worksector = Keywords.get(it)
+//			personInstance?.worksector?.add(_worksector)
+//		}
+//		personInstance?.incomeSource?.clear()
+//		params?.incomeSource.each{
+//			def _incomesource = Keywords.get(it)
+//			personInstance?.incomeSource?.add(_incomesource)
+//		}
+	
 		//Save location information
 		try{
 			Location location = cbcApiService.saveLocation(params)

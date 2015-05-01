@@ -188,13 +188,12 @@
 		class="many-to-one" 
 		noSelection="['null':'-select-']"/>
 </div>
-<%--
+
 <div class="table">
 	<div class="row">
 		<div class="cell" style="width:200px;">
 		<label for="worksector">
 			<g:message code="person.worksector.label" default="Work sector:" />
-			<span class="required-indicator">*</span>
 			<span class='lookup-admin-key'>WorkSector</span>
 		</label>
 		</div>
@@ -212,7 +211,6 @@
 		<div class="cell" style="width:200px;">
 		<label for="incomeSource">
 			<g:message code="person.incomeSource.label" default="Source of Income:" />
-			<span class="required-indicator">*</span>
 			<span class='lookup-admin-key'>IncomeSource</span>
 		</label>
 		</div>
@@ -224,5 +222,5 @@
 		</div>
 	</div>
 </div>
---%>
+
 </fieldset>

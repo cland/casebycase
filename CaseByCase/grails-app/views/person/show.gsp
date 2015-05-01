@@ -1,4 +1,4 @@
-
+<%@ page import="com.cbc.SystemRoles" %>
 <%@ page import="com.cbc.Person" %>
 <!DOCTYPE html>
 <html>
@@ -33,8 +33,12 @@
 			<div id="tabs" style="display: none;">
 				<ul>
 					<li><a href="#tab-1">Details</a></li>
-					<li><a href="#tab-2">Access Rights</a></li>	
-					<li><a href="#tab-3">Attachments</a></li>	
+					<li><a href="#tab-5">Employment</a></li>	
+					<li><a href="#tab-3">Attachments</a></li>
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_OCO }">
+						<li><a href="#tab-2">Admin</a></li>	
+					</sec:ifAnyGranted>
+				
 				</ul>
 				<div id="tab-1">
 					<ol class="property-list person">
@@ -110,52 +114,7 @@
 									<span class="property-value" aria-labelledby="race-label"><g:link controller="race" action="show" id="${personInstance?.race?.id}">${personInstance?.race?.encodeAsHTML()}</g:link></span>
 								
 							</li>
-							</g:if>
-						
-							<g:if test="${personInstance?.empHowJobFound}">
-							<li class="fieldcontain">
-								<span id="empHowJobFound-label" class="property-label"><g:message code="person.empHowJobFound.label" default="Emp How Job Found" /></span>
-								
-									<span class="property-value" aria-labelledby="empHowJobFound-label"><g:fieldValue bean="${personInstance}" field="empHowJobFound"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${personInstance?.empHowJobFoundDesc}">
-							<li class="fieldcontain">
-								<span id="empHowJobFoundDesc-label" class="property-label"><g:message code="person.empHowJobFoundDesc.label" default="Emo How Job Found Desc" /></span>
-								
-									<span class="property-value" aria-labelledby="empHowJobFoundDesc-label"><g:fieldValue bean="${personInstance}" field="empHowJobFoundDesc"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${personInstance?.lastUpdatedBy}">
-							<li class="fieldcontain">
-								<span id="lastUpdatedBy-label" class="property-label"><g:message code="person.lastUpdatedBy.label" default="Last Updated By" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${personInstance}" field="lastUpdatedBy"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${personInstance?.createdBy}">
-							<li class="fieldcontain">
-								<span id="createdBy-label" class="property-label"><g:message code="person.createdBy.label" default="Created By" /></span>
-								
-									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${personInstance}" field="createdBy"/></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${personInstance?.history}">
-							<li class="fieldcontain">
-								<span id="history-label" class="property-label"><g:message code="person.history.label" default="History" /></span>
-								
-									<span class="property-value" aria-labelledby="history-label"><g:fieldValue bean="${personInstance}" field="history"/></span>
-								
-							</li>
-							</g:if>
+							</g:if>																							
 						
 							<g:if test="${personInstance?.citizenship}">
 							<li class="fieldcontain">
@@ -166,24 +125,7 @@
 							</li>
 							</g:if>
 						
-							<g:if test="${personInstance?.dateCreated}">
-							<li class="fieldcontain">
-								<span id="dateCreated-label" class="property-label"><g:message code="person.dateCreated.label" default="Date Created" /></span>
-								
-									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${personInstance?.dateCreated}" /></span>
-								
-							</li>
-							</g:if>
-						
-							<g:if test="${personInstance?.lastUpdated}">
-							<li class="fieldcontain">
-								<span id="lastUpdated-label" class="property-label"><g:message code="person.lastUpdated.label" default="Last Updated" /></span>
-								
-									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${personInstance?.lastUpdated}" /></span>
-								
-							</li>
-							</g:if>
-						
+							
 							<g:if test="${personInstance?.office}">
 							<li class="fieldcontain">
 								<span id="office-label" class="property-label"><g:message code="person.office.label" default="Office" /></span>
@@ -210,16 +152,108 @@
 							<g:render template="../layouts/location" bean="${personInstance?.location}" var="locationInstance" model="[mode:'read']"></g:render>
 						</fieldset>
 				</div>
-				
-				<div id="tab-2">
-					<div style="padding-left:50px;"><H3>Roles</H3>
-						<ul>
-							<g:each in="${personInstance?.authorities }" var="role">
-								<li>${role.name} &raquo; ${role.description }</li>
-							</g:each>
-						</ul>
-					</div>
+				<div id="tab-5">
+					<ol class="property-list person">
+						<g:if test="${personInstance?.empHowJobFound}">
+							<li class="fieldcontain">
+								<span id="empHowJobFound-label" class="property-label"><g:message code="person.empHowJobFound.label" default="Emp How Job Found" /></span>
+								
+									<span class="property-value" aria-labelledby="empHowJobFound-label"><g:fieldValue bean="${personInstance}" field="empHowJobFound"/></span>								
+							</li>
+						</g:if>
+					
+						<g:if test="${personInstance?.empHowJobFoundDesc}">
+						<li class="fieldcontain">
+							<span id="empHowJobFoundDesc-label" class="property-label"><g:message code="person.empHowJobFoundDesc.label" default="Emo How Job Found Desc" /></span>
+							
+								<span class="property-value" aria-labelledby="empHowJobFoundDesc-label"><g:fieldValue bean="${personInstance}" field="empHowJobFoundDesc"/></span>
+							
+						</li>
+						</g:if>	
+					</ol>
+					<br/>
+					<fieldset><legend>Work Details</legend>
+						<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'workStatus', 'error')} ">
+	<label for="workStatus.id">
+		<g:message code="person.workStatus.label" default="Work Status" />	
+		<span class='lookup-admin-key'>WorkStatus</span>
+	</label>
+	${personInstance?.workStatus}
+</div>
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'empHowJobFound', 'error')} ">
+	<label for="empHowJobFound">
+		<g:message code="person.empHowJobFound.label" default="How the job was found" />
+		
+	</label>
+	${personInstance?.empHowJobFound}
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'empHowJobFoundDesc', 'error')} ">
+	<label for="empHowJobFoundDesc">
+		<g:message code="person.empHowJobFoundDesc.label" default="Describe how the job was found" />
+		
+	</label>
+	${personInstance?.empHowJobFoundDesc}
+</div>
+ 
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'education', 'error')} ">
+	<label for="education">
+		<g:message code="person.education.label" default="Education" />	
+		<span class='lookup-admin-key'>PersonEducation</span>
+	</label>
+	${personInstance?.education}
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'incomePersonal', 'error')} ">
+	<label for="incomePersonal.id">
+		<g:message code="person.incomePersonal.label" default="Personal Income" />	
+		<span class='lookup-admin-key'>IncomePersonal</span>
+	</label>
+	${personInstance?.incomePersonal}
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'incomeHouse', 'error')} ">
+	<label for="incomeHouse.id">
+		<g:message code="person.incomeHouse.label" default="Household total income" />	
+		<span class='lookup-admin-key'>IncomeHouse</span>
+	</label>
+	${personInstance?.incomeHouse}
+</div>
+<br/>
+<div class="table">
+	<div class="row">
+		<div class="cell" style="width:200px;">
+		<label for="worksector">
+			<g:message code="person.worksector.label" default="Work sector:" />
+			<span class='lookup-admin-key'>WorkSector</span>
+		</label>
+		</div>
+		<div class="cell">
+		<g:each in="${personInstance?.worksector}" var="keyword" status="index">		
+			<label for="worksector">&raquo; ${keyword }</label><br/>
+		</g:each>
+		</div>
+	</div>
+</div>
+
+<div class="table">
+	<div class="row">
+		<div class="cell" style="width:200px;">
+		<label for="incomeSource">
+			<g:message code="person.incomeSource.label" default="Source of Income:" />
+			<span class='lookup-admin-key'>IncomeSource</span>
+		</label>
+		</div>
+		<div class="cell">
+		<g:each in="${personInstance?.incomeSource}" var="keyword" status="index">			
+			<label for="incomeSource">&raquo; ${keyword }</label><br/>
+		</g:each>
+		</div>
+	</div>
+</div>
+					</fieldset>
 				</div>
+				
 				
 				<div id="tab-3">
 				<!-- Supporting documents -->
@@ -239,6 +273,64 @@
 						<div style="clear:both"></div>
 					</div>
 				</div>
+				<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_OCO }">
+				<div id="tab-2">
+					<ol class="property-list person">
+					<g:if test="${personInstance?.dateCreated}">
+							<li class="fieldcontain">
+								<span id="dateCreated-label" class="property-label"><g:message code="person.dateCreated.label" default="Date Created" /></span>
+								
+									<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${personInstance?.dateCreated}" /></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${personInstance?.lastUpdated}">
+							<li class="fieldcontain">
+								<span id="lastUpdated-label" class="property-label"><g:message code="person.lastUpdated.label" default="Last Updated" /></span>
+								
+									<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${personInstance?.lastUpdated}" /></span>
+								
+							</li>
+							</g:if>
+						<g:if test="${personInstance?.lastUpdatedBy}">
+							<li class="fieldcontain">
+								<span id="lastUpdatedBy-label" class="property-label"><g:message code="person.lastUpdatedBy.label" default="Last Updated By" /></span>
+								
+									<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${personInstance}" field="lastUpdatedByName"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${personInstance?.createdBy}">
+							<li class="fieldcontain">
+								<span id="createdBy-label" class="property-label"><g:message code="person.createdBy.label" default="Created By" /></span>
+								
+									<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${personInstance}" field="createdByName"/></span>
+								
+							</li>
+							</g:if>
+						
+							<g:if test="${personInstance?.history}">
+							<li class="fieldcontain">
+								<span id="history-label" class="property-label"><g:message code="person.history.label" default="History" /></span>
+								
+									<span class="property-value" aria-labelledby="history-label"><g:fieldValue bean="${personInstance}" field="history"/></span>
+								
+							</li>
+							</g:if>
+					</ol>
+					<fieldset><legend>Access Rights</legend>
+						<div style="padding-left:50px;"><H3>Roles</H3>
+						<ul>
+							<g:each in="${personInstance?.authorities }" var="role">
+								<li>${role.name} &raquo; ${role.description }</li>
+							</g:each>
+						</ul>
+					</div>
+					</fieldset>
+				</div>
+				</sec:ifAnyGranted>
 			</div>
 			<!--  *** END TABS *** -->
 			

@@ -67,8 +67,9 @@ class Person {
 		'primaryOffice',
 		'loginDetails',
 		'authorities',
-		'caseList'
-		//,"createdByName","lastUpdatedByName" 
+		'caseList',
+
+		"createdByName","lastUpdatedByName" 
 		]
 
 	static mapping = {
@@ -106,8 +107,8 @@ class Person {
 			lastname:lastName,
 			datecreated:dateCreated?.format("dd-MMM-yyyy"),
 			datelastupdated:lastUpdated?.format("dd-MMM-yyyy"),
-			//createdby:getCreatedByName(),			
-			//lastupdatedby:getLastUpdatedByName(),
+			createdbyname:getCreatedByName(),			
+			lastupdatedbyname:getLastUpdatedByName(),
 			params:params]
 	}
 	def beforeInsert = {
@@ -211,12 +212,12 @@ class Person {
 		if(!u) return []
 		return u.authorities
 	}
-//	String getCreatedByName(){
-//		User user = User.get(createdBy)
-//		return (user==null?"unknown":user?.person.toString())
-//	}
-//	String getLastUpdatedByName(){
-//		User user = User.get(lastUpdatedBy)
-//		return (user==null?"unknown":user?.person.toString())
-//	}
+	String getCreatedByName(){
+		User user = User.get(createdBy)
+		return (user==null?"unknown":user?.person.toString())
+	}
+	String getLastUpdatedByName(){
+		User user = User.get(lastUpdatedBy)
+		return (user==null?"unknown":user?.person.toString())
+	}
 } //end class
