@@ -1,5 +1,6 @@
 package com.cbc
 
+import com.cbc.lookup.Keywords
 import java.util.Date;
 import java.util.List;
 
@@ -10,14 +11,17 @@ class Organisation {
 	String status
 	String phoneNo
 	String email
+	
 	boolean isMember
 	boolean isHost
+	boolean isLabourBroker
+	Integer staffCount
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
 	static transients = ['adviceOfficeList','caseList',"createdByName","lastUpdatedByName"]
-	static hasMany = [staff:Person]
+	static hasMany = [staff:Person,sector:Keywords]
 	
     static constraints = {
 		name unique:true, blank:false
@@ -29,10 +33,19 @@ class Organisation {
 		email nullable:true,email:true
     }
 	def beforeInsert = {
+		uniqueHost()
 		createdBy = cbcApiService.getCurrentUserId()
 	}
 	def beforeUpdate = {
+		uniqueHost()
 		lastUpdatedBy = cbcApiService.getCurrentUserId()
+	}
+	def uniqueHost(){
+		
+		def orgs = Organisation.findAll{isHost==true}
+		if(orgs.size()> 0) {
+			isHost = false
+		}
 	}
 	/**
 	 * To ensure that all attachments are removed when the "owner" domain is deleted.

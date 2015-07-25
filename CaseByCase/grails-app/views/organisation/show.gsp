@@ -73,15 +73,32 @@
 								
 							</li>
 							</g:if>
-						
-							<g:if test="${organisationInstance?.isHost}">
+							<g:if test="${organisationInstance?.staffCount}">
 							<li class="fieldcontain">
-								<span id="isHost-label" class="property-label"><g:message code="organisation.isHost.label" default="Is Host" /></span>
+								<span id="staffcount-label" class="property-label"><g:message code="organisation.staffCount.label" default="Number of employees" /></span>
 								
-									<span class="property-value" aria-labelledby="isHost-label">
-									<g:formatBoolean boolean="${organisationInstance?.isHost}" true="yes" false="no"/>
-									</span>
+									<span class="property-value" aria-labelledby="staffcount-label"><g:fieldValue bean="${organisationInstance}" field="staffCount"/></span>
 								
+							</li>
+							</g:if>
+							<g:if test="${organisationInstance?.sector}">
+							<li class="fieldcontain">
+								<label for="sector">
+									<g:message code="organisation.sector.label" default="Sector" />		
+								</label>
+								<div style="width:70%;float:right;">
+									<g:each in="${organisationInstance?.sector }" var="keyword" status="index">
+										 <span class="property-value"><span class="r-arrow"></span> ${keyword }</span><br>
+									</g:each>
+								</div>
+							</li>
+							</g:if>
+							<g:if test="${organisationInstance?.isLabourBroker}">
+							<li class="fieldcontain">
+								<span id="isLabourBroker-label" class="property-label"><g:message code="organisation.isLabourBroker.label" default="Is Labour Broker" /></span>								
+									<span class="property-value" aria-labelledby="isLabourBroker-label">
+									<g:formatBoolean boolean="${organisationInstance?.isLabourBroker}" true="yes" false="no"/>
+									</span>								
 							</li>
 							</g:if>
 						
@@ -95,7 +112,18 @@
 								
 							</li>
 							</g:if>
-						
+							
+							
+							<g:if test="${organisationInstance?.isHost}">
+							<li class="fieldcontain">
+								<span id="isHost-label" class="property-label"><g:message code="organisation.isHost.label" default="Is Host" /></span>
+								
+									<span class="property-value" aria-labelledby="isHost-label">
+									<g:formatBoolean boolean="${organisationInstance?.isHost}" true="yes" false="no"/>
+									</span>
+								
+							</li>
+							</g:if>
 							<g:if test="${organisationInstance?.staff}">
 							<li class="fieldcontain">
 								<span id="staff-label" class="property-label"><g:message code="organisation.staff.label" default="Staff" /></span>
